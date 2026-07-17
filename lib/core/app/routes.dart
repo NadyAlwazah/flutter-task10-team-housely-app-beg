@@ -1,3 +1,4 @@
+import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_bar_layout.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/add_review_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/reset_password_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/signin_view.dart';
@@ -21,6 +22,7 @@ abstract class AppRouter {
   static const String kOnBoarding = 'on_boarding';
   static const String kSignin = '/signin';
   static const String kSignup = '/signup';
+  static const String kBottomBar = '/bottom_bar';
   static const String kDetails = '/details';
   static const String kSearch = '/search';
   static const String kProfile = '/profile';
@@ -37,7 +39,7 @@ abstract class AppRouter {
 
   static final router = GoRouter(
     routes: [
-      GoRoute(path: '/', builder: (context, state) => const SplashView()),
+      // GoRoute(path: '/', builder: (context, state) => const SplashView()),
       GoRoute(
         path: kOnBoarding,
         builder: (context, state) => const OnBoardingView(),
@@ -45,6 +47,7 @@ abstract class AppRouter {
 
       GoRoute(path: kSignin, builder: (context, state) => const SigninView()),
       GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
+      GoRoute(path: '/', builder: (context, state) => const BottomBarLayout()),
 
       GoRoute(
         path: kOnBoarding,
