@@ -12,6 +12,7 @@ class CustomTextFormField extends StatefulWidget {
     this.obscureText = false,
     this.validator,
     this.controller,
+    this.hintStyle,
   });
   final String hintText;
 
@@ -21,6 +22,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool obscureText;
   final String? Function(String?)? validator;
   final TextEditingController? controller;
+  final TextStyle? hintStyle;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
@@ -57,7 +59,9 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             : widget.suffixIcon,
 
         hintText: widget.hintText,
-        hintStyle: Styles.textStyle14W400Inter,
+        hintStyle:
+            widget.hintStyle ??
+            Styles.textStyle14W400Inter.copyWith(color: AppColors.textPrimary),
         filled: true,
         fillColor: Colors.white,
         border: buildBorder(),
