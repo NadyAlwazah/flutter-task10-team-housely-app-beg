@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -16,22 +18,47 @@ class CustomBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 86.h,
-      padding: const EdgeInsets.only(bottom: 24, left: 40, right: 40),
+      padding: const EdgeInsets.symmetric(horizontal: 40),
       color: Colors.white,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _buildNavItem(Icons.home_filled, 'Home', 0),
-          _buildNavItem(Icons.explore_outlined, 'Explore', 1),
-          _buildNavItem(Icons.favorite, 'Favorite', 2),
-          _buildNavItem(Icons.receipt_long_outlined, 'My Booking', 3),
-          _buildNavItem(Icons.person, 'Profile', 4),
+          _buildNavItem(icon: Icons.home_filled, label: 'Home', index: 0),
+          _buildNavItem(
+            isSvg: true,
+            path: AssetsData.iconExploreSvg,
+            label: 'Explore',
+            index: 1,
+          ),
+          _buildNavItem(
+            isSvg: true,
+            path: AssetsData.iconFavoriteSvg,
+            label: 'Favorite',
+            index: 2,
+          ),
+          _buildNavItem(
+            isSvg: true,
+            path: AssetsData.iconDocumentSvg,
+            label: 'My Booking',
+            index: 3,
+          ),
+          _buildNavItem(
+            icon: Icons.person_outline_rounded,
+            label: 'Profile',
+            index: 4,
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildNavItem(IconData icon, String label, int index) {
+  Widget _buildNavItem({
+    bool isSvg = false,
+    String? path,
+    IconData? icon,
+    required String label,
+    required int index,
+  }) {
     final isSelected = currentIndex == index;
     return GestureDetector(
       onTap: () => onTap(index),
@@ -47,11 +74,15 @@ class CustomBottomNavBar extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(top: 20),
-            child: Icon(
-              icon,
-              size: 24.r,
-              color: isSelected ? AppColors.primary : AppColors.textSecondary,
-            ),
+            child: isSvg
+                ? SvgPicture.asset(path!)
+                : Icon(
+                    icon,
+                    size: 24.r,
+                    color: isSelected
+                        ? AppColors.primary
+                        : AppColors.textSecondary,
+                  ),
           ),
           Text(
             label,
