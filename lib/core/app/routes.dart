@@ -45,10 +45,10 @@ abstract class AppRouter {
         builder: (context, state) => const OnBoardingView(),
       ),
 
-      GoRoute(path: kSignin, builder: (context, state) => const SigninView()),
+      GoRoute(path: '/', builder: (context, state) => const SigninView()),
       GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
-      GoRoute(path: '/', builder: (context, state) => const BottomBarLayout()),
 
+      // GoRoute(path: '/', builder: (context, state) => const BottomBarLayout()),
       GoRoute(
         path: kOnBoarding,
         builder: (context, state) => const OnBoardingView(),
