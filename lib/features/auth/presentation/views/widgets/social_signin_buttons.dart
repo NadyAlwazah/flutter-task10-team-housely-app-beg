@@ -12,7 +12,7 @@ class SocialSigninButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         _buildSocialButton(AssetsData.iconFacebookSvg),
-        SizedBox(width: 24.w),
+        const SizedBox(width: 16),
         _buildSocialButton(AssetsData.iconGoogleSvg),
       ],
     );
