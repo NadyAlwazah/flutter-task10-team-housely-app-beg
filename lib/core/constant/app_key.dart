@@ -1,3 +1,4 @@
 class AppKey {
-  // Shared Prefrence تبع ال   keys منحط فيه ال
+  static const String keyFullName = "full_name";
+  static const String keyEmail = "email";
 }
