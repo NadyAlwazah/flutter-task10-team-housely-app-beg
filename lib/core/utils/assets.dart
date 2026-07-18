@@ -6,4 +6,6 @@ class AssetsData {
   static const iconDocumentSvg = "${_icons}document.svg";
   static const iconExploreSvg = "${_icons}explore.svg";
   static const iconCheckSvg = "${_icons}check.svg";
+  static const iconGoogleSvg = "${_icons}google.svg";
+  static const iconFacebookSvg = "${_icons}facebook.svg";
 }

@@ -5,6 +5,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/forgot_password_text.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/remember_me.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/signin_form_fields.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/social_signin_buttons.dart';
 
 class SigninViewBody extends StatefulWidget {
   const SigninViewBody({super.key});
@@ -62,6 +63,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                 const AuthOrText(),
 
                 const SizedBox(height: 24),
+                const SocialSigninButtons(),
               ],
             ),
           ),
