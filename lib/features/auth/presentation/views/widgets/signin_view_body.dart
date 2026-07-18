@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/auth_header.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/forgot_password_text.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/remember_me.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/signin_form_fields.dart';
 
 class SigninViewBody extends StatefulWidget {
@@ -40,6 +42,15 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                 SigninFormFields(
                   emailController: emailController,
                   passwordController: passwordController,
+                ),
+
+                const SizedBox(height: 16),
+                Row(
+                  children: [
+                    RememberMe(onChanged: (val) {}),
+                    const Spacer(),
+                    const ForgotPasswordText(),
+                  ],
                 ),
               ],
             ),
