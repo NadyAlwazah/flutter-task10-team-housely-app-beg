@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/auth_header.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/signup_form_fields.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/terms_and_conditions.dart';
 
 class SignupViewBody extends StatefulWidget {
   const SignupViewBody({super.key});
@@ -43,6 +44,9 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                 emailController: emailController,
                 passwordController: passwordController,
               ),
+
+              const SizedBox(height: 16),
+              TermsAndConditions(onChanged: (val) {}),
             ],
           ),
         ),
