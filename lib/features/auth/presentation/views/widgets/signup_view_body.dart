@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/auth_header.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/signup_form_fields.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/terms_and_conditions.dart';
@@ -47,6 +48,9 @@ class _SignupViewBodyState extends State<SignupViewBody> {
 
               const SizedBox(height: 16),
               TermsAndConditions(onChanged: (val) {}),
+
+              const SizedBox(height: 32),
+              CustomButton(text: "Sign up", onPressed: () {}),
             ],
           ),
         ),
