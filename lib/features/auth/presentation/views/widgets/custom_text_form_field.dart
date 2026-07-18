@@ -59,9 +59,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             : widget.suffixIcon,
 
         hintText: widget.hintText,
-        hintStyle:
-            widget.hintStyle ??
-            Styles.textStyle14W400Inter.copyWith(color: AppColors.textPrimary),
+        hintStyle: widget.hintStyle ?? Styles.textStyle14W400Inter,
         filled: true,
         fillColor: Colors.white,
         border: buildBorder(),
