@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 
-class SocialSigninButtons extends StatelessWidget {
-  const SocialSigninButtons({super.key});
+class SocialButtons extends StatelessWidget {
+  const SocialButtons({super.key});
 
   @override
   Widget build(BuildContext context) {

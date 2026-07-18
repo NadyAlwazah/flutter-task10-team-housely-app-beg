@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/auth_header.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/auth_or_text.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/signup_form_fields.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/social_buttons.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/terms_and_conditions.dart';
 
 class SignupViewBody extends StatefulWidget {
@@ -51,6 +53,12 @@ class _SignupViewBodyState extends State<SignupViewBody> {
 
               const SizedBox(height: 32),
               CustomButton(text: "Sign up", onPressed: () {}),
+
+              const SizedBox(height: 24),
+              const AuthOrText(),
+
+              const SizedBox(height: 24),
+              const SocialButtons(),
             ],
           ),
         ),
