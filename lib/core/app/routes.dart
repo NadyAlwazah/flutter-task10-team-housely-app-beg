@@ -19,7 +19,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/splash/presentation
 import 'package:go_router/go_router.dart';
 
 abstract class AppRouter {
-  static const String kOnBoarding = 'on_boarding';
+  static const String kOnBoarding = '/on_boarding';
   static const String kSignin = '/signin';
   static const String kSignup = '/signup';
   static const String kBottomBar = '/bottom_bar';
@@ -39,12 +39,15 @@ abstract class AppRouter {
 
   static final router = GoRouter(
     routes: [
-      // GoRoute(path: '/', builder: (context, state) => const SplashView()),
+      GoRoute(path: '/', builder: (context, state) => const SplashView()),
+      GoRoute(path: kSignin, builder: (context, state) => const SigninView()),
+      GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
+      GoRoute(path: '/', builder: (context, state) => const BottomBarLayout()),
+
       GoRoute(
         path: kOnBoarding,
         builder: (context, state) => const OnBoardingView(),
       ),
-
       GoRoute(path: kSignin, builder: (context, state) => const SigninView()),
       GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
       GoRoute(path: '/', builder: (context, state) => const BottomBarLayout()),
