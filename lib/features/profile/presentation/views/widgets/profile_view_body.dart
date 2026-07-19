@@ -4,6 +4,7 @@ import 'package:flutter_task10_team_housely_app_beg/core/widgets/app_loader.dart
 import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/profile_image_widget.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/profile_options_list.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/sign_out_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/user_info_widget.dart';
 
 class ProfileViewBody extends StatefulWidget {
@@ -46,8 +47,11 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
             const SizedBox(height: 64),
             const Divider(),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
             const ProfileOptionsList(),
+
+            const SizedBox(height: 16),
+            const SignOutButton(),
           ],
         ),
       ),

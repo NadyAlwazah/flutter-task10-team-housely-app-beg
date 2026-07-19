@@ -73,6 +73,7 @@ class ProfileOptionsList extends StatelessWidget {
     return Column(
       children: options.map((item) {
         return ListTile(
+          dense: true,
           contentPadding: EdgeInsets.zero,
           leading: SvgPicture.asset(item['icon']!),
           title: Text(item['title']!, style: Styles.textStyle12W500Inter),
