@@ -12,6 +12,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/popular_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/notifications/presentation/views/notifications_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/on_boarding_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/search_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/select_location_view.dart';
@@ -26,6 +27,7 @@ abstract class AppRouter {
   static const String kDetails = '/details';
   static const String kSearch = '/search';
   static const String kProfile = '/profile';
+  static const String kEditProfile = '/edit_profile';
   static const String kAddReview = '/add_review';
   static const String kResetPassword = '/reset_password';
   static const String kBookingAddCard = '/booking_add_card';
@@ -98,6 +100,10 @@ abstract class AppRouter {
       GoRoute(
         path: kSelectLocation,
         builder: (context, state) => const SelectLocationView(),
+      ),
+      GoRoute(
+        path: kEditProfile,
+        builder: (context, state) => const EditProfileView(),
       ),
     ],
   );
