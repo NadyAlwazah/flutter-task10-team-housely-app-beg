@@ -48,6 +48,17 @@ class MapPageBody extends StatelessWidget {
           const Spacer(),
 
           _buildLocationDetailsCard(),
+           
+            SizedBox(height: 20.h),
+          Padding(padding: EdgeInsets.all(20.h),
+          child: CustomAppButton(
+            text: "Choose location",
+            onPressed: onChooseLocation,
+            textStyle: Styles.textStyle18W400Inter.copyWith(
+              color: Colors.white,
+            ),
+          ),
+          ),
 
           Padding(
             padding: EdgeInsets.only(bottom: 20.h),
@@ -151,9 +162,19 @@ class MapPageBody extends StatelessWidget {
 
           Row(
             children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFF4EBFF),
+                  shape: BoxShape.circle,
+                ),
+                child: 
               const Icon(
+                size: 18,
                 Icons.location_on_outlined,
                 color: AppColors.primary,
+              ),
               ),
 
               SizedBox(width: 10.w),
@@ -171,15 +192,7 @@ class MapPageBody extends StatelessWidget {
             ],
           ),
 
-          SizedBox(height: 20.h),
-
-          CustomAppButton(
-            text: "Choose location",
-            onPressed: onChooseLocation,
-            textStyle: Styles.textStyle18W400Inter.copyWith(
-              color: Colors.white,
-            ),
-          ),
+         
         ],
       ),
     );

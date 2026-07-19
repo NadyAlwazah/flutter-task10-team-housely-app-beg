@@ -5,7 +5,6 @@ import 'package:http/http.dart' as http;
 
 class LocationService {
   Future<String> getCurrentAddress() async {
-    // التحقق من تفعيل خدمة الموقع
     final bool serviceEnabled =
         await Geolocator.isLocationServiceEnabled();
 
@@ -15,7 +14,6 @@ class LocationService {
       );
     }
 
-    // التحقق من الصلاحيات
     LocationPermission permission =
         await Geolocator.checkPermission();
 
@@ -37,7 +35,6 @@ class LocationService {
       );
     }
 
-    // الحصول على الموقع الحالي
     final Position position =
         await Geolocator.getCurrentPosition(
       locationSettings: const LocationSettings(
@@ -45,7 +42,6 @@ class LocationService {
       ),
     );
 
-    // Reverse Geocoding باستخدام Nominatim
     final Uri url = Uri.parse(
       'https://nominatim.openstreetmap.org/reverse'
       '?lat=${position.latitude}'

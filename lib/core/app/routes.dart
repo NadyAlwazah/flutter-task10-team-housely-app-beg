@@ -108,6 +108,13 @@ abstract class AppRouter {
         builder: (context, state) => const NotificationsView(),
       ),
       GoRoute(
+        path: kSelectLocation,
+        builder: (context, state) => BlocProvider(
+          create: (context) => LocationCubit(),
+          child: const SelectLocationView(),
+        ),
+      ),
+      GoRoute(
         path: '/map',
         builder: (context, state) => BlocProvider(
           create: (context) => LocationCubit(),

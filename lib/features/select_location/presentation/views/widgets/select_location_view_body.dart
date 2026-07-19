@@ -36,15 +36,15 @@ class SelectLocationViewBody extends StatelessWidget {
               style: Styles.textStyle20W600Inter,
             ),
 
-            SizedBox(height: 10.h),
+            SizedBox(height: 16.h),
 
             Text(
-              "Choose your location to find property around you",
+              "Choose your location to find property\n around you",
               style: Styles.textStyle14W400Inter,
               textAlign: TextAlign.center,
             ),
 
-            SizedBox(height: 110.h),
+           SizedBox(height: 104.h),
 
            CustomAppButton(
   text: "Use current location",
