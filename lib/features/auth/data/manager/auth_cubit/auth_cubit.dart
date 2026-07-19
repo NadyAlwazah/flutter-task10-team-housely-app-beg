@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
 
 part 'auth_state.dart';
@@ -6,7 +7,7 @@ part 'auth_state.dart';
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
-  final AuthLocalDataSource _local = AuthLocalDataSource();
+  final AuthLocalDataSource _local = getIt<AuthLocalDataSource>();
 
   Future<void> signup({required String fullName, required String email}) async {
     emit(AuthLoading());
