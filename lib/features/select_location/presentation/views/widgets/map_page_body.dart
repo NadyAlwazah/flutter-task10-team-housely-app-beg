@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_search_service.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/app_bottom_indicator.dart';
@@ -28,6 +30,19 @@ class MapPageBody extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
+           Align(
+          alignment: Alignment.centerLeft,
+          child: IconButton(
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        const SizedBox(height: 32,),
           _buildSearchBar(),
 
           const Spacer(),
@@ -55,12 +70,14 @@ class MapPageBody extends StatelessWidget {
             borderRadius: BorderRadius.circular(15.r),
           ),
           child: TextField(
-            decoration: const InputDecoration(
-              icon: Icon(
-                Icons.search,
-                color: Colors.purple,
-              ),
+            decoration: InputDecoration(
+              icon: SvgPicture.asset(
+                AssetsData.searchSvg,
+                width: 24.w,
+                 height: 24.h,
+                 ),
               hintText: "Search Location",
+              hintStyle: Styles.textStyle14W400Inter,
               border: InputBorder.none,
             ),
             onSubmitted: (value) {
@@ -135,8 +152,8 @@ class MapPageBody extends StatelessWidget {
           Row(
             children: [
               const Icon(
-                Icons.location_on,
-                color: Colors.purple,
+                Icons.location_on_outlined,
+                color: AppColors.primary,
               ),
 
               SizedBox(width: 10.w),

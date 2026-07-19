@@ -44,14 +44,18 @@ abstract class AppRouter {
   static final router = GoRouter(
     routes: [
       // GoRoute(path: '/', builder: (context, state) => const SplashView()),
-      GoRoute(
-        path: kOnBoarding,
-        builder: (context, state) => const OnBoardingView(),
-      ),
+       GoRoute(
+        path: kSelectLocation,
+        builder: (context, state) => BlocProvider(
+         create: (context) => LocationCubit(
+         AuthLocalDataSource(),
+    ),
+    child: const SelectLocationView(),
+  ),), 
 
       GoRoute(path: kSignin, builder: (context, state) => const SigninView()),
       GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
-      GoRoute(path: '/', builder: (context, state) => const BottomBarLayout()),
+      GoRoute(path: '/', builder: (context, state) => const SelectLocationView()),
 
       GoRoute(
         path: kOnBoarding,
@@ -96,7 +100,7 @@ abstract class AppRouter {
         path: kNotifications,
         builder: (context, state) => const NotificationsView(),
       ),
-       GoRoute(
+    /*   GoRoute(
         path: kSelectLocation,
         builder: (context, state) => BlocProvider(
          create: (context) => LocationCubit(
@@ -104,7 +108,7 @@ abstract class AppRouter {
     ),
     child: const SelectLocationView(),
   ),
-),
+),*/
       GoRoute(
        path: '/map',
       builder: (context, state) => BlocProvider(

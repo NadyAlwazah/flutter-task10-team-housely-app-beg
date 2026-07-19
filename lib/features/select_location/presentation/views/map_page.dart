@@ -27,7 +27,7 @@ class _MapPageState extends State<MapPage> {
 
   List<LocationResult> _searchResults = [];
 
-  String _currentAddress = "Searching...";
+  String _currentAddress = "";
 
   LatLng _center = const LatLng(
     -7.7956,

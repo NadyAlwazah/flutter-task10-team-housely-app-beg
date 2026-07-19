@@ -44,7 +44,7 @@ class SelectLocationViewBody extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
 
-            SizedBox(height: 30.h),
+            SizedBox(height: 110.h),
 
            CustomAppButton(
   text: "Use current location",
