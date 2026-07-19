@@ -9,13 +9,14 @@ class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final double? radius;
-
+  final Color? loadingColor;
   const CustomButton({
     super.key,
     this.text,
     this.onPressed,
     this.isLoading = false,
     this.radius,
+    this.loadingColor,
   });
 
   @override
@@ -30,8 +31,12 @@ class CustomButton extends StatelessWidget {
         ),
       ),
       child: isLoading
-          ? const Center(
-              child: SizedBox(width: 20, height: 20, child: AppLoader()),
+          ? Center(
+              child: SizedBox(
+                width: 20,
+                height: 20,
+                child: AppLoader(color: loadingColor),
+              ),
             )
           : Text(
               text!,
