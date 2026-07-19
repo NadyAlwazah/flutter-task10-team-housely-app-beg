@@ -5,4 +5,5 @@ class AssetsData {
   static const iconFavoriteSvg = "${_icons}favorite.svg";
   static const iconDocumentSvg = "${_icons}document.svg";
   static const iconExploreSvg = "${_icons}explore.svg";
+  static const selectLocationSvg = "${_icons}select-location.svg";
 }

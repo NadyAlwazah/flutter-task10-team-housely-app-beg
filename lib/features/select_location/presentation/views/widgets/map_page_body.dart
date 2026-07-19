@@ -1,0 +1,170 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_search_service.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/app_bottom_indicator.dart';
+import 'custom_app_button.dart';
+
+class MapPageBody extends StatelessWidget {
+  final String address;
+  final VoidCallback onChooseLocation;
+  final Function(String) onSearch;
+
+  final List<LocationResult> searchResults;
+  final Function(LocationResult) onLocationSelected;
+
+  const MapPageBody({
+    super.key,
+    required this.address,
+    required this.onChooseLocation,
+    required this.onSearch,
+    required this.searchResults,
+    required this.onLocationSelected,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Column(
+        children: [
+          _buildSearchBar(),
+
+          const Spacer(),
+
+          _buildLocationDetailsCard(),
+
+          Padding(
+            padding: EdgeInsets.only(bottom: 20.h),
+            child: const AppBottomIndicator(opacity: 0.6),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSearchBar() {
+    return Column(
+      children: [
+        Container(
+          height: 55.h,
+          margin: EdgeInsets.symmetric(horizontal: 20.w),
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(15.r),
+          ),
+          child: TextField(
+            decoration: const InputDecoration(
+              icon: Icon(
+                Icons.search,
+                color: Colors.purple,
+              ),
+              hintText: "Search Location",
+              border: InputBorder.none,
+            ),
+            onSubmitted: (value) {
+              if (value.trim().isNotEmpty) {
+                onSearch(value.trim());
+              }
+            },
+          ),
+        ),
+
+        if (searchResults.isNotEmpty)
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20.w),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15.r),
+            ),
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: searchResults.length,
+              itemBuilder: (context, index) {
+                final result = searchResults[index];
+
+                return ListTile(
+                  leading: const Icon(
+                    Icons.location_on,
+                    color: Colors.purple,
+                  ),
+                  title: Text(
+                    result.displayName,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  onTap: () {
+                    onLocationSelected(result);
+                  },
+                );
+              },
+            ),
+          ),
+      ],
+    );
+  }
+
+  Widget _buildLocationDetailsCard() {
+    return Container(
+      margin: EdgeInsets.all(20.w),
+      padding: EdgeInsets.all(20.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20.r),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.black26,
+            blurRadius: 15,
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              "Location Details",
+              style: Styles.textStyle20W600Inter,
+            ),
+          ),
+
+          SizedBox(height: 15.h),
+
+          Row(
+            children: [
+              const Icon(
+                Icons.location_on,
+                color: Colors.purple,
+              ),
+
+              SizedBox(width: 10.w),
+
+              Flexible(
+                child: Text(
+                  address,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Styles.textStyle14W400Inter.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: 20.h),
+
+          CustomAppButton(
+            text: "Choose location",
+            onPressed: onChooseLocation,
+            textStyle: Styles.textStyle18W400Inter.copyWith(
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
