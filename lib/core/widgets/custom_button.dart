@@ -9,13 +9,14 @@ class CustomButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final bool isLoading;
   final double? radius;
-
+  final Color? loadingColor;
   const CustomButton({
     super.key,
     this.text,
     this.onPressed,
     this.isLoading = false,
     this.radius,
+    this.loadingColor,
   });
 
   @override
@@ -24,14 +25,18 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
-        minimumSize: const Size(double.infinity, 50),
+        minimumSize: const Size(double.infinity, 52),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(radius ?? 8.r),
         ),
       ),
       child: isLoading
-          ? const Center(
-              child: SizedBox(width: 20, height: 20, child: AppLoader()),
+          ? Center(
+              child: SizedBox(
+                width: 20,
+                height: 20,
+                child: AppLoader(color: loadingColor),
+              ),
             )
           : Text(
               text!,

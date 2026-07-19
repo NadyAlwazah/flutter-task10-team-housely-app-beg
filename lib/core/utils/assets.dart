@@ -14,4 +14,7 @@ class AssetsData {
   static const imageOnboard4png = "${_images}image4.png";
   static const imageOnboard5png = "${_images}image5.png";
   static const imageOnboard6png = "${_images}image6.png";
+  static const iconCheckSvg = "${_icons}check.svg";
+  static const iconGoogleSvg = "${_icons}google.svg";
+  static const iconFacebookSvg = "${_icons}facebook.svg";
 }
