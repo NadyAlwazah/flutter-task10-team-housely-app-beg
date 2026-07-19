@@ -8,4 +8,8 @@ class AssetsData {
   static const iconCheckSvg = "${_icons}check.svg";
   static const iconGoogleSvg = "${_icons}google.svg";
   static const iconFacebookSvg = "${_icons}facebook.svg";
+  static const iconCameraSvg = "${_icons}camera.svg";
+
+  //Images
+  static const imageProfilePng = "${_images}profile_image.png";
 }
