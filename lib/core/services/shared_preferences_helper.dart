@@ -29,6 +29,18 @@ class SharedPreferencesHelper {
     return prefs.getStringList(key);
   }
 
+  // bool حفظ
+  static Future<void> saveBool(String key, bool value) async {
+    final prefs = await instance;
+    await prefs.setBool(key, value);
+  }
+
+  // bool قراءة
+  static Future<bool?> getBool(String key) async {
+    final prefs = await instance;
+    return prefs.getBool(key);
+  }
+
   // حذف قيمة واحدة
   static Future<void> remove(String key) async {
     final prefs = await instance;

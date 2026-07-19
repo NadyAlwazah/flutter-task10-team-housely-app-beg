@@ -32,6 +32,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
     passwordController.dispose();
   }
 
+  bool rememberMeValue = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -56,7 +57,11 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                 const SizedBox(height: 16),
                 Row(
                   children: [
-                    RememberMe(onChanged: (val) {}),
+                    RememberMe(
+                      onChanged: (value) {
+                        rememberMeValue = value;
+                      },
+                    ),
                     const Spacer(),
                     const ForgotPasswordText(),
                   ],
@@ -90,6 +95,7 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                         if (_formKey.currentState!.validate()) {
                           context.read<AuthCubit>().signin(
                             email: emailController.text,
+                            rememberMe: rememberMeValue,
                           );
                         }
                       },

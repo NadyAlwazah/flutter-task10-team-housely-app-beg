@@ -21,13 +21,14 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
-  Future<void> signin({required String email}) async {
+  Future<void> signin({required String email, required bool rememberMe}) async {
     emit(AuthLoading());
 
     try {
       final isCorrect = await _local.isEmailCorrect(email);
 
       if (isCorrect) {
+        await _local.saveRememberMe(rememberMe);
         emit(AuthSuccess());
       } else {
         emit(AuthFailure("Incorrect email. Please try again."));

@@ -32,4 +32,12 @@ class AuthLocalDataSource {
     final savedEmail = await getEmail();
     return savedEmail != null && savedEmail == email;
   }
+
+  Future<void> saveRememberMe(bool value) async {
+    await SharedPreferencesHelper.saveBool(AppKey.keyRememberMe, value);
+  }
+
+  Future<bool?> getRememberMe() async {
+    return await SharedPreferencesHelper.getBool(AppKey.keyRememberMe);
+  }
 }
