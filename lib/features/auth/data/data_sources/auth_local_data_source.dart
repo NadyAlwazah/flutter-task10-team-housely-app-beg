@@ -1,43 +1,30 @@
+import 'dart:convert';
+
 import 'package:flutter_task10_team_housely_app_beg/core/constant/app_key.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/shared_preferences_helper.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/data/models/user_model.dart';
 
 class AuthLocalDataSource {
-  // حفظ الاسم
-  Future<void> saveFullName(String fullName) async {
-    await SharedPreferencesHelper.saveString(AppKey.keyFullName, fullName);
+  // JSON حفظ المستخدم كامل كـ
+  Future<void> saveUser(UserModel user) async {
+    final jsonString = jsonEncode(user.toMap());
+    await SharedPreferencesHelper.saveString(AppKey.keyUserModel, jsonString);
   }
 
-  // قراءة الاسم
-  Future<String?> getFullName() async {
-    return await SharedPreferencesHelper.getString(AppKey.keyFullName);
+  // قراءة المستخدم كامل
+  Future<UserModel?> getUser() async {
+    final jsonString = await SharedPreferencesHelper.getString(
+      AppKey.keyUserModel,
+    );
+
+    if (jsonString == null) return null;
+
+    final map = jsonDecode(jsonString);
+    return UserModel.fromMap(map);
   }
 
-  // حفظ الإيميل
-  Future<void> saveEmail(String email) async {
-    await SharedPreferencesHelper.saveString(AppKey.keyEmail, email);
-  }
-
-  // قراءة الإيميل
-  Future<String?> getEmail() async {
-    return await SharedPreferencesHelper.getString(AppKey.keyEmail);
-  }
-
-  // حذف البيانات
+  // حذف بيانات المستخدم بالكامل
   Future<void> clearUserData() async {
-    await SharedPreferencesHelper.remove(AppKey.keyFullName);
-    await SharedPreferencesHelper.remove(AppKey.keyEmail);
-  }
-
-  Future<bool> isEmailCorrect(String email) async {
-    final savedEmail = await getEmail();
-    return savedEmail != null && savedEmail == email;
-  }
-
-  Future<void> saveRememberMe(bool value) async {
-    await SharedPreferencesHelper.saveBool(AppKey.keyRememberMe, value);
-  }
-
-  Future<bool?> getRememberMe() async {
-    return await SharedPreferencesHelper.getBool(AppKey.keyRememberMe);
+    await SharedPreferencesHelper.remove(AppKey.keyUserModel);
   }
 }
