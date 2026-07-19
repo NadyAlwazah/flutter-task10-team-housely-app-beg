@@ -48,7 +48,10 @@ abstract class AppRouter {
       GoRoute(path: '/', builder: (context, state) => const SigninView()),
       GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
 
-      // GoRoute(path: '/', builder: (context, state) => const BottomBarLayout()),
+      GoRoute(
+        path: kBottomBar,
+        builder: (context, state) => const BottomBarLayout(),
+      ),
       GoRoute(
         path: kOnBoarding,
         builder: (context, state) => const OnBoardingView(),

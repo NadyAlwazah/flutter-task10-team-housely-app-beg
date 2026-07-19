@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/data/manager/auth_cubit/auth_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/auth_header.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/auth_or_text.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/have_an_account_widget.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/signup_form_fields.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/social_buttons.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/terms_and_conditions.dart';
+import 'package:go_router/go_router.dart';
 
 class SignupViewBody extends StatefulWidget {
   const SignupViewBody({super.key});
@@ -29,6 +34,35 @@ class _SignupViewBodyState extends State<SignupViewBody> {
     passwordController.dispose();
   }
 
+  bool isTermsAccepted = false;
+
+  void _showTermsError() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        backgroundColor: Colors.red,
+        behavior: SnackBarBehavior.floating,
+        content: Text(
+          "Please accept the Terms and Conditions to continue",
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+
+  void _onRegister() {
+    if (!_formKey.currentState!.validate()) return;
+
+    if (!isTermsAccepted) {
+      _showTermsError();
+      return;
+    }
+
+    context.read<AuthCubit>().signup(
+      fullName: fullNameController.text.trim(),
+      email: emailController.text.trim(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -50,10 +84,37 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               ),
 
               const SizedBox(height: 16),
-              TermsAndConditions(onChanged: (val) {}),
+              TermsAndConditions(
+                onChanged: (value) {
+                  isTermsAccepted = value;
+                },
+              ),
 
               const SizedBox(height: 32),
-              CustomButton(text: "Sign up", onPressed: () {}),
+              BlocConsumer<AuthCubit, AuthState>(
+                listener: (context, state) {
+                  if (state is AuthSuccess) {
+                    context.go(AppRouter.kBottomBar);
+                  } else if (state is AuthFailure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      CustomSnackBar(message: state.message, isError: true),
+                    );
+                  }
+                },
+                buildWhen: (previous, current) =>
+                    current is AuthLoading ||
+                    current is AuthFailure ||
+                    current is AuthSuccess,
+                builder: (context, state) {
+                  if (state is AuthLoading) {
+                    return const CustomButton(
+                      isLoading: true,
+                      loadingColor: Colors.white,
+                    );
+                  }
+                  return CustomButton(text: "Sign up", onPressed: _onRegister);
+                },
+              ),
 
               const SizedBox(height: 24),
               const AuthOrText(),

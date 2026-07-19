@@ -27,4 +27,9 @@ class AuthLocalDataSource {
     await SharedPreferencesHelper.remove(AppKey.keyFullName);
     await SharedPreferencesHelper.remove(AppKey.keyEmail);
   }
+
+  Future<bool> isEmailCorrect(String email) async {
+    final savedEmail = await getEmail();
+    return savedEmail != null && savedEmail == email;
+  }
 }
