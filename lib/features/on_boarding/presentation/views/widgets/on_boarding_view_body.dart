@@ -5,7 +5,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/data/on
 import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/widgets/on_boarding_item.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
-import 'package:flutter_task10_team_housely_app_beg/core/widgets/dot_indicator.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/widgets/dot_indicator.dart';
 import 'skip_button.dart';
 
 class OnBoardingViewBody extends StatefulWidget {

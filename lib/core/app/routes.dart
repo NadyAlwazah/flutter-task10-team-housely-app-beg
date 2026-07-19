@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_bar_layout.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/add_review_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/reset_password_view.dart';
@@ -14,6 +15,8 @@ import 'package:flutter_task10_team_housely_app_beg/features/notifications/prese
 import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/search_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/map_page.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/select_location_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/splash/presentation/views/splash_view.dart';
 import 'package:go_router/go_router.dart';
@@ -40,16 +43,20 @@ abstract class AppRouter {
   static final router = GoRouter(
     routes: [
       GoRoute(path: '/', builder: (context, state) => const SplashView()),
-      GoRoute(path: kSignin, builder: (context, state) => const SigninView()),
-      GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
-      GoRoute(path: '/', builder: (context, state) => const BottomBarLayout()),
-
       GoRoute(
-        path: kOnBoarding,
-        builder: (context, state) => const OnBoardingView(),
+        path: kSelectLocation,
+        builder: (context, state) => BlocProvider(
+          create: (context) => LocationCubit(),
+          child: const SelectLocationView(),
+        ),
       ),
 
-      GoRoute(path: '/', builder: (context, state) => const SigninView()),
+      GoRoute(path: kSignin, builder: (context, state) => const SigninView()),
+      GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
+      GoRoute(
+        path: '/',
+        builder: (context, state) => const SelectLocationView(),
+      ),
 
       GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
 
@@ -102,7 +109,17 @@ abstract class AppRouter {
       ),
       GoRoute(
         path: kSelectLocation,
-        builder: (context, state) => const SelectLocationView(),
+        builder: (context, state) => BlocProvider(
+          create: (context) => LocationCubit(),
+          child: const SelectLocationView(),
+        ),
+      ),
+      GoRoute(
+        path: '/map',
+        builder: (context, state) => BlocProvider(
+          create: (context) => LocationCubit(),
+          child: const MapPage(),
+        ),
       ),
     ],
   );
