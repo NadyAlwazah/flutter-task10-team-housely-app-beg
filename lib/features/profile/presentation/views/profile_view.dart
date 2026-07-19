@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_app_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
@@ -6,6 +7,11 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(children: [ProfileViewBody()]);
+    return const Column(
+      children: [
+        CustomAppBar(title: "Profile"),
+        Expanded(child: ProfileViewBody()),
+      ],
+    );
   }
 }
