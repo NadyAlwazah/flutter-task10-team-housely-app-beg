@@ -23,9 +23,15 @@ class Validators {
     if (value == null || value.isEmpty) {
       return "Password is required";
     }
-    if (value.length < 8) {
-      return "Password must be at least 8 characters";
+
+    final regex = RegExp(
+      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*]).{8,}$',
+    );
+
+    if (!regex.hasMatch(value)) {
+      return "Password must contain uppercase, lowercase,\nnumber, and special character";
     }
+
     return null;
   }
 
