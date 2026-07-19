@@ -1,34 +1,33 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/auth/models/user_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/data/models/user_model.dart';
 
 class LocationCubit extends Cubit<String?> {
-  final AuthLocalDataSource _dataSource;
-  
-  LocationCubit(this._dataSource) : super(null);
-Future<void> updateLocation(String newLocation) async {
-  try {
-    final UserModel? user = await _dataSource.getUser();
+  LocationCubit() : super(null);
+  final AuthLocalDataSource _local = getIt<AuthLocalDataSource>();
+  Future<void> updateLocation(String newLocation) async {
+    try {
+      final user = await _local.getUser();
 
+      if (user == null) {
+        emit(null);
+        return;
+      }
 
-    if (user == null) {
+      final updatedUser = UserModel(
+        fullName: user.fullName,
+        email: user.email,
+        rememberMe: user.rememberMe,
+        dateOfBirth: user.dateOfBirth,
+        myLocation: newLocation,
+      );
+
+      await _local.saveUser(updatedUser);
+
+      emit(newLocation);
+    } catch (e) {
       emit(null);
-      return;
     }
-
-    final UserModel updatedUser = UserModel(
-      fullName: user.fullName,
-      email: user.email,
-      rememberMe: user.rememberMe,
-      dateOfBirth: user.dateOfBirth,
-      myLocation: newLocation,
-    );
-
-    await _dataSource.saveUser(updatedUser);
-
-    emit(newLocation);
-  } catch (e) {
-    emit(null);
   }
-}
 }

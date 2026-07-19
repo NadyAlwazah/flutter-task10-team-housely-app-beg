@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter_task10_team_housely_app_beg/core/constant/app_key.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/shared_preferences_helper.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/auth/models/user_model.dart';
+
+import 'package:flutter_task10_team_housely_app_beg/features/auth/data/models/user_model.dart';
 
 class AuthLocalDataSource {
   // JSON حفظ المستخدم كامل كـ
