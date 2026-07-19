@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_app_bar.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/edit_profile_view_body.dart';
 import 'package:go_router/go_router.dart';
 
 class EditProfileView extends StatelessWidget {
@@ -12,6 +13,7 @@ class EditProfileView extends StatelessWidget {
         title: "Edit Profile",
         onTapLeading: () => context.pop(),
       ),
+      body: const EditProfileViewBody(),
     );
   }
 }
