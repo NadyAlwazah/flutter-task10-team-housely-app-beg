@@ -12,6 +12,13 @@ class AssetsData {
   static const iconCheckSvg = "${_icons}check.svg";
   static const iconGoogleSvg = "${_icons}google.svg";
   static const iconFacebookSvg = "${_icons}facebook.svg";
+  static const iconCameraSvg = "${_icons}camera.svg";
+  static const iconSettingSvg = "${_icons}setting.svg";
+  static const iconWalletSvg = "${_icons}wallet.svg";
+  static const iconNotificationSvg = "${_icons}notification.svg";
+  static const iconTimeSquareSvg = "${_icons}time_square.svg";
+  static const iconInfoSquareSvg = "${_icons}info_square.svg";
+  static const iconCalendarSvg = "${_icons}calendar.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -20,4 +27,5 @@ class AssetsData {
   static const imageOnboard4png = "${_images}image4.png";
   static const imageOnboard5png = "${_images}image5.png";
   static const imageOnboard6png = "${_images}image6.png";
+  static const imageProfilePng = "${_images}profile_image.png";
 }

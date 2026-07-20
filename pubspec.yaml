@@ -49,6 +49,7 @@ dependencies:
   latlong2: ^0.9.0
   http: ^1.2.2
   get_it: ^9.2.1
+  awesome_dialog: ^3.3.0
 
 dev_dependencies:
   flutter_test:

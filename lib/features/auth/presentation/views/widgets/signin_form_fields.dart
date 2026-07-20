@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/validators.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/custom_text_form_field.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/form_label.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_text_form_field.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/form_label.dart';
 
 class SigninFormFields extends StatelessWidget {
   const SigninFormFields({
