@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
@@ -22,8 +23,7 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
-  final LocationSearchService _searchService =
-      LocationSearchService();
+  final LocationSearchService _searchService = LocationSearchService();
 
   final MapController _mapController = MapController();
 
@@ -31,10 +31,7 @@ class _MapPageState extends State<MapPage> {
 
   String _currentAddress = 'Getting current location...';
 
-  LatLng _center = const LatLng(
-    -7.7956,
-    110.3695,
-  );
+  LatLng _center = const LatLng(-7.7956, 110.3695);
 
   Timer? _debounceTimer;
 
@@ -55,36 +52,31 @@ class _MapPageState extends State<MapPage> {
 
   Future<void> _getCurrentLocation() async {
     try {
-      final bool serviceEnabled =
-          await Geolocator.isLocationServiceEnabled();
+      final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
       if (!serviceEnabled) {
         debugPrint('Location service is disabled');
 
         if (mounted) {
           setState(() {
-            _currentAddress =
-                'Location service is disabled';
+            _currentAddress = 'Location service is disabled';
           });
         }
 
         return;
       }
 
-      LocationPermission permission =
-          await Geolocator.checkPermission();
+      LocationPermission permission = await Geolocator.checkPermission();
 
       if (permission == LocationPermission.denied) {
-        permission =
-            await Geolocator.requestPermission();
+        permission = await Geolocator.requestPermission();
 
         if (permission == LocationPermission.denied) {
           debugPrint('Location permission denied');
 
           if (mounted) {
             setState(() {
-              _currentAddress =
-                  'Location permission denied';
+              _currentAddress = 'Location permission denied';
             });
           }
 
@@ -93,22 +85,18 @@ class _MapPageState extends State<MapPage> {
       }
 
       if (permission == LocationPermission.deniedForever) {
-        debugPrint(
-          'Location permission permanently denied',
-        );
+        debugPrint('Location permission permanently denied');
 
         if (mounted) {
           setState(() {
-            _currentAddress =
-                'Location permission permanently denied';
+            _currentAddress = 'Location permission permanently denied';
           });
         }
 
         return;
       }
 
-      final Position position =
-          await Geolocator.getCurrentPosition(
+      final Position position = await Geolocator.getCurrentPosition(
         locationSettings: const LocationSettings(
           accuracy: LocationAccuracy.high,
         ),
@@ -130,38 +118,27 @@ class _MapPageState extends State<MapPage> {
         _center = currentLocation;
       });
 
-      _mapController.move(
-        currentLocation,
-        15,
-      );
+      _mapController.move(currentLocation, 15);
 
       await _getAddress(currentLocation);
     } catch (e, stackTrace) {
-      debugPrint(
-        'Current location error: $e',
-      );
+      debugPrint('Current location error: $e');
 
-      debugPrint(
-        stackTrace.toString(),
-      );
+      debugPrint(stackTrace.toString());
 
       if (mounted) {
         setState(() {
-          _currentAddress =
-              'Unable to get current location';
+          _currentAddress = 'Unable to get current location';
         });
       }
     }
   }
 
-  Future<void> _searchLocation(
-    String query,
-  ) async {
+  Future<void> _searchLocation(String query) async {
     if (query.trim().isEmpty) return;
 
     try {
-      final List<LocationResult> results =
-          await _searchService.searchLocation(
+      final List<LocationResult> results = await _searchService.searchLocation(
         query.trim(),
       );
 
@@ -171,95 +148,68 @@ class _MapPageState extends State<MapPage> {
         _searchResults = results;
       });
     } catch (e) {
-      debugPrint(
-        'Search error: $e',
-      );
+      debugPrint('Search error: $e');
     }
   }
 
-  void _selectLocation(
-    LocationResult result,
-  ) {
-    final LatLng selectedLocation = LatLng(
-      result.latitude,
-      result.longitude,
-    );
+  void _selectLocation(LocationResult result) {
+    final LatLng selectedLocation = LatLng(result.latitude, result.longitude);
 
     setState(() {
       _center = selectedLocation;
 
-      _currentAddress =
-          result.displayName;
+      _currentAddress = result.displayName;
 
       _searchResults = [];
     });
 
-    _mapController.move(
-      selectedLocation,
-      15,
-    );
+    _mapController.move(selectedLocation, 15);
   }
 
-
-  
-Future<void> _getAddress(LatLng position) async {
-  try {
-    final url = Uri.parse(
-      'https://nominatim.openstreetmap.org/reverse'
-      '?lat=${position.latitude}'
-      '&lon=${position.longitude}'
-      '&format=json'
-      '&addressdetails=1',
-    );
-
-    final response = await http.get(
-      url,
-      headers: {
-        'User-Agent': 'Team-Housely-Flutter-App',
-      },
-    );
-
-    if (response.statusCode != 200) {
-      debugPrint(
-        'Reverse geocoding failed: ${response.statusCode}',
+  Future<void> _getAddress(LatLng position) async {
+    try {
+      final url = Uri.parse(
+        'https://nominatim.openstreetmap.org/reverse'
+        '?lat=${position.latitude}'
+        '&lon=${position.longitude}'
+        '&format=json'
+        '&addressdetails=1',
       );
-      return;
-    }
 
-    final data = jsonDecode(response.body);
-
-    final String? displayName =
-        data['display_name'];
-
-    if (displayName != null &&
-        displayName.isNotEmpty &&
-        mounted) {
-      setState(() {
-        _currentAddress = displayName;
-      });
-
-      debugPrint(
-        'Current address: $_currentAddress',
+      final response = await http.get(
+        url,
+        headers: {'User-Agent': 'Team-Housely-Flutter-App'},
       );
-    }
-  } catch (e) {
-    debugPrint(
-      'Reverse geocoding error: $e',
-    );
 
-    if (mounted) {
-      setState(() {
-        _currentAddress =
-            'Unable to get address';
-      });
+      if (response.statusCode != 200) {
+        debugPrint('Reverse geocoding failed: ${response.statusCode}');
+        return;
+      }
+
+      final data = jsonDecode(response.body);
+
+      final String? displayName = data['display_name'];
+
+      if (displayName != null && displayName.isNotEmpty && mounted) {
+        setState(() {
+          _currentAddress = displayName;
+        });
+
+        debugPrint('Current address: $_currentAddress');
+      }
+    } catch (e) {
+      debugPrint('Reverse geocoding error: $e');
+
+      if (mounted) {
+        setState(() {
+          _currentAddress = 'Unable to get address';
+        });
+      }
     }
   }
-}
 
   @override
-  Widget build(
-    BuildContext context,
-  ) {
+  Widget build(BuildContext context) {
     return Scaffold(
       extendBodyBehindAppBar: true,
 
@@ -272,15 +222,9 @@ Future<void> _getAddress(LatLng position) async {
               initialCenter: _center,
               initialZoom: 15,
 
-              onPositionChanged: (
-                position,
-                hasGesture,
-              ) {
-                if (
-                    hasGesture &&
-                    position.center != null) {
-                  final LatLng newCenter =
-                      position.center!;
+              onPositionChanged: (position, hasGesture) {
+                if (hasGesture && position.center != null) {
+                  final LatLng newCenter = position.center!;
 
                   setState(() {
                     _center = newCenter;
@@ -288,24 +232,16 @@ Future<void> _getAddress(LatLng position) async {
 
                   _debounceTimer?.cancel();
 
-                  _debounceTimer = Timer(
-                    const Duration(
-                      milliseconds: 700,
-                    ),
-                    () {
-                      _getAddress(
-                        newCenter,
-                      );
-                    },
-                  );
+                  _debounceTimer = Timer(const Duration(milliseconds: 700), () {
+                    _getAddress(newCenter);
+                  });
                 }
               },
             ),
 
             children: [
               TileLayer(
-                urlTemplate:
-                    'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               ),
 
               MarkerLayer(
@@ -338,14 +274,12 @@ Future<void> _getAddress(LatLng position) async {
                 return;
               }
 
-              await context
-                  .read<LocationCubit>()
-                  .updateLocation(
-                    _currentAddress,
-                  );
+              await context.read<LocationCubit>().updateLocation(
+                _currentAddress,
+              );
 
               if (context.mounted) {
-                context.go('/');
+                context.go(AppRouter.kBottomBar);
               }
             },
           ),

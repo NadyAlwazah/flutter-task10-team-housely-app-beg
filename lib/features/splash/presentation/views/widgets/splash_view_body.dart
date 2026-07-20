@@ -23,7 +23,7 @@ class SplashViewBody extends StatelessWidget {
           Text(
             "HOUSELY",
             style: Styles.textStyle24W800Inter.copyWith(
-              color: const Color(0xFF1F2A37),
+              letterSpacing: 0.16 * 24,
             ),
           ),
         ],

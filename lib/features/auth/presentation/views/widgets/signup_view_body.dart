@@ -94,7 +94,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
                   if (state is AuthSuccess) {
-                    context.go(AppRouter.kBottomBar);
+                    context.go(AppRouter.kSelectLocation);
                   } else if (state is AuthFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       CustomSnackBar(message: state.message, isError: true),

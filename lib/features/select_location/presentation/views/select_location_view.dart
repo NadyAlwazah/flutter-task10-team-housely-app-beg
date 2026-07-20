@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/shared_preferences_helper.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/app_bottom_indicator.dart';
 
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/select_location_view_body.dart';
+import 'package:go_router/go_router.dart';
 
 class SelectLocationView extends StatelessWidget {
   const SelectLocationView({super.key});
@@ -15,9 +19,8 @@ class SelectLocationView extends StatelessWidget {
     return BlocProvider(
       create: (_) => LocationCubit(),
       child: Scaffold(
-        backgroundColor: Colors.white,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.backgroundColor,
           elevation: 0,
           actions: [
             Padding(
@@ -39,10 +42,13 @@ class SelectLocationView extends StatelessWidget {
                       'hasSkippedLocation',
                       true,
                     );
+                    context.go(AppRouter.kBottomBar);
                   },
                   child: Text(
                     "Skip",
-                    style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+                    style: Styles.textStyle12W400Inter.copyWith(
+                      color: const Color(0xFF4D5761),
+                    ),
                   ),
                 ),
               ),

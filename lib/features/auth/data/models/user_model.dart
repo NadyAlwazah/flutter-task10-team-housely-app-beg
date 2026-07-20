@@ -19,7 +19,7 @@ class UserModel {
       email: map['email'] ?? '',
       rememberMe: map['remember_me'] ?? false,
       dateOfBirth: map['date_of_birth'] ?? '',
-      myLocation: map['my_location'] ?? 'Location not set.',
+      myLocation: map['my_location'] ?? '',
     );
   }
 
