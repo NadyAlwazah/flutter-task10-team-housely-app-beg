@@ -14,8 +14,12 @@ void setupLocator() {
   // Cubits
   getIt.registerFactory<AuthCubit>(() => AuthCubit());
   getIt.registerFactory<ProfileCubit>(() => ProfileCubit());
-  getIt.registerFactory<LocationCubit>(() => LocationCubit());
+  getIt.registerFactory<LocationCubit>(
+    () => LocationCubit(getIt<AuthLocalDataSource>()),
+  );
 
   // Location Service
-  getIt.registerLazySingleton<LocationService>(() => LocationService());
+  getIt.registerLazySingleton<LocationService>(
+    () => LocationService(getIt<AuthLocalDataSource>()),
+  );
 }
