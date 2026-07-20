@@ -9,16 +9,18 @@ class EditProfileFormFields extends StatelessWidget {
     super.key,
     required this.fullNameController,
     required this.emailController,
+    required this.dateController,
   });
   final TextEditingController fullNameController;
   final TextEditingController emailController;
+  final TextEditingController dateController;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const FormLabel(text: 'Text Form'),
-        SizedBox(height: 8.h),
+        SizedBox(height: 4.h),
         CustomTextFormField(
           controller: fullNameController,
           hintText: 'Brooklyn Simmons',
@@ -27,7 +29,7 @@ class EditProfileFormFields extends StatelessWidget {
         SizedBox(height: 16.h),
 
         const FormLabel(text: 'Username'),
-        SizedBox(height: 8.h),
+        SizedBox(height: 4.h),
         CustomTextFormField(
           controller: fullNameController,
           hintText: 'Brooklynsim',
@@ -36,7 +38,7 @@ class EditProfileFormFields extends StatelessWidget {
         SizedBox(height: 16.h),
 
         const FormLabel(text: 'Email'),
-        SizedBox(height: 8.h),
+        SizedBox(height: 4.h),
         CustomTextFormField(
           controller: emailController,
           hintText: 'brooklynsim@gmail.com',
@@ -45,13 +47,31 @@ class EditProfileFormFields extends StatelessWidget {
         SizedBox(height: 16.h),
 
         const FormLabel(text: 'Date of Birth'),
-        SizedBox(height: 8.h),
-        const CustomTextFormField(
-          hintText: 'November/21/1992',
-          textInputType: TextInputType.datetime,
-          suffixIcon: Icon(
-            Icons.calendar_today,
-            color: AppColors.textSecondary,
+        SizedBox(height: 4.h),
+        GestureDetector(
+          onTap: () async {
+            final DateTime? pickedDate = await showDatePicker(
+              context: context,
+              initialDate: DateTime(1992, 11, 21),
+              firstDate: DateTime(1900),
+              lastDate: DateTime.now(),
+            );
+
+            if (pickedDate != null) {
+              dateController.text =
+                  "${pickedDate.year}/${pickedDate.month}/${pickedDate.day}";
+            }
+          },
+          child: AbsorbPointer(
+            child: CustomTextFormField(
+              controller: dateController,
+              hintText: 'November/21/1992',
+              textInputType: TextInputType.datetime,
+              suffixIcon: const Icon(
+                Icons.calendar_today,
+                color: AppColors.textSecondary,
+              ),
+            ),
           ),
         ),
       ],

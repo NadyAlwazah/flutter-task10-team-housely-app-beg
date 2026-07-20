@@ -13,11 +13,14 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
+  TextEditingController dateController = TextEditingController();
+
   @override
   void dispose() {
     super.dispose();
     fullNameController.dispose();
     emailController.dispose();
+    dateController.dispose();
   }
 
   @override
@@ -35,6 +38,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
               EditProfileFormFields(
                 fullNameController: fullNameController,
                 emailController: emailController,
+                dateController: dateController,
               ),
             ],
           ),
