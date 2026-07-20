@@ -8,6 +8,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sour
 import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/edit_profile_form_fields.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/profile_image_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class EditProfileViewBody extends StatefulWidget {
   const EditProfileViewBody({super.key});
@@ -43,7 +44,26 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
         final firstName = user.fullName.split(" ").first;
         usernameController.text = firstName;
       });
+
+      // الآن نضيف الـ listener بعد تحميل البيانات
+      usernameController.addListener(_updateFullNameFromUsername);
     }
+  }
+
+  void _updateFullNameFromUsername() {
+    final fullName = fullNameController.text.trim();
+
+    if (fullName.isEmpty) return;
+
+    final parts = fullName.split(" ");
+
+    // إذا ما في كنية لا تعمل شيء
+    if (parts.length < 2) return;
+
+    final lastName = parts.sublist(1).join(" ");
+    final newFirstName = usernameController.text.trim();
+
+    fullNameController.text = "$newFirstName $lastName";
   }
 
   @override
@@ -81,6 +101,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       CustomSnackBar(message: "Profile updated successfully"),
                     );
+                    context.pop();
                   } else if (state is ProfileFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       CustomSnackBar(message: state.message, isError: true),
