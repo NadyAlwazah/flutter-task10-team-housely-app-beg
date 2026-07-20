@@ -14,6 +14,7 @@ class AssetsData {
   static const iconNotificationSvg = "${_icons}notification.svg";
   static const iconTimeSquareSvg = "${_icons}time_square.svg";
   static const iconInfoSquareSvg = "${_icons}info_square.svg";
+  static const iconCalendarSvg = "${_icons}calendar.svg";
 
   //Images
   static const imageProfilePng = "${_images}profile_image.png";

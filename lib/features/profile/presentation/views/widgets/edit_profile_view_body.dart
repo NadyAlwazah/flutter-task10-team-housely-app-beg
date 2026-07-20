@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext, BlocConsumer;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/edit_profile_form_fields.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/profile_image_widget.dart';
 
@@ -59,7 +64,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
           key: _formKey,
           child: Column(
             children: [
-              const SizedBox(height: 32),
+              SizedBox(height: 32.h),
               const ProfileImageWidget(),
 
               EditProfileFormFields(
@@ -67,6 +72,39 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                 usernameController: usernameController,
                 emailController: emailController,
                 dateController: dateController,
+              ),
+
+              SizedBox(height: 62.h),
+              BlocConsumer<ProfileCubit, ProfileState>(
+                listener: (context, state) {
+                  if (state is ProfileLoaded) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      CustomSnackBar(message: "Profile updated successfully"),
+                    );
+                  } else if (state is ProfileFailure) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      CustomSnackBar(message: state.message, isError: true),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is ProfileLoading) {
+                    return const CustomButton(
+                      isLoading: true,
+                      loadingColor: Colors.white,
+                    );
+                  }
+                  return CustomButton(
+                    text: "Save Change",
+                    onPressed: () {
+                      context.read<ProfileCubit>().updateUser(
+                        fullName: fullNameController.text,
+                        email: emailController.text,
+                        dateOfBirth: dateController.text,
+                      );
+                    },
+                  );
+                },
               ),
             ],
           ),

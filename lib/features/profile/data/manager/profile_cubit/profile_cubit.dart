@@ -21,4 +21,35 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileLoaded(user: user));
     }
   }
+
+  Future<void> updateUser({
+    required String fullName,
+    required String email,
+    required String dateOfBirth,
+  }) async {
+    emit(ProfileLoading());
+
+    try {
+      final user = await _local.getUser();
+
+      if (user == null) {
+        emit(ProfileFailure(message: "No user found"));
+        return;
+      }
+
+      final updatedUser = UserModel(
+        fullName: fullName,
+        email: email,
+        rememberMe: user.rememberMe,
+        dateOfBirth: dateOfBirth,
+        myLocation: user.myLocation,
+      );
+
+      await _local.saveUser(updatedUser);
+
+      emit(ProfileLoaded(user: updatedUser));
+    } catch (e) {
+      emit(ProfileFailure(message: e.toString()));
+    }
+  }
 }
