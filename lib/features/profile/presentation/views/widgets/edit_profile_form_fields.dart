@@ -10,8 +10,10 @@ class EditProfileFormFields extends StatelessWidget {
     required this.fullNameController,
     required this.emailController,
     required this.dateController,
+    required this.usernameController,
   });
   final TextEditingController fullNameController;
+  final TextEditingController usernameController;
   final TextEditingController emailController;
   final TextEditingController dateController;
   @override
@@ -31,7 +33,7 @@ class EditProfileFormFields extends StatelessWidget {
         const FormLabel(text: 'Username'),
         SizedBox(height: 4.h),
         CustomTextFormField(
-          controller: fullNameController,
+          controller: usernameController,
           hintText: 'Brooklynsim',
           textInputType: TextInputType.text,
         ),
