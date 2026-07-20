@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/manager/auth_cubit/auth_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/auth_header.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/auth_or_text.dart';
@@ -69,9 +71,21 @@ class _SigninViewBodyState extends State<SigninViewBody> {
 
                 const SizedBox(height: 32),
                 BlocConsumer<AuthCubit, AuthState>(
-                  listener: (context, state) {
+                  listener: (context, state) async {
                     if (state is AuthSuccess) {
-                      context.go(AppRouter.kBottomBar);
+                      final local = getIt<AuthLocalDataSource>();
+                      final user = await local.getUser();
+
+                      // التحقق من وجود الموقع
+                      final hasLocation =
+                          user?.myLocation != null &&
+                          user!.myLocation!.isNotEmpty;
+
+                      if (hasLocation) {
+                        context.go(AppRouter.kBottomBar);
+                      } else {
+                        context.go(AppRouter.kSelectLocation);
+                      }
                     } else if (state is AuthFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         CustomSnackBar(message: state.message, isError: true),
