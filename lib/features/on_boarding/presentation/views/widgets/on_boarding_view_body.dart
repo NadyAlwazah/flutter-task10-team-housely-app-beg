@@ -42,7 +42,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
             child: currentIndex < 2
                 ? SkipButton(
                     onPressed: () {
-                      context.pushReplacement(AppRouter.kSignin);
+                      context.go(AppRouter.kSignin);
                     },
                   )
                 : SizedBox(height: 50.h),
@@ -86,7 +86,7 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
                   curve: Curves.easeInOut,
                 );
               } else {
-                context.pushReplacement(AppRouter.kSignin);
+                context.go(AppRouter.kSignin);
               }
             },
           ),

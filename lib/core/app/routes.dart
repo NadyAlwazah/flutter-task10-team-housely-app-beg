@@ -1,4 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_bar_layout.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/add_review_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/reset_password_view.dart';
@@ -13,9 +12,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/popular_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/notifications/presentation/views/notifications_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/on_boarding_view.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/profile_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/search_view.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/map_page.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/select_location_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/splash/presentation/views/splash_view.dart';
@@ -28,7 +25,6 @@ abstract class AppRouter {
   static const String kBottomBar = '/bottom_bar';
   static const String kDetails = '/details';
   static const String kSearch = '/search';
-  static const String kProfile = '/profile';
   static const String kAddReview = '/add_review';
   static const String kResetPassword = '/reset_password';
   static const String kBookingAddCard = '/booking_add_card';
@@ -39,88 +35,72 @@ abstract class AppRouter {
   static const String kPopular = '/popular';
   static const String kNotifications = '/notifications';
   static const String kSelectLocation = '/select_location';
+  static const String kMapPage = '/map';
 
-  static final router = GoRouter(
-    routes: [
-      GoRoute(path: '/', builder: (context, state) => const SplashView()),
-      GoRoute(
-        path: kSelectLocation,
-        builder: (context, state) => BlocProvider(
-          create: (context) => LocationCubit(),
-          child: const SelectLocationView(),
+  static late GoRouter router;
+
+  static void initRouter() {
+    router = GoRouter(
+      initialLocation: '/',
+      routes: [
+        GoRoute(path: '/', builder: (context, state) => const SplashView()),
+        GoRoute(
+          path: kOnBoarding,
+          builder: (context, state) => const OnBoardingView(),
         ),
-      ),
-
-      GoRoute(path: kSignin, builder: (context, state) => const SigninView()),
-      GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
-      GoRoute(
-        path: '/',
-        builder: (context, state) => const SelectLocationView(),
-      ),
-
-      GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
-
-      GoRoute(
-        path: kBottomBar,
-        builder: (context, state) => const BottomBarLayout(),
-      ),
-      GoRoute(
-        path: kOnBoarding,
-        builder: (context, state) => const OnBoardingView(),
-      ),
-      GoRoute(path: kDetails, builder: (context, state) => const DetailsView()),
-
-      GoRoute(path: kProfile, builder: (context, state) => const ProfileView()),
-
-      GoRoute(path: kSearch, builder: (context, state) => const SearchView()),
-      GoRoute(
-        path: kAddReview,
-        builder: (context, state) => const AddReviewView(),
-      ),
-      GoRoute(
-        path: kResetPassword,
-        builder: (context, state) => const ResetPasswordView(),
-      ),
-
-      GoRoute(
-        path: kBookingAddCard,
-        builder: (context, state) => const BookingAddCardView(),
-      ),
-      GoRoute(
-        path: kBookingPayment,
-        builder: (context, state) => const BookingPaymentView(),
-      ),
-      GoRoute(
-        path: kBookingReserve,
-        builder: (context, state) => const BookingReserveView(),
-      ),
-      GoRoute(
-        path: kChatList,
-        builder: (context, state) => const ChatListView(),
-      ),
-      GoRoute(
-        path: kChatDetail,
-        builder: (context, state) => const ChatDetailView(),
-      ),
-      GoRoute(path: kPopular, builder: (context, state) => const PopularView()),
-      GoRoute(
-        path: kNotifications,
-        builder: (context, state) => const NotificationsView(),
-      ),
-      GoRoute(
-        path: kSelectLocation,
-        builder: (context, state) => BlocProvider(
-          create: (context) => LocationCubit(),
-          child: const SelectLocationView(),
+        GoRoute(path: kSignin, builder: (context, state) => const SigninView()),
+        GoRoute(path: kSignup, builder: (context, state) => const SignupView()),
+        GoRoute(
+          path: kBottomBar,
+          builder: (context, state) => const BottomBarLayout(),
         ),
-      ),
-      GoRoute(
-        path: '/map',
-        builder: (context, state) => BlocProvider(
-          create: (context) => LocationCubit(),
-          child: const MapPage(),
+        GoRoute(
+          path: kDetails,
+          builder: (context, state) => const DetailsView(),
         ),
-      ),
-    ],
-  );
+        GoRoute(
+          path: kSelectLocation,
+          builder: (context, state) => const SelectLocationView(),
+        ),
+        GoRoute(path: kSearch, builder: (context, state) => const SearchView()),
+        GoRoute(
+          path: kAddReview,
+          builder: (context, state) => const AddReviewView(),
+        ),
+        GoRoute(
+          path: kResetPassword,
+          builder: (context, state) => const ResetPasswordView(),
+        ),
+        GoRoute(
+          path: kBookingAddCard,
+          builder: (context, state) => const BookingAddCardView(),
+        ),
+        GoRoute(
+          path: kBookingPayment,
+          builder: (context, state) => const BookingPaymentView(),
+        ),
+        GoRoute(
+          path: kBookingReserve,
+          builder: (context, state) => const BookingReserveView(),
+        ),
+        GoRoute(
+          path: kChatList,
+          builder: (context, state) => const ChatListView(),
+        ),
+        GoRoute(
+          path: kChatDetail,
+          builder: (context, state) => const ChatDetailView(),
+        ),
+        GoRoute(
+          path: kPopular,
+          builder: (context, state) => const PopularView(),
+        ),
+        GoRoute(
+          path: kNotifications,
+          builder: (context, state) => const NotificationsView(),
+        ),
+        GoRoute(path: kMapPage, builder: (context, state) => const MapPage()),
+      ],
+    );
+  }
 }

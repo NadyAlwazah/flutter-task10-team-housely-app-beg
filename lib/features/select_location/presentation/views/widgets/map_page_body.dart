@@ -5,7 +5,6 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_search_service.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/app_bottom_indicator.dart';
 import 'custom_app_button.dart';
 
 class MapPageBody extends StatelessWidget {
@@ -30,39 +29,32 @@ class MapPageBody extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: [
-           Align(
-          alignment: Alignment.centerLeft,
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
+          Align(
+            alignment: Alignment.centerLeft,
+            child: IconButton(
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
           ),
-        ),
-        const SizedBox(height: 32,),
+          const SizedBox(height: 32),
           _buildSearchBar(),
 
           const Spacer(),
 
           _buildLocationDetailsCard(),
-           
-            SizedBox(height: 20.h),
-          Padding(padding: EdgeInsets.all(20.h),
-          child: CustomAppButton(
-            text: "Choose location",
-            onPressed: onChooseLocation,
-            textStyle: Styles.textStyle18W400Inter.copyWith(
-              color: Colors.white,
-            ),
-          ),
-          ),
 
+          SizedBox(height: 20.h),
           Padding(
-            padding: EdgeInsets.only(bottom: 20.h),
-            child: const AppBottomIndicator(opacity: 0.6),
+            padding: EdgeInsets.all(20.h),
+            child: CustomAppButton(
+              text: "Choose location",
+              onPressed: onChooseLocation,
+              textStyle: Styles.textStyle18W400Inter.copyWith(
+                color: Colors.white,
+              ),
+            ),
           ),
         ],
       ),
@@ -85,8 +77,8 @@ class MapPageBody extends StatelessWidget {
               icon: SvgPicture.asset(
                 AssetsData.searchSvg,
                 width: 24.w,
-                 height: 24.h,
-                 ),
+                height: 24.h,
+              ),
               hintText: "Search Location",
               hintStyle: Styles.textStyle14W400Inter,
               border: InputBorder.none,
@@ -113,10 +105,7 @@ class MapPageBody extends StatelessWidget {
                 final result = searchResults[index];
 
                 return ListTile(
-                  leading: const Icon(
-                    Icons.location_on,
-                    color: Colors.purple,
-                  ),
+                  leading: const Icon(Icons.location_on, color: Colors.purple),
                   title: Text(
                     result.displayName,
                     maxLines: 2,
@@ -140,22 +129,14 @@ class MapPageBody extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20.r),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black26,
-            blurRadius: 15,
-          ),
-        ],
+        boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 15)],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: Text(
-              "Location Details",
-              style: Styles.textStyle20W600Inter,
-            ),
+            child: Text("Location Details", style: Styles.textStyle20W600Inter),
           ),
 
           SizedBox(height: 15.h),
@@ -169,12 +150,11 @@ class MapPageBody extends StatelessWidget {
                   color: Color(0xFFF4EBFF),
                   shape: BoxShape.circle,
                 ),
-                child: 
-              const Icon(
-                size: 18,
-                Icons.location_on_outlined,
-                color: AppColors.primary,
-              ),
+                child: const Icon(
+                  size: 18,
+                  Icons.location_on_outlined,
+                  color: AppColors.primary,
+                ),
               ),
 
               SizedBox(width: 10.w),
@@ -191,8 +171,6 @@ class MapPageBody extends StatelessWidget {
               ),
             ],
           ),
-
-         
         ],
       ),
     );

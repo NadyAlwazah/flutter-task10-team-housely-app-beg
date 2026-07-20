@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/app_initializer.dart';
 import 'package:go_router/go_router.dart';
 import 'widgets/splash_view_body.dart';
 
@@ -18,17 +18,14 @@ class _SplashViewState extends State<SplashView> {
   }
 
   void _navigateToOnBoarding() async {
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     if (mounted) {
-      context.pushReplacement(AppRouter.kOnBoarding);
+      context.go(AppInitializer.nextRoute);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Colors.white,
-      body: SplashViewBody(),
-    );
+    return const Scaffold(body: SplashViewBody());
   }
 }
