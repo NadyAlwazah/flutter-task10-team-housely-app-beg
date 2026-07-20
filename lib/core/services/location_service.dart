@@ -3,7 +3,13 @@ import 'dart:convert';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 
+import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
+
 class LocationService {
+  final AuthLocalDataSource _authLocalDataSource;
+
+  LocationService(this._authLocalDataSource);
+
   Future<String> getCurrentAddress() async {
     final bool serviceEnabled =
         await Geolocator.isLocationServiceEnabled();
@@ -28,8 +34,7 @@ class LocationService {
       );
     }
 
-    if (permission ==
-        LocationPermission.deniedForever) {
+    if (permission == LocationPermission.deniedForever) {
       throw Exception(
         'Location permission permanently denied.',
       );
@@ -42,23 +47,32 @@ class LocationService {
       ),
     );
 
+    final user =
+        await _authLocalDataSource.getUser();
+
+    final String userEmail =
+        user?.email ?? 'unknown@example.com';
+
     final Uri url = Uri.parse(
       'https://nominatim.openstreetmap.org/reverse'
       '?lat=${position.latitude}'
       '&lon=${position.longitude}'
-      '&format=json',
+      '&format=json'
+      '&addressdetails=1',
     );
 
     final response = await http.get(
       url,
       headers: {
-        'User-Agent': 'Team-Housely-Flutter-App',
+        'User-Agent':
+            'TeamHouselyFlutterApp/1.0 ($userEmail)',
+        'Accept-Language': 'en',
       },
     );
 
     if (response.statusCode != 200) {
       throw Exception(
-        'Failed to get address.',
+        'Failed to get address: ${response.statusCode}',
       );
     }
 

@@ -7,7 +7,6 @@ import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sour
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/manager/auth_cubit/auth_cubit.dart';
 
 final getIt = GetIt.instance;
-
 void setupLocator() {
   // Data Sources
   getIt.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSource());
