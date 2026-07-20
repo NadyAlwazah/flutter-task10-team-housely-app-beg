@@ -5,15 +5,24 @@ import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sour
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/manager/auth_cubit/auth_cubit.dart';
 
 final getIt = GetIt.instance;
-
 void setupLocator() {
-  // Data Sources
-  getIt.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSource());
+  getIt.registerLazySingleton<AuthLocalDataSource>(
+    () => AuthLocalDataSource(),
+  );
 
-  // Cubits
-  getIt.registerFactory<AuthCubit>(() => AuthCubit());
-  getIt.registerFactory<LocationCubit>(() => LocationCubit());
+  getIt.registerFactory<AuthCubit>(
+    () => AuthCubit(),
+  );
 
-  // Location Service
-  getIt.registerLazySingleton<LocationService>(() => LocationService());
+  getIt.registerFactory<LocationCubit>(
+    () => LocationCubit(
+      getIt<AuthLocalDataSource>(),
+    ),
+  );
+
+  getIt.registerLazySingleton<LocationService>(
+    () => LocationService(
+      getIt<AuthLocalDataSource>(),
+    ),
+  );
 }

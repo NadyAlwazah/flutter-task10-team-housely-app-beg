@@ -9,6 +9,7 @@ class AppInitializer {
   static late String nextRoute;
 
   Future<void> init() async {
+    await _local.clearUserData();
     final UserModel? user = await _local.getUser();
 
     if (user == null) {

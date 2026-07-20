@@ -4,24 +4,18 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_search_service.dart';
 import 'custom_app_button.dart';
 
 class MapPageBody extends StatelessWidget {
   final String address;
   final VoidCallback onChooseLocation;
-  final Function(String) onSearch;
 
-  final List<LocationResult> searchResults;
-  final Function(LocationResult) onLocationSelected;
 
   const MapPageBody({
     super.key,
     required this.address,
     required this.onChooseLocation,
-    required this.onSearch,
-    required this.searchResults,
-    required this.onLocationSelected,
+   
   });
 
   @override
@@ -60,68 +54,43 @@ class MapPageBody extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildSearchBar() {
-    return Column(
-      children: [
-        Container(
-          height: 55.h,
-          margin: EdgeInsets.symmetric(horizontal: 20.w),
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(15.r),
-          ),
-          child: TextField(
-            decoration: InputDecoration(
-              icon: SvgPicture.asset(
-                AssetsData.searchSvg,
-                width: 24.w,
-                height: 24.h,
-              ),
-              hintText: "Search Location",
-              hintStyle: Styles.textStyle14W400Inter,
-              border: InputBorder.none,
+Widget _buildSearchBar() {
+  return Column(
+    children: [
+      Container(
+        height: 55.h,
+        margin: EdgeInsets.symmetric(horizontal: 20.w),
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15.r),
+        ),
+        child: TextField(
+          readOnly: true, 
+          decoration: InputDecoration(
+            icon: SvgPicture.asset(
+              AssetsData.searchSvg,
+              width: 24.w,
+              height: 24.h,
             ),
-            onSubmitted: (value) {
-              if (value.trim().isNotEmpty) {
-                onSearch(value.trim());
-              }
-            },
+            hintText: "Search Location",
+            hintStyle: Styles.textStyle14W400Inter,
+            border: InputBorder.none,
           ),
         ),
+      ),
 
-        if (searchResults.isNotEmpty)
-          Container(
-            margin: EdgeInsets.symmetric(horizontal: 20.w),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(15.r),
-            ),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: searchResults.length,
-              itemBuilder: (context, index) {
-                final result = searchResults[index];
-
-                return ListTile(
-                  leading: const Icon(Icons.location_on, color: Colors.purple),
-                  title: Text(
-                    result.displayName,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  onTap: () {
-                    onLocationSelected(result);
-                  },
-                );
-              },
-            ),
-          ),
-      ],
-    );
-  }
-
+      Container(
+        margin: EdgeInsets.symmetric(horizontal: 20.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15.r),
+        ),
+        child: const SizedBox.shrink(), 
+      ),
+    ],
+  );
+}
   Widget _buildLocationDetailsCard() {
     return Container(
       margin: EdgeInsets.all(20.w),
