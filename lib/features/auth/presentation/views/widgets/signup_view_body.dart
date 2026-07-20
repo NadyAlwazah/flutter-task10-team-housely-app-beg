@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/manager/auth_cubit/auth_cubit.dart';
@@ -94,7 +93,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               BlocConsumer<AuthCubit, AuthState>(
                 listener: (context, state) {
                   if (state is AuthSuccess) {
-                    context.go(AppRouter.kSelectLocation);
+                    context.pop();
                   } else if (state is AuthFailure) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       CustomSnackBar(message: state.message, isError: true),

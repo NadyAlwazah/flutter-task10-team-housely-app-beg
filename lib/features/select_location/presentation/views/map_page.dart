@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/manager/location_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_search_service.dart';
 
 import 'widgets/map_page_body.dart';
@@ -210,80 +211,86 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
+    return BlocProvider(
+      create: (context) => getIt<LocationCubit>(),
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
 
-      body: Stack(
-        children: [
-          FlutterMap(
-            mapController: _mapController,
+        body: Stack(
+          children: [
+            FlutterMap(
+              mapController: _mapController,
 
-            options: MapOptions(
-              initialCenter: _center,
-              initialZoom: 15,
+              options: MapOptions(
+                initialCenter: _center,
+                initialZoom: 15,
 
-              onPositionChanged: (position, hasGesture) {
-                if (hasGesture && position.center != null) {
-                  final LatLng newCenter = position.center!;
+                onPositionChanged: (position, hasGesture) {
+                  if (hasGesture && position.center != null) {
+                    final LatLng newCenter = position.center!;
 
-                  setState(() {
-                    _center = newCenter;
-                  });
+                    setState(() {
+                      _center = newCenter;
+                    });
 
-                  _debounceTimer?.cancel();
+                    _debounceTimer?.cancel();
 
-                  _debounceTimer = Timer(const Duration(milliseconds: 700), () {
-                    _getAddress(newCenter);
-                  });
+                    _debounceTimer = Timer(
+                      const Duration(milliseconds: 700),
+                      () {
+                        _getAddress(newCenter);
+                      },
+                    );
+                  }
+                },
+              ),
+
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                ),
+
+                MarkerLayer(
+                  markers: [
+                    Marker(
+                      point: _center,
+
+                      child: const Icon(
+                        Icons.location_on,
+                        color: Colors.red,
+                        size: 40,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
+            MapPageBody(
+              address: _currentAddress,
+
+              searchResults: _searchResults,
+
+              onSearch: _searchLocation,
+
+              onLocationSelected: _selectLocation,
+
+              onChooseLocation: () async {
+                if (_currentAddress.isEmpty) {
+                  return;
+                }
+
+                await context.read<LocationCubit>().updateLocation(
+                  _currentAddress,
+                );
+
+                if (context.mounted) {
+                  context.go(AppRouter.kBottomBar);
                 }
               },
             ),
-
-            children: [
-              TileLayer(
-                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-              ),
-
-              MarkerLayer(
-                markers: [
-                  Marker(
-                    point: _center,
-
-                    child: const Icon(
-                      Icons.location_on,
-                      color: Colors.red,
-                      size: 40,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-
-          MapPageBody(
-            address: _currentAddress,
-
-            searchResults: _searchResults,
-
-            onSearch: _searchLocation,
-
-            onLocationSelected: _selectLocation,
-
-            onChooseLocation: () async {
-              if (_currentAddress.isEmpty) {
-                return;
-              }
-
-              await context.read<LocationCubit>().updateLocation(
-                _currentAddress,
-              );
-
-              if (context.mounted) {
-                context.go(AppRouter.kBottomBar);
-              }
-            },
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

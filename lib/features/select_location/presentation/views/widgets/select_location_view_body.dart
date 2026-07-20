@@ -3,20 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/data_sources/location_service.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/location_service.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/manager/location_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/custom_app_button.dart';
 import 'package:go_router/go_router.dart';
 
 class SelectLocationViewBody extends StatelessWidget {
   SelectLocationViewBody({super.key});
 
-  final LocationService _locationService = LocationService();
-
+  final _locationService = getIt<LocationService>();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(

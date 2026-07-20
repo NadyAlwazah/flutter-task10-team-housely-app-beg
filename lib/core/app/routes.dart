@@ -1,4 +1,3 @@
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_bar_layout.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/add_review_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/reset_password_view.dart';
@@ -14,7 +13,6 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/notifications/presentation/views/notifications_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/search_view.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/map_page.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/select_location_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/splash/presentation/views/splash_view.dart';
@@ -60,18 +58,10 @@ abstract class AppRouter {
           path: kDetails,
           builder: (context, state) => const DetailsView(),
         ),
-        // GoRoute(
-        //   path: kSelectLocation,
-        //   builder: (context, state) => BlocProvider(
-        //     create: (context) => LocationCubit(),
-        //     child: const SelectLocationView(),
-        //   ),
-        // ),
         GoRoute(
           path: kSelectLocation,
           builder: (context, state) => const SelectLocationView(),
         ),
-
         GoRoute(path: kSearch, builder: (context, state) => const SearchView()),
         GoRoute(
           path: kAddReview,
@@ -109,13 +99,7 @@ abstract class AppRouter {
           path: kNotifications,
           builder: (context, state) => const NotificationsView(),
         ),
-        GoRoute(
-          path: kMapPage,
-          builder: (context, state) => BlocProvider(
-            create: (context) => LocationCubit(),
-            child: const MapPage(),
-          ),
-        ),
+        GoRoute(path: kMapPage, builder: (context, state) => const MapPage()),
       ],
     );
   }

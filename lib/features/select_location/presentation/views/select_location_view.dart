@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
-import 'package:flutter_task10_team_housely_app_beg/core/services/shared_preferences_helper.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_cubit.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/app_bottom_indicator.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/manager/location_cubit.dart';
 
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/select_location_view_body.dart';
 import 'package:go_router/go_router.dart';
@@ -17,7 +16,7 @@ class SelectLocationView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => LocationCubit(),
+      create: (_) => getIt<LocationCubit>(),
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.backgroundColor,
@@ -37,11 +36,7 @@ class SelectLocationView extends StatelessWidget {
                     padding: EdgeInsets.zero,
                     minimumSize: Size(50.w, 35.h),
                   ),
-                  onPressed: () async {
-                    await SharedPreferencesHelper.saveBool(
-                      'hasSkippedLocation',
-                      true,
-                    );
+                  onPressed: () {
                     context.go(AppRouter.kBottomBar);
                   },
                   child: Text(
@@ -55,15 +50,7 @@ class SelectLocationView extends StatelessWidget {
             ),
           ],
         ),
-        body: Column(
-          children: [
-            Expanded(child: SelectLocationViewBody()),
-            Padding(
-              padding: EdgeInsets.only(bottom: 20.h),
-              child: const AppBottomIndicator(opacity: 0.1),
-            ),
-          ],
-        ),
+        body: Column(children: [Expanded(child: SelectLocationViewBody())]),
       ),
     );
   }

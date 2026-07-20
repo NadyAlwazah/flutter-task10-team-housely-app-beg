@@ -5,7 +5,6 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/location_search_service.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/app_bottom_indicator.dart';
 import 'custom_app_button.dart';
 
 class MapPageBody extends StatelessWidget {
@@ -56,11 +55,6 @@ class MapPageBody extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
-          ),
-
-          Padding(
-            padding: EdgeInsets.only(bottom: 20.h),
-            child: const AppBottomIndicator(opacity: 0.6),
           ),
         ],
       ),
