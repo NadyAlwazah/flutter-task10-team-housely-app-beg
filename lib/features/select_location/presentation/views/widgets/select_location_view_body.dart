@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/location_service.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
@@ -14,7 +15,7 @@ import 'package:go_router/go_router.dart';
 class SelectLocationViewBody extends StatelessWidget {
   SelectLocationViewBody({super.key});
 
-final LocationService _locationService = getIt<LocationService>();
+  final LocationService _locationService = getIt<LocationService>();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -24,17 +25,11 @@ final LocationService _locationService = getIt<LocationService>();
           children: [
             SizedBox(height: 30.h),
 
-            SvgPicture.asset(
-              AssetsData.selectLocationSvg,
-              height: 220.h,
-            ),
+            SvgPicture.asset(AssetsData.selectLocationSvg, height: 220.h),
 
             SizedBox(height: 30.h),
 
-            Text(
-              "Hi, Nice to meet you !",
-              style: Styles.textStyle20W600Inter,
-            ),
+            Text("Hi, Nice to meet you !", style: Styles.textStyle20W600Inter),
 
             SizedBox(height: 16.h),
 
@@ -44,40 +39,34 @@ final LocationService _locationService = getIt<LocationService>();
               textAlign: TextAlign.center,
             ),
 
-           SizedBox(height: 104.h),
+            SizedBox(height: 104.h),
 
-           CustomAppButton(
-  text: "Use current location",
-  onPressed: () async {
-  try {
-    final String address =
-        await _locationService.getCurrentAddress();
+            CustomAppButton(
+              text: "Use current location",
+              onPressed: () async {
+                try {
+                  final String address = await _locationService
+                      .getCurrentAddress();
 
-    if (!context.mounted) return;
+                  if (!context.mounted) return;
 
-    await context
-        .read<LocationCubit>()
-        .updateLocation(address);
+                  await context.read<LocationCubit>().updateLocation(address);
 
-    if (!context.mounted) return;
+                  if (!context.mounted) return;
 
-    context.go('/home');
-  } catch (e) {
-    if (!context.mounted) return;
+                  context.go(AppRouter.kBottomBar);
+                } catch (e) {
+                  if (!context.mounted) return;
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          "Error: $e",
-        ),
-      ),
-    );
-  }
-},
-  textStyle: Styles.textStyle18W400Inter.copyWith(
-    color: Colors.white,
-  ),
-),
+                  ScaffoldMessenger.of(
+                    context,
+                  ).showSnackBar(SnackBar(content: Text("Error: $e")));
+                }
+              },
+              textStyle: Styles.textStyle18W400Inter.copyWith(
+                color: Colors.white,
+              ),
+            ),
 
             SizedBox(height: 16.h),
 
