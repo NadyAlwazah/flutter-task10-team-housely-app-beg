@@ -19,7 +19,7 @@ class Validators {
     return null;
   }
 
-  static String? validatePassword(String? value) {
+  static String? validatePassword(String? value, {String? message}) {
     if (value == null || value.isEmpty) {
       return "Password is required";
     }
@@ -29,7 +29,8 @@ class Validators {
     );
 
     if (!regex.hasMatch(value)) {
-      return "Password must contain uppercase, lowercase,\nnumber, and special character";
+      return message ??
+          "Password must contain uppercase, lowercase,\nnumber, and special character";
     }
 
     return null;
@@ -39,6 +40,25 @@ class Validators {
     if (value == null || value.isEmpty) {
       return "Password is required";
     }
+    return null;
+  }
+
+  static String? validateConfirmPassword(
+    String? value,
+    String newPassword, {
+    String? message,
+  }) {
+    //  تحقق من قوة كلمة المرور
+    final baseValidation = validatePassword(value, message: message);
+    if (baseValidation != null) {
+      return baseValidation;
+    }
+
+    //  تحقق من التطابق
+    if (value != newPassword) {
+      return "Passwords do not match";
+    }
+
     return null;
   }
 }

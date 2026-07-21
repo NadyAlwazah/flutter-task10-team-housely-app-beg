@@ -25,7 +25,10 @@ class ResetPasswordFormFields extends StatelessWidget {
           hintText: "Enter new password",
           textInputType: TextInputType.visiblePassword,
           obscureText: true,
-          validator: Validators.validatePassword,
+          validator: (value) => Validators.validatePassword(
+            value,
+            message: "Use upper/lowercase, number, and symbol.",
+          ),
         ),
 
         SizedBox(height: 16.h),
@@ -38,7 +41,11 @@ class ResetPasswordFormFields extends StatelessWidget {
           hintText: "Re-enter password",
           textInputType: TextInputType.visiblePassword,
           obscureText: true,
-          validator: Validators.validatePassword,
+          validator: (value) => Validators.validateConfirmPassword(
+            value,
+            newPasswordController.text,
+            message: "Use upper/lowercase, number, and symbol.",
+          ),
         ),
       ],
     );

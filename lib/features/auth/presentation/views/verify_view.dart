@@ -9,7 +9,6 @@ class VerifyView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       appBar: CustomAppBar(onTapLeading: () => context.pop()),
       body: const VerifyViewBody(),
     );
