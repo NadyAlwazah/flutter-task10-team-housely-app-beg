@@ -1,8 +1,11 @@
 import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_bar_layout.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/add_review_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/forgot_password_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/reset_password_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/signin_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/signup_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/success_reset_password_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/verify_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_add_card_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_payment_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_reserve_view.dart';
@@ -28,6 +31,7 @@ abstract class AppRouter {
   static const String kSearch = '/search';
   static const String kAddReview = '/add_review';
   static const String kResetPassword = '/reset_password';
+  static const String kForgotPassword = '/forgot_password';
   static const String kBookingAddCard = '/booking_add_card';
   static const String kBookingPayment = '/booking_payment';
   static const String kBookingReserve = '/booking_reserve';
@@ -38,6 +42,8 @@ abstract class AppRouter {
   static const String kSelectLocation = '/select_location';
   static const String kMapPage = '/map';
   static const String kEditProfile = '/edit_profile';
+  static const String kVerify = '/verify';
+  static const String kSuccessResetPassword = '/success_reset_password';
 
   static late GoRouter router;
 
@@ -78,6 +84,10 @@ abstract class AppRouter {
           builder: (context, state) => const ResetPasswordView(),
         ),
         GoRoute(
+          path: kForgotPassword,
+          builder: (context, state) => const ForgotPasswordView(),
+        ),
+        GoRoute(
           path: kBookingAddCard,
           builder: (context, state) => const BookingAddCardView(),
         ),
@@ -106,6 +116,11 @@ abstract class AppRouter {
           builder: (context, state) => const NotificationsView(),
         ),
         GoRoute(path: kMapPage, builder: (context, state) => const MapPage()),
+        GoRoute(path: kVerify, builder: (context, state) => const VerifyView()),
+        GoRoute(
+          path: kSuccessResetPassword,
+          builder: (context, state) => const SuccessResetPasswordView(),
+        ),
       ],
     );
   }
