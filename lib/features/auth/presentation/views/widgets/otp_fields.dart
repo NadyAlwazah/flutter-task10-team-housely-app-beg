@@ -13,17 +13,23 @@ class OtpFields extends StatefulWidget {
 
 class OtpFieldsState extends State<OtpFields> {
   late List<TextEditingController> controllers;
+  late List<FocusNode> focusNodes;
 
   @override
   void initState() {
     super.initState();
+
     controllers = List.generate(widget.length, (_) => TextEditingController());
+    focusNodes = List.generate(widget.length, (_) => FocusNode());
   }
 
   @override
   void dispose() {
     for (var controller in controllers) {
       controller.dispose();
+    }
+    for (var node in focusNodes) {
+      node.dispose();
     }
     super.dispose();
   }
@@ -48,6 +54,7 @@ class OtpFieldsState extends State<OtpFields> {
           height: 60.r,
           child: TextField(
             controller: controllers[index],
+            focusNode: focusNodes[index],
             textAlign: TextAlign.center,
             keyboardType: TextInputType.number,
             maxLength: 1,
@@ -68,6 +75,23 @@ class OtpFieldsState extends State<OtpFields> {
                 ),
               ),
             ),
+
+            onChanged: (value) {
+              if (value.isNotEmpty) {
+                // انتقل للحقل التالي
+                if (index < widget.length - 1) {
+                  FocusScope.of(context).requestFocus(focusNodes[index + 1]);
+                } else {
+                  // آخر حقل
+                  FocusScope.of(context).unfocus();
+                }
+              } else {
+                // رجوع للحقل السابق عند الحذف
+                if (index > 0) {
+                  FocusScope.of(context).requestFocus(focusNodes[index - 1]);
+                }
+              }
+            },
           ),
         ),
       ),
