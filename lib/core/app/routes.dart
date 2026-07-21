@@ -3,6 +3,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/add_review/presenta
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/reset_password_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/signin_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/signup_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/verify_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_add_card_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_payment_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_reserve_view.dart';
@@ -38,6 +39,7 @@ abstract class AppRouter {
   static const String kSelectLocation = '/select_location';
   static const String kMapPage = '/map';
   static const String kEditProfile = '/edit_profile';
+  static const String kVerify = '/verify';
 
   static late GoRouter router;
 
@@ -106,6 +108,7 @@ abstract class AppRouter {
           builder: (context, state) => const NotificationsView(),
         ),
         GoRoute(path: kMapPage, builder: (context, state) => const MapPage()),
+        GoRoute(path: kVerify, builder: (context, state) => const VerifyView()),
       ],
     );
   }
