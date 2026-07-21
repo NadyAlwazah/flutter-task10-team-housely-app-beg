@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/reset_password_form_fields.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/section_header.dart';
+import 'package:go_router/go_router.dart';
 
 class ResetPasswordViewBody extends StatefulWidget {
   const ResetPasswordViewBody({super.key});
@@ -56,7 +58,9 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
             CustomButton(
               text: "Change password",
               onPressed: () {
-                if (!_formKey.currentState!.validate()) {}
+                if (_formKey.currentState!.validate()) {
+                  context.push(AppRouter.kSuccessResetPassword);
+                }
               },
             ),
           ],

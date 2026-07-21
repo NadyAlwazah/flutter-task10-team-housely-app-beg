@@ -4,6 +4,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/reset_password_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/signin_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/signup_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/success_reset_password_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/verify_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_add_card_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_payment_view.dart';
@@ -42,6 +43,7 @@ abstract class AppRouter {
   static const String kMapPage = '/map';
   static const String kEditProfile = '/edit_profile';
   static const String kVerify = '/verify';
+  static const String kSuccessResetPassword = '/success_reset_password';
 
   static late GoRouter router;
 
@@ -115,6 +117,10 @@ abstract class AppRouter {
         ),
         GoRoute(path: kMapPage, builder: (context, state) => const MapPage()),
         GoRoute(path: kVerify, builder: (context, state) => const VerifyView()),
+        GoRoute(
+          path: kSuccessResetPassword,
+          builder: (context, state) => const SuccessResetPasswordView(),
+        ),
       ],
     );
   }
