@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/otp_fields.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/resend_code_text.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/section_header.dart';
+import 'package:go_router/go_router.dart';
 
 class VerifyViewBody extends StatefulWidget {
   const VerifyViewBody({super.key});
@@ -47,6 +49,7 @@ class _VerifyViewBodyState extends State<VerifyViewBody> {
             text: "Verify",
             onPressed: () {
               if (otpKey.currentState!.validateOtp()) {
+                context.push(AppRouter.kResetPassword);
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
                   CustomSnackBar(
