@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/contact_option_card.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/section_header.dart';
 
@@ -48,6 +49,11 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
             isSelected: selectedIndex == 1,
             onTap: () => setState(() => selectedIndex = 1),
           ),
+
+          const Spacer(),
+
+          CustomButton(text: "Continue", onPressed: () {}),
+          SizedBox(height: 48.h),
         ],
       ),
     );
