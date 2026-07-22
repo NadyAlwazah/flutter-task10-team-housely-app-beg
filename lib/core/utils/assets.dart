@@ -34,4 +34,5 @@ class AssetsData {
   static const imageOnboard5png = "${_images}image5.png";
   static const imageOnboard6png = "${_images}image6.png";
   static const imageProfilePng = "${_images}profile_image.png";
+  static const imageBannerPng = "${_images}banner.png";
 }
