@@ -22,6 +22,8 @@ class AssetsData {
   static const iconCallSvg = "${_icons}call.svg";
   static const iconEmailSvg = "${_icons}email.svg";
   static const iconShieldDoneSvg = "${_icons}shield_done.svg";
+  static const iconChatSvg = "${_icons}chat.svg";
+  static const iconLocationSvg = "${_icons}location.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";

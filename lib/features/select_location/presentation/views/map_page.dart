@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
@@ -215,20 +216,31 @@ class _MapPageViewState extends State<_MapPageView> {
           MapPageBody(
             address: _currentAddress,
 
-            onChooseLocation: () async {
+            onChooseLocation: () {
+              // منع الضغط إذا لم يتم تحديد الموقع
               if (_currentAddress.isEmpty ||
                   _currentAddress == 'Getting current location...' ||
                   _currentAddress == 'Unable to get current location') {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  CustomSnackBar(
+                    message:
+                        "Location not set yet, please wait… then try again.",
+                    isError: true,
+                  ),
+                );
                 return;
               }
 
-              await context.read<LocationCubit>().updateLocation(
-                _currentAddress,
-              );
+              // تنفيذ العملية بشكل async داخل دالة عادية
+              () async {
+                await context.read<LocationCubit>().updateLocation(
+                  _currentAddress,
+                );
 
-              if (context.mounted) {
-                context.go(AppRouter.kBottomBar);
-              }
+                if (context.mounted) {
+                  context.go(AppRouter.kBottomBar);
+                }
+              }();
             },
           ),
         ],

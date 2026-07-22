@@ -33,7 +33,7 @@ class SuccessAvatar extends StatelessWidget {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      offset: const Offset(0, 24),
+                      offset: Offset(0, 24),
                       blurRadius: 48,
                       spreadRadius: -12,
                     ),

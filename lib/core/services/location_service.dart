@@ -11,47 +11,33 @@ class LocationService {
   LocationService(this._authLocalDataSource);
 
   Future<String> getCurrentAddress() async {
-    final bool serviceEnabled =
-        await Geolocator.isLocationServiceEnabled();
+    final bool serviceEnabled = await isLocationEnabled();
 
     if (!serviceEnabled) {
-      throw Exception(
-        'Location services are disabled.',
-      );
+      throw Exception('Location services are disabled.');
     }
 
-    LocationPermission permission =
-        await Geolocator.checkPermission();
+    LocationPermission permission = await Geolocator.checkPermission();
 
     if (permission == LocationPermission.denied) {
-      permission =
-          await Geolocator.requestPermission();
+      permission = await Geolocator.requestPermission();
     }
 
     if (permission == LocationPermission.denied) {
-      throw Exception(
-        'Location permission denied.',
-      );
+      throw Exception('Location permission denied.');
     }
 
     if (permission == LocationPermission.deniedForever) {
-      throw Exception(
-        'Location permission permanently denied.',
-      );
+      throw Exception('Location permission permanently denied.');
     }
 
-    final Position position =
-        await Geolocator.getCurrentPosition(
-      locationSettings: const LocationSettings(
-        accuracy: LocationAccuracy.high,
-      ),
+    final Position position = await Geolocator.getCurrentPosition(
+      locationSettings: const LocationSettings(accuracy: LocationAccuracy.high),
     );
 
-    final user =
-        await _authLocalDataSource.getUser();
+    final user = await _authLocalDataSource.getUser();
 
-    final String userEmail =
-        user?.email ?? 'unknown@example.com';
+    final String userEmail = user?.email ?? 'unknown@example.com';
 
     final Uri url = Uri.parse(
       'https://nominatim.openstreetmap.org/reverse'
@@ -64,31 +50,27 @@ class LocationService {
     final response = await http.get(
       url,
       headers: {
-        'User-Agent':
-            'TeamHouselyFlutterApp/1.0 ($userEmail)',
+        'User-Agent': 'TeamHouselyFlutterApp/1.0 ($userEmail)',
         'Accept-Language': 'en',
       },
     );
 
     if (response.statusCode != 200) {
-      throw Exception(
-        'Failed to get address: ${response.statusCode}',
-      );
+      throw Exception('Failed to get address: ${response.statusCode}');
     }
 
-    final Map<String, dynamic> data =
-        jsonDecode(response.body);
+    final Map<String, dynamic> data = jsonDecode(response.body);
 
-    final String? displayName =
-        data['display_name'];
+    final String? displayName = data['display_name'];
 
-    if (displayName == null ||
-        displayName.isEmpty) {
-      throw Exception(
-        'Address not found.',
-      );
+    if (displayName == null || displayName.isEmpty) {
+      throw Exception('Address not found.');
     }
 
     return displayName;
+  }
+
+  Future<bool> isLocationEnabled() async {
+    return await Geolocator.isLocationServiceEnabled();
   }
 }
