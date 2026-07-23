@@ -40,4 +40,7 @@ class AssetsData {
   static const imageBannerPng = "${_images}banner.png";
   static const imageRecommendedImage1Png = "${_images}recommended_image_1.png";
   static const imageRecommendedImage2Png = "${_images}recommended_image_2.png";
+  static const imageTopLocation1Png = "${_images}top_location_1.png";
+  static const imageTopLocation2Png = "${_images}top_location_2.png";
+  static const imageTopLocation3Png = "${_images}top_location_3.png";
 }

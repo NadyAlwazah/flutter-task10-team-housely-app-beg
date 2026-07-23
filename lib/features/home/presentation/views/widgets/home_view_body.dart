@@ -5,6 +5,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/popular_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/recommended_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/search_property_field.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/top_locations_section.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -37,6 +38,13 @@ class HomeViewBody extends StatelessWidget {
         const SliverPadding(
           padding: EdgeInsets.only(left: 24),
           sliver: SliverToBoxAdapter(child: RecommendedSection()),
+        ),
+
+        SliverToBoxAdapter(child: SizedBox(height: 8.h)),
+
+        const SliverPadding(
+          padding: EdgeInsets.only(left: 24),
+          sliver: SliverToBoxAdapter(child: TopLocationsSection()),
         ),
 
         SliverToBoxAdapter(child: SizedBox(height: 24.h)),
