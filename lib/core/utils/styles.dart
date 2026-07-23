@@ -60,6 +60,9 @@ abstract class Styles {
   static TextStyle get textStyle14W700Inter =>
       GoogleFonts.inter(fontSize: 14.sp, fontWeight: FontWeight.w700);
 
+  static TextStyle get textStyle10W700Inter =>
+      GoogleFonts.inter(fontSize: 10.sp, fontWeight: FontWeight.w700);
+
   static TextStyle get textStyle12W500Inter => GoogleFonts.inter(
     fontSize: 12.sp,
     fontWeight: FontWeight.w500,
