@@ -25,6 +25,8 @@ class AssetsData {
   static const iconChatSvg = "${_icons}chat.svg";
   static const iconLocationSvg = "${_icons}location.svg";
   static const iconFilterSvg = "${_icons}filter.svg";
+  static const iconFavoriteRedSvg = "${_icons}favorite_red.svg";
+  static const iconLocationOutlinedSvg = "${_icons}location_outlined.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -35,4 +37,6 @@ class AssetsData {
   static const imageOnboard6png = "${_images}image6.png";
   static const imageProfilePng = "${_images}profile_image.png";
   static const imageBannerPng = "${_images}banner.png";
+  static const imageRecommendedImage1Png = "${_images}recommended_image_1.png";
+  static const imageRecommendedImage2Png = "${_images}recommended_image_2.png";
 }
