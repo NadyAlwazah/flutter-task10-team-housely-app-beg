@@ -13,16 +13,20 @@ class PropertyCubit extends Cubit<PropertyState> {
   List<int> favoriteIds = [];
 
   void loadData({
-    required List<PropertyModel> recommended,
-    required List<PropertyModel> popular,
+    List<PropertyModel>? recommended,
+    List<PropertyModel>? popular,
   }) async {
     favoriteIds = await _favoritesLocalDataSource.loadFavorites();
 
-    final updatedRecommended = _applyFavoritesToList(recommended);
-    final updatedPopular = _applyFavoritesToList(popular);
-
     emit(
-      PropertyState(recommended: updatedRecommended, popular: updatedPopular),
+      PropertyState(
+        recommended: recommended != null
+            ? _applyFavoritesToList(recommended)
+            : state.recommended,
+        popular: popular != null
+            ? _applyFavoritesToList(popular)
+            : state.popular,
+      ),
     );
   }
 

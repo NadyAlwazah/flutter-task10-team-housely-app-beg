@@ -1,4 +1,5 @@
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/data_source/favorites_local_data_source.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/home_content_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 
@@ -23,6 +24,7 @@ void setupLocator() {
     () => LocationCubit(getIt<AuthLocalDataSource>()),
   );
   getIt.registerFactory<PropertyCubit>(() => PropertyCubit());
+  getIt.registerFactory<HomeContentCubit>(() => HomeContentCubit());
 
   // Location Service
   getIt.registerLazySingleton<LocationService>(

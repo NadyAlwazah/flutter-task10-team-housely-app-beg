@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, BlocProvider;
+import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_activity/presentation/views/booking_activity_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/explore/presentation/views/explore_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/favourite/presentation/views/favourite_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/home_content_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/home_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/popular_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/profile_view.dart';
 
 class BottomBarLayout extends StatefulWidget {
@@ -36,7 +40,18 @@ class _BottomBarLayoutState extends State<BottomBarLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _getPage(currentIndex),
+      // body: _getPage(currentIndex),
+      body: BlocProvider(
+        create: (context) => getIt<HomeContentCubit>(),
+        child: BlocBuilder<HomeContentCubit, bool>(
+          builder: (context, showPopular) {
+            if (currentIndex == 0) {
+              return showPopular ? const PopularView() : const HomeView();
+            }
+            return _getPage(currentIndex);
+          },
+        ),
+      ),
 
       bottomNavigationBar: CustomBottomNavBar(
         currentIndex: currentIndex,

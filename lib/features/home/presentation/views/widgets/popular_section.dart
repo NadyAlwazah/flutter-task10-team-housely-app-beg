@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show BlocBuilder, ReadContext;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/home_content_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/popular_property_card.dart';
@@ -21,7 +22,9 @@ class PopularSection extends StatelessWidget {
             Text('Popular for you', style: Styles.textStyle16W600Inter),
 
             GestureDetector(
-              onTap: () {},
+              onTap: () {
+                context.read<HomeContentCubit>().showPopular();
+              },
               child: Text(
                 'See all',
                 style: Styles.textStyle12W500Inter.copyWith(
