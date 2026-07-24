@@ -38,37 +38,31 @@ class PopularSection extends StatelessWidget {
         BlocBuilder<PropertyCubit, PropertyState>(
           builder: (context, state) {
             final properties = state.popular;
+            return ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.only(bottom: 16.h),
+              itemCount: properties.length > 4 ? 4 : properties.length,
+              separatorBuilder: (context, index) =>
+                  const Divider(thickness: 0.5, color: AppColors.textSecondary),
+              itemBuilder: (context, index) {
+                final property = properties[index];
 
-            return SizedBox(
-              height: 352.h,
-
-              child: ListView.separated(
-                physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.only(bottom: 16.h),
-                itemCount: properties.length,
-                separatorBuilder: (context, index) => const Divider(
-                  thickness: 0.5,
-                  color: AppColors.textSecondary,
-                ),
-                itemBuilder: (context, index) {
-                  final property = properties[index];
-
-                  return PopularPropertyCard(
-                    width: 327.w,
-                    height: 72.h,
-                    padding: EdgeInsets.only(right: 8.w),
-                    image: property.image,
-                    title: property.title,
-                    location: property.location,
-                    price: "\$${property.pricePerMonth}",
-                    isFavorite: property.isFavorite,
-                    rating: 4.2,
-                    onTapFavorite: () {
-                      context.read<PropertyCubit>().toggleFavorite(property.id);
-                    },
-                  );
-                },
-              ),
+                return PopularPropertyCard(
+                  width: 327.w,
+                  height: 72.h,
+                  padding: EdgeInsets.only(right: 8.w),
+                  image: property.image,
+                  title: property.title,
+                  location: property.location,
+                  price: "\$${property.pricePerMonth}",
+                  isFavorite: property.isFavorite,
+                  rating: 4.2,
+                  onTapFavorite: () {
+                    context.read<PropertyCubit>().toggleFavorite(property.id);
+                  },
+                );
+              },
             );
           },
         ),
