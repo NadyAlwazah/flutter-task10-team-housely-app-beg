@@ -19,6 +19,14 @@ class AssetsData {
   static const iconTimeSquareSvg = "${_icons}time_square.svg";
   static const iconInfoSquareSvg = "${_icons}info_square.svg";
   static const iconCalendarSvg = "${_icons}calendar.svg";
+  static const iconDeleteOutlineSvg = "${_icons}Delete.svg";
+  static const iconDeleteSvg = "${_icons}Delete1.svg";
+  static const iconMoreSvg = "${_icons}More Square.svg";
+  static const iconSendSvg = "${_icons}Send.svg";
+  static const iconVideoSvg = "${_icons}Video.svg";
+  static const iconFavoriteRedSvg = "${_icons}favorite_red.svg";
+  static const iconCallSvg = "${_icons}call.svg";
+  static const iconLocationOutlinedSvg = "${_icons}location_outlined.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -28,4 +36,17 @@ class AssetsData {
   static const imageOnboard5png = "${_images}image5.png";
   static const imageOnboard6png = "${_images}image6.png";
   static const imageProfilePng = "${_images}profile_image.png";
+  static const alexPng = "${_images}alexander.png";
+  static const anggelaPng = "${_images}anggela.png";
+  static const arlenePng = "${_images}arlene.png";
+  static const codyPng = "${_images}cody.png";
+  static const guyPng = "${_images}guy.png";
+  static const savannahPng = "${_images}savannah.png";
+  static const theresaPng = "${_images}theresa.png";
+  static const imag1chatPng = "${_images}img1.png";
+  static const imag2chatPng = "${_images}img2.png";
+  static const imag3chatPng = "${_images}img3.png";
+  static const imag4chatPng = "${_images}img4.png";
+  static const imag5chatPng = "${_images}img5.png";
+  static const imagCardPng = "${_images}card.png";
 }

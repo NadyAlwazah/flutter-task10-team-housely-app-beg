@@ -89,4 +89,9 @@ abstract class Styles {
     fontWeight: FontWeight.w400,
     color: AppColors.textSecondary,
   );
+  static TextStyle get textStyle12W400Poppins => GoogleFonts.poppins(
+    fontSize: 12.sp,
+    fontWeight: FontWeight.w400,
+    color: AppColors.textSecondary,
+  );
 }
