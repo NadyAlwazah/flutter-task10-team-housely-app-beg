@@ -8,6 +8,7 @@ import 'package:flutter_task10_team_housely_app_beg/core/services/service_locato
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/data/manager/location_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/custom_app_button.dart';
 import 'package:go_router/go_router.dart';
@@ -58,9 +59,12 @@ class SelectLocationViewBody extends StatelessWidget {
                 } catch (e) {
                   if (!context.mounted) return;
 
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text("Error: $e")));
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    CustomSnackBar(
+                      message: "Please turn on location to continue.",
+                      isError: true,
+                    ),
+                  );
                 }
               },
               textStyle: Styles.textStyle18W400Inter.copyWith(
@@ -74,7 +78,20 @@ class SelectLocationViewBody extends StatelessWidget {
               text: "Select it manually",
               backgroundColor: Colors.white,
               textColor: AppColors.primary,
-              onPressed: () => context.push('/map'),
+              onPressed: () async {
+                final isEnabled = await _locationService.isLocationEnabled();
+
+                if (!isEnabled) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    CustomSnackBar(
+                      message: "Please turn on location to continue.",
+                      isError: true,
+                    ),
+                  );
+                  return;
+                }
+                context.push(AppRouter.kMapPage);
+              },
               textStyle: Styles.textStyle18W400Inter,
             ),
 

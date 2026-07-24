@@ -22,6 +22,13 @@ class AssetsData {
   static const iconCallSvg = "${_icons}call.svg";
   static const iconEmailSvg = "${_icons}email.svg";
   static const iconShieldDoneSvg = "${_icons}shield_done.svg";
+  static const iconChatSvg = "${_icons}chat.svg";
+  static const iconLocationSvg = "${_icons}location.svg";
+  static const iconFilterSvg = "${_icons}filter.svg";
+  static const iconFavoriteRedSvg = "${_icons}favorite_red.svg";
+  static const iconLocationOutlinedSvg = "${_icons}location_outlined.svg";
+  static const iconStarSvg = "${_icons}star.svg";
+  static const iconProfileSvg = "${_icons}profile.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -31,4 +38,10 @@ class AssetsData {
   static const imageOnboard5png = "${_images}image5.png";
   static const imageOnboard6png = "${_images}image6.png";
   static const imageProfilePng = "${_images}profile_image.png";
+  static const imageBannerPng = "${_images}banner.png";
+  static const imageRecommendedImage1Png = "${_images}recommended_image_1.png";
+  static const imageRecommendedImage2Png = "${_images}recommended_image_2.png";
+  static const imageTopLocation1Png = "${_images}top_location_1.png";
+  static const imageTopLocation2Png = "${_images}top_location_2.png";
+  static const imageTopLocation3Png = "${_images}top_location_3.png";
 }

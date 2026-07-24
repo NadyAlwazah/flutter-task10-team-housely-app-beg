@@ -43,7 +43,8 @@ class CustomBottomNavBar extends StatelessWidget {
             index: 3,
           ),
           _buildNavItem(
-            icon: Icons.person_outline_rounded,
+            isSvg: true,
+            path: AssetsData.iconProfileSvg,
             label: 'Profile',
             index: 4,
           ),
