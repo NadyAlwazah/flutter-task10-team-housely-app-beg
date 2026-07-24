@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_nav_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_app_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
@@ -14,7 +15,12 @@ class FavouriteViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const CustomAppBar(title: "Favorite"),
+        CustomAppBar(
+          title: "Favorite",
+          onTapLeading: () {
+            context.read<BottomNavCubit>().changeTab(0);
+          },
+        ),
         BlocBuilder<PropertyCubit, PropertyState>(
           builder: (context, state) {
             final properties = (state.popular + state.recommended)
