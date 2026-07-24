@@ -13,11 +13,13 @@ class CustomTextFormField extends StatefulWidget {
     this.validator,
     this.controller,
     this.hintStyle,
+    this.prefixIcon,
+    this.onTap,
   });
   final String hintText;
-
+  final Widget? prefixIcon;
   final Widget? suffixIcon;
-
+  final VoidCallback? onTap;
   final TextInputType textInputType;
   final bool obscureText;
   final String? Function(String?)? validator;
@@ -42,6 +44,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       controller: widget.controller,
       validator: widget.validator,
       obscureText: isObscured,
+      onTap: widget.onTap,
       keyboardType: widget.textInputType,
       decoration: InputDecoration(
         suffixIcon: widget.obscureText
@@ -57,7 +60,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                 },
               )
             : widget.suffixIcon,
-
+        prefixIcon: widget.prefixIcon,
         hintText: widget.hintText,
         hintStyle: widget.hintStyle ?? Styles.textStyle14W400Inter,
         filled: true,

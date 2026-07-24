@@ -65,7 +65,9 @@ class _SigninViewBodyState extends State<SigninViewBody> {
                       },
                     ),
                     const Spacer(),
-                    const ForgotPasswordText(),
+                    ForgotPasswordText(
+                      onTap: () => context.push(AppRouter.kForgotPassword),
+                    ),
                   ],
                 ),
 

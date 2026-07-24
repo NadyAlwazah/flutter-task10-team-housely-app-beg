@@ -19,14 +19,22 @@ class AssetsData {
   static const iconTimeSquareSvg = "${_icons}time_square.svg";
   static const iconInfoSquareSvg = "${_icons}info_square.svg";
   static const iconCalendarSvg = "${_icons}calendar.svg";
-  static const iconDeleteOutlineSvg = "${_icons}Delete.svg";
+ static const iconDeleteOutlineSvg = "${_icons}Delete.svg";
   static const iconDeleteSvg = "${_icons}Delete1.svg";
   static const iconMoreSvg = "${_icons}More Square.svg";
   static const iconSendSvg = "${_icons}Send.svg";
   static const iconVideoSvg = "${_icons}Video.svg";
-  static const iconFavoriteRedSvg = "${_icons}favorite_red.svg";
+
   static const iconCallSvg = "${_icons}call.svg";
+  static const iconEmailSvg = "${_icons}email.svg";
+  static const iconShieldDoneSvg = "${_icons}shield_done.svg";
+  static const iconChatSvg = "${_icons}chat.svg";
+  static const iconLocationSvg = "${_icons}location.svg";
+  static const iconFilterSvg = "${_icons}filter.svg";
+  static const iconFavoriteRedSvg = "${_icons}favorite_red.svg";
   static const iconLocationOutlinedSvg = "${_icons}location_outlined.svg";
+  static const iconStarSvg = "${_icons}star.svg";
+  static const iconProfileSvg = "${_icons}profile.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -36,6 +44,7 @@ class AssetsData {
   static const imageOnboard5png = "${_images}image5.png";
   static const imageOnboard6png = "${_images}image6.png";
   static const imageProfilePng = "${_images}profile_image.png";
+
   static const alexPng = "${_images}alexander.png";
   static const anggelaPng = "${_images}anggela.png";
   static const arlenePng = "${_images}arlene.png";
@@ -49,4 +58,10 @@ class AssetsData {
   static const imag4chatPng = "${_images}img4.png";
   static const imag5chatPng = "${_images}img5.png";
   static const imagCardPng = "${_images}card.png";
+  static const imageBannerPng = "${_images}banner.png";
+  static const imageRecommendedImage1Png = "${_images}recommended_image_1.png";
+  static const imageRecommendedImage2Png = "${_images}recommended_image_2.png";
+  static const imageTopLocation1Png = "${_images}top_location_1.png";
+  static const imageTopLocation2Png = "${_images}top_location_2.png";
+  static const imageTopLocation3Png = "${_images}top_location_3.png";
 }

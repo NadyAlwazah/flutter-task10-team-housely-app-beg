@@ -1,3 +1,7 @@
+import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_nav_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/data_source/favorites_local_data_source.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/home_content_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 
 import 'package:flutter_task10_team_housely_app_beg/core/services/location_service.dart';
@@ -10,6 +14,9 @@ final getIt = GetIt.instance;
 void setupLocator() {
   // Data Sources
   getIt.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSource());
+  getIt.registerLazySingleton<FavoritesLocalDataSource>(
+    () => FavoritesLocalDataSource(),
+  );
 
   // Cubits
   getIt.registerFactory<AuthCubit>(() => AuthCubit());
@@ -17,6 +24,9 @@ void setupLocator() {
   getIt.registerFactory<LocationCubit>(
     () => LocationCubit(getIt<AuthLocalDataSource>()),
   );
+  getIt.registerFactory<PropertyCubit>(() => PropertyCubit());
+  getIt.registerFactory<HomeContentCubit>(() => HomeContentCubit());
+  getIt.registerFactory<BottomNavCubit>(() => BottomNavCubit());
 
   // Location Service
   getIt.registerLazySingleton<LocationService>(
