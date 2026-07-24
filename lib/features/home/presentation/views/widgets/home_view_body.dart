@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/discount_banner.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/home_app_bar.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/nearby_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/popular_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/recommended_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/search_property_field.dart';
@@ -40,8 +41,14 @@ class HomeViewBody extends StatelessWidget {
           sliver: SliverToBoxAdapter(child: RecommendedSection()),
         ),
 
-        SliverToBoxAdapter(child: SizedBox(height: 8.h)),
+        SliverToBoxAdapter(child: SizedBox(height: 24.h)),
 
+        const SliverPadding(
+          padding: EdgeInsets.only(left: 24),
+          sliver: SliverToBoxAdapter(child: NearbySection()),
+        ),
+
+        SliverToBoxAdapter(child: SizedBox(height: 20.h)),
         const SliverPadding(
           padding: EdgeInsets.only(left: 24),
           sliver: SliverToBoxAdapter(child: TopLocationsSection()),

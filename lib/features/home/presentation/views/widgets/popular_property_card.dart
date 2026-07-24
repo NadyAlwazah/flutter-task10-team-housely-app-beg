@@ -15,6 +15,10 @@ class PopularPropertyCard extends StatelessWidget {
     required this.rating,
     this.isFavorite = false,
     this.onTapFavorite,
+    required this.width,
+    required this.height,
+    this.padding,
+    this.showIconFavorite = true,
   });
 
   final String image;
@@ -25,12 +29,16 @@ class PopularPropertyCard extends StatelessWidget {
   final bool isFavorite;
   final VoidCallback? onTapFavorite;
 
+  final double width;
+  final double height;
+  final EdgeInsetsGeometry? padding;
+  final bool showIconFavorite;
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 327.w,
-      height: 72.h,
-      padding: EdgeInsets.only(right: 8.w),
+      width: width,
+      height: height,
+      padding: padding,
       child: Row(
         children: [
           _buildImage(),
@@ -56,8 +64,14 @@ class PopularPropertyCard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(title, style: Styles.textStyle14W600Inter),
-            _buildFavoriteButton(),
+            Expanded(
+              child: Text(
+                title,
+                style: Styles.textStyle14W600Inter,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            if (showIconFavorite) _buildFavoriteButton(),
           ],
         ),
         SizedBox(height: 2.h),

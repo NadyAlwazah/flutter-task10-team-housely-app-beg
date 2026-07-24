@@ -37,10 +37,11 @@ class PopularSection extends StatelessWidget {
             final properties = state.popular;
 
             return SizedBox(
-              height: 276.h,
+              height: 352.h,
+
               child: ListView.separated(
                 physics: const NeverScrollableScrollPhysics(),
-                padding: EdgeInsets.only(bottom: 16.h), //!  فراغ بعد آخر عنصر
+                padding: EdgeInsets.only(bottom: 16.h),
                 itemCount: properties.length,
                 separatorBuilder: (context, index) => const Divider(
                   thickness: 0.5,
@@ -50,6 +51,9 @@ class PopularSection extends StatelessWidget {
                   final property = properties[index];
 
                   return PopularPropertyCard(
+                    width: 327.w,
+                    height: 72.h,
+                    padding: EdgeInsets.only(right: 8.w),
                     image: property.image,
                     title: property.title,
                     location: property.location,

@@ -28,6 +28,7 @@ class AssetsData {
   static const iconFavoriteRedSvg = "${_icons}favorite_red.svg";
   static const iconLocationOutlinedSvg = "${_icons}location_outlined.svg";
   static const iconStarSvg = "${_icons}star.svg";
+  static const iconProfileSvg = "${_icons}profile.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
