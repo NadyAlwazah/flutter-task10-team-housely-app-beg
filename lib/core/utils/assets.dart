@@ -19,7 +19,7 @@ class AssetsData {
   static const iconTimeSquareSvg = "${_icons}time_square.svg";
   static const iconInfoSquareSvg = "${_icons}info_square.svg";
   static const iconCalendarSvg = "${_icons}calendar.svg";
- static const iconDeleteOutlineSvg = "${_icons}Delete.svg";
+  static const iconDeleteOutlineSvg = "${_icons}Delete.svg";
   static const iconDeleteSvg = "${_icons}Delete1.svg";
   static const iconMoreSvg = "${_icons}More Square.svg";
   static const iconSendSvg = "${_icons}Send.svg";
@@ -35,6 +35,7 @@ class AssetsData {
   static const iconLocationOutlinedSvg = "${_icons}location_outlined.svg";
   static const iconStarSvg = "${_icons}star.svg";
   static const iconProfileSvg = "${_icons}profile.svg";
+  static const iconShareSvg = "${_icons}share.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";

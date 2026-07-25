@@ -1,3 +1,4 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_bar_layout.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/add_review_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/forgot_password_view.dart';
@@ -11,6 +12,8 @@ import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_reserve_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/chat_detail_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/chat_list_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/details_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/popular_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/notifications/presentation/views/notifications_view.dart';
@@ -68,9 +71,19 @@ abstract class AppRouter {
           path: kEditProfile,
           builder: (context, state) => const EditProfileView(),
         ),
+
         GoRoute(
           path: kDetails,
-          builder: (context, state) => const DetailsView(),
+          builder: (context, state) {
+            final data = state.extra as Map<String, dynamic>;
+
+            return BlocProvider.value(
+              value: data['cubit'] as PropertyCubit,
+              child: DetailsView(
+                propertyModel: data['property'] as PropertyModel,
+              ),
+            );
+          },
         ),
         GoRoute(
           path: kSelectLocation,
