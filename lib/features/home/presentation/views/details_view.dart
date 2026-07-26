@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/share_bottom_sheet.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
@@ -21,6 +22,23 @@ class DetailsView extends StatefulWidget {
 }
 
 class _DetailsViewState extends State<DetailsView> {
+  void _showAddBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(40.r)),
+      ),
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: const ShareBottomSheet(),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +49,7 @@ class _DetailsViewState extends State<DetailsView> {
         },
         actions: [
           GestureDetector(
-            onTap: () {},
+            onTap: _showAddBottomSheet,
             child: SvgPicture.asset(
               AssetsData.iconShareSvg,
               width: 24.r,
