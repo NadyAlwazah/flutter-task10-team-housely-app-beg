@@ -46,7 +46,7 @@ class ShareBottomSheet extends StatelessWidget {
     ];
 
     return Container(
-      height: 339.h,
+      height: 345.h,
       padding: EdgeInsets.symmetric(horizontal: 32.w),
       decoration: BoxDecoration(
         color: Colors.white,

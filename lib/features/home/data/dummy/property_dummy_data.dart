@@ -16,7 +16,8 @@ final List<PropertyModel> recommendedProperties = [
     parking: 1,
     area: 1880,
     status: "For Rent",
-    description: "Beautiful modern homestay with garden view.",
+    description:
+        "Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.",
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
