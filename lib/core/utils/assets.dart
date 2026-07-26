@@ -65,4 +65,8 @@ class AssetsData {
   static const imageTopLocation1Png = "${_images}top_location_1.png";
   static const imageTopLocation2Png = "${_images}top_location_2.png";
   static const imageTopLocation3Png = "${_images}top_location_3.png";
+  static const imageDetails1Png = "${_images}details_1.png";
+  static const imageDetails2Png = "${_images}details_2.png";
+  static const imageDetails3Png = "${_images}details_3.png";
+  static const imageDetails4Png = "${_images}details_4.png";
 }

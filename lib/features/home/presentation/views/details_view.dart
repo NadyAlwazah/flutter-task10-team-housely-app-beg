@@ -12,10 +12,15 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/p
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/details_view_body.dart';
 
-class DetailsView extends StatelessWidget {
+class DetailsView extends StatefulWidget {
   const DetailsView({super.key, required this.propertyModel});
   final PropertyModel propertyModel;
 
+  @override
+  State<DetailsView> createState() => _DetailsViewState();
+}
+
+class _DetailsViewState extends State<DetailsView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,23 +43,26 @@ class DetailsView extends StatelessWidget {
               final property = [
                 ...state.recommended,
                 ...state.popular,
-              ].firstWhere((e) => e.id == propertyModel.id);
+              ].firstWhere((e) => e.id == widget.propertyModel.id);
 
-              return GestureDetector(
-                onTap: () {
-                  context.read<PropertyCubit>().toggleFavorite(property.id);
-                },
-                child: SvgPicture.asset(
-                  property.isFavorite
-                      ? AssetsData.iconFavoriteRedSvg
-                      : AssetsData.iconFavoriteSvg,
-                  width: 24.r,
-                  height: 24.r,
-                  colorFilter: ColorFilter.mode(
+              return Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    context.read<PropertyCubit>().toggleFavorite(property.id);
+                  },
+                  child: SvgPicture.asset(
                     property.isFavorite
-                        ? const Color(0xFFF97066)
-                        : AppColors.textPrimary,
-                    BlendMode.srcIn,
+                        ? AssetsData.iconFavoriteRedSvg
+                        : AssetsData.iconFavoriteSvg,
+                    width: 24.r,
+                    height: 24.r,
+                    colorFilter: ColorFilter.mode(
+                      property.isFavorite
+                          ? const Color(0xFFF97066)
+                          : AppColors.textPrimary,
+                      BlendMode.srcIn,
+                    ),
                   ),
                 ),
               );
@@ -62,7 +70,7 @@ class DetailsView extends StatelessWidget {
           ),
         ],
       ),
-      body: const DetailsViewBody(),
+      body: DetailsViewBody(propertyModel: widget.propertyModel),
     );
   }
 }
