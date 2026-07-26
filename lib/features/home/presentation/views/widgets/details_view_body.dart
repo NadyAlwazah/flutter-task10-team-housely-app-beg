@@ -6,6 +6,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/property_details_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/property_images_slider.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/property_location_section.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/property_reviews_section.dart';
 
 class DetailsViewBody extends StatelessWidget {
   const DetailsViewBody({super.key, required this.propertyModel});
@@ -37,6 +38,9 @@ class DetailsViewBody extends StatelessWidget {
           ),
           SizedBox(height: 24.h),
           const PropertyLocationSection(),
+
+          SizedBox(height: 24.h),
+          PropertyReviewsSection(property: propertyModel),
 
           SizedBox(height: 44.h),
         ],

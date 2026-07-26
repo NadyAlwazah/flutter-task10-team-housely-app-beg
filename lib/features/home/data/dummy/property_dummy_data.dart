@@ -21,9 +21,16 @@ final List<PropertyModel> recommendedProperties = [
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
-        reviewerImage: AssetsData.imageProfilePng,
+        reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
-        comment: "Amazing place, very clean and cozy!",
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -44,10 +51,17 @@ final List<PropertyModel> recommendedProperties = [
     description: "Spacious villa with private pool.",
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -71,9 +85,16 @@ List<PropertyModel> popularProperties = [
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
-        reviewerImage: AssetsData.imageProfilePng,
+        reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
-        comment: "Amazing place, very clean and cozy!",
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -94,10 +115,17 @@ List<PropertyModel> popularProperties = [
     description: "Spacious villa with private pool.",
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -118,9 +146,16 @@ List<PropertyModel> popularProperties = [
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
-        reviewerImage: AssetsData.imageProfilePng,
+        reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
-        comment: "Amazing place, very clean and cozy!",
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -141,10 +176,17 @@ List<PropertyModel> popularProperties = [
     description: "Spacious villa with private pool.",
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -164,10 +206,17 @@ List<PropertyModel> popularProperties = [
     description: "Spacious villa with private pool.",
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -190,9 +239,16 @@ List<PropertyModel> nearbyProperties = [
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
-        reviewerImage: AssetsData.imageProfilePng,
+        reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
-        comment: "Amazing place, very clean and cozy!",
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -213,10 +269,17 @@ List<PropertyModel> nearbyProperties = [
     description: "Spacious villa with private pool.",
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -237,9 +300,16 @@ List<PropertyModel> nearbyProperties = [
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
-        reviewerImage: AssetsData.imageProfilePng,
+        reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
-        comment: "Amazing place, very clean and cozy!",
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -260,10 +330,17 @@ List<PropertyModel> nearbyProperties = [
     description: "Spacious villa with private pool.",
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -283,10 +360,17 @@ List<PropertyModel> nearbyProperties = [
     description: "Spacious villa with private pool.",
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),

@@ -78,4 +78,6 @@ class AssetsData {
   static const imageDetails4Png = "${_images}details_4.png";
   static const imageAgentPng = "${_images}agent.png";
   static const imageMapPng = "${_images}map.png";
+  static const imageReview1Png = "${_images}review_1.png";
+  static const imageReview2Png = "${_images}review_2.png";
 }
