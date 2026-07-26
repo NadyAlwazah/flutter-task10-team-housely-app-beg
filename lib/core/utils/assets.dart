@@ -35,6 +35,7 @@ class AssetsData {
   static const iconLocationOutlinedSvg = "${_icons}location_outlined.svg";
   static const iconStarSvg = "${_icons}star.svg";
   static const iconProfileSvg = "${_icons}profile.svg";
+  static const iconMailBoxSvg = "${_icons}mailbox.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -64,4 +65,6 @@ class AssetsData {
   static const imageTopLocation1Png = "${_images}top_location_1.png";
   static const imageTopLocation2Png = "${_images}top_location_2.png";
   static const imageTopLocation3Png = "${_images}top_location_3.png";
+    static const imagJhonPng = "${_images}jhon.png";
+
 }

@@ -1,36 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
+import 'package:go_router/go_router.dart';
 
 class RecommendedPropertyCard extends StatelessWidget {
   const RecommendedPropertyCard({
     super.key,
-    required this.image,
-    required this.title,
-    required this.location,
-    required this.price,
-    this.isFavorite = false,
+
     this.onTapFavorite,
+    required this.propertyModel,
   });
 
-  final String image;
-  final String title;
-  final String location;
-  final String price;
-  final bool isFavorite;
   final VoidCallback? onTapFavorite;
-
+  final PropertyModel propertyModel;
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        _buildPropertyImage(),
-        _buildPriceTag(),
-        _buildBottomDetails(),
-      ],
+    return InkWell(
+      onTap: () {
+        context.push(
+          AppRouter.kDetails,
+          extra: {
+            'property': propertyModel,
+            'cubit': context.read<PropertyCubit>(),
+          },
+        );
+      },
+      child: Stack(
+        children: [
+          _buildPropertyImage(),
+          _buildPriceTag(),
+          _buildBottomDetails(),
+        ],
+      ),
     );
   }
 
@@ -38,7 +46,12 @@ class RecommendedPropertyCard extends StatelessWidget {
   Widget _buildPropertyImage() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16.r),
-      child: Image.asset(image, height: 164.h, width: 224.w, fit: BoxFit.cover),
+      child: Image.asset(
+        propertyModel.image,
+        height: 164.h,
+        width: 224.w,
+        fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -57,7 +70,7 @@ class RecommendedPropertyCard extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text: price,
+                text: propertyModel.pricePerMonth.toString(),
                 style: Styles.textStyle12W600Inter.copyWith(
                   fontWeight: FontWeight.w700,
                   color: AppColors.primary,
@@ -93,7 +106,7 @@ class RecommendedPropertyCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          title,
+          propertyModel.title,
           style: Styles.textStyle14W600Inter.copyWith(color: Colors.white),
         ),
         SizedBox(height: 4.h),
@@ -110,7 +123,7 @@ class RecommendedPropertyCard extends StatelessWidget {
             ),
             SizedBox(width: 4.w),
             Text(
-              location,
+              propertyModel.location,
               style: Styles.textStyle12W400Inter.copyWith(color: Colors.white),
             ),
           ],
@@ -133,7 +146,7 @@ class RecommendedPropertyCard extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: SvgPicture.asset(
-            isFavorite
+            propertyModel.isFavorite
                 ? AssetsData.iconFavoriteRedSvg
                 : AssetsData.iconFavoriteSvg,
             width: 16.r,
