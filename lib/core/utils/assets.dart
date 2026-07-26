@@ -39,6 +39,10 @@ class AssetsData {
   static const iconAreaSvg = "${_icons}area.svg";
   static const iconBathubSvg = "${_icons}bathub.svg";
   static const iconBedSvg = "${_icons}bed.svg";
+  static const iconBagSvg = "${_icons}bag.svg";
+  static const iconGasSvg = "${_icons}gas.svg";
+  static const iconHospitalSvg = "${_icons}hospital.svg";
+  static const iconMosqueSvg = "${_icons}mosque.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -73,4 +77,5 @@ class AssetsData {
   static const imageDetails3Png = "${_images}details_3.png";
   static const imageDetails4Png = "${_images}details_4.png";
   static const imageAgentPng = "${_images}agent.png";
+  static const imageMapPng = "${_images}map.png";
 }
