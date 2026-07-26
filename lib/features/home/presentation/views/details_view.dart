@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/share_bottom_sheet.dart';
 import 'package:go_router/go_router.dart';
@@ -89,6 +90,10 @@ class _DetailsViewState extends State<DetailsView> {
         ],
       ),
       body: DetailsViewBody(propertyModel: widget.propertyModel),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10),
+        child: CustomButton(text: "Rent now", onPressed: () {}),
+      ),
     );
   }
 }

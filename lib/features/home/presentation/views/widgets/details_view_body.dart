@@ -42,7 +42,7 @@ class DetailsViewBody extends StatelessWidget {
           SizedBox(height: 24.h),
           PropertyReviewsSection(property: propertyModel),
 
-          SizedBox(height: 44.h),
+          SizedBox(height: 34.h),
         ],
       ),
     );
