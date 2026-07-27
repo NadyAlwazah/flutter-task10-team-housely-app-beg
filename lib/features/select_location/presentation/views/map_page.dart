@@ -175,8 +175,8 @@ class _MapPageViewState extends State<_MapPageView> {
               initialZoom: 15,
 
               onPositionChanged: (position, hasGesture) {
-                if (hasGesture && position.center != null) {
-                  final LatLng newCenter = position.center!;
+                if (hasGesture) {
+                  final LatLng newCenter = position.center;
 
                   setState(() {
                     _center = newCenter;

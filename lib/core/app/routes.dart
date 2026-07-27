@@ -9,7 +9,6 @@ import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/verify_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_add_card_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_payment_view.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_reserve_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/chat_detail_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/chat_list_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
@@ -50,7 +49,6 @@ abstract class AppRouter {
   static const String kFillter = '/fillter';
 
   static late GoRouter router;
-
   static void initRouter() {
     router = GoRouter(
       initialLocation: '/',
@@ -105,10 +103,6 @@ abstract class AppRouter {
           path: kBookingAddCard,
           builder: (context, state) => const BookingAddCardView(),
         ),
-        GoRoute(
-          path: kBookingPayment,
-          builder: (context, state) => const BookingPaymentView(),
-        ),
 
         GoRoute(
           path: kBookingReserve,
@@ -117,8 +111,8 @@ abstract class AppRouter {
 
             return BlocProvider.value(
               value: data['cubit'] as PropertyCubit,
-              child: BookingReserveView(
-                propertyModel: data['property'] as PropertyModel,
+              child: BookingPaymentView(
+                property: data['property'] as PropertyModel,
               ),
             );
           },

@@ -43,10 +43,10 @@ dependencies:
   cached_network_image: ^3.4.1
   flutter_slidable: ^4.0.3
   geolocator: ^14.0.3
-  geocoding: ^3.0.0
+  geocoding: ^5.0.0
   google_maps_flutter: ^2.5.0
-  flutter_map: ^6.1.0
-  latlong2: ^0.9.0
+  flutter_map: ^8.3.1
+  latlong2: ^0.10.1
   http: ^1.2.2
   get_it: ^9.2.1
   awesome_dialog: ^3.3.0
@@ -54,6 +54,12 @@ dependencies:
   smooth_page_indicator: ^2.0.1
   readmore: ^3.0.0
   flutter_rating_bar: ^4.0.1
+
+  font_awesome_flutter: ^11.0.0
+  smooth_page_indicator: ^2.0.1
+  readmore: ^3.0.0
+  flutter_rating_bar: ^4.0.1
+  table_calendar: ^3.2.0
 
 dev_dependencies:
   flutter_test:
