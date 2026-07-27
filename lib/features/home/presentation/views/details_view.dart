@@ -98,7 +98,7 @@ class _DetailsViewState extends State<DetailsView> {
           text: "Rent now",
           onPressed: () {
             context.push(
-              AppRouter.kDetails,
+              AppRouter.kBookingPayment,
               extra: {
                 'property': widget.propertyModel,
                 'cubit': context.read<PropertyCubit>(),
