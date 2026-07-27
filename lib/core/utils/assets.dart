@@ -19,7 +19,6 @@ class AssetsData {
   static const iconTimeSquareSvg = "${_icons}time_square.svg";
   static const iconInfoSquareSvg = "${_icons}info_square.svg";
   static const iconCalendarSvg = "${_icons}calendar.svg";
-
   static const iconDeleteOutlineSvg = "${_icons}Delete.svg";
   static const iconDeleteSvg = "${_icons}Delete1.svg";
   static const iconMoreSvg = "${_icons}More Square.svg";

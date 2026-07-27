@@ -104,11 +104,6 @@ abstract class AppRouter {
           builder: (context, state) => const BookingAddCardView(),
         ),
 
-        // GoRoute(
-        //   path: kBookingPayment,
-
-        //   builder: (context, state) => const BookingPaymentView(),
-        // ),
         GoRoute(
           path: kBookingReserve,
           builder: (context, state) {

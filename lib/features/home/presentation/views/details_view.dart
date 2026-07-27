@@ -99,6 +99,7 @@ class _DetailsViewState extends State<DetailsView> {
           onPressed: () {
             context.push(
               AppRouter.kBookingPayment,
+
               extra: {
                 'property': widget.propertyModel,
                 'cubit': context.read<PropertyCubit>(),
