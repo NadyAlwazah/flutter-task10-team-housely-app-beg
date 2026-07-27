@@ -5,6 +5,7 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/model/user_chat_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/agent_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/recommended_property_card.dart';
@@ -30,6 +31,11 @@ class ChatDetailViewBody extends StatelessWidget {
       area: 1880,
       status: "For Rent",
       description: "Beautiful modern homestay with garden view.",
+      agent: AgentModel(
+        image: AssetsData.imageAgentPng,
+        name: "Theresa Webb",
+        role: "Property Agent",
+      ),
       reviews: [
         ReviewModel(
           reviewerName: "Theresa Webb",

@@ -31,11 +31,7 @@ class DetailsViewBody extends StatelessWidget {
           PropertyDetailsSection(property: propertyModel),
 
           SizedBox(height: 24.h),
-          const PropertyAgentSection(
-            image: AssetsData.imageAgentPng,
-            name: "Esther Howard",
-            role: " Real Estate Agent",
-          ),
+          PropertyAgentSection(propertyModel: propertyModel),
           SizedBox(height: 24.h),
           const PropertyLocationSection(),
 

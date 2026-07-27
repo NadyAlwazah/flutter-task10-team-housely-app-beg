@@ -4,19 +4,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 
 class PropertyAgentSection extends StatelessWidget {
-  const PropertyAgentSection({
-    super.key,
-    required this.image,
-    required this.name,
-    required this.role,
-  });
+  const PropertyAgentSection({super.key, required this.propertyModel});
 
-  final String image;
-  final String name;
-  final String role;
-
+  final PropertyModel propertyModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,7 +29,7 @@ class PropertyAgentSection extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(40.r),
                     child: Image.asset(
-                      AssetsData.imageAgentPng,
+                      propertyModel.agent.image,
                       width: 52.r,
                       height: 52.r,
                       fit: BoxFit.cover,
@@ -46,8 +39,14 @@ class PropertyAgentSection extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(name, style: Styles.textStyle14W600Inter),
-                      Text(role, style: Styles.textStyle12W400Inter),
+                      Text(
+                        propertyModel.agent.name,
+                        style: Styles.textStyle14W600Inter,
+                      ),
+                      Text(
+                        propertyModel.agent.role,
+                        style: Styles.textStyle12W400Inter,
+                      ),
                     ],
                   ),
                 ],
