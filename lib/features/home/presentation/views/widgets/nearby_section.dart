@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/home/data/dummy/property_dummy_data.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/popular_property_card.dart';
 
 class NearbySection extends StatelessWidget {
@@ -33,66 +35,63 @@ class NearbySection extends StatelessWidget {
         ),
         SizedBox(height: 16.h),
 
-        SizedBox(
-          height: 180.h,
-          child: ListView.separated(
-            scrollDirection: Axis.horizontal,
-            padding: EdgeInsets.only(right: 16.w),
-            itemCount: (nearbyProperties.length / 2).ceil(),
-            separatorBuilder: (_, _) => SizedBox(width: 12.w),
-            itemBuilder: (context, index) {
-              final first = nearbyProperties[index * 2];
-              final secondIndex = index * 2 + 1;
-              final second = secondIndex < nearbyProperties.length
-                  ? nearbyProperties[secondIndex]
-                  : null;
+        BlocBuilder<PropertyCubit, PropertyState>(
+          builder: (context, state) {
+            final properties = state.nearbyProperties;
+            return SizedBox(
+              height: 180.h,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                padding: EdgeInsets.only(right: 16.w),
+                itemCount: (properties.length / 2).ceil(),
+                separatorBuilder: (_, _) => SizedBox(width: 12.w),
+                itemBuilder: (context, index) {
+                  final first = properties[index * 2];
+                  final secondIndex = index * 2 + 1;
+                  final second = secondIndex < properties.length
+                      ? properties[secondIndex]
+                      : null;
 
-              return SizedBox(
-                width: 240.w,
+                  return SizedBox(
+                    width: 240.w,
 
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    PopularPropertyCard(
-                      width: 240.w,
-                      height: 74.h,
-                      padding: EdgeInsets.only(right: 8.w, bottom: 3.h),
-                      showIconFavorite: false,
-                      image: first.image,
-                      title: first.title,
-                      location: first.location,
-                      price: "\$${first.pricePerMonth}",
-                      rating: 4.2,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        PopularPropertyCard(
+                          width: 240.w,
+                          height: 74.h,
+                          padding: EdgeInsets.only(right: 8.w, bottom: 3.h),
+                          showIconFavorite: false,
+                          propertyModel: first,
+                        ),
+
+                        const Divider(
+                          thickness: 0.5,
+                          color: AppColors.textSecondary,
+                        ),
+
+                        if (second != null) ...[
+                          PopularPropertyCard(
+                            width: 240.w,
+                            height: 74.h,
+                            padding: EdgeInsets.only(right: 8.w, bottom: 3.h),
+                            showIconFavorite: false,
+                            propertyModel: second,
+                          ),
+
+                          const Divider(
+                            thickness: 0.5,
+                            color: AppColors.textSecondary,
+                          ),
+                        ],
+                      ],
                     ),
-
-                    const Divider(
-                      thickness: 0.5,
-                      color: AppColors.textSecondary,
-                    ),
-
-                    if (second != null) ...[
-                      PopularPropertyCard(
-                        width: 240.w,
-                        height: 74.h,
-                        padding: EdgeInsets.only(right: 8.w, bottom: 3.h),
-                        showIconFavorite: false,
-                        image: second.image,
-                        title: second.title,
-                        location: second.location,
-                        price: "\$${second.pricePerMonth}",
-                        rating: 4.2,
-                      ),
-
-                      const Divider(
-                        thickness: 0.5,
-                        color: AppColors.textSecondary,
-                      ),
-                    ],
-                  ],
-                ),
-              );
-            },
-          ),
+                  );
+                },
+              ),
+            );
+          },
         ),
       ],
     );

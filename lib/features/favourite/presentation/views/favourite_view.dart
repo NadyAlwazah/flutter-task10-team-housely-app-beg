@@ -6,8 +6,8 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/dummy/pro
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 
 class FavouriteView extends StatelessWidget {
-  const FavouriteView({super.key});
-
+  const FavouriteView({super.key, required this.onBackToHome});
+  final VoidCallback onBackToHome;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -15,8 +15,9 @@ class FavouriteView extends StatelessWidget {
         ..loadData(
           popular: popularProperties,
           recommended: recommendedProperties,
+          nearbyProperties: nearbyProperties,
         ),
-      child: const SafeArea(child: FavouriteViewBody()),
+      child: SafeArea(child: FavouriteViewBody(onBackToHome: onBackToHome)),
     );
   }
 }

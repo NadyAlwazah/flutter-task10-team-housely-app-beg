@@ -19,7 +19,7 @@ class AssetsData {
   static const iconTimeSquareSvg = "${_icons}time_square.svg";
   static const iconInfoSquareSvg = "${_icons}info_square.svg";
   static const iconCalendarSvg = "${_icons}calendar.svg";
- static const iconDeleteOutlineSvg = "${_icons}Delete.svg";
+  static const iconDeleteOutlineSvg = "${_icons}Delete.svg";
   static const iconDeleteSvg = "${_icons}Delete1.svg";
   static const iconMoreSvg = "${_icons}More Square.svg";
   static const iconSendSvg = "${_icons}Send.svg";
@@ -35,6 +35,14 @@ class AssetsData {
   static const iconLocationOutlinedSvg = "${_icons}location_outlined.svg";
   static const iconStarSvg = "${_icons}star.svg";
   static const iconProfileSvg = "${_icons}profile.svg";
+  static const iconShareSvg = "${_icons}share.svg";
+  static const iconAreaSvg = "${_icons}area.svg";
+  static const iconBathubSvg = "${_icons}bathub.svg";
+  static const iconBedSvg = "${_icons}bed.svg";
+  static const iconBagSvg = "${_icons}bag.svg";
+  static const iconGasSvg = "${_icons}gas.svg";
+  static const iconHospitalSvg = "${_icons}hospital.svg";
+  static const iconMosqueSvg = "${_icons}mosque.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -64,4 +72,12 @@ class AssetsData {
   static const imageTopLocation1Png = "${_images}top_location_1.png";
   static const imageTopLocation2Png = "${_images}top_location_2.png";
   static const imageTopLocation3Png = "${_images}top_location_3.png";
+  static const imageDetails1Png = "${_images}details_1.png";
+  static const imageDetails2Png = "${_images}details_2.png";
+  static const imageDetails3Png = "${_images}details_3.png";
+  static const imageDetails4Png = "${_images}details_4.png";
+  static const imageAgentPng = "${_images}agent.png";
+  static const imageMapPng = "${_images}map.png";
+  static const imageReview1Png = "${_images}review_1.png";
+  static const imageReview2Png = "${_images}review_2.png";
 }

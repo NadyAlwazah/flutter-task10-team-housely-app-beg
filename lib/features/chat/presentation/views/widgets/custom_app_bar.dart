@@ -4,8 +4,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-class CustomAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
+import 'package:go_router/go_router.dart';
+
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
 
   @override
@@ -19,7 +20,9 @@ class CustomAppBar extends StatelessWidget
         children: [
           IconButton(
             padding: EdgeInsets.zero,
-            onPressed: () {},
+            onPressed: () {
+              context.pop();
+            },
             icon: Icon(
               Icons.arrow_back,
               color: AppColors.textPrimary,

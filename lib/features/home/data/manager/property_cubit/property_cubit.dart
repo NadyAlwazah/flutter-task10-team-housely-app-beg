@@ -15,6 +15,7 @@ class PropertyCubit extends Cubit<PropertyState> {
   void loadData({
     List<PropertyModel>? recommended,
     List<PropertyModel>? popular,
+    List<PropertyModel>? nearbyProperties,
   }) async {
     favoriteIds = await _favoritesLocalDataSource.loadFavorites();
 
@@ -26,6 +27,9 @@ class PropertyCubit extends Cubit<PropertyState> {
         popular: popular != null
             ? _applyFavoritesToList(popular)
             : state.popular,
+        nearbyProperties: nearbyProperties != null
+            ? _applyFavoritesToList(nearbyProperties)
+            : state.nearbyProperties,
       ),
     );
   }
@@ -48,9 +52,16 @@ class PropertyCubit extends Cubit<PropertyState> {
 
     final updatedRecommended = _applyFavoritesToList(state.recommended);
     final updatedPopular = _applyFavoritesToList(state.popular);
+    final updatedNearbyProperties = _applyFavoritesToList(
+      state.nearbyProperties,
+    );
 
     emit(
-      state.copyWith(recommended: updatedRecommended, popular: updatedPopular),
+      state.copyWith(
+        recommended: updatedRecommended,
+        popular: updatedPopular,
+        nearbyProperties: updatedNearbyProperties,
+      ),
     );
   }
 }

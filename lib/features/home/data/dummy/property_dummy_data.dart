@@ -1,4 +1,5 @@
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/agent_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 
@@ -16,13 +17,27 @@ final List<PropertyModel> recommendedProperties = [
     parking: 1,
     area: 1880,
     status: "For Rent",
-    description: "Beautiful modern homestay with garden view.",
+    description:
+        "Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
+
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
-        reviewerImage: AssetsData.imageProfilePng,
+        reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
-        comment: "Amazing place, very clean and cozy!",
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -41,12 +56,24 @@ final List<PropertyModel> recommendedProperties = [
     area: 2100,
     status: "For Rent",
     description: "Spacious villa with private pool.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Arlene McCoy",
+      role: "Senior Agent",
+    ),
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -67,12 +94,24 @@ List<PropertyModel> popularProperties = [
     area: 1880,
     status: "For Rent",
     description: "Beautiful modern homestay with garden view.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
-        reviewerImage: AssetsData.imageProfilePng,
+        reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
-        comment: "Amazing place, very clean and cozy!",
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -91,12 +130,24 @@ List<PropertyModel> popularProperties = [
     area: 2100,
     status: "For Rent",
     description: "Spacious villa with private pool.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -114,12 +165,24 @@ List<PropertyModel> popularProperties = [
     area: 1880,
     status: "For Rent",
     description: "Beautiful modern homestay with garden view.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
-        reviewerImage: AssetsData.imageProfilePng,
+        reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
-        comment: "Amazing place, very clean and cozy!",
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -138,12 +201,24 @@ List<PropertyModel> popularProperties = [
     area: 2100,
     status: "For Rent",
     description: "Spacious villa with private pool.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -161,12 +236,24 @@ List<PropertyModel> popularProperties = [
     area: 2100,
     status: "For Rent",
     description: "Spacious villa with private pool.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -186,12 +273,24 @@ List<PropertyModel> nearbyProperties = [
     area: 1880,
     status: "For Rent",
     description: "Beautiful modern homestay with garden view.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
-        reviewerImage: AssetsData.imageProfilePng,
+        reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
-        comment: "Amazing place, very clean and cozy!",
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -210,12 +309,24 @@ List<PropertyModel> nearbyProperties = [
     area: 2100,
     status: "For Rent",
     description: "Spacious villa with private pool.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -233,12 +344,24 @@ List<PropertyModel> nearbyProperties = [
     area: 1880,
     status: "For Rent",
     description: "Beautiful modern homestay with garden view.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
-        reviewerImage: AssetsData.imageProfilePng,
+        reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
-        comment: "Amazing place, very clean and cozy!",
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -257,12 +380,24 @@ List<PropertyModel> nearbyProperties = [
     area: 2100,
     status: "For Rent",
     description: "Spacious villa with private pool.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),
@@ -280,12 +415,24 @@ List<PropertyModel> nearbyProperties = [
     area: 2100,
     status: "For Rent",
     description: "Spacious villa with private pool.",
+    agent: AgentModel(
+      image: AssetsData.imageAgentPng,
+      name: "Theresa Webb",
+      role: "Property Agent",
+    ),
     reviews: [
       ReviewModel(
-        reviewerName: "Courtney Henry",
-        reviewerImage: AssetsData.imageProfilePng,
-        rating: 4.7,
-        comment: "Loved the pool and the quiet neighborhood.",
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview1Png,
+        rating: 4.5,
+        comment:
+            "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+      ),
+      ReviewModel(
+        reviewerName: "Theresa Webb",
+        reviewerImage: AssetsData.imageReview2Png,
+        rating: 3.5,
+        comment: "Amazing place, very clean and cozy! ",
       ),
     ],
   ),

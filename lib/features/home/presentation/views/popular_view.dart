@@ -6,14 +6,14 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/p
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/popular_view_body.dart';
 
 class PopularView extends StatelessWidget {
-  const PopularView({super.key});
-
+  const PopularView({super.key, required this.onBackToHome});
+  final VoidCallback onBackToHome;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
           getIt<PropertyCubit>()..loadData(popular: popularProperties),
-      child: const SafeArea(child: PopularViewBody()),
+      child: SafeArea(child: PopularViewBody(onBackToHome: onBackToHome)),
     );
   }
 }
