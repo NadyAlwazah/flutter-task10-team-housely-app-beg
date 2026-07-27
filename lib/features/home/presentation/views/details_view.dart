@@ -62,6 +62,7 @@ class _DetailsViewState extends State<DetailsView> {
               final property = [
                 ...state.recommended,
                 ...state.popular,
+                ...state.nearbyProperties,
               ].firstWhere((e) => e.id == widget.propertyModel.id);
 
               return Padding(
@@ -91,7 +92,7 @@ class _DetailsViewState extends State<DetailsView> {
       ),
       body: DetailsViewBody(propertyModel: widget.propertyModel),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 10),
+        padding: const EdgeInsets.only(left: 24, right: 24, bottom: 20),
         child: CustomButton(text: "Rent now", onPressed: () {}),
       ),
     );

@@ -15,6 +15,7 @@ class FavouriteView extends StatelessWidget {
         ..loadData(
           popular: popularProperties,
           recommended: recommendedProperties,
+          nearbyProperties: nearbyProperties,
         ),
       child: const SafeArea(child: FavouriteViewBody()),
     );

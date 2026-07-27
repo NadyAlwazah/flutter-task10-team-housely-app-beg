@@ -23,9 +23,10 @@ class FavouriteViewBody extends StatelessWidget {
         ),
         BlocBuilder<PropertyCubit, PropertyState>(
           builder: (context, state) {
-            final properties = (state.popular + state.recommended)
-                .where((property) => property.isFavorite)
-                .toList();
+            final properties =
+                (state.popular + state.recommended + state.nearbyProperties)
+                    .where((property) => property.isFavorite)
+                    .toList();
 
             return Expanded(
               child: Padding(
@@ -44,12 +45,7 @@ class FavouriteViewBody extends StatelessWidget {
                       width: 327.w,
                       height: 72.h,
                       padding: EdgeInsets.only(right: 8.w),
-                      image: property.image,
-                      title: property.title,
-                      location: property.location,
-                      price: "\$${property.pricePerMonth}",
-                      isFavorite: property.isFavorite,
-                      rating: 4.2,
+                      propertyModel: property,
                       onTapFavorite: () {
                         context.read<PropertyCubit>().toggleFavorite(
                           property.id,

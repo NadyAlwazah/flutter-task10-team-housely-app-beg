@@ -14,6 +14,7 @@ class HomeView extends StatelessWidget {
         ..loadData(
           recommended: recommendedProperties,
           popular: popularProperties,
+          nearbyProperties: nearbyProperties,
         ),
       child: const SafeArea(child: HomeViewBody()),
     );

@@ -56,9 +56,9 @@ class PropertyAgentSection extends StatelessWidget {
               //  الاتصال والرسائل
               Row(
                 children: [
-                  _buildActionIcon(AssetsData.iconCallSvg),
+                  _buildActionIcon(AssetsData.iconCallSvg, () {}),
                   SizedBox(width: 8.w),
-                  _buildActionIcon(AssetsData.iconChatSvg),
+                  _buildActionIcon(AssetsData.iconChatSvg, () {}),
                 ],
               ),
             ],
@@ -68,23 +68,26 @@ class PropertyAgentSection extends StatelessWidget {
     );
   }
 
-  Widget _buildActionIcon(String icon) {
-    return Container(
-      width: 36.r,
-      height: 36.r,
+  Widget _buildActionIcon(String icon, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 36.r,
+        height: 36.r,
 
-      decoration: const BoxDecoration(
-        color: Color(0xFFF9F5FF),
-        shape: BoxShape.circle,
-      ),
-      child: Center(
-        child: SvgPicture.asset(
-          icon,
-          width: 24.r,
-          height: 24.r,
-          colorFilter: const ColorFilter.mode(
-            AppColors.primary,
-            BlendMode.srcIn,
+        decoration: const BoxDecoration(
+          color: Color(0xFFF9F5FF),
+          shape: BoxShape.circle,
+        ),
+        child: Center(
+          child: SvgPicture.asset(
+            icon,
+            width: 24.r,
+            height: 24.r,
+            colorFilter: const ColorFilter.mode(
+              AppColors.primary,
+              BlendMode.srcIn,
+            ),
           ),
         ),
       ),
