@@ -4,16 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/model/user_chat_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/agent_model.dart';
+import 'package:go_router/go_router.dart';
 
-class ChatDetailAppBar extends StatelessWidget
-    implements PreferredSizeWidget {
-  final UserChatModel user;
+class ChatDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final AgentModel agent;
 
-  const ChatDetailAppBar({
-    super.key,
-    required this.user,
-  });
+  const ChatDetailAppBar({super.key, required this.agent});
 
   @override
   Widget build(BuildContext context) {
@@ -25,12 +22,8 @@ class ChatDetailAppBar extends StatelessWidget
       leadingWidth: 48.w,
 
       leading: GestureDetector(
-        onTap: () => Navigator.pop(context),
-        child: Icon(
-          Icons.arrow_back,
-          color: AppColors.textPrimary,
-          size: 24.r,
-        ),
+        onTap: () => context.pop(),
+        child: Icon(Icons.arrow_back, color: AppColors.textPrimary, size: 24.r),
       ),
 
       titleSpacing: 0,
@@ -40,18 +33,13 @@ class ChatDetailAppBar extends StatelessWidget
           Container(
             width: 44.r,
             height: 44.r,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-            ),
+            decoration: const BoxDecoration(shape: BoxShape.circle),
             clipBehavior: Clip.antiAlias,
             child: Image.asset(
-              user.image,
+              agent.image,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
-                return Icon(
-                  Icons.person,
-                  size: 28.r,
-                );
+                return Icon(Icons.person, size: 28.r);
               },
             ),
           ),
@@ -64,7 +52,7 @@ class ChatDetailAppBar extends StatelessWidget
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  user.name,
+                  agent.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Styles.textStyle12W600Inter,
@@ -86,7 +74,7 @@ class ChatDetailAppBar extends StatelessWidget
                     SizedBox(width: 4.w),
 
                     Text(
-                      user.isOnline ? 'Online' : 'Offline',
+                      agent.isOnline ? 'Online' : 'Offline',
                       style: Styles.textStyle10W400Inter.copyWith(
                         color: AppColors.textchatSecondary,
                       ),
@@ -100,17 +88,11 @@ class ChatDetailAppBar extends StatelessWidget
       ),
 
       actions: [
-        _buildIconButton(
-          iconPath: AssetsData.iconCallSvg,
-          onTap: () {},
-        ),
+        _buildIconButton(iconPath: AssetsData.iconCallSvg, onTap: () {}),
 
         SizedBox(width: 8.w),
 
-        _buildIconButton(
-          iconPath: AssetsData.iconVideoSvg,
-          onTap: () {},
-        ),
+        _buildIconButton(iconPath: AssetsData.iconVideoSvg, onTap: () {}),
 
         SizedBox(width: 24.w),
       ],

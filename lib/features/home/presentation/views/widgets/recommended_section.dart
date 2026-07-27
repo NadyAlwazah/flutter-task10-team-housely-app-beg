@@ -50,11 +50,7 @@ class RecommendedSection extends StatelessWidget {
                   final property = properties[index];
 
                   return RecommendedPropertyCard(
-                    image: property.image,
-                    title: property.title,
-                    location: property.location,
-                    price: "\$${property.pricePerMonth}",
-                    isFavorite: property.isFavorite,
+                    propertyModel: property,
                     onTapFavorite: () {
                       context.read<PropertyCubit>().toggleFavorite(property.id);
                     },
