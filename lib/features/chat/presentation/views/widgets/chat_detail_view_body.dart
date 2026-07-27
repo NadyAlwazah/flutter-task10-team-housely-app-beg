@@ -4,16 +4,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/model/user_chat_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/agent_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/recommended_property_card.dart';
 
 class ChatDetailViewBody extends StatelessWidget {
-  final UserChatModel? user;
+  final AgentModel? agent;
 
-  const ChatDetailViewBody({Key? key, this.user}) : super(key: key);
+  const ChatDetailViewBody({Key? key, this.agent}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +145,7 @@ class ChatDetailViewBody extends StatelessWidget {
                       decoration: const BoxDecoration(shape: BoxShape.circle),
                       clipBehavior: Clip.antiAlias,
                       child: Image.asset(
-                        user?.image ?? AssetsData.anggelaPng,
+                        agent?.image ?? AssetsData.anggelaPng,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) =>
                             Icon(Icons.person, size: 28.r),

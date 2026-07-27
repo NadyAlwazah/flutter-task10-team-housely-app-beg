@@ -4,13 +4,13 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/model/user_chat_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/agent_model.dart';
 import 'package:go_router/go_router.dart';
 
 class ChatDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final UserChatModel user;
+  final AgentModel agent;
 
-  const ChatDetailAppBar({super.key, required this.user});
+  const ChatDetailAppBar({super.key, required this.agent});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class ChatDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
             decoration: const BoxDecoration(shape: BoxShape.circle),
             clipBehavior: Clip.antiAlias,
             child: Image.asset(
-              user.image,
+              agent.image,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 return Icon(Icons.person, size: 28.r);
@@ -52,7 +52,7 @@ class ChatDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  user.name,
+                  agent.name,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: Styles.textStyle12W600Inter,
@@ -74,7 +74,7 @@ class ChatDetailAppBar extends StatelessWidget implements PreferredSizeWidget {
                     SizedBox(width: 4.w),
 
                     Text(
-                      user.isOnline ? 'Online' : 'Offline',
+                      agent.isOnline ? 'Online' : 'Offline',
                       style: Styles.textStyle10W400Inter.copyWith(
                         color: AppColors.textchatSecondary,
                       ),

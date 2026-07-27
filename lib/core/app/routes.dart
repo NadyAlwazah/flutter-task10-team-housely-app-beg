@@ -129,8 +129,14 @@ abstract class AppRouter {
         ),
         GoRoute(
           path: kChatDetail,
-          builder: (context, state) => const ChatDetailView(),
+          builder: (context, state) {
+            final data = state.extra as Map<String, dynamic>;
+            final agent = data['agent'];
+
+            return ChatDetailView(agent: agent);
+          },
         ),
+
         GoRoute(
           path: kNotifications,
           builder: (context, state) => const NotificationsView(),

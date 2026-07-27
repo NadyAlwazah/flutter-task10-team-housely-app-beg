@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
+import 'package:go_router/go_router.dart';
 
 class PropertyAgentSection extends StatelessWidget {
   const PropertyAgentSection({super.key, required this.propertyModel});
@@ -55,9 +57,19 @@ class PropertyAgentSection extends StatelessWidget {
               //  الاتصال والرسائل
               Row(
                 children: [
-                  _buildActionIcon(AssetsData.iconCallSvg, () {}),
+                  _buildActionIcon(AssetsData.iconCallSvg, () {
+                    context.push(
+                      AppRouter.kChatDetail,
+                      extra: {'agent': propertyModel.agent},
+                    );
+                  }),
                   SizedBox(width: 8.w),
-                  _buildActionIcon(AssetsData.iconChatSvg, () {}),
+                  _buildActionIcon(AssetsData.iconChatSvg, () {
+                    context.push(
+                      AppRouter.kChatDetail,
+                      extra: {'agent': propertyModel.agent},
+                    );
+                  }),
                 ],
               ),
             ],
