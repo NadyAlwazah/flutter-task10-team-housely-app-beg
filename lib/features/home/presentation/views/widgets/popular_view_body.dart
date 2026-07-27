@@ -7,21 +7,14 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/p
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/popular_property_card.dart';
 
-import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/home_content_cubit.dart';
-
 class PopularViewBody extends StatelessWidget {
-  const PopularViewBody({super.key});
-
+  const PopularViewBody({super.key, required this.onBackToHome});
+  final VoidCallback onBackToHome;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomAppBar(
-          title: "Popular",
-          onTapLeading: () {
-            context.read<HomeContentCubit>().showHome();
-          },
-        ),
+        CustomAppBar(title: "Popular", onTapLeading: onBackToHome),
 
         BlocBuilder<PropertyCubit, PropertyState>(
           builder: (context, state) {

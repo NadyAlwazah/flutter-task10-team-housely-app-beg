@@ -76,7 +76,13 @@ class CustomBottomNavBar extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 20),
             child: isSvg
-                ? SvgPicture.asset(path!)
+                ? SvgPicture.asset(
+                    path!,
+                    colorFilter: ColorFilter.mode(
+                      isSelected ? AppColors.primary : AppColors.textSecondary,
+                      BlendMode.srcIn,
+                    ),
+                  )
                 : Icon(
                     icon,
                     size: 24.r,

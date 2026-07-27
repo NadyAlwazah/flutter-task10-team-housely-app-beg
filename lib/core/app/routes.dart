@@ -15,7 +15,6 @@ import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/details_view.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/popular_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/notifications/presentation/views/notifications_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/edit_profile_view.dart';
@@ -131,10 +130,6 @@ abstract class AppRouter {
         GoRoute(
           path: kChatDetail,
           builder: (context, state) => const ChatDetailView(),
-        ),
-        GoRoute(
-          path: kPopular,
-          builder: (context, state) => const PopularView(),
         ),
         GoRoute(
           path: kNotifications,

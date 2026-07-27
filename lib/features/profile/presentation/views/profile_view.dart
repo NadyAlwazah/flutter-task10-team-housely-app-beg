@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_nav_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_app_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/profile_view_body.dart';
 
 class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
-
+  const ProfileView({super.key, required this.onBackToHome});
+  final VoidCallback onBackToHome;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomAppBar(
-          title: "Profile",
-          onTapLeading: () {
-            context.read<BottomNavCubit>().changeTab(0);
-          },
-        ),
+        CustomAppBar(title: "Profile", onTapLeading: onBackToHome),
         BlocProvider(
           create: (context) => getIt<ProfileCubit>(),
           child: const Expanded(child: ProfileViewBody()),
