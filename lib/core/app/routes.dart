@@ -4,8 +4,6 @@ import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/signin_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/signup_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_add_card_view.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_payment_view.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_reserve_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/chat_detail_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/chat_list_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/details_view.dart';
@@ -40,7 +38,6 @@ abstract class AppRouter {
   static const String kEditProfile = '/edit_profile';
 
   static late GoRouter router;
-
   static void initRouter() {
     router = GoRouter(
       initialLocation: '/',
@@ -81,14 +78,15 @@ abstract class AppRouter {
           path: kBookingAddCard,
           builder: (context, state) => const BookingAddCardView(),
         ),
-        GoRoute(
+
+        /*GoRoute(
           path: kBookingPayment,
-          builder: (context, state) => const BookingPaymentView(),
-        ),
-        GoRoute(
+          builder: (context, state) => const BookingPaymentView(property: null,),
+        ),*/
+       /* GoRoute(
           path: kBookingReserve,
           builder: (context, state) => const BookingReserveView(),
-        ),
+        ),*/
         GoRoute(
           path: kChatList,
           builder: (context, state) => const ChatListView(),

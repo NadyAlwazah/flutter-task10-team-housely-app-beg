@@ -19,7 +19,14 @@ class AssetsData {
   static const iconTimeSquareSvg = "${_icons}time_square.svg";
   static const iconInfoSquareSvg = "${_icons}info_square.svg";
   static const iconCalendarSvg = "${_icons}calendar.svg";
-
+  static const iconCreditcardSvg = "${_icons}credit_card.svg";
+  static const iconPaypalSvg = "${_icons}paypal.svg";
+  static const iconCreditreservepaySvg = "${_icons}credit_reserve_pay.svg";
+  static const iconReservesuccessSvg = "${_icons}reserve_success.svg";
+  static const iconAddcardlogoSvg = "${_icons}add_card_logo.svg";
+  static const iconCreditcardshSvg = "${_icons}credit_card_sh.svg";
+  static const iconCardcolorSvg = "${_icons}card_color.svg";
+  static const iconLocationOutlinedSvg = "${_icons}location_outlined.svg";
   // Images
   static const imageOnboard1png = "${_images}image1.png";
   static const imageOnboard2png = "${_images}image2.png";
