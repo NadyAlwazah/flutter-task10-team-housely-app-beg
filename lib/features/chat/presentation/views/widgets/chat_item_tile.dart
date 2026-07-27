@@ -5,6 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/widgets/delete_confirmation_dialog.dart';
 
 class ChatItemTile extends StatelessWidget {
   final String name;
@@ -23,6 +24,21 @@ class ChatItemTile extends StatelessWidget {
     this.onTap,
     required this.onDeletePressed,
   }) : super(key: key);
+
+  void _showDeleteConfirmation(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => DeleteConfirmationDialog(
+        onDeleteConfirm: () async {
+
+          await Future.delayed(const Duration(seconds: 2));
+          onDeletePressed();
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +61,7 @@ class ChatItemTile extends StatelessWidget {
           ),
           CustomSlidableAction(
             onPressed: (_) {
-              onDeletePressed();
+              _showDeleteConfirmation(context);
             },
             padding: EdgeInsets.zero,
             backgroundColor: AppColors.chatMessageContainer,

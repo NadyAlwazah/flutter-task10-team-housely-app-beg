@@ -22,7 +22,6 @@ class ChatDetailView extends StatelessWidget {
         );
 
     return Scaffold(
-      backgroundColor: Colors.white,
 
       appBar: ChatDetailAppBar(
         user: currentUser,

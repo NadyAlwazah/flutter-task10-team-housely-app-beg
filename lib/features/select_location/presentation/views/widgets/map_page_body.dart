@@ -26,22 +26,22 @@ class MapPageBody extends StatelessWidget {
           Align(
             alignment: Alignment.centerLeft,
             child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary, size: 24,),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
           ),
-          const SizedBox(height: 32),
+           SizedBox(height: 35.h),
           _buildSearchBar(),
 
-          const Spacer(),
+          SizedBox(height: 339.h),
 
           _buildLocationDetailsCard(),
 
           SizedBox(height: 20.h),
           Padding(
-            padding: EdgeInsets.all(20.h),
+            padding: EdgeInsets.all(24.h),
             child: CustomAppButton(
               text: "Choose location",
               onPressed: onChooseLocation,
@@ -50,6 +50,7 @@ class MapPageBody extends StatelessWidget {
               ),
             ),
           ),
+          SizedBox(height: 48.h),
         ],
       ),
     );
@@ -58,12 +59,13 @@ Widget _buildSearchBar() {
   return Column(
     children: [
       Container(
-        height: 55.h,
-        margin: EdgeInsets.symmetric(horizontal: 20.w),
+        height: 50.h,
+        width: 327.w,
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(15.r),
+          borderRadius: BorderRadius.circular(12.r),
+          border: Border.all(color: AppColors.textCard, width: 1.w)
         ),
         child: TextField(
           readOnly: true, 
@@ -80,26 +82,29 @@ Widget _buildSearchBar() {
         ),
       ),
 
-      Container(
-        margin: EdgeInsets.symmetric(horizontal: 20.w),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15.r),
-        ),
-        child: const SizedBox.shrink(), 
-      ),
     ],
   );
 }
   Widget _buildLocationDetailsCard() {
     return Container(
-      margin: EdgeInsets.all(20.w),
-      padding: EdgeInsets.all(20.w),
+      width: 327.w,
+      height: 149.h,
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
+        border: Border.all(
+          color: AppColors.textCard,width: 1.w
+        ),
         borderRadius: BorderRadius.circular(20.r),
-        boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 15)],
-      ),
+        boxShadow: [
+           BoxShadow(
+             color: AppColors.textPrimary.withOpacity(0.18), 
+             offset: Offset(0, 24.h),                   
+             blurRadius: 48.r,                             
+             spreadRadius: -12.r,                            
+            ),
+         ],    
+          ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -5,13 +5,20 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 
-class DeleteConfirmationDialog extends StatelessWidget {
-  final VoidCallback onDeleteConfirm;
+class DeleteConfirmationDialog extends StatefulWidget {
+  final Future<void> Function() onDeleteConfirm;
 
   const DeleteConfirmationDialog({
     Key? key,
     required this.onDeleteConfirm,
   }) : super(key: key);
+
+  @override
+  State<DeleteConfirmationDialog> createState() => _DeleteConfirmationDialogState();
+}
+
+class _DeleteConfirmationDialogState extends State<DeleteConfirmationDialog> {
+  bool _isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -72,29 +79,43 @@ class DeleteConfirmationDialog extends StatelessWidget {
             style: Styles.textStyle14W400Inter.copyWith(color: AppColors.textSecondary),
           ),
           SizedBox(height: 40.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _DialogButton(
-                text: 'Cancel',
-                backgroundColor: AppColors.primary,
-                pressedColor: AppColors.primary,
-                textColor: Colors.white,
-                onTap: () => Navigator.pop(context),
+          if (_isLoading)
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.h),
+              child: const CircularProgressIndicator(
+                color: AppColors.chatMessageContainer,
               ),
-              SizedBox(width: 16.w),
-              _DialogButton(
-                text: 'Delete',
-                backgroundColor: AppColors.greyDeleteContainer,
-                pressedColor: AppColors.primary,
-                textColor: Colors.white,
-                onTap: () {
-                  Navigator.pop(context);
-                  onDeleteConfirm();
-                },
-              ),
-            ],
-          ),
+            )
+          else
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _DialogButton(
+                  text: 'Cancel',
+                  backgroundColor: AppColors.primary,
+                  pressedColor: AppColors.primary,
+                  textColor: Colors.white,
+                  onTap: () => Navigator.pop(context),
+                ),
+                SizedBox(width: 16.w),
+                _DialogButton(
+                  text: 'Delete',
+                  backgroundColor: AppColors.greyDeleteContainer,
+                  pressedColor: AppColors.primary,
+                  textColor: Colors.white,
+                  onTap: () async {
+                    setState(() {
+                      _isLoading = true;
+                    });
+
+                    await widget.onDeleteConfirm();
+                    if (mounted) {
+                      Navigator.pop(context);
+                    }
+                  },
+                ),
+              ],
+            ),
           SizedBox(height: 60.h),
         ],
       ),
