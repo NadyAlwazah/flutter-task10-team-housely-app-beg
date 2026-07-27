@@ -110,9 +110,19 @@ abstract class AppRouter {
           path: kBookingPayment,
           builder: (context, state) => const BookingPaymentView(),
         ),
+
         GoRoute(
           path: kBookingReserve,
-          builder: (context, state) => const BookingReserveView(),
+          builder: (context, state) {
+            final data = state.extra as Map<String, dynamic>;
+
+            return BlocProvider.value(
+              value: data['cubit'] as PropertyCubit,
+              child: BookingReserveView(
+                propertyModel: data['property'] as PropertyModel,
+              ),
+            );
+          },
         ),
         GoRoute(
           path: kChatList,

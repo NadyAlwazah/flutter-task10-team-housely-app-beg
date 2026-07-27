@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/share_bottom_sheet.dart';
@@ -93,7 +94,18 @@ class _DetailsViewState extends State<DetailsView> {
       body: DetailsViewBody(propertyModel: widget.propertyModel),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.only(left: 24, right: 24, bottom: 20),
-        child: CustomButton(text: "Rent now", onPressed: () {}),
+        child: CustomButton(
+          text: "Rent now",
+          onPressed: () {
+            context.push(
+              AppRouter.kDetails,
+              extra: {
+                'property': widget.propertyModel,
+                'cubit': context.read<PropertyCubit>(),
+              },
+            );
+          },
+        ),
       ),
     );
   }
