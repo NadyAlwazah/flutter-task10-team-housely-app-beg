@@ -13,7 +13,7 @@ class SuccessImageWidget extends StatelessWidget {
       width: 208.w,
       height: 208.h,
       decoration: BoxDecoration(
-        color: AppColors.Secondary.withOpacity(
+        color: AppColors.secondary.withOpacity(
           0.25,
         ), // لون الخلفية الدائرية الفاتح
         shape: BoxShape.circle,
