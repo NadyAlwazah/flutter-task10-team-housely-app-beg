@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/model/user_chat_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/chat_detail_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/agent_model.dart';
 import 'chat_item_tile.dart';
 
 class MessageList extends StatefulWidget {
@@ -84,20 +84,21 @@ class _MessageListState extends State<MessageList> {
               message: item['message']!,
               time: item['time']!,
               image: item['image']!,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChatDetailView(
-                      user: UserChatModel(
-                        name: item['name'] ?? 'User',
-                        image: item['image'] ?? AssetsData.codyPng,
-                        isOnline: true,
-                      ),
-                    ),
-                  ),
-                );
-              },
+             onTap: () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => ChatDetailView(
+        agent: AgentModel(
+          name: item['name'] ?? 'User',
+          image: item['image'] ?? AssetsData.codyPng,
+          isOnline: true,
+          role: 'Property Agent',
+        ),
+      ),
+    ),
+  );
+},
               onDeletePressed: () {
                 setState(() {
                   chatItems.removeAt(index);

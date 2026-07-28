@@ -4,11 +4,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/model/user_chat_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/agent_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/recommended_property_card.dart';
-
 
 class ChatMessageModel {
   final String text;
@@ -23,9 +22,9 @@ class ChatMessageModel {
 }
 
 class ChatDetailViewBody extends StatefulWidget {
-  final UserChatModel? user;
+  final AgentModel? agent;
 
-  const ChatDetailViewBody({Key? key, this.user}) : super(key: key);
+  const ChatDetailViewBody({Key? key, this.agent}) : super(key: key);
 
   @override
   State<ChatDetailViewBody> createState() => _ChatDetailViewBodyState();
@@ -64,17 +63,16 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
     super.dispose();
   }
 
-
   Widget _buildSentMessage({required String text, required String time}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: 224.w), 
+          constraints: BoxConstraints(maxWidth: 224.w),
           child: Container(
             padding: EdgeInsets.symmetric(
-              horizontal: 12.w, 
-              vertical: 8.h,  
+              horizontal: 12.w,
+              vertical: 8.h,
             ),
             decoration: BoxDecoration(
               color: AppColors.chatMessageContainer,
@@ -105,7 +103,6 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
     );
   }
 
-
   Widget _buildReceivedMessage({required String text, required String time}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -119,7 +116,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
               decoration: const BoxDecoration(shape: BoxShape.circle),
               clipBehavior: Clip.antiAlias,
               child: Image.asset(
-                widget.user?.image ?? AssetsData.anggelaPng,
+                widget.agent?.image ?? AssetsData.anggelaPng,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) =>
                     Icon(Icons.person, size: 28.r),
@@ -133,8 +130,8 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
                   constraints: BoxConstraints(maxWidth: 216.w),
                   child: Container(
                     padding: EdgeInsets.symmetric(
-                      horizontal: 12.w, 
-                      vertical: 8.h, 
+                      horizontal: 12.w,
+                      vertical: 8.h,
                     ),
                     decoration: BoxDecoration(
                       color: AppColors.chatMessage2Container,
@@ -168,7 +165,6 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
       ],
     );
   }
-
 
   void _sendMessage() {
     final String text = _messageController.text.trim();
@@ -207,6 +203,11 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
       area: 1880,
       status: "For Rent",
       description: "Beautiful modern homestay with garden view.",
+      agent: AgentModel(
+        image: widget.agent?.image ?? AssetsData.imageAgentPng,
+        name: widget.agent?.name ?? "Theresa Webb",
+        role: widget.agent?.role ?? "Property Agent",
+      ),
       reviews: [
         ReviewModel(
           reviewerName: "Theresa Webb",
@@ -236,8 +237,6 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
                   ),
                 ),
                 SizedBox(height: 16.h),
-
-
                 Container(
                   width: 224.w,
                   height: 164.h,
@@ -247,8 +246,6 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
                   child: RecommendedPropertyCard(propertyModel: propertyModel),
                 ),
                 SizedBox(height: 16.h),
-
-
                 ..._messages.map((msg) {
                   if (msg.isSentByMe) {
                     return _buildSentMessage(text: msg.text, time: msg.time);
@@ -260,8 +257,6 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
             ),
           ),
         ),
-
-
         Padding(
           padding: EdgeInsets.all(16.0.r),
           child: Row(
@@ -298,7 +293,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
               ),
               SizedBox(width: 12.w),
               GestureDetector(
-                onTap: _sendMessage, 
+                onTap: _sendMessage,
                 child: Container(
                   width: 44.r,
                   height: 44.r,

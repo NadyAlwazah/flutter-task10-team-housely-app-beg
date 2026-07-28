@@ -80,7 +80,7 @@ class NotificationsViewBody extends StatelessWidget {
 
 
               NotificationItemTile(
-                imagePath: AssetsData.imagJhonPng,
+                imagePath: AssetsData.imageAgentPng,
                 imageType: NotificationImageType.png,
                 hasRedDot: false,
                 textSpan: TextSpan(
