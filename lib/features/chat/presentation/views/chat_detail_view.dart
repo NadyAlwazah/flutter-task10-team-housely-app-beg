@@ -7,14 +7,12 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/ag
 class ChatDetailView extends StatelessWidget {
   final AgentModel? agent;
 
-  const ChatDetailView({
-    super.key,
-    this.agent,
-  });
+  const ChatDetailView({super.key, this.agent});
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = agent ??
+    final currentUser =
+        agent ??
         AgentModel(
           name: 'User',
           image: AssetsData.codyPng,
@@ -23,12 +21,11 @@ class ChatDetailView extends StatelessWidget {
         );
 
     return Scaffold(
-      appBar: ChatDetailAppBar(
-        agent: currentUser,
-      ),
-      body: ChatDetailViewBody(
-        agent: currentUser,
-      ),
+      backgroundColor: Colors.white,
+
+      appBar: ChatDetailAppBar(agent: currentUser),
+
+      body: ChatDetailViewBody(agent: currentUser),
     );
   }
 }

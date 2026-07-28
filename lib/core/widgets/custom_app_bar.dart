@@ -1,24 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
-  final Widget? action;
-  final VoidCallback? onTapAction;
   final VoidCallback? onTapLeading;
-  final bool isActionIcon;
   final Widget? leadingSvg;
+  final List<Widget>? actions;
 
   const CustomAppBar({
     super.key,
     this.title,
-    this.action,
-    this.onTapAction,
-    this.isActionIcon = true,
     this.onTapLeading,
     this.leadingSvg,
+    this.actions,
   });
 
   @override
@@ -45,29 +40,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: Text(title ?? '', style: Styles.textStyle16W600Inter),
 
       //actions
-      actions: [
-        if (action != null)
-          Padding(
-            padding: const EdgeInsets.only(right: 24.0),
-            child: GestureDetector(
-              onTap: onTapAction,
-              child: isActionIcon
-                  ? Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(33.r),
-                        border: Border.all(
-                          color: const Color(0xFFD2D6DB),
-                          width: 1,
-                        ),
-                        color: Colors.white,
-                      ),
-                      child: action,
-                    )
-                  : action,
-            ),
-          ),
-      ],
+      actions: actions != null
+          ? actions!.map((widget) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 16.0),
+                child: widget,
+              );
+            }).toList()
+          : [],
     );
   }
 

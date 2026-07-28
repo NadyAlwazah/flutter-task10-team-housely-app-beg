@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_nav_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_bottom_nav_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_activity/presentation/views/booking_activity_view.dart';
@@ -11,48 +10,45 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/popular_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/profile_view.dart';
 
-class BottomBarLayout extends StatelessWidget {
+class BottomBarLayout extends StatefulWidget {
   const BottomBarLayout({super.key});
 
-  Widget _getPage(int index) {
-    switch (index) {
-      case 0:
-        return const HomeView();
-      case 1:
-        return const ExploreView();
-      case 2:
-        return const FavouriteView();
-      case 3:
-        return const BookingActivityView();
-      case 4:
-        return const ProfileView();
-      default:
-        return const HomeView();
-    }
-  }
+  @override
+  State<BottomBarLayout> createState() => _BottomBarLayoutState();
+}
+
+class _BottomBarLayoutState extends State<BottomBarLayout> {
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (_) => getIt<BottomNavCubit>()),
-        BlocProvider(create: (_) => getIt<HomeContentCubit>()),
-      ],
-      child: BlocBuilder<BottomNavCubit, int>(
-        builder: (context, currentIndex) {
+    return BlocProvider(
+      create: (context) => getIt<HomeContentCubit>(),
+      child: BlocBuilder<HomeContentCubit, bool>(
+        builder: (context, showPopular) {
+          final pages = [
+            showPopular
+                ? PopularView(
+                    onBackToHome: () {
+                      context.read<HomeContentCubit>().showHome();
+                    },
+                  )
+                : const HomeView(),
+
+            const ExploreView(),
+
+            FavouriteView(onBackToHome: () => setState(() => currentIndex = 0)),
+
+            const BookingActivityView(),
+            ProfileView(onBackToHome: () => setState(() => currentIndex = 0)),
+          ];
+
           return Scaffold(
-            body: BlocBuilder<HomeContentCubit, bool>(
-              builder: (context, showPopular) {
-                if (currentIndex == 0) {
-                  return showPopular ? const PopularView() : const HomeView();
-                }
-                return _getPage(currentIndex);
-              },
-            ),
+            body: IndexedStack(index: currentIndex, children: pages),
             bottomNavigationBar: CustomBottomNavBar(
               currentIndex: currentIndex,
               onTap: (index) {
-                context.read<BottomNavCubit>().changeTab(index);
+                setState(() => currentIndex = index);
               },
             ),
           );

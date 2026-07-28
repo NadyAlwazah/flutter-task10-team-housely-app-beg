@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_task10_team_housely_app_beg/core/layout/bottom_nav_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_app_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
@@ -9,23 +8,19 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/p
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/popular_property_card.dart';
 
 class FavouriteViewBody extends StatelessWidget {
-  const FavouriteViewBody({super.key});
-
+  const FavouriteViewBody({super.key, required this.onBackToHome});
+  final VoidCallback onBackToHome;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CustomAppBar(
-          title: "Favorite",
-          onTapLeading: () {
-            context.read<BottomNavCubit>().changeTab(0);
-          },
-        ),
+        CustomAppBar(title: "Favorite", onTapLeading: onBackToHome),
         BlocBuilder<PropertyCubit, PropertyState>(
           builder: (context, state) {
-            final properties = (state.popular + state.recommended)
-                .where((property) => property.isFavorite)
-                .toList();
+            final properties =
+                (state.popular + state.recommended + state.nearbyProperties)
+                    .where((property) => property.isFavorite)
+                    .toList();
 
             return Expanded(
               child: Padding(
@@ -44,12 +39,7 @@ class FavouriteViewBody extends StatelessWidget {
                       width: 327.w,
                       height: 72.h,
                       padding: EdgeInsets.only(right: 8.w),
-                      image: property.image,
-                      title: property.title,
-                      location: property.location,
-                      price: "\$${property.pricePerMonth}",
-                      isFavorite: property.isFavorite,
-                      rating: 4.2,
+                      propertyModel: property,
                       onTapFavorite: () {
                         context.read<PropertyCubit>().toggleFavorite(
                           property.id,

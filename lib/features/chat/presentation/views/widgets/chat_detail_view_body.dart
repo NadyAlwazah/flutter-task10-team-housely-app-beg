@@ -70,10 +70,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
         ConstrainedBox(
           constraints: BoxConstraints(maxWidth: 224.w),
           child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 12.w,
-              vertical: 8.h,
-            ),
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
             decoration: BoxDecoration(
               color: AppColors.chatMessageContainer,
               borderRadius: BorderRadius.only(
@@ -85,9 +82,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
             ),
             child: Text(
               text,
-              style: Styles.textStyle14W400Inter.copyWith(
-                color: Colors.white,
-              ),
+              style: Styles.textStyle14W400Inter.copyWith(color: Colors.white),
             ),
           ),
         ),
@@ -175,11 +170,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
 
       setState(() {
         _messages.add(
-          ChatMessageModel(
-            text: text,
-            time: formattedTime,
-            isSentByMe: true,
-          ),
+          ChatMessageModel(text: text, time: formattedTime, isSentByMe: true),
         );
       });
 
@@ -218,7 +209,6 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
       ],
       isFavorite: true,
     );
-
     return Column(
       children: [
         Expanded(
@@ -250,7 +240,10 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
                   if (msg.isSentByMe) {
                     return _buildSentMessage(text: msg.text, time: msg.time);
                   } else {
-                    return _buildReceivedMessage(text: msg.text, time: msg.time);
+                    return _buildReceivedMessage(
+                      text: msg.text,
+                      time: msg.time,
+                    );
                   }
                 }).toList(),
               ],

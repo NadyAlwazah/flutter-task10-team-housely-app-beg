@@ -67,7 +67,9 @@ class _MessageListState extends State<MessageList> {
       children: [
         Text(
           'All Message',
-          style: Styles.textStyle16W600Inter.copyWith(color: AppColors.textPrimary),
+          style: Styles.textStyle16W600Inter.copyWith(
+            color: AppColors.textPrimary,
+          ),
         ),
         const SizedBox(height: 16),
         ListView.separated(
@@ -78,27 +80,26 @@ class _MessageListState extends State<MessageList> {
           itemBuilder: (context, index) {
             final item = chatItems[index];
             return ChatItemTile(
-
               key: ValueKey(item['name']),
               name: item['name']!,
               message: item['message']!,
               time: item['time']!,
               image: item['image']!,
-             onTap: () {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => ChatDetailView(
-        agent: AgentModel(
-          name: item['name'] ?? 'User',
-          image: item['image'] ?? AssetsData.codyPng,
-          isOnline: true,
-          role: 'Property Agent',
-        ),
-      ),
-    ),
-  );
-},
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChatDetailView(
+                      agent: AgentModel(
+                        name: item['name'] ?? 'User',
+                        image: item['image'] ?? AssetsData.codyPng,
+                        isOnline: true,
+                        role: 'Property Agent',
+                      ),
+                    ),
+                  ),
+                );
+              },
               onDeletePressed: () {
                 setState(() {
                   chatItems.removeAt(index);

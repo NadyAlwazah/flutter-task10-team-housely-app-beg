@@ -1,50 +1,54 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
+import 'package:go_router/go_router.dart';
 
 class PopularPropertyCard extends StatelessWidget {
   const PopularPropertyCard({
     super.key,
-    required this.image,
-    required this.title,
-    required this.location,
-    required this.price,
-    required this.rating,
-    this.isFavorite = false,
     this.onTapFavorite,
     required this.width,
     required this.height,
     this.padding,
     this.showIconFavorite = true,
+    required this.propertyModel,
   });
-
-  final String image;
-  final String title;
-  final String location;
-  final String price;
-  final double rating;
-  final bool isFavorite;
+  final PropertyModel propertyModel;
   final VoidCallback? onTapFavorite;
-
   final double width;
   final double height;
   final EdgeInsetsGeometry? padding;
   final bool showIconFavorite;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: width,
-      height: height,
-      padding: padding,
-      child: Row(
-        children: [
-          _buildImage(),
-          SizedBox(width: 12.w),
-          Expanded(child: _buildDetails()),
-        ],
+    return GestureDetector(
+      onTap: () {
+        context.push(
+          AppRouter.kDetails,
+          extra: {
+            'property': propertyModel,
+            'cubit': context.read<PropertyCubit>(),
+          },
+        );
+      },
+      child: Container(
+        width: width,
+        height: height,
+        padding: padding,
+        child: Row(
+          children: [
+            _buildImage(),
+            SizedBox(width: 12.w),
+            Expanded(child: _buildDetails()),
+          ],
+        ),
       ),
     );
   }
@@ -52,7 +56,12 @@ class PopularPropertyCard extends StatelessWidget {
   Widget _buildImage() {
     return ClipRRect(
       borderRadius: BorderRadius.circular(6.r),
-      child: Image.asset(image, width: 80.w, height: 62.h, fit: BoxFit.cover),
+      child: Image.asset(
+        propertyModel.image,
+        width: 80.w,
+        height: 62.h,
+        fit: BoxFit.cover,
+      ),
     );
   }
 
@@ -66,7 +75,7 @@ class PopularPropertyCard extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                title,
+                propertyModel.title,
                 style: Styles.textStyle14W600Inter,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -89,7 +98,7 @@ class PopularPropertyCard extends StatelessWidget {
             SizedBox(width: 4.w),
             Expanded(
               child: Text(
-                location,
+                propertyModel.location,
                 style: Styles.textStyle12W400Inter.copyWith(
                   color: AppColors.textSecondary,
                 ),
@@ -101,7 +110,10 @@ class PopularPropertyCard extends StatelessWidget {
         SizedBox(height: 4.h),
         Row(
           children: [
-            Text("$price/month", style: Styles.textStyle10W600Inter),
+            Text(
+              "${propertyModel.pricePerMonth}/month",
+              style: Styles.textStyle10W600Inter,
+            ),
             const Spacer(),
             Container(
               width: 47.w,
@@ -120,7 +132,7 @@ class PopularPropertyCard extends StatelessWidget {
                     height: 12.r,
                   ),
                   Text(
-                    rating.toString(),
+                    propertyModel.rating.toString(),
                     style: Styles.textStyle10W700Inter.copyWith(
                       color: AppColors.textPrimary,
                     ),
@@ -138,7 +150,9 @@ class PopularPropertyCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTapFavorite,
       child: SvgPicture.asset(
-        isFavorite ? AssetsData.iconFavoriteRedSvg : AssetsData.iconFavoriteSvg,
+        propertyModel.isFavorite
+            ? AssetsData.iconFavoriteRedSvg
+            : AssetsData.iconFavoriteSvg,
         width: 20.r,
         height: 20.r,
         colorFilter: const ColorFilter.mode(Color(0xFFF97066), BlendMode.srcIn),

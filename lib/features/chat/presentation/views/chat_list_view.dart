@@ -6,26 +6,30 @@ import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_app_bar.
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/widgets/chat_list_view_body.dart';
 import 'package:go_router/go_router.dart';
 
-
 class ChatListView extends StatelessWidget {
-  const ChatListView({Key? key}) : super(key: key);
+  const ChatListView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Message',
-      isActionIcon: false,
-      action: IconButton(onPressed: (){}, 
-      icon:  SvgPicture.asset(AssetsData.searchSvg,
-      colorFilter:  const ColorFilter.mode(
-       AppColors.textPrimary,
-        BlendMode.srcIn,
+      appBar: CustomAppBar(
+        title: 'Message',
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: SvgPicture.asset(
+              AssetsData.searchSvg,
+              colorFilter: const ColorFilter.mode(
+                AppColors.textPrimary,
+                BlendMode.srcIn,
+              ),
+            ),
+          ),
+        ],
+        onTapLeading: () {
+          context.pop();
+        },
       ),
-       ),
-      ) ,
-      onTapLeading: (){
-        context.pop();
-      },),
       body: const ChatListViewBody(),
     );
   }

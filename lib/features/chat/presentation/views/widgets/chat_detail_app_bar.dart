@@ -10,10 +10,7 @@ import 'package:go_router/go_router.dart';
 class ChatDetailAppBar extends StatefulWidget implements PreferredSizeWidget {
   final AgentModel agent;
 
-  const ChatDetailAppBar({
-    super.key,
-    required this.agent,
-  });
+  const ChatDetailAppBar({super.key, required this.agent});
 
   @override
   State<ChatDetailAppBar> createState() => _ChatDetailAppBarState();
@@ -50,11 +47,7 @@ class _ChatDetailAppBarState extends State<ChatDetailAppBar> {
       leadingWidth: 48.w,
       leading: GestureDetector(
         onTap: () => context.pop(),
-        child: Icon(
-          Icons.arrow_back,
-          color: AppColors.textPrimary,
-          size: 24.r,
-        ),
+        child: Icon(Icons.arrow_back, color: AppColors.textPrimary, size: 24.r),
       ),
       titleSpacing: 0,
       title: Row(
@@ -62,18 +55,13 @@ class _ChatDetailAppBarState extends State<ChatDetailAppBar> {
           Container(
             width: 44.r,
             height: 44.r,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-            ),
+            decoration: const BoxDecoration(shape: BoxShape.circle),
             clipBehavior: Clip.antiAlias,
             child: Image.asset(
               widget.agent.image,
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
-                return Icon(
-                  Icons.person,
-                  size: 28.r,
-                );
+                return Icon(Icons.person, size: 28.r);
               },
             ),
           ),
@@ -118,15 +106,9 @@ class _ChatDetailAppBarState extends State<ChatDetailAppBar> {
         ],
       ),
       actions: [
-        _buildIconButton(
-          iconPath: AssetsData.iconCallSvg,
-          onTap: () {},
-        ),
+        _buildIconButton(iconPath: AssetsData.iconCallSvg, onTap: () {}),
         SizedBox(width: 8.w),
-        _buildIconButton(
-          iconPath: AssetsData.iconVideoSvg,
-          onTap: () {},
-        ),
+        _buildIconButton(iconPath: AssetsData.iconVideoSvg, onTap: () {}),
         SizedBox(width: 24.w),
       ],
     );
