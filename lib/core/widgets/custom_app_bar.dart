@@ -4,7 +4,6 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
-  final Widget? action;
   final VoidCallback? onTapLeading;
   final Widget? leadingSvg;
   final List<Widget>? actions;
@@ -12,7 +11,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({
     super.key,
     this.title,
-    this.action,
     this.onTapLeading,
     this.leadingSvg,
     this.actions,

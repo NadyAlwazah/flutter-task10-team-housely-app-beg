@@ -9,10 +9,174 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/pr
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/recommended_property_card.dart';
 
-class ChatDetailViewBody extends StatelessWidget {
+class ChatMessageModel {
+  final String text;
+  final String time;
+  final bool isSentByMe;
+
+  ChatMessageModel({
+    required this.text,
+    required this.time,
+    required this.isSentByMe,
+  });
+}
+
+class ChatDetailViewBody extends StatefulWidget {
   final AgentModel? agent;
 
   const ChatDetailViewBody({Key? key, this.agent}) : super(key: key);
+
+  @override
+  State<ChatDetailViewBody> createState() => _ChatDetailViewBodyState();
+}
+
+class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
+  final TextEditingController _messageController = TextEditingController();
+  final List<ChatMessageModel> _messages = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    _messages.addAll([
+      ChatMessageModel(
+        text: 'Hello we are interested in this how about the price ?',
+        time: '1:22 AM',
+        isSentByMe: true,
+      ),
+      ChatMessageModel(
+        text: 'can it be negotiated ?',
+        time: '1:22 AM',
+        isSentByMe: true,
+      ),
+      ChatMessageModel(
+        text: 'Hi there, the price is negotiable',
+        time: '1:30 AM',
+        isSentByMe: false,
+      ),
+    ]);
+  }
+
+  @override
+  void dispose() {
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  Widget _buildSentMessage({required String text, required String time}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: 224.w),
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+            decoration: BoxDecoration(
+              color: AppColors.chatMessageContainer,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8.r),
+                topRight: Radius.circular(8.r),
+                bottomLeft: Radius.circular(8.r),
+                bottomRight: Radius.zero,
+              ),
+            ),
+            child: Text(
+              text,
+              style: Styles.textStyle14W400Inter.copyWith(color: Colors.white),
+            ),
+          ),
+        ),
+        SizedBox(height: 4.h),
+        Text(
+          time,
+          style: Styles.textStyle12W500Inter.copyWith(
+            color: AppColors.textSecondary,
+          ),
+        ),
+        SizedBox(height: 12.h),
+      ],
+    );
+  }
+
+  Widget _buildReceivedMessage({required String text, required String time}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 44.r,
+              height: 44.r,
+              decoration: const BoxDecoration(shape: BoxShape.circle),
+              clipBehavior: Clip.antiAlias,
+              child: Image.asset(
+                widget.agent?.image ?? AssetsData.anggelaPng,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) =>
+                    Icon(Icons.person, size: 28.r),
+              ),
+            ),
+            SizedBox(width: 8.w),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ConstrainedBox(
+                  constraints: BoxConstraints(maxWidth: 216.w),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 12.w,
+                      vertical: 8.h,
+                    ),
+                    decoration: BoxDecoration(
+                      color: AppColors.chatMessage2Container,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(8.r),
+                        topRight: Radius.circular(8.r),
+                        bottomRight: Radius.circular(8.r),
+                        bottomLeft: Radius.zero,
+                      ),
+                    ),
+                    child: Text(
+                      text,
+                      style: Styles.textStyle12W400Inter.copyWith(
+                        color: AppColors.textPrimary,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 4.h),
+                Text(
+                  time,
+                  style: Styles.textStyle12W500Inter.copyWith(
+                    color: AppColors.textSecondary,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 12.h),
+      ],
+    );
+  }
+
+  void _sendMessage() {
+    final String text = _messageController.text.trim();
+    if (text.isNotEmpty) {
+      final now = TimeOfDay.now();
+      final String formattedTime =
+          '${now.hourOfPeriod == 0 ? 12 : now.hourOfPeriod}:${now.minute.toString().padLeft(2, '0')} ${now.period == DayPeriod.am ? 'AM' : 'PM'}';
+
+      setState(() {
+        _messages.add(
+          ChatMessageModel(text: text, time: formattedTime, isSentByMe: true),
+        );
+      });
+
+      _messageController.clear();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +195,9 @@ class ChatDetailViewBody extends StatelessWidget {
       status: "For Rent",
       description: "Beautiful modern homestay with garden view.",
       agent: AgentModel(
-        image: AssetsData.imageAgentPng,
-        name: "Theresa Webb",
-        role: "Property Agent",
+        image: widget.agent?.image ?? AssetsData.imageAgentPng,
+        name: widget.agent?.name ?? "Theresa Webb",
+        role: widget.agent?.role ?? "Property Agent",
       ),
       reviews: [
         ReviewModel(
@@ -63,7 +227,6 @@ class ChatDetailViewBody extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 16.h),
-
                 Container(
                   width: 224.w,
                   height: 164.h,
@@ -72,123 +235,17 @@ class ChatDetailViewBody extends StatelessWidget {
                   ),
                   child: RecommendedPropertyCard(propertyModel: propertyModel),
                 ),
-
-                SizedBox(height: 12.h),
-
-                //chats
-                Container(
-                  width: 224.w,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 12.w,
-                    vertical: 8.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: AppColors.chatMessageContainer,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.r),
-                      topRight: Radius.circular(8.r),
-                      bottomLeft: Radius.circular(8.r),
-                      bottomRight: Radius.zero,
-                    ),
-                  ),
-                  child: Text(
-                    'Hello we are interested in this how about the price ?',
-                    style: Styles.textStyle14W400Inter.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  '1:22 AM',
-                  style: Styles.textStyle12W500Inter.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                Container(
-                  width: 160.w,
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 12.w,
-                    vertical: 8.h,
-                  ),
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF6C5CE7),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8.r),
-                      topRight: Radius.circular(8.r),
-                      bottomLeft: Radius.circular(8.r),
-                      bottomRight: Radius.zero,
-                    ),
-                  ),
-                  child: Text(
-                    'can it be negotiated ?  ',
-                    style: Styles.textStyle14W400Inter.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 8.h),
-                Text(
-                  '1:22 AM',
-                  style: Styles.textStyle12W500Inter.copyWith(
-                    color: AppColors.textSecondary,
-                  ),
-                ),
-                SizedBox(height: 42.h),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: 44.r,
-                      height: 44.r,
-                      decoration: const BoxDecoration(shape: BoxShape.circle),
-                      clipBehavior: Clip.antiAlias,
-                      child: Image.asset(
-                        agent?.image ?? AssetsData.anggelaPng,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) =>
-                            Icon(Icons.person, size: 28.r),
-                      ),
-                    ),
-                    SizedBox(width: 8.w),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: 216.w,
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12.w,
-                            vertical: 8.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: AppColors.chatMessage2Container,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8.r),
-                              topRight: Radius.circular(8.r),
-                              bottomRight: Radius.circular(8.r),
-                              bottomLeft: Radius.zero,
-                            ),
-                          ),
-                          child: Text(
-                            'Hi there, the price \nis negotiable',
-                            style: Styles.textStyle12W400Inter.copyWith(
-                              color: AppColors.textPrimary,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Text(
-                          '1:30 AM',
-                          style: Styles.textStyle12W500Inter.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(height: 24.h),
+                SizedBox(height: 16.h),
+                ..._messages.map((msg) {
+                  if (msg.isSentByMe) {
+                    return _buildSentMessage(text: msg.text, time: msg.time);
+                  } else {
+                    return _buildReceivedMessage(
+                      text: msg.text,
+                      time: msg.time,
+                    );
+                  }
+                }).toList(),
               ],
             ),
           ),
@@ -210,10 +267,11 @@ class ChatDetailViewBody extends StatelessWidget {
                     vertical: 8.h,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.grey.shade200,
+                    color: AppColors.chatMessage2Container,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: TextField(
+                    controller: _messageController,
                     textAlign: TextAlign.left,
                     decoration: InputDecoration(
                       isDense: true,
@@ -222,28 +280,32 @@ class ChatDetailViewBody extends StatelessWidget {
                       hintStyle: Styles.textStyle12W400Poppins,
                       border: InputBorder.none,
                     ),
+                    onSubmitted: (_) => _sendMessage(),
                   ),
                 ),
               ),
               SizedBox(width: 12.w),
-              Container(
-                width: 44.r,
-                height: 44.r,
-                decoration: const BoxDecoration(
-                  color: Color(0xFF6C5CE7),
-                  shape: BoxShape.circle,
-                ),
-                child: SvgPicture.asset(
-                  width: 18.w,
-                  height: 18.h,
-                  AssetsData.iconSendSvg,
-                  fit: BoxFit.scaleDown,
+              GestureDetector(
+                onTap: _sendMessage,
+                child: Container(
+                  width: 44.r,
+                  height: 44.r,
+                  decoration: const BoxDecoration(
+                    color: AppColors.chatMessageContainer,
+                    shape: BoxShape.circle,
+                  ),
+                  child: SvgPicture.asset(
+                    AssetsData.iconSendSvg,
+                    width: 18.w,
+                    height: 18.h,
+                    fit: BoxFit.scaleDown,
+                  ),
                 ),
               ),
             ],
           ),
         ),
-        SizedBox(height: 40.h),
+        SizedBox(height: 20.h),
       ],
     );
   }

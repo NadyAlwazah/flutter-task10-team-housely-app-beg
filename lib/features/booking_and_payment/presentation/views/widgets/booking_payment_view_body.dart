@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/shared_preferences_helper.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
@@ -27,8 +28,9 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
   String? selectedCard; // يبدأ فارغاً
   DateTime? _startDate;
   DateTime? _endDate;
-  @override
-  /* void initState() {
+
+  /* @override
+  void initState() {
     super.initState();
     _loadSavedData(); //  استرجاع البيانات المحفوظة بمجرد فتح الشاشة
   }*/
@@ -46,6 +48,7 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
       if (loadedCard != null) selectedCard = loadedCard;
     });
   }*/
+
   Future<void> _saveBookingData() async {
     if (selectedDate != null) {
       await SharedPreferencesHelper.saveString(
@@ -99,7 +102,7 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
           BookingPaymentSection(
             selectedCard: selectedCard,
             onAddCardTap: () async {
-              final result = await context.push('/booking_add_card');
+              final result = await context.push(AppRouter.kBookingAddCard);
               if (result != null && result is String) {
                 setState(
                   () => selectedCard =
@@ -253,8 +256,7 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
                       CustomButton(
                         text: 'Explore more',
                         onPressed: () {
-                          Navigator.pop(context);
-                          context.go('/bottom_bar');
+                          context.go(AppRouter.kBottomBar);
                         },
                       ),
                     ],

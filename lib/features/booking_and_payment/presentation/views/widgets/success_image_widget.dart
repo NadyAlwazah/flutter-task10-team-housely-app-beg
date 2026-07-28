@@ -11,7 +11,7 @@ class SuccessImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 208.w,
-      height: 208.w,
+      height: 208.h,
       decoration: BoxDecoration(
         color: AppColors.Secondary.withOpacity(
           0.25,

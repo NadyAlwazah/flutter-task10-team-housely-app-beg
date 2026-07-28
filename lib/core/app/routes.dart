@@ -105,7 +105,7 @@ abstract class AppRouter {
         ),
 
         GoRoute(
-          path: kBookingReserve,
+          path: kBookingPayment,
           builder: (context, state) {
             final data = state.extra as Map<String, dynamic>;
 

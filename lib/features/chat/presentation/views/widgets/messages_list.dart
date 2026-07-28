@@ -6,7 +6,6 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/chat_detail_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/agent_model.dart';
 import 'chat_item_tile.dart';
-import 'delete_confirmation_dialog.dart';
 
 class MessageList extends StatefulWidget {
   const MessageList({Key? key}) : super(key: key);
@@ -61,23 +60,6 @@ class _MessageListState extends State<MessageList> {
     ];
   }
 
-  void _showDeleteDialog(int index) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) {
-        return DeleteConfirmationDialog(
-          onDeleteConfirm: () {
-            setState(() {
-              chatItems.removeAt(index);
-            });
-          },
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -98,6 +80,7 @@ class _MessageListState extends State<MessageList> {
           itemBuilder: (context, index) {
             final item = chatItems[index];
             return ChatItemTile(
+              key: ValueKey(item['name']),
               name: item['name']!,
               message: item['message']!,
               time: item['time']!,
@@ -111,13 +94,17 @@ class _MessageListState extends State<MessageList> {
                         name: item['name'] ?? 'User',
                         image: item['image'] ?? AssetsData.codyPng,
                         isOnline: true,
-                        role: "sas",
+                        role: 'Property Agent',
                       ),
                     ),
                   ),
                 );
               },
-              onDeletePressed: () => _showDeleteDialog(index),
+              onDeletePressed: () {
+                setState(() {
+                  chatItems.removeAt(index);
+                });
+              },
             );
           },
         ),
