@@ -90,4 +90,5 @@ class AssetsData {
   static const imageMapPng = "${_images}map.png";
   static const imageReview1Png = "${_images}review_1.png";
   static const imageReview2Png = "${_images}review_2.png";
+  static const imageSearchResultPng = "${_images}search_result.png";
 }
