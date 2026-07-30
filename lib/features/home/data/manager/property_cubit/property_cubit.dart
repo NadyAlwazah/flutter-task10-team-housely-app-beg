@@ -10,7 +10,10 @@ class PropertyCubit extends Cubit<PropertyState> {
 
   final FavoritesLocalDataSource _favoritesLocalDataSource =
       getIt<FavoritesLocalDataSource>();
+
   List<int> favoriteIds = [];
+
+  String currentQuery = "";
 
   void loadData({
     List<PropertyModel>? recommended,
@@ -61,6 +64,41 @@ class PropertyCubit extends Cubit<PropertyState> {
         recommended: updatedRecommended,
         popular: updatedPopular,
         nearbyProperties: updatedNearbyProperties,
+      ),
+    );
+  }
+
+  void search(String query) {
+    currentQuery = query;
+    // حماية من null
+    if (query.isEmpty) {
+      emit(state.copyWith(filteredProperties: []));
+      return;
+    }
+
+    // حماية من null في القوائم
+    final recommended = state.recommended;
+    final popular = state.popular;
+    final nearby = state.nearbyProperties;
+
+    final allProperties = [...recommended, ...popular, ...nearby];
+
+    final results = allProperties.where((property) {
+      return property.title.toLowerCase().contains(query.toLowerCase()) ||
+          property.location.toLowerCase().contains(query.toLowerCase());
+    }).toList();
+
+    // recentSearches حماية من null
+    final updatedRecent = List<PropertyModel>.from(state.recentSearches ?? []);
+
+    if (results.isNotEmpty) {
+      updatedRecent.add(results.first);
+    }
+
+    emit(
+      state.copyWith(
+        filteredProperties: results,
+        recentSearches: updatedRecent,
       ),
     );
   }

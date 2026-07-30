@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/search_property_field.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/widgets/search_result_section.dart';
 import 'package:go_router/go_router.dart';
 
 class SearchViewBody extends StatelessWidget {
@@ -24,6 +25,9 @@ class SearchViewBody extends StatelessWidget {
               ),
               onTapSuffix: () => context.pop(),
             ),
+
+            SizedBox(height: 24.h),
+            const SearchResultSection(),
           ],
         ),
       ),

@@ -44,8 +44,8 @@ final List<PropertyModel> recommendedProperties = [
 
   PropertyModel(
     id: 2,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
+    title: "Bali Komang Guest",
+    location: "Nusa penida, bali",
     image: AssetsData.imageRecommendedImage2Png,
     pricePerMonth: 420,
     rating: 4.8,
@@ -82,10 +82,10 @@ final List<PropertyModel> recommendedProperties = [
 List<PropertyModel> popularProperties = [
   PropertyModel(
     id: 3,
-    title: "Ayana Homestay",
-    location: "Imogiri, Yogyakarta  12 153 5153123 ",
+    title: "Takatea Homestay",
+    location: "Jl. Tentara Pelajar No.47, RW.001 ",
     image: AssetsData.imageRecommendedImage1Png,
-    pricePerMonth: 310,
+    pricePerMonth: 120,
     rating: 4.5,
     bedrooms: 3,
     bathrooms: 2,
@@ -118,10 +118,11 @@ List<PropertyModel> popularProperties = [
 
   PropertyModel(
     id: 4,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
+    title: "Maharani Villa Yogyakarta",
+    location:
+        "Benhil, Jl. Bendungan Hilir Karet Tengsin, Bendungan Hilir, Tanah Abang, Central Jakarta City,",
     image: AssetsData.imageRecommendedImage2Png,
-    pricePerMonth: 420,
+    pricePerMonth: 320,
     rating: 4.8,
     bedrooms: 4,
     bathrooms: 3,
@@ -153,10 +154,10 @@ List<PropertyModel> popularProperties = [
   ),
   PropertyModel(
     id: 5,
-    title: "Ayana Homestay",
-    location: "Imogiri, Yogyakarta",
+    title: "Bali Komang Guest",
+    location: "Nusa Penida, Bali",
     image: AssetsData.imageRecommendedImage1Png,
-    pricePerMonth: 310,
+    pricePerMonth: 180,
     rating: 4.5,
     bedrooms: 3,
     bathrooms: 2,
@@ -189,10 +190,11 @@ List<PropertyModel> popularProperties = [
 
   PropertyModel(
     id: 6,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
+    title: "Batavia Apartments",
+    location:
+        "Benhil, Jl. Bendungan Hilir Karet Tengsin, Bendungan Hilir, Tanah Abang, Central Jakarta City,",
     image: AssetsData.imageRecommendedImage2Png,
-    pricePerMonth: 420,
+    pricePerMonth: 120,
     rating: 4.8,
     bedrooms: 4,
     bathrooms: 3,
@@ -224,10 +226,11 @@ List<PropertyModel> popularProperties = [
   ),
   PropertyModel(
     id: 7,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
+    title: "Manhattan Hotel ",
+    location:
+        "Jl. Prof. DR. Satrio No.Kav.19-24, RT.7/RW.4, Kuningan, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan",
     image: AssetsData.imageRecommendedImage2Png,
-    pricePerMonth: 420,
+    pricePerMonth: 230,
     rating: 4.8,
     bedrooms: 4,
     bathrooms: 3,
@@ -261,10 +264,11 @@ List<PropertyModel> popularProperties = [
 List<PropertyModel> nearbyProperties = [
   PropertyModel(
     id: 8,
-    title: "Ayana Homestay",
-    location: "Imogiri, Yogyakarta  12 153 5153123 ",
+    title: "Maharani Villa Yogyakarta",
+    location:
+        "Benhil, Jl. Bendungan Hilir Karet Tengsin, Bendungan Hilir, Tanah Abang, Central Jakarta City, ",
     image: AssetsData.imageRecommendedImage1Png,
-    pricePerMonth: 310,
+    pricePerMonth: 320,
     rating: 4.5,
     bedrooms: 3,
     bathrooms: 2,
@@ -297,10 +301,10 @@ List<PropertyModel> nearbyProperties = [
 
   PropertyModel(
     id: 9,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
+    title: "Apartement land house",
+    location: "Jl. Tentara Pelajar No.47, RW.001",
     image: AssetsData.imageRecommendedImage2Png,
-    pricePerMonth: 420,
+    pricePerMonth: 320,
     rating: 4.8,
     bedrooms: 4,
     bathrooms: 3,
@@ -332,8 +336,8 @@ List<PropertyModel> nearbyProperties = [
   ),
   PropertyModel(
     id: 10,
-    title: "Ayana Homestay",
-    location: "Imogiri, Yogyakarta",
+    title: "Syria",
+    location: "Lataki, Syriea",
     image: AssetsData.imageRecommendedImage1Png,
     pricePerMonth: 310,
     rating: 4.5,
@@ -368,8 +372,8 @@ List<PropertyModel> nearbyProperties = [
 
   PropertyModel(
     id: 11,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
+    title: "Germany",
+    location: "Barllen, Germany",
     image: AssetsData.imageRecommendedImage2Png,
     pricePerMonth: 420,
     rating: 4.8,
@@ -403,8 +407,8 @@ List<PropertyModel> nearbyProperties = [
   ),
   PropertyModel(
     id: 12,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
+    title: "USA",
+    location: "los, USA",
     image: AssetsData.imageRecommendedImage2Png,
     pricePerMonth: 420,
     rating: 4.8,

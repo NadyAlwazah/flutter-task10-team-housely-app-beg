@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_text_form_field.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 
 class SearchPropertyField extends StatelessWidget {
   const SearchPropertyField({
@@ -18,9 +20,13 @@ class SearchPropertyField extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onTapSuffix;
   final Widget? suffixIcon;
+
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      onChanged: (value) {
+        context.read<PropertyCubit>().search(value);
+      },
       hintText: hintText,
       textInputType: TextInputType.text,
       onTap: onTap,

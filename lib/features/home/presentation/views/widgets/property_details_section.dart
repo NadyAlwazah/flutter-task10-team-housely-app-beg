@@ -23,7 +23,13 @@ class PropertyDetailsSection extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(property.title, style: Styles.textStyle20W600Inter),
+              Expanded(
+                child: Text(
+                  property.title,
+                  overflow: TextOverflow.ellipsis,
+                  style: Styles.textStyle20W600Inter,
+                ),
+              ),
               RichText(
                 text: TextSpan(
                   children: [
@@ -58,7 +64,13 @@ class PropertyDetailsSection extends StatelessWidget {
                 ),
               ),
               SizedBox(width: 4.w),
-              Text(property.location, style: Styles.textStyle14W400Inter),
+              Expanded(
+                child: Text(
+                  property.location,
+                  overflow: TextOverflow.ellipsis,
+                  style: Styles.textStyle14W400Inter,
+                ),
+              ),
             ],
           ),
 
