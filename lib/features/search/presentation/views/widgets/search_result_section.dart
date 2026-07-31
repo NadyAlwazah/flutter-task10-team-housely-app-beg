@@ -29,7 +29,6 @@ class _SearchResultSectionState extends State<SearchResultSection> {
   Widget build(BuildContext context) {
     return BlocBuilder<PropertyCubit, PropertyState>(
       builder: (context, state) {
-        // fix null
         final recentResults = state.recentSearches ?? [];
         final searchResults = state.filteredProperties ?? [];
         final query = context.read<PropertyCubit>().currentQuery;
@@ -130,15 +129,18 @@ class _SearchResultSectionState extends State<SearchResultSection> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // العنوان
                   RichText(
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    text: _highlightText(title, query),
+                    text: _highlightText(title, query, isTitle: true),
                   ),
+
+                  // الموقع
                   RichText(
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    text: _highlightText(location, query),
+                    text: _highlightText(location, query, isTitle: false),
                   ),
                 ],
               ),
@@ -149,14 +151,16 @@ class _SearchResultSectionState extends State<SearchResultSection> {
     );
   }
 
-  TextSpan _highlightText(String text, String query) {
-    final defaultStyle = Styles.textStyle12W600Inter.copyWith(
-      color: AppColors.textPrimary,
-    );
+  TextSpan _highlightText(String text, String query, {required bool isTitle}) {
+    // Default styles
+    final defaultStyle = isTitle
+        ? Styles.textStyle14W600Inter
+        : Styles.textStyle12W400Inter;
 
-    final highlightStyle = Styles.textStyle12W600Inter.copyWith(
-      color: AppColors.primary,
-    );
+    // Highlight styles
+    final highlightStyle = isTitle
+        ? Styles.textStyle14W600Inter.copyWith(color: AppColors.primary)
+        : Styles.textStyle12W400Inter.copyWith(color: AppColors.primary);
 
     if (query.isEmpty) {
       return TextSpan(text: text, style: defaultStyle);
@@ -164,7 +168,6 @@ class _SearchResultSectionState extends State<SearchResultSection> {
 
     final lowerText = text.toLowerCase();
     final lowerQuery = query.toLowerCase();
-
     final startIndex = lowerText.indexOf(lowerQuery);
 
     if (startIndex == -1) {
