@@ -8,10 +8,22 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/widgets/empty_search_result.dart';
 import 'package:go_router/go_router.dart';
 
-class SearchResultSection extends StatelessWidget {
+class SearchResultSection extends StatefulWidget {
   const SearchResultSection({super.key});
+
+  @override
+  State<SearchResultSection> createState() => _SearchResultSectionState();
+}
+
+class _SearchResultSectionState extends State<SearchResultSection> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<PropertyCubit>().loadRecentProperties();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +47,7 @@ class SearchResultSection extends StatelessWidget {
                 ...recentResults.map(
                   (property) => _buildResultItem(
                     query: query,
-                    icon: AssetsData.iconLocationOutlinedSvg,
+                    icon: AssetsData.iconTimeCircleSvg,
                     title: property.title,
                     location: property.location,
                     onTap: () {
@@ -61,7 +73,7 @@ class SearchResultSection extends StatelessWidget {
                 ...searchResults.map(
                   (property) => _buildResultItem(
                     query: query,
-                    icon: AssetsData.iconLocationSvg,
+                    icon: AssetsData.iconLocationOutlinedSvg,
                     title: property.title,
                     location: property.location,
                     onTap: () {
@@ -79,13 +91,9 @@ class SearchResultSection extends StatelessWidget {
 
               // Empty State
               if (recentResults.isEmpty && searchResults.isEmpty)
-                Center(
-                  child: Text(
-                    "No results found",
-                    style: Styles.textStyle14W400Inter.copyWith(
-                      color: AppColors.textSecondary,
-                    ),
-                  ),
+                Padding(
+                  padding: EdgeInsets.only(top: 90.0.h),
+                  child: const Center(child: EmptySearchResult()),
                 ),
             ],
           ),

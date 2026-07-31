@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/data_source/favorites_local_data_source.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/data/data_source/search_local_data_source.dart';
 
 import 'property_state.dart';
 
@@ -10,6 +11,8 @@ class PropertyCubit extends Cubit<PropertyState> {
 
   final FavoritesLocalDataSource _favoritesLocalDataSource =
       getIt<FavoritesLocalDataSource>();
+  final SearchLocalDataSource _searchLocalDataSource =
+      getIt<SearchLocalDataSource>();
 
   List<int> favoriteIds = [];
 
@@ -68,15 +71,14 @@ class PropertyCubit extends Cubit<PropertyState> {
     );
   }
 
-  void search(String query) {
+  Future<void> search(String query) async {
     currentQuery = query;
-    // حماية من null
+
     if (query.isEmpty) {
       emit(state.copyWith(filteredProperties: []));
       return;
     }
 
-    // حماية من null في القوائم
     final recommended = state.recommended;
     final popular = state.popular;
     final nearby = state.nearbyProperties;
@@ -88,11 +90,18 @@ class PropertyCubit extends Cubit<PropertyState> {
           property.location.toLowerCase().contains(query.toLowerCase());
     }).toList();
 
-    // recentSearches حماية من null
     final updatedRecent = List<PropertyModel>.from(state.recentSearches ?? []);
 
+    //  منع التكرار
     if (results.isNotEmpty) {
-      updatedRecent.add(results.first);
+      final firstResult = results.first;
+
+      final alreadyExists = updatedRecent.any((p) => p.id == firstResult.id);
+
+      if (!alreadyExists) {
+        updatedRecent.add(firstResult);
+        await _searchLocalDataSource.saveRecentProperty(firstResult);
+      }
     }
 
     emit(
@@ -101,5 +110,19 @@ class PropertyCubit extends Cubit<PropertyState> {
         recentSearches: updatedRecent,
       ),
     );
+  }
+
+  Future<void> loadRecentProperties() async {
+    final ids = await _searchLocalDataSource.getRecentPropertyIds();
+
+    final all = [
+      ...state.recommended,
+      ...state.popular,
+      ...state.nearbyProperties,
+    ];
+
+    final recent = all.where((p) => ids.contains(p.id.toString())).toList();
+
+    emit(state.copyWith(recentSearches: recent));
   }
 }
