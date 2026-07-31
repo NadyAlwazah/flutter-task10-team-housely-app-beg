@@ -125,4 +125,14 @@ class PropertyCubit extends Cubit<PropertyState> {
 
     emit(state.copyWith(recentSearches: recent));
   }
+
+  Future<void> removeRecentItem(PropertyModel property) async {
+    final updatedRecent = List<PropertyModel>.from(state.recentSearches ?? []);
+
+    updatedRecent.removeWhere((p) => p.id == property.id);
+
+    await _searchLocalDataSource.removeRecentProperty(property.id.toString());
+
+    emit(state.copyWith(recentSearches: updatedRecent));
+  }
 }

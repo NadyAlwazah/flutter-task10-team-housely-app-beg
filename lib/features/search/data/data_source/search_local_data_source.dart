@@ -21,6 +21,16 @@ class SearchLocalDataSource {
         [];
   }
 
+  // recent حذف عنصر واحد من  الـ
+  Future<void> removeRecentProperty(String propertyId) async {
+    final list =
+        await SharedPreferencesHelper.getList(AppKey.kRecentProperties) ?? [];
+
+    list.remove(propertyId);
+
+    await SharedPreferencesHelper.saveList(AppKey.kRecentProperties, list);
+  }
+
   // recent حذف الـ
   Future<void> clearRecent() async {
     await SharedPreferencesHelper.remove(AppKey.kRecentProperties);

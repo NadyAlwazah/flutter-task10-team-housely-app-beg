@@ -1,3 +1,4 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,6 +9,7 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/widgets/empty_search_result.dart';
 import 'package:go_router/go_router.dart';
 
@@ -45,6 +47,7 @@ class _SearchResultSectionState extends State<SearchResultSection> {
 
                 ...recentResults.map(
                   (property) => _buildResultItem(
+                    property: property,
                     query: query,
                     icon: AssetsData.iconTimeCircleSvg,
                     title: property.title,
@@ -71,6 +74,7 @@ class _SearchResultSectionState extends State<SearchResultSection> {
 
                 ...searchResults.map(
                   (property) => _buildResultItem(
+                    property: property,
                     query: query,
                     icon: AssetsData.iconLocationOutlinedSvg,
                     title: property.title,
@@ -103,6 +107,7 @@ class _SearchResultSectionState extends State<SearchResultSection> {
 
   // Result Item Builder
   Widget _buildResultItem({
+    required PropertyModel property,
     required String icon,
     required String title,
     required String location,
@@ -111,6 +116,20 @@ class _SearchResultSectionState extends State<SearchResultSection> {
   }) {
     return GestureDetector(
       onTap: onTap,
+      // ⭐ الضغط المطوّل لحذف العنصر
+      onLongPress: () {
+        AwesomeDialog(
+          context: context,
+          dialogType: DialogType.warning,
+          animType: AnimType.scale,
+          title: "Delete Recent",
+          desc: "Are you sure you want to remove this item from recent?",
+          btnCancelOnPress: () {},
+          btnOkOnPress: () {
+            context.read<PropertyCubit>().removeRecentItem(property);
+          },
+        ).show();
+      },
       child: Padding(
         padding: EdgeInsets.only(bottom: 12.h),
         child: Row(
