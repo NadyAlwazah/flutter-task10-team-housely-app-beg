@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_check_box.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/widgets/filter_checkbox_item.dart';
 
 class FilterLookingForSection extends StatefulWidget {
   const FilterLookingForSection({super.key});
@@ -21,43 +21,20 @@ class _FilterLookingForSectionState extends State<FilterLookingForSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Looking for", style: Styles.textStyle16W600Inter),
-        SizedBox(height: 16.h),
 
-        _buildCheckboxItem(
+        SizedBox(height: 16.h),
+        FilterCheckboxItem(
           title: "For Rent",
           value: forRent,
           onChanged: (val) => setState(() => forRent = val!),
         ),
 
-        _buildCheckboxItem(
+        FilterCheckboxItem(
           title: "For Sale",
           value: forSale,
           onChanged: (val) => setState(() => forSale = val!),
         ),
       ],
-    );
-  }
-
-  Widget _buildCheckboxItem({
-    required String title,
-    required bool value,
-    required ValueChanged<bool?> onChanged,
-  }) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 8.h),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(title, style: Styles.textStyle12W500Inter),
-
-          CustomCheckBox(
-            value: value,
-            onChanged: onChanged,
-            sizeContainer: 21,
-            sizeIcon: 18,
-          ),
-        ],
-      ),
     );
   }
 }
