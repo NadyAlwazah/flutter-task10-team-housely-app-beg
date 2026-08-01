@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/widgets/filter_facilities_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/widgets/filter_looking_for_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/widgets/filter_price_range_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/widgets/filter_property_type_section.dart';
@@ -34,6 +35,9 @@ class FillterBottomSheet extends StatelessWidget {
             SizedBox(height: 24.h),
 
             const FilterPriceRangeSection(),
+
+            SizedBox(height: 24.h),
+            const FilterFacilitiesSection(),
           ],
         ),
       ),

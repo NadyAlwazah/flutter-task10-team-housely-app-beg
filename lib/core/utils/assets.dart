@@ -54,6 +54,7 @@ class AssetsData {
   static const iconMailBoxSvg = "${_icons}mailbox.svg";
   static const iconCloseSquareSvg = "${_icons}close_square.svg";
   static const iconTimeCircleSvg = "${_icons}time_circle.svg";
+  static const iconAcSvg = "${_icons}ac.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";

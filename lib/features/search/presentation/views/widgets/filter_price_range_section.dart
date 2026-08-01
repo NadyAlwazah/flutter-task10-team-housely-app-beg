@@ -28,7 +28,7 @@ class _FilterPriceRangeSectionState extends State<FilterPriceRangeSection> {
 
             // حجم الدائرتين
             thumbShape: const RoundSliderThumbShape(
-              enabledThumbRadius: 6,
+              enabledThumbRadius: 5,
               elevation: 0,
               pressedElevation: 0,
             ),
@@ -39,7 +39,7 @@ class _FilterPriceRangeSectionState extends State<FilterPriceRangeSection> {
             inactiveTrackColor: const Color(0xffD9D9D9),
 
             rangeThumbShape: const RoundRangeSliderThumbShape(
-              enabledThumbRadius: 6,
+              enabledThumbRadius: 5,
               elevation: 0,
               pressedElevation: 0,
             ),
