@@ -10,10 +10,34 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/recommended_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/search_property_field.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/top_locations_section.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/widgets/fillter_bottom_sheet.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
+
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
+  void _showBottomSheet() {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(40.r)),
+      ),
+      isScrollControlled: true,
+      builder: (context) {
+        return Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: const FillterBottomSheet(),
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +55,12 @@ class HomeViewBody extends StatelessWidget {
           sliver: SliverToBoxAdapter(
             child: SearchPropertyField(
               hintText: "Search Property",
-              onTap: () {
+              onTap: () async {
+                FocusManager.instance.primaryFocus?.unfocus();
+                await Future.delayed(const Duration(milliseconds: 50));
                 context.push(AppRouter.kSearch);
               },
-              onTapSuffix: () {
-                context.push(AppRouter.kFillter);
-              },
+              onTapSuffix: _showBottomSheet,
               suffixIcon: SvgPicture.asset(
                 AssetsData.iconFilterSvg,
                 width: 24.r,

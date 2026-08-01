@@ -114,57 +114,61 @@ class _SearchResultSectionState extends State<SearchResultSection> {
     required VoidCallback onTap,
     required String query,
   }) {
-    return GestureDetector(
-      onTap: onTap,
-      // ⭐ الضغط المطوّل لحذف العنصر
-      onLongPress: () {
-        AwesomeDialog(
-          context: context,
-          dialogType: DialogType.warning,
-          animType: AnimType.scale,
-          title: "Delete Recent",
-          desc: "Are you sure you want to remove this item from recent?",
-          btnCancelOnPress: () {},
-          btnOkOnPress: () {
-            context.read<PropertyCubit>().removeRecentItem(property);
-          },
-        ).show();
-      },
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 12.h),
-        child: Row(
-          children: [
-            SvgPicture.asset(
-              icon,
-              width: 24.r,
-              height: 24.r,
-              colorFilter: const ColorFilter.mode(
-                AppColors.textSecondary,
-                BlendMode.srcIn,
-              ),
+    return Padding(
+      padding: EdgeInsets.only(bottom: 12.h),
+      child: GestureDetector(
+        onTap: onTap,
+        onLongPress: () {
+          AwesomeDialog(
+            context: context,
+            dialogType: DialogType.warning,
+            animType: AnimType.scale,
+            title: "Delete Recent",
+            desc: "Are you sure you want to remove this item from recent?",
+            btnCancelOnPress: () {},
+            btnOkOnPress: () {
+              context.read<PropertyCubit>().removeRecentItem(property);
+            },
+          ).show();
+        },
+        child: Container(
+          padding: EdgeInsets.only(bottom: 12.h),
+          decoration: const BoxDecoration(
+            border: Border(
+              bottom: BorderSide(color: Color(0xFFE5E7EB), width: 0.5),
             ),
-            SizedBox(width: 12.w),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // العنوان
-                  RichText(
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    text: _highlightText(title, query, isTitle: true),
-                  ),
-
-                  // الموقع
-                  RichText(
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    text: _highlightText(location, query, isTitle: false),
-                  ),
-                ],
+          ),
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                icon,
+                width: 24.r,
+                height: 24.r,
+                colorFilter: const ColorFilter.mode(
+                  AppColors.textPrimary,
+                  BlendMode.srcIn,
+                ),
               ),
-            ),
-          ],
+              SizedBox(width: 12.w),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    RichText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      text: _highlightText(title, query, isTitle: true),
+                    ),
+                    RichText(
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      text: _highlightText(location, query, isTitle: false),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

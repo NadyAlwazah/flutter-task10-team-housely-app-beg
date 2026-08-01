@@ -23,7 +23,12 @@ class SearchViewBody extends StatelessWidget {
                 width: 24.r,
                 height: 24.r,
               ),
-              onTapSuffix: () => context.pop(),
+              onTapSuffix: () async {
+                FocusManager.instance.primaryFocus?.unfocus();
+                // يغلق لوحة المفاتيح
+                await Future.delayed(const Duration(milliseconds: 50));
+                context.pop();
+              },
             ),
 
             SizedBox(height: 24.h),
