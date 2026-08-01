@@ -5,7 +5,9 @@ import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_app_bar.
 import 'widgets/booking_add_card_view_body.dart';
 
 class BookingAddCardView extends StatelessWidget {
-  const BookingAddCardView({super.key});
+  final Map<String, dynamic>? extraData;
+
+  const BookingAddCardView({super.key, this.extraData});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,12 @@ class BookingAddCardView extends StatelessWidget {
 
         onTapLeading: () => context.pop(),
       ),
-      body: const BookingAddCardViewBody(),
+      body: BookingAddCardViewBody(
+        initialName: extraData?['initialName'],
+        initialCardNumber: extraData?['initialCardNumber'],
+        initialExpiry: extraData?['initialExpiry'],
+        initialCvv: extraData?['initialCvv'],
+      ),
     );
   }
 }

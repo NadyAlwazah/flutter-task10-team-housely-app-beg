@@ -7,6 +7,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/signup_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/success_reset_password_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/verify_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/booking_activity/presentation/views/booking_activity_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_add_card_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/booking_payment_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/chat_detail_view.dart';
@@ -38,7 +39,7 @@ abstract class AppRouter {
   static const String kBookingPayment = '/booking_payment';
   static const String kBookingReserve = '/booking_reserve';
   static const String kChatList = '/chat_list';
-  static const String kChatDetail = '/chat_detail';
+  static const String kChatDetail = '/chat_detailView';
   static const String kPopular = '/popular';
   static const String kNotifications = '/notifications';
   static const String kSelectLocation = '/select_location';
@@ -47,6 +48,7 @@ abstract class AppRouter {
   static const String kVerify = '/verify';
   static const String kSuccessResetPassword = '/success_reset_password';
   static const String kFillter = '/fillter';
+  static const String kBookingActivity = '/booking_activity';
 
   static late GoRouter router;
   static void initRouter() {
@@ -69,6 +71,10 @@ abstract class AppRouter {
           builder: (context, state) => const EditProfileView(),
         ),
 
+        GoRoute(
+          path: kBookingActivity,
+          builder: (context, state) => const BookingActivityView(),
+        ),
         GoRoute(
           path: kDetails,
           builder: (context, state) {
@@ -101,7 +107,10 @@ abstract class AppRouter {
         ),
         GoRoute(
           path: kBookingAddCard,
-          builder: (context, state) => const BookingAddCardView(),
+          builder: (context, state) {
+            final extra = state.extra as Map<String, dynamic>?;
+            return BookingAddCardView(extraData: extra);
+          },
         ),
 
         GoRoute(
@@ -124,7 +133,7 @@ abstract class AppRouter {
         GoRoute(
           path: kChatDetail,
           builder: (context, state) {
-            final data = state.extra as Map<String, dynamic>;
+            final data = state.extra as Map<String, dynamic>? ?? {};
             final agent = data['agent'];
 
             return ChatDetailView(agent: agent);

@@ -176,7 +176,6 @@ class _BookingCalendarContentState extends State<BookingCalendarContent> {
                         );
                       });
                     },
-
                     child: Container(
                       width: 18.5.w,
                       height: 18.5.h,
@@ -189,7 +188,6 @@ class _BookingCalendarContentState extends State<BookingCalendarContent> {
                           Icons.chevron_left,
                           size: 16,
                           color: Colors.black87,
-                          weight: 2.1,
                         ),
                       ),
                     ),
@@ -218,7 +216,6 @@ class _BookingCalendarContentState extends State<BookingCalendarContent> {
                           Icons.chevron_right,
                           size: 16,
                           color: Colors.black87,
-                          weight: 2.1,
                         ),
                       ),
                     ),
@@ -255,162 +252,162 @@ class _BookingCalendarContentState extends State<BookingCalendarContent> {
             ],
           ),
           SizedBox(height: 4.h),
-          // 4. جدول الروزنامة
-          TableCalendar(
-            firstDay: DateTime.utc(2020, 1, 1),
-            lastDay: DateTime.utc(2030, 12, 31),
-            focusedDay: _focusedDay,
-            calendarFormat: _calendarFormat,
-            headerVisible: false,
-            daysOfWeekVisible: false,
-            startingDayOfWeek: StartingDayOfWeek.sunday,
 
-            calendarStyle: CalendarStyle(
-              outsideDaysVisible: true,
-              defaultDecoration: const BoxDecoration(shape: BoxShape.circle),
-              weekendDecoration: const BoxDecoration(shape: BoxShape.circle),
-              defaultTextStyle: TextStyle(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w400,
-                fontSize: 16.sp,
-              ),
-              weekendTextStyle: TextStyle(
-                color: AppColors.textPrimary,
-                fontWeight: FontWeight.w400,
-                fontSize: 16.sp,
-              ),
-              outsideTextStyle: TextStyle(
-                color: Colors.grey.shade400,
-                fontSize: 16.sp,
-              ),
-            ),
+          // 4. جدول الروزنامة 
+          SizedBox(
+            height: 275.h,
+            child: TableCalendar(
+              firstDay: DateTime.utc(2020, 1, 1),
+              lastDay: DateTime.utc(2030, 12, 31),
+              focusedDay: _focusedDay,
+              calendarFormat: _calendarFormat,
+              headerVisible: false,
+              daysOfWeekVisible: false,
+              startingDayOfWeek: StartingDayOfWeek.sunday,
+              rowHeight: 38.h, //  تثبيت ارتفاع الصف لمنع تمدد الشهر
 
-            calendarBuilders: CalendarBuilders(
-              defaultBuilder: (context, day, focusedDay) {
-                bool isBooked = _isBooked(day);
-                bool isStart =
-                    _startDate != null && isSameDay(_startDate!, day);
-                bool isEnd = _endDate != null && isSameDay(_endDate!, day);
-                if (isBooked) {
-                  return Container(
-                    margin: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(
-                        0.2,
-                      ), // بنفسجي فاتح للأيام المحجوزة
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${day.day}',
-                        style: TextStyle(
-                          color: AppColors.textPrimary,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                    ),
-                  );
-                }
-
-                if (isStart || isEnd) {
-                  return Container(
-                    margin: const EdgeInsets.all(6),
-                    decoration: const BoxDecoration(
-                      color: AppColors
-                          .primary, // بنفسجي غامق ليومي البداية والنهاية
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${day.day}',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                    ),
-                  );
-                }
-                if (_isInRange(day)) {
-                  return Container(
-                    margin: const EdgeInsets.all(6),
-                    decoration: BoxDecoration(
-                      color: AppColors.primary.withOpacity(0.2),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Center(
-                      child: Text(
-                        '${day.day}',
-                        style: TextStyle(
-                          color: AppColors.textPrimary,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                    ),
-                  );
-                }
-
-                return null;
-              },
-            ),
-
-            onDaySelected: (selectedDay, focusedDay) {
-              if (_isBooked(selectedDay)) {
-                return;
-              }
-
-              setState(() {
-                _errorMessage = null; // إخفاء رسالة الخطأ عند اختيار تاريخ
-                if (_startDate == null ||
-                    (_startDate != null && _endDate != null)) {
-                  _startDate = selectedDay;
-                  _endDate = null;
-                } else if (selectedDay.isBefore(_startDate!)) {
-                  // إذا اختار تاريخاً قبل البداية وكان هناك أيام محجوزة بينهما
-                  if (_hasBookedDayInRange(selectedDay, _startDate!)) {
-                    _errorMessage = 'Cannot select range over booked dates';
-                  } else {
-                    _startDate = selectedDay;
-                    _endDate = null;
-                  }
-                } else {
-                  // التحقق من عدم وجود أيام محجوزة بين البداية والنهاية الجديدة
-                  if (_hasBookedDayInRange(_startDate!, selectedDay)) {
-                    _errorMessage = 'Cannot select range over booked dates';
-                  } else {
-                    _endDate = selectedDay;
-                  }
-                }
-                _focusedDay = focusedDay;
-              });
-            },
-            onPageChanged: (focusedDay) {
-              setState(() {
-                _focusedDay = focusedDay;
-              });
-            },
-          ),
-          SizedBox(height: 75.h),
-          // رسالة الخطأ تظهر هنا فوق الزر إذا وجدت
-          if (_errorMessage != null) ...[
-            SizedBox(height: 8.h),
-            Center(
-              child: Text(
-                _errorMessage!,
-                style: TextStyle(
-                  color: Colors.red,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
+              calendarStyle: CalendarStyle(
+                outsideDaysVisible: true,
+                defaultDecoration: const BoxDecoration(shape: BoxShape.circle),
+                weekendDecoration: const BoxDecoration(shape: BoxShape.circle),
+                defaultTextStyle: TextStyle(
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16.sp,
+                ),
+                weekendTextStyle: TextStyle(
+                  color: AppColors.textPrimary,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16.sp,
+                ),
+                outsideTextStyle: TextStyle(
+                  color: Colors.grey.shade400,
+                  fontSize: 16.sp,
                 ),
               ),
-            ),
-            SizedBox(height: 8.h),
-          ],
 
-          SizedBox(height: 16.h),
+              calendarBuilders: CalendarBuilders(
+                defaultBuilder: (context, day, focusedDay) {
+                  bool isBooked = _isBooked(day);
+                  bool isStart =
+                      _startDate != null && isSameDay(_startDate!, day);
+                  bool isEnd = _endDate != null && isSameDay(_endDate!, day);
+                  if (isBooked) {
+                    return Container(
+                      margin: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withOpacity(0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${day.day}',
+                          style: TextStyle(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+
+                  if (isStart || isEnd) {
+                    return Container(
+                      margin: const EdgeInsets.all(6),
+                      decoration: const BoxDecoration(
+                        color: AppColors.primary,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${day.day}',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+                  if (_isInRange(day)) {
+                    return Container(
+                      margin: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        color: AppColors.primary.withOpacity(0.2),
+                        shape: BoxShape.circle,
+                      ),
+                      child: Center(
+                        child: Text(
+                          '${day.day}',
+                          style: TextStyle(
+                            color: AppColors.textPrimary,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+
+                  return null;
+                },
+              ),
+
+              onDaySelected: (selectedDay, focusedDay) {
+                if (_isBooked(selectedDay)) {
+                  return;
+                }
+
+                setState(() {
+                  _errorMessage = null;
+                  if (_startDate == null ||
+                      (_startDate != null && _endDate != null)) {
+                    _startDate = selectedDay;
+                    _endDate = null;
+                  } else if (selectedDay.isBefore(_startDate!)) {
+                    if (_hasBookedDayInRange(selectedDay, _startDate!)) {
+                      _errorMessage = 'Cannot select range over booked dates';
+                    } else {
+                      _startDate = selectedDay;
+                      _endDate = null;
+                    }
+                  } else {
+                    if (_hasBookedDayInRange(_startDate!, selectedDay)) {
+                      _errorMessage = 'Cannot select range over booked dates';
+                    } else {
+                      _endDate = selectedDay;
+                    }
+                  }
+                  _focusedDay = focusedDay;
+                });
+              },
+              onPageChanged: (focusedDay) {
+                setState(() {
+                  _focusedDay = focusedDay;
+                });
+              },
+            ),
+          ),
+
+          // مساحة ثابتة لرسالة الخطأ لضمان عدم تغير موقع الزر
+          SizedBox(
+            height: 24.h,
+            child: Center(
+              child: _errorMessage != null
+                  ? Text(
+                      _errorMessage!,
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )
+                  : const SizedBox.shrink(),
+            ),
+          ),
+          SizedBox(height: 8.h),
 
           // 5. زر الحفظ (Save)
           CustomButton(
@@ -429,7 +426,6 @@ class _BookingCalendarContentState extends State<BookingCalendarContent> {
                       '${_startDate!.day} ${_getMonthShort(_startDate!.month)}';
                   widget.onSave(formattedDate, _startDate, null);
                 } else {
-                  // تحديث الحالة لتظهر رسالة الخطأ فوق الزر فوراً
                   _errorMessage = 'Please select a date first';
                 }
               });
