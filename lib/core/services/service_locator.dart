@@ -10,6 +10,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sour
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/manager/auth_cubit/auth_cubit.dart';
 
 final getIt = GetIt.instance;
+
 void setupLocator() {
   // Data Sources
   getIt.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSource());
@@ -17,17 +18,23 @@ void setupLocator() {
     () => FavoritesLocalDataSource(),
   );
 
-  // Cubits
-  getIt.registerFactory<AuthCubit>(() => AuthCubit());
-  getIt.registerFactory<ProfileCubit>(() => ProfileCubit());
-  getIt.registerFactory<LocationCubit>(
-    () => LocationCubit(getIt<AuthLocalDataSource>()),
-  );
-  getIt.registerFactory<PropertyCubit>(() => PropertyCubit());
-  getIt.registerFactory<HomeContentCubit>(() => HomeContentCubit());
-
-  // Location Service
+  // Services
   getIt.registerLazySingleton<LocationService>(
     () => LocationService(getIt<AuthLocalDataSource>()),
   );
+
+  // Cubits
+  getIt.registerFactory<AuthCubit>(() => AuthCubit());
+  getIt.registerFactory<ProfileCubit>(() => ProfileCubit());
+  
+  // تم تعديل تسجيل LocationCubit لتمرير البرامترين المطلوبين
+  getIt.registerFactory<LocationCubit>(
+    () => LocationCubit(
+      getIt<LocationService>(),
+      getIt<AuthLocalDataSource>(),
+    ),
+  );
+  
+  getIt.registerFactory<PropertyCubit>(() => PropertyCubit());
+  getIt.registerFactory<HomeContentCubit>(() => HomeContentCubit());
 }

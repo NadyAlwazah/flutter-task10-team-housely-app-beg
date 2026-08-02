@@ -87,10 +87,13 @@ abstract class AppRouter {
           builder: (context, state) => const SelectLocationView(),
         ),
         GoRoute(path: kSearch, builder: (context, state) => const SearchView()),
-        GoRoute(
-          path: kAddReview,
-          builder: (context, state) => const AddReviewView(),
-        ),
+        GoRoute( path: kAddReview, builder: (context, state) {
+          final property = state.extra as PropertyModel?; 
+           return AddReviewView(
+           property: property,
+           );
+         },
+       ),
         GoRoute(
           path: kResetPassword,
           builder: (context, state) => const ResetPasswordView(),

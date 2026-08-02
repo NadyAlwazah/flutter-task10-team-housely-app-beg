@@ -15,7 +15,7 @@ class AppColors {
   static const Color greenOnlineContainer = Color(0xFF34D399);
   static const Color greyDeleteContainer = Color(0xFFD2D6DB);
   static const Color redCircle = Color(0xFFF04438);
-  static const Color vectorColor = Color(0xFFE5E7E5);
+  static const Color vectorColor = Color(0xFFE5E7EB);
 
   static const Color Secondary = Color(0xFFE9D7FE);
   static const Color circleColor = Color(0xFFF4EBFF);

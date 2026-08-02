@@ -1,5 +1,4 @@
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/agent_model.dart';
-
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 
 class PropertyModel {
@@ -38,7 +37,11 @@ class PropertyModel {
     this.isFavorite = false,
     required this.agent,
   });
-  PropertyModel copyWith({bool? isFavorite}) {
+
+  PropertyModel copyWith({
+    bool? isFavorite,
+    List<ReviewModel>? reviews,
+  }) {
     return PropertyModel(
       id: id,
       title: title,
@@ -53,7 +56,7 @@ class PropertyModel {
       area: area,
       status: status,
       description: description,
-      reviews: reviews,
+      reviews: reviews ?? this.reviews,
       isFavorite: isFavorite ?? this.isFavorite,
       agent: agent,
     );

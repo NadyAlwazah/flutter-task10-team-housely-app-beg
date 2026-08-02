@@ -52,6 +52,7 @@ class AssetsData {
   static const iconCreditcardshSvg = "${_icons}credit_card_sh.svg";
   static const iconCardcolorSvg = "${_icons}card_color.svg";
   static const iconMailBoxSvg = "${_icons}mailbox.svg";
+  static const iconCloudSvg = "${_icons}tabler_cloud-upload.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -74,7 +75,7 @@ class AssetsData {
   static const imag3chatPng = "${_images}img3.png";
   static const imag4chatPng = "${_images}img4.png";
   static const imag5chatPng = "${_images}img5.png";
-  static const imagCardPng = "${_images}card.png";
+
   static const imageBannerPng = "${_images}banner.png";
   static const imageRecommendedImage1Png = "${_images}recommended_image_1.png";
   static const imageRecommendedImage2Png = "${_images}recommended_image_2.png";
@@ -89,4 +90,14 @@ class AssetsData {
   static const imageMapPng = "${_images}map.png";
   static const imageReview1Png = "${_images}review_1.png";
   static const imageReview2Png = "${_images}review_2.png";
+  static const addReviewCardJpg = "${_images}addReviewCard.jpg";
+  static const gallery2Jpg = "${_images}gallery2.jpg";
+  static const gallery3Jpg = "${_images}gallery3.jpg";
+  static const gallery4Jpg = "${_images}gallery4.jpg";
+  static const gallery5Jpg = "${_images}gallery5.jpg";
+  static const gallery6Jpg = "${_images}gallery6.jpg";
+  static const gallery7Jpg = "${_images}gallery7.jpg";
+  static const gallery8Jpg = "${_images}gallery8.jpg";
+  static const gallery9Jpg = "${_images}gallery9.jpg";
+   static const imagCardPng = "${_images}card.png";
 }

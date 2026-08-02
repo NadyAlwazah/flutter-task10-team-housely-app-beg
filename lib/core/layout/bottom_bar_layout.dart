@@ -35,22 +35,35 @@ class _BottomBarLayoutState extends State<BottomBarLayout> {
                   )
                 : const HomeView(),
 
-            const ExploreView(),
+            ExploreView(
+              onBackToHome: () => setState(() => currentIndex = 0),
+            ),
 
-            FavouriteView(onBackToHome: () => setState(() => currentIndex = 0)),
+            FavouriteView(
+              onBackToHome: () => setState(() => currentIndex = 0),
+            ),
 
             const BookingActivityView(),
-            ProfileView(onBackToHome: () => setState(() => currentIndex = 0)),
+            
+            ProfileView(
+              onBackToHome: () => setState(() => currentIndex = 0),
+            ),
           ];
 
           return Scaffold(
-            body: IndexedStack(index: currentIndex, children: pages),
-            bottomNavigationBar: CustomBottomNavBar(
-              currentIndex: currentIndex,
-              onTap: (index) {
-                setState(() => currentIndex = index);
-              },
+            body: IndexedStack(
+              index: currentIndex,
+              children: pages,
             ),
+
+            bottomNavigationBar: currentIndex == 1
+                ? null
+                : CustomBottomNavBar(
+                    currentIndex: currentIndex,
+                    onTap: (index) {
+                      setState(() => currentIndex = index);
+                    },
+                  ),
           );
         },
       ),

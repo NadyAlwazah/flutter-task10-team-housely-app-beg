@@ -8,14 +8,20 @@ import 'custom_app_button.dart';
 
 class MapPageBody extends StatelessWidget {
   final String address;
-  final VoidCallback onChooseLocation;
-
+  final VoidCallback? onChooseLocation;
+  final VoidCallback? onBackPressed;
+  final bool hideChooseLocationButton;
+  final String cardTitle;
+  final IconData cardIcon;
 
   const MapPageBody({
     super.key,
     required this.address,
-    required this.onChooseLocation,
-   
+    this.onChooseLocation,
+    this.onBackPressed,
+    this.hideChooseLocationButton = false,
+    this.cardTitle = "Location Details",
+    this.cardIcon = Icons.location_on_outlined,
   });
 
   @override
@@ -25,66 +31,75 @@ class MapPageBody extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.centerLeft,
-            child: IconButton(
-              icon: const Icon(Icons.arrow_back, color: AppColors.textPrimary, size: 24,),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-           SizedBox(height: 35.h),
-          _buildSearchBar(),
-
-          SizedBox(height: 339.h),
-
-          _buildLocationDetailsCard(),
-
-          SizedBox(height: 20.h),
-          Padding(
-            padding: EdgeInsets.all(24.h),
-            child: CustomAppButton(
-              text: "Choose location",
-              onPressed: onChooseLocation,
-              textStyle: Styles.textStyle18W400Inter.copyWith(
-                color: Colors.white,
+            child: Padding(
+              padding: EdgeInsets.only(left: 8.w),
+              child: IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: AppColors.textPrimary,
+                  size: 24,
+                ),
+                onPressed: onBackPressed ??
+                    () {
+                      if (Navigator.canPop(context)) {
+                        Navigator.pop(context);
+                      }
+                    },
               ),
             ),
           ),
-          SizedBox(height: 48.h),
+          SizedBox(height: 20.h),
+          _buildSearchBar(),
+          const Spacer(),
+          _buildLocationDetailsCard(),
+          if (!hideChooseLocationButton) ...[
+            SizedBox(height: 20.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: CustomAppButton(
+                text: "Choose location",
+                onPressed: onChooseLocation ?? () {},
+                textStyle: Styles.textStyle18W400Inter.copyWith(
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+          SizedBox(height: 20.h),
         ],
       ),
     );
   }
-Widget _buildSearchBar() {
-  return Column(
-    children: [
-      Container(
-        height: 50.h,
-        width: 327.w,
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.r),
-          border: Border.all(color: AppColors.textCard, width: 1.w)
-        ),
-        child: TextField(
-          readOnly: true, 
-          decoration: InputDecoration(
-            icon: SvgPicture.asset(
-              AssetsData.searchSvg,
-              width: 24.w,
-              height: 24.h,
-            ),
-            hintText: "Search Location",
-            hintStyle: Styles.textStyle14W400Inter,
-            border: InputBorder.none,
-          ),
+
+  Widget _buildSearchBar() {
+    return Container(
+      height: 50.h,
+      width: 327.w,
+      padding: EdgeInsets.symmetric(horizontal: 16.w),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12.r),
+        border: Border.all(
+          color: AppColors.textCard,
+          width: 1.w,
         ),
       ),
+      child: TextField(
+        readOnly: true,
+        decoration: InputDecoration(
+          icon: SvgPicture.asset(
+            AssetsData.searchSvg,
+            width: 24.w,
+            height: 24.h,
+          ),
+          hintText: "Search Location",
+          hintStyle: Styles.textStyle14W400Inter,
+          border: InputBorder.none,
+        ),
+      ),
+    );
+  }
 
-    ],
-  );
-}
   Widget _buildLocationDetailsCard() {
     return Container(
       width: 327.w,
@@ -93,46 +108,43 @@ Widget _buildSearchBar() {
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(
-          color: AppColors.textCard,width: 1.w
+          color: AppColors.textCard,
+          width: 1.w,
         ),
         borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
-           BoxShadow(
-             color: AppColors.textPrimary.withOpacity(0.18), 
-             offset: Offset(0, 24.h),                   
-             blurRadius: 48.r,                             
-             spreadRadius: -12.r,                            
-            ),
-         ],    
+          BoxShadow(
+            color: AppColors.textPrimary.withOpacity(0.18),
+            offset: Offset(0, 24.h),
+            blurRadius: 48.r,
+            spreadRadius: -12.r,
           ),
+        ],
+      ),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text("Location Details", style: Styles.textStyle20W600Inter),
+          Text(
+            cardTitle,
+            style: Styles.textStyle20W600Inter,
           ),
-
           SizedBox(height: 15.h),
-
           Row(
             children: [
               Container(
-                width: 40,
-                height: 40,
+                width: 40.r,
+                height: 40.r,
                 decoration: const BoxDecoration(
                   color: Color(0xFFF4EBFF),
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(
-                  size: 18,
-                  Icons.location_on_outlined,
+                child: Icon(
+                  cardIcon,
+                  size: 18.r,
                   color: AppColors.primary,
                 ),
               ),
-
               SizedBox(width: 10.w),
-
               Flexible(
                 child: Text(
                   address,
