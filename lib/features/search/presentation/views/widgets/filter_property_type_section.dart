@@ -53,9 +53,14 @@ class _FilterPropertyTypeSectionState extends State<FilterPropertyTypeSection> {
 
         SizedBox(height: 4.h),
 
-        Text(
-          "Show all",
-          style: Styles.textStyle12W600Inter.copyWith(color: AppColors.primary),
+        GestureDetector(
+          onTap: () {},
+          child: Text(
+            "Show all",
+            style: Styles.textStyle12W600Inter.copyWith(
+              color: AppColors.primary,
+            ),
+          ),
         ),
       ],
     );
