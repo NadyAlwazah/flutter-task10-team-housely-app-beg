@@ -61,6 +61,22 @@ class _SearchResultSectionState extends State<SearchResultSection> {
                         },
                       );
                     },
+                    onLongPress: () {
+                      AwesomeDialog(
+                        context: context,
+                        dialogType: DialogType.warning,
+                        animType: AnimType.scale,
+                        title: "Delete Recent",
+                        desc:
+                            "Are you sure you want to remove this item from recent?",
+                        btnCancelOnPress: () {},
+                        btnOkOnPress: () {
+                          context.read<PropertyCubit>().removeRecentItem(
+                            property,
+                          );
+                        },
+                      ).show();
+                    },
                   ),
                 ),
 
@@ -112,25 +128,14 @@ class _SearchResultSectionState extends State<SearchResultSection> {
     required String title,
     required String location,
     required VoidCallback onTap,
+    VoidCallback? onLongPress,
     required String query,
   }) {
     return Padding(
       padding: EdgeInsets.only(bottom: 12.h),
       child: GestureDetector(
         onTap: onTap,
-        onLongPress: () {
-          AwesomeDialog(
-            context: context,
-            dialogType: DialogType.warning,
-            animType: AnimType.scale,
-            title: "Delete Recent",
-            desc: "Are you sure you want to remove this item from recent?",
-            btnCancelOnPress: () {},
-            btnOkOnPress: () {
-              context.read<PropertyCubit>().removeRecentItem(property);
-            },
-          ).show();
-        },
+        onLongPress: onLongPress,
         child: Container(
           padding: EdgeInsets.only(bottom: 12.h),
           decoration: const BoxDecoration(
