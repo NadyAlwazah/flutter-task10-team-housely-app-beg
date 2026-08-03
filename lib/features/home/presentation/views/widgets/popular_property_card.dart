@@ -76,7 +76,7 @@ class PopularPropertyCard extends StatelessWidget {
             Expanded(
               child: Text(
                 propertyModel.title,
-                style: Styles.textStyle14W600Inter,
+                style: Styles.textStyle14W700Inter,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -112,7 +112,7 @@ class PopularPropertyCard extends StatelessWidget {
           children: [
             Text(
               "${propertyModel.pricePerMonth}/month",
-              style: Styles.textStyle10W600Inter,
+              style: Styles.textStyle10W700Inter,
             ),
             const Spacer(),
             Container(

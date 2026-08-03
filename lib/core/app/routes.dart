@@ -16,6 +16,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/pr
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/details_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/notifications/presentation/views/notifications_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/on_boarding_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/edit_profile_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/filtered_properties_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/search_view.dart';
@@ -64,9 +65,15 @@ abstract class AppRouter {
           path: kBottomBar,
           builder: (context, state) => const BottomBarLayout(),
         ),
+
         GoRoute(
           path: kEditProfile,
-          builder: (context, state) => const EditProfileView(),
+          builder: (context, state) {
+            return BlocProvider.value(
+              value: state.extra as ProfileCubit,
+              child: const EditProfileView(),
+            );
+          },
         ),
 
         GoRoute(

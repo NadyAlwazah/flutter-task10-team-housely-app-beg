@@ -225,7 +225,7 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
-    type: "Penhouse",
+    type: "Penthouse",
     hasAc: false,
     hasWifi: true,
     reviews: [
@@ -264,7 +264,7 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
-    type: "Penhouse",
+    type: "Penthouse",
     hasAc: true,
     hasWifi: false,
     reviews: [
@@ -382,7 +382,7 @@ List<PropertyModel> nearbyProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
-    type: "Penhouse",
+    type: "Penthouse",
     hasAc: true,
     hasWifi: false,
     reviews: [
