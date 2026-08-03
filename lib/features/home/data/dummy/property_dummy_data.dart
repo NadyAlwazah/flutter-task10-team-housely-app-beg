@@ -24,6 +24,9 @@ final List<PropertyModel> recommendedProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Apartment",
+    hasAc: true,
+    hasWifi: true,
 
     reviews: [
       ReviewModel(
@@ -44,8 +47,8 @@ final List<PropertyModel> recommendedProperties = [
 
   PropertyModel(
     id: 2,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
+    title: "Bali Komang Guest",
+    location: "Nusa penida, bali",
     image: AssetsData.imageRecommendedImage2Png,
     pricePerMonth: 420,
     rating: 4.8,
@@ -61,6 +64,10 @@ final List<PropertyModel> recommendedProperties = [
       name: "Arlene McCoy",
       role: "Senior Agent",
     ),
+    type: "Hotel",
+    hasAc: true,
+    hasWifi: true,
+
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -82,10 +89,10 @@ final List<PropertyModel> recommendedProperties = [
 List<PropertyModel> popularProperties = [
   PropertyModel(
     id: 3,
-    title: "Ayana Homestay",
-    location: "Imogiri, Yogyakarta  12 153 5153123 ",
-    image: AssetsData.imageRecommendedImage1Png,
-    pricePerMonth: 310,
+    title: "Takatea Homestay",
+    location: "Jl. Tentara Pelajar No.47, RW.001 ",
+    image: AssetsData.imagePopularImage1Png,
+    pricePerMonth: 120,
     rating: 4.5,
     bedrooms: 3,
     bathrooms: 2,
@@ -99,6 +106,10 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Villa",
+    hasAc: false,
+    hasWifi: true,
+
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -118,10 +129,11 @@ List<PropertyModel> popularProperties = [
 
   PropertyModel(
     id: 4,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
-    image: AssetsData.imageRecommendedImage2Png,
-    pricePerMonth: 420,
+    title: "Maharani Villa Yogyakarta",
+    location:
+        "Benhil, Jl. Bendungan Hilir Karet Tengsin, Bendungan Hilir, Tanah Abang, Central Jakarta City,",
+    image: AssetsData.imagePopularImage2Png,
+    pricePerMonth: 320,
     rating: 4.8,
     bedrooms: 4,
     bathrooms: 3,
@@ -135,6 +147,9 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Apartment",
+    hasAc: false,
+    hasWifi: true,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -153,10 +168,10 @@ List<PropertyModel> popularProperties = [
   ),
   PropertyModel(
     id: 5,
-    title: "Ayana Homestay",
-    location: "Imogiri, Yogyakarta",
-    image: AssetsData.imageRecommendedImage1Png,
-    pricePerMonth: 310,
+    title: "Bali Komang Guest",
+    location: "Nusa Penida, Bali",
+    image: AssetsData.imagePopularImage3Png,
+    pricePerMonth: 180,
     rating: 4.5,
     bedrooms: 3,
     bathrooms: 2,
@@ -170,6 +185,9 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Villa",
+    hasAc: true,
+    hasWifi: false,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -189,10 +207,11 @@ List<PropertyModel> popularProperties = [
 
   PropertyModel(
     id: 6,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
-    image: AssetsData.imageRecommendedImage2Png,
-    pricePerMonth: 420,
+    title: "Batavia Apartments",
+    location:
+        "Benhil, Jl. Bendungan Hilir Karet Tengsin, Bendungan Hilir, Tanah Abang, Central Jakarta City,",
+    image: AssetsData.imageRecommendedImage1Png,
+    pricePerMonth: 120,
     rating: 4.8,
     bedrooms: 4,
     bathrooms: 3,
@@ -206,6 +225,9 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Penthouse",
+    hasAc: false,
+    hasWifi: true,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -224,10 +246,11 @@ List<PropertyModel> popularProperties = [
   ),
   PropertyModel(
     id: 7,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
+    title: "Manhattan Hotel ",
+    location:
+        "Jl. Prof. DR. Satrio No.Kav.19-24, RT.7/RW.4, Kuningan, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan",
     image: AssetsData.imageRecommendedImage2Png,
-    pricePerMonth: 420,
+    pricePerMonth: 230,
     rating: 4.8,
     bedrooms: 4,
     bathrooms: 3,
@@ -241,6 +264,9 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Penthouse",
+    hasAc: true,
+    hasWifi: false,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -261,10 +287,11 @@ List<PropertyModel> popularProperties = [
 List<PropertyModel> nearbyProperties = [
   PropertyModel(
     id: 8,
-    title: "Ayana Homestay",
-    location: "Imogiri, Yogyakarta  12 153 5153123 ",
-    image: AssetsData.imageRecommendedImage1Png,
-    pricePerMonth: 310,
+    title: "Maharani Villa Yogyakarta",
+    location:
+        "Benhil, Jl. Bendungan Hilir Karet Tengsin, Bendungan Hilir, Tanah Abang, Central Jakarta City, ",
+    image: AssetsData.imageNearbyImage1Png,
+    pricePerMonth: 320,
     rating: 4.5,
     bedrooms: 3,
     bathrooms: 2,
@@ -278,6 +305,9 @@ List<PropertyModel> nearbyProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Apartment",
+    hasAc: true,
+    hasWifi: true,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -297,10 +327,10 @@ List<PropertyModel> nearbyProperties = [
 
   PropertyModel(
     id: 9,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
-    image: AssetsData.imageRecommendedImage2Png,
-    pricePerMonth: 420,
+    title: "Apartement land house",
+    location: "Jl. Tentara Pelajar No.47, RW.001",
+    image: AssetsData.imageNearbyImage2Png,
+    pricePerMonth: 320,
     rating: 4.8,
     bedrooms: 4,
     bathrooms: 3,
@@ -314,6 +344,9 @@ List<PropertyModel> nearbyProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Hotel",
+    hasAc: false,
+    hasWifi: true,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -332,9 +365,9 @@ List<PropertyModel> nearbyProperties = [
   ),
   PropertyModel(
     id: 10,
-    title: "Ayana Homestay",
-    location: "Imogiri, Yogyakarta",
-    image: AssetsData.imageRecommendedImage1Png,
+    title: "Syria",
+    location: "Lataki, Syriea",
+    image: AssetsData.imageNearbyImage3Png,
     pricePerMonth: 310,
     rating: 4.5,
     bedrooms: 3,
@@ -349,6 +382,9 @@ List<PropertyModel> nearbyProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Penthouse",
+    hasAc: true,
+    hasWifi: false,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -368,9 +404,9 @@ List<PropertyModel> nearbyProperties = [
 
   PropertyModel(
     id: 11,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
-    image: AssetsData.imageRecommendedImage2Png,
+    title: "Germany",
+    location: "Barllen, Germany",
+    image: AssetsData.imageNearbyImage4Png,
     pricePerMonth: 420,
     rating: 4.8,
     bedrooms: 4,
@@ -378,13 +414,16 @@ List<PropertyModel> nearbyProperties = [
     buildYear: 2019,
     parking: 2,
     area: 2100,
-    status: "For Rent",
+    status: "For Sale",
     description: "Spacious villa with private pool.",
     agent: AgentModel(
       image: AssetsData.imageAgentPng,
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Apartment",
+    hasAc: false,
+    hasWifi: true,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -403,9 +442,9 @@ List<PropertyModel> nearbyProperties = [
   ),
   PropertyModel(
     id: 12,
-    title: "Green Villa",
-    location: "Bantul, Yogyakarta",
-    image: AssetsData.imageRecommendedImage2Png,
+    title: "USA",
+    location: "los, USA",
+    image: AssetsData.imageRecommendedImage1Png,
     pricePerMonth: 420,
     rating: 4.8,
     bedrooms: 4,
@@ -420,6 +459,9 @@ List<PropertyModel> nearbyProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Villa",
+    hasAc: true,
+    hasWifi: false,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",

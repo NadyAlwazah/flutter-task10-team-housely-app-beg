@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/custom_check_box.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_check_box.dart';
 
 class RememberMe extends StatefulWidget {
   const RememberMe({super.key, required this.onChanged});

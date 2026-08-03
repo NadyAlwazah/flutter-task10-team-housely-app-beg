@@ -16,8 +16,9 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/pr
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/details_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/notifications/presentation/views/notifications_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/on_boarding_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/edit_profile_view.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/fillter_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/filtered_properties_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/search_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/map_page.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/select_location_view.dart';
@@ -46,7 +47,7 @@ abstract class AppRouter {
   static const String kEditProfile = '/edit_profile';
   static const String kVerify = '/verify';
   static const String kSuccessResetPassword = '/success_reset_password';
-  static const String kFillter = '/fillter';
+  static const String kFileterdProperties = '/filtered_properties';
 
   static late GoRouter router;
   static void initRouter() {
@@ -64,9 +65,15 @@ abstract class AppRouter {
           path: kBottomBar,
           builder: (context, state) => const BottomBarLayout(),
         ),
+
         GoRoute(
           path: kEditProfile,
-          builder: (context, state) => const EditProfileView(),
+          builder: (context, state) {
+            return BlocProvider.value(
+              value: state.extra as ProfileCubit,
+              child: const EditProfileView(),
+            );
+          },
         ),
 
         GoRoute(
@@ -141,9 +148,23 @@ abstract class AppRouter {
           path: kSuccessResetPassword,
           builder: (context, state) => const SuccessResetPasswordView(),
         ),
+
         GoRoute(
-          path: kFillter,
-          builder: (context, state) => const FillterView(),
+          path: AppRouter.kFileterdProperties,
+
+          builder: (context, state) {
+            final data = state.extra as Map<String, dynamic>;
+            return BlocProvider.value(
+              value: data['cubit'] as PropertyCubit,
+              child: FilteredPropertiesView(
+                minPrice: data['minPrice'],
+                maxPrice: data['maxPrice'],
+                facilities: data['facilities'],
+                lookingFor: data['lookingFor'],
+                propertyTypes: data['propertyTypes'],
+              ),
+            );
+          },
         ),
       ],
     );

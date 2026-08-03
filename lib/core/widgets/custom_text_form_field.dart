@@ -15,6 +15,8 @@ class CustomTextFormField extends StatefulWidget {
     this.hintStyle,
     this.prefixIcon,
     this.onTap,
+    this.onChanged,
+    this.readOnly = false,
   });
   final String hintText;
   final Widget? prefixIcon;
@@ -25,6 +27,8 @@ class CustomTextFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final TextStyle? hintStyle;
+  final ValueChanged<String>? onChanged;
+  final bool readOnly;
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
 }
@@ -41,6 +45,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: widget.readOnly,
+      onChanged: widget.onChanged,
       controller: widget.controller,
       validator: widget.validator,
       obscureText: isObscured,
