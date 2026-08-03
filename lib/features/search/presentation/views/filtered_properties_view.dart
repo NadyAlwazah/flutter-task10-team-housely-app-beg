@@ -1,8 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_app_bar.dart';
 
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class FilteredPropertiesView extends StatelessWidget {
   final double minPrice;
@@ -74,7 +83,10 @@ class FilteredPropertiesView extends StatelessWidget {
     }).toList();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Filtered Properties")),
+      appBar: CustomAppBar(
+        title: "Filtered Properties",
+        onTapLeading: () => context.pop(),
+      ),
       body: filtered.isEmpty
           ? const Center(child: Text("No properties match your filters."))
           : ListView.builder(
@@ -83,25 +95,185 @@ class FilteredPropertiesView extends StatelessWidget {
               itemBuilder: (context, index) {
                 final property = filtered[index];
 
-                return Card(
-                  margin: const EdgeInsets.only(bottom: 12),
-                  child: ListTile(
-                    title: Text(property.title),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(property.location),
-                        Text(property.type),
-                        Text(property.status),
-                        Text("hasAc:${property.hasAc}"),
-                        Text("hasAc:${property.hasWifi}"),
+                return GestureDetector(
+                  onTap: () {
+                    context.push(
+                      AppRouter.kDetails,
+                      extra: {
+                        'property': property,
+                        'cubit': context.read<PropertyCubit>(),
+                      },
+                    );
+                  },
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20.r),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.08),
+                          blurRadius: 15,
+                          offset: const Offset(0, 6),
+                        ),
                       ],
                     ),
-                    trailing: Text("\$${property.pricePerMonth.toInt()}"),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // صورة العقار
+                        ClipRRect(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(20.r),
+                          ),
+                          child: Image.asset(
+                            property.image,
+                            height: 180.h,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+
+                        Padding(
+                          padding: const EdgeInsets.all(16),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // العنوان + السعر
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      property.title,
+                                      style: Styles.textStyle18W600Inter,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                  Text(
+                                    "\$${property.pricePerMonth.toInt()}",
+                                    style: Styles.textStyle18W600Inter.copyWith(
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              SizedBox(height: 6.h),
+
+                              // الموقع
+                              Row(
+                                children: [
+                                  SvgPicture.asset(AssetsData.iconLocationSvg),
+
+                                  SizedBox(width: 4.w),
+                                  Expanded(
+                                    child: Text(
+                                      property.location,
+                                      style: Styles.textStyle14W400Inter,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              SizedBox(height: 12.h),
+
+                              // نوع العقار + الحالة
+                              Row(
+                                children: [
+                                  _buildTag(property.type),
+                                  SizedBox(width: 8.w),
+                                  _buildTag(property.status),
+                                ],
+                              ),
+
+                              SizedBox(height: 12.h),
+
+                              // غرف النوم + الحمامات + المكيف + الانترنيت
+                              Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      _buildIconText(
+                                        const Icon(
+                                          Icons.bed,
+                                          color: AppColors.primary,
+                                        ),
+                                        "${property.bedrooms} Beds",
+                                      ),
+                                      _buildIconText(
+                                        SvgPicture.asset(
+                                          AssetsData.iconBathubSvg,
+                                        ),
+                                        "${property.bathrooms} Baths",
+                                      ),
+                                      _buildIconText(
+                                        SvgPicture.asset(
+                                          AssetsData.iconAcSvg,
+                                          height: 18,
+                                          width: 18,
+                                        ),
+                                        property.hasAc
+                                            ? "AC Available"
+                                            : "No AC",
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: 4.h),
+                                  _buildIconText(
+                                    FaIcon(
+                                      FontAwesomeIcons.wifi,
+                                      color: AppColors.primary,
+                                      size: 18.r,
+                                    ),
+                                    property.hasAc
+                                        ? "wifi Available"
+                                        : "No wifi",
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
             ),
+    );
+  }
+
+  Widget _buildTag(String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.blueAccent.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12.r),
+      ),
+      child: Text(
+        text,
+        style: Styles.textStyle12W600Inter.copyWith(color: Colors.blue),
+      ),
+    );
+  }
+
+  Widget _buildIconText(Widget icon, String text) {
+    return Row(
+      children: [
+        icon,
+        SizedBox(width: 4.w),
+        Text(
+          text,
+          style: Styles.textStyle14W400Inter.copyWith(
+            color: AppColors.textPrimary,
+          ),
+        ),
+      ],
     );
   }
 }
