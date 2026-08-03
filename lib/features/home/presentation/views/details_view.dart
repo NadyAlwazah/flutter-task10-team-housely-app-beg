@@ -24,7 +24,7 @@ class DetailsView extends StatefulWidget {
 }
 
 class _DetailsViewState extends State<DetailsView> {
-  void _showAddBottomSheet() {
+  void _showBottomSheet() {
     showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -51,7 +51,7 @@ class _DetailsViewState extends State<DetailsView> {
         },
         actions: [
           GestureDetector(
-            onTap: _showAddBottomSheet,
+            onTap: _showBottomSheet,
             child: SvgPicture.asset(
               AssetsData.iconShareSvg,
               width: 24.r,

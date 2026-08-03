@@ -199,6 +199,10 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
         name: widget.agent?.name ?? "Theresa Webb",
         role: widget.agent?.role ?? "Property Agent",
       ),
+      type: "Apartment",
+      hasAc: true,
+      hasWifi: true,
+
       reviews: [
         ReviewModel(
           reviewerName: "Theresa Webb",

@@ -62,13 +62,9 @@ class NearbySection extends StatelessWidget {
                           width: 240.w,
                           height: 74.h,
                           padding: EdgeInsets.only(right: 8.w, bottom: 3.h),
+                          margin: EdgeInsets.only(bottom: 12.h),
                           showIconFavorite: false,
                           propertyModel: first,
-                        ),
-
-                        const Divider(
-                          thickness: 0.5,
-                          color: AppColors.textSecondary,
                         ),
 
                         if (second != null) ...[
@@ -78,11 +74,6 @@ class NearbySection extends StatelessWidget {
                             padding: EdgeInsets.only(right: 8.w, bottom: 3.h),
                             showIconFavorite: false,
                             propertyModel: second,
-                          ),
-
-                          const Divider(
-                            thickness: 0.5,
-                            color: AppColors.textSecondary,
                           ),
                         ],
                       ],

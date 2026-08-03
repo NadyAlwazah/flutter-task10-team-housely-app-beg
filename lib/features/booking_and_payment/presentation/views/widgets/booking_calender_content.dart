@@ -110,7 +110,7 @@ class _BookingCalendarContentState extends State<BookingCalendarContent> {
                 width: 36.w,
                 height: 36.h,
                 decoration: BoxDecoration(
-                  color: AppColors.Secondary.withOpacity(0.2),
+                  color: AppColors.secondary.withOpacity(0.2),
                   shape: BoxShape.circle,
                 ),
                 child: Center(

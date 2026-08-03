@@ -117,8 +117,8 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
                   }
                   return CustomButton(
                     text: "Save Change",
-                    onPressed: () {
-                      context.read<ProfileCubit>().updateUser(
+                    onPressed: () async {
+                      await context.read<ProfileCubit>().updateUser(
                         fullName: fullNameController.text,
                         email: emailController.text,
                         dateOfBirth: dateController.text,

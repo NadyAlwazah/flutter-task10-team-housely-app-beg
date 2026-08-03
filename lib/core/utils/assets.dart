@@ -53,6 +53,12 @@ class AssetsData {
   static const iconCreditcardshSvg = "${_icons}credit_card_sh.svg";
   static const iconCardcolorSvg = "${_icons}card_color.svg";
   static const iconMailBoxSvg = "${_icons}mailbox.svg";
+  static const iconCloseSquareSvg = "${_icons}close_square.svg";
+  static const iconTimeCircleSvg = "${_icons}time_circle.svg";
+  static const iconAcSvg = "${_icons}ac.svg";
+  static const iconDocumentActiveSvg = "${_icons}document_active.svg";
+  static const iconHeartActiveSvg = "${_icons}heart_active.svg";
+  static const iconProfileActiveSvg = "${_icons}profile_active.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -91,4 +97,14 @@ class AssetsData {
   static const imageMapPng = "${_images}map.png";
   static const imageReview1Png = "${_images}review_1.png";
   static const imageReview2Png = "${_images}review_2.png";
+  static const imageSearchResultPng = "${_images}search_result.png";
+
+  static const imageNearbyImage1Png = "${_images}nearby_image_1.png";
+  static const imageNearbyImage2Png = "${_images}nearby_image_2.png";
+  static const imageNearbyImage3Png = "${_images}nearby_image_3.png";
+  static const imageNearbyImage4Png = "${_images}nearby_image_4.png";
+
+  static const imagePopularImage1Png = "${_images}popular_image_1.png";
+  static const imagePopularImage2Png = "${_images}popular_image_2.png";
+  static const imagePopularImage3Png = "${_images}popular_image_3.png";
 }

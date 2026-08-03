@@ -21,6 +21,6 @@ class AppColors {
   static const Color greenStatusBackground = Color(0xFFD1FADF);
   static const Color vectorColor = Color(0xFFE5E7E5);
   static const Color textUnselected = Color(0xFF4B5563);
-  static const Color Secondary = Color(0xFFE9D7FE);
+  static const Color secondary = Color(0xFFE9D7FE);
   static const Color circleColor = Color(0xFFF4EBFF);
 }

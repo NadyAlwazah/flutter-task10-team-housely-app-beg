@@ -30,7 +30,7 @@ class BookingPeriodSection extends StatelessWidget {
                 width: 36.w,
                 height: 36.h,
                 decoration: BoxDecoration(
-                  color: AppColors.Secondary.withOpacity(0.1), 
+                  color: AppColors.secondary.withOpacity(0.1), // لون فاتح
                   shape: BoxShape.circle,
                 ),
                 child: Center(
