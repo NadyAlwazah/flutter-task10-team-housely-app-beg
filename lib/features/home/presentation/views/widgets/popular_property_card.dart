@@ -19,12 +19,14 @@ class PopularPropertyCard extends StatelessWidget {
     this.padding,
     this.showIconFavorite = true,
     required this.propertyModel,
+    this.margin,
   });
   final PropertyModel propertyModel;
   final VoidCallback? onTapFavorite;
   final double width;
   final double height;
   final EdgeInsetsGeometry? padding;
+  final EdgeInsetsGeometry? margin;
   final bool showIconFavorite;
   @override
   Widget build(BuildContext context) {
@@ -42,9 +44,15 @@ class PopularPropertyCard extends StatelessWidget {
         width: width,
         height: height,
         padding: padding,
+        margin: margin,
+        decoration: BoxDecoration(
+          border: Border(
+            bottom: BorderSide(color: AppColors.textSecondary, width: 0.5.w),
+          ),
+        ),
         child: Row(
           children: [
-            _buildImage(),
+            Column(children: [_buildImage()]),
             SizedBox(width: 12.w),
             Expanded(child: _buildDetails()),
           ],
@@ -69,7 +77,6 @@ class PopularPropertyCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(height: 3.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
