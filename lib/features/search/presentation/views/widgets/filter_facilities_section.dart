@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/data/manager/filter_cubit/filter_cubit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class FilterFacilitiesSection extends StatefulWidget {
@@ -15,10 +17,17 @@ class FilterFacilitiesSection extends StatefulWidget {
 }
 
 class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
-  bool bedRoom = true;
-  bool bathTub = false;
-  bool ac = false;
-  bool wifi = false;
+  List<String> facilities = ["Bed room"];
+
+  void _toggle(String value) {
+    setState(() {
+      if (facilities.contains(value)) {
+        facilities.remove(value);
+      } else {
+        facilities.add(value);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +43,12 @@ class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
             _buildFacilityItem(
               icon: const Icon(Icons.bed_outlined, color: AppColors.primary),
               title: "Bed room",
-              isSelected: bedRoom,
-              onTap: () => setState(() => bedRoom = !bedRoom),
+              isSelected: facilities.contains("Bed room"),
+              onTap: () {
+                _toggle("Bed room");
+
+                context.read<FilterCubit>().toggleFacility("Bed room");
+              },
             ),
             _buildFacilityItem(
               icon: SvgPicture.asset(
@@ -44,8 +57,12 @@ class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
                 height: 20.r,
               ),
               title: "Bathtub",
-              isSelected: bathTub,
-              onTap: () => setState(() => bathTub = !bathTub),
+              isSelected: facilities.contains("Bathtub"),
+
+              onTap: () {
+                _toggle("Bathtub");
+                context.read<FilterCubit>().toggleFacility("Bathtub");
+              },
             ),
             _buildFacilityItem(
               icon: SvgPicture.asset(
@@ -54,8 +71,11 @@ class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
                 height: 21.r,
               ),
               title: "AC",
-              isSelected: ac,
-              onTap: () => setState(() => ac = !ac),
+              isSelected: facilities.contains("AC"),
+              onTap: () {
+                _toggle("AC");
+                context.read<FilterCubit>().toggleFacility("AC");
+              },
             ),
             _buildFacilityItem(
               icon: FaIcon(
@@ -64,8 +84,11 @@ class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
                 size: 18.r,
               ),
               title: "WIFI",
-              isSelected: wifi,
-              onTap: () => setState(() => wifi = !wifi),
+              isSelected: facilities.contains("WIFI"),
+              onTap: () {
+                _toggle("WIFI");
+                context.read<FilterCubit>().toggleFacility("WIFI");
+              },
             ),
           ],
         ),

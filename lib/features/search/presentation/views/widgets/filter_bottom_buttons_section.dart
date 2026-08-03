@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/data/manager/filter_cubit/filter_cubit.dart';
 
 class FilterBottomButtonsSection extends StatefulWidget {
   const FilterBottomButtonsSection({super.key});
@@ -21,6 +23,8 @@ class _FilterBottomButtonsSectionState
       isResetActive = true;
       isApplyActive = false;
     });
+
+    context.read<FilterCubit>().reset();
   }
 
   void _onApplyPressed() {
@@ -28,13 +32,15 @@ class _FilterBottomButtonsSectionState
       isApplyActive = true;
       isResetActive = false;
     });
+
+    context.read<FilterCubit>().applyFilters();
   }
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        //  Reset
+        // Reset Button
         ElevatedButton(
           onPressed: _onResetPressed,
           style: ElevatedButton.styleFrom(
@@ -53,7 +59,7 @@ class _FilterBottomButtonsSectionState
           ),
         ),
 
-        // Apply
+        // Apply Button
         ElevatedButton(
           onPressed: _onApplyPressed,
           style: ElevatedButton.styleFrom(

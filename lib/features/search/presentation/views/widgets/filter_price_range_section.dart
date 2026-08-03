@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/data/manager/filter_cubit/filter_cubit.dart';
 
 class FilterPriceRangeSection extends StatefulWidget {
   const FilterPriceRangeSection({super.key});
@@ -12,7 +14,11 @@ class FilterPriceRangeSection extends StatefulWidget {
 }
 
 class _FilterPriceRangeSectionState extends State<FilterPriceRangeSection> {
-  RangeValues rangeValues = const RangeValues(0, 1500);
+  RangeValues rangeValues = const RangeValues(300, 1100);
+
+  double get minPrice => rangeValues.start;
+  double get maxPrice => rangeValues.end;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -25,19 +31,14 @@ class _FilterPriceRangeSectionState extends State<FilterPriceRangeSection> {
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             trackHeight: 2,
-
-            // حجم الدائرتين
             thumbShape: const RoundSliderThumbShape(
               enabledThumbRadius: 5,
               elevation: 0,
               pressedElevation: 0,
             ),
-
             overlayShape: SliderComponentShape.noOverlay,
-
             activeTrackColor: AppColors.primary,
             inactiveTrackColor: const Color(0xffD9D9D9),
-
             rangeThumbShape: const RoundRangeSliderThumbShape(
               enabledThumbRadius: 5,
               elevation: 0,
@@ -53,6 +54,10 @@ class _FilterPriceRangeSectionState extends State<FilterPriceRangeSection> {
               onChanged: (values) {
                 setState(() {
                   rangeValues = values;
+                  context.read<FilterCubit>().updatePrice(
+                    values.start,
+                    values.end,
+                  );
                 });
               },
             ),

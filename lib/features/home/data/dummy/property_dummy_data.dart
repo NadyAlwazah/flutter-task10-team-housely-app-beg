@@ -24,6 +24,9 @@ final List<PropertyModel> recommendedProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Apartment",
+    hasAc: true,
+    hasWifi: true,
 
     reviews: [
       ReviewModel(
@@ -61,6 +64,10 @@ final List<PropertyModel> recommendedProperties = [
       name: "Arlene McCoy",
       role: "Senior Agent",
     ),
+    type: "Hotel",
+    hasAc: true,
+    hasWifi: true,
+
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -99,6 +106,10 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Villa",
+    hasAc: false,
+    hasWifi: true,
+
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -136,6 +147,9 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Apartment",
+    hasAc: false,
+    hasWifi: true,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -171,6 +185,9 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Villa",
+    hasAc: true,
+    hasWifi: false,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -208,6 +225,9 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Penhouse",
+    hasAc: false,
+    hasWifi: true,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -244,6 +264,9 @@ List<PropertyModel> popularProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Penhouse",
+    hasAc: true,
+    hasWifi: false,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -282,6 +305,9 @@ List<PropertyModel> nearbyProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Apartment",
+    hasAc: true,
+    hasWifi: true,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -318,6 +344,9 @@ List<PropertyModel> nearbyProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Hotel",
+    hasAc: false,
+    hasWifi: true,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -353,6 +382,9 @@ List<PropertyModel> nearbyProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Penhouse",
+    hasAc: true,
+    hasWifi: false,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -382,13 +414,16 @@ List<PropertyModel> nearbyProperties = [
     buildYear: 2019,
     parking: 2,
     area: 2100,
-    status: "For Rent",
+    status: "For Sale",
     description: "Spacious villa with private pool.",
     agent: AgentModel(
       image: AssetsData.imageAgentPng,
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Apartment",
+    hasAc: false,
+    hasWifi: true,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
@@ -424,6 +459,9 @@ List<PropertyModel> nearbyProperties = [
       name: "Theresa Webb",
       role: "Property Agent",
     ),
+    type: "Villa",
+    hasAc: true,
+    hasWifi: false,
     reviews: [
       ReviewModel(
         reviewerName: "Theresa Webb",
