@@ -26,7 +26,7 @@ class SearchViewBody extends StatelessWidget {
               onTapSuffix: () async {
                 FocusManager.instance.primaryFocus?.unfocus();
                 // يغلق لوحة المفاتيح
-                await Future.delayed(const Duration(milliseconds: 50));
+                await Future.delayed(const Duration(milliseconds: 150));
                 context.pop();
               },
             ),

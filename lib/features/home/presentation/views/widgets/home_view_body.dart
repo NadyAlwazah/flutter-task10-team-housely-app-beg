@@ -66,10 +66,9 @@ class _HomeViewBodyState extends State<HomeViewBody> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           sliver: SliverToBoxAdapter(
             child: SearchPropertyField(
+              readOnly: true,
               hintText: "Search Property",
-              onTap: () async {
-                FocusManager.instance.primaryFocus?.unfocus();
-                await Future.delayed(const Duration(milliseconds: 50));
+              onTap: () {
                 context.push(AppRouter.kSearch);
               },
               onTapSuffix: _showBottomSheet,

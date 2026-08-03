@@ -15,15 +15,17 @@ class SearchPropertyField extends StatelessWidget {
     this.onTap,
     this.onTapSuffix,
     this.suffixIcon,
+    this.readOnly = false,
   });
   final String hintText;
   final VoidCallback? onTap;
   final VoidCallback? onTapSuffix;
   final Widget? suffixIcon;
-
+  final bool readOnly;
   @override
   Widget build(BuildContext context) {
     return CustomTextFormField(
+      readOnly: readOnly,
       onChanged: (value) {
         context.read<PropertyCubit>().search(value);
       },

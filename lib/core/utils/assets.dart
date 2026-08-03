@@ -96,4 +96,13 @@ class AssetsData {
   static const imageReview1Png = "${_images}review_1.png";
   static const imageReview2Png = "${_images}review_2.png";
   static const imageSearchResultPng = "${_images}search_result.png";
+
+  static const imageNearbyImage1Png = "${_images}nearby_image_1.png";
+  static const imageNearbyImage2Png = "${_images}nearby_image_2.png";
+  static const imageNearbyImage3Png = "${_images}nearby_image_3.png";
+  static const imageNearbyImage4Png = "${_images}nearby_image_4.png";
+
+  static const imagePopularImage1Png = "${_images}popular_image_1.png";
+  static const imagePopularImage2Png = "${_images}popular_image_2.png";
+  static const imagePopularImage3Png = "${_images}popular_image_3.png";
 }
