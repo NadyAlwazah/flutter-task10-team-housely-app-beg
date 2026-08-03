@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
@@ -24,55 +26,61 @@ class BookingPaymentViewBody extends StatefulWidget {
 }
 
 class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
-  String? selectedDate; // يبدأ فارغاً
-  String? selectedCard; // يبدأ فارغاً
+  String? selectedDate;
+  String? selectedCard;
   DateTime? _startDate;
   DateTime? _endDate;
 
-  /* @override
-  void initState() {
-    super.initState();
-    _loadSavedData(); //  استرجاع البيانات المحفوظة بمجرد فتح الشاشة
-  }*/
-  // دالة لجلب البيانات المحفوظة محلياً عبر SharedPreferencesHelper
-  /* Future<void> _loadSavedData() async {
-    String? loadedDate = await SharedPreferencesHelper.getString(
-      'saved_booking_date',
-    );
-    String? loadedCard = await SharedPreferencesHelper.getString(
-      'saved_payment_card',
-    );
+  String? savedCardName;
+  String? savedCardNumber;
+  String? savedCardExpiry;
+  String? savedCardCvv;
 
-    setState(() {
-      if (loadedDate != null) selectedDate = loadedDate;
-      if (loadedCard != null) selectedCard = loadedCard;
-    });
-  }*/
+  Future<void> _saveBookingData({required String status}) async {
+    // 1. جلب الحجوزات القديمة المخزنة مسبقاً
+    final String? existingBookingsJson =
+        await SharedPreferencesHelper.getString('saved_bookings_list');
+    List<Map<String, dynamic>> allBookings = [];
 
-  Future<void> _saveBookingData() async {
-    if (selectedDate != null) {
-      await SharedPreferencesHelper.saveString(
-        'saved_booking_date',
-        selectedDate!,
-      );
+    if (existingBookingsJson != null && existingBookingsJson.isNotEmpty) {
+      List<dynamic> decodedList = jsonDecode(existingBookingsJson);
+      allBookings = decodedList
+          .map((item) => Map<String, dynamic>.from(item))
+          .toList();
     }
-    if (selectedCard != null) {
-      await SharedPreferencesHelper.saveString(
-        'saved_payment_card',
-        selectedCard!,
-      );
+
+    // 2. إنشاء بيانات الحجز الجديد
+    final newBooking = {
+      'title': widget.property.title.toString(),
+      'location': widget.property.location.toString(),
+      'image': widget.property.image.toString(),
+      'date': selectedDate ?? '',
+      'status': status,
+    };
+
+    // 3. التحقق مما إذا كان العقار موجوداً مسبقاً، لتحديثه أو إضافته كعنصر جديد تحت القديم
+    int existingIndex = allBookings.indexWhere(
+      (item) => item['title'] == newBooking['title'],
+    );
+    if (existingIndex >= 0) {
+      allBookings[existingIndex] = newBooking; // تحديث الحالة إذا كان موجوداً
+    } else {
+      allBookings.add(
+        newBooking,
+      ); // إضافته إلى القائمة لكي يظهر تحت العقارات القديمة
     }
+
+    // 4. حفظ القائمة المحدثة محلياً
     await SharedPreferencesHelper.saveString(
-      'saved_property_title',
-      widget.property.title.toString(),
+      'saved_bookings_list',
+      jsonEncode(allBookings),
     );
 
-    debugPrint("Booking and Card saved locally successfully!");
+    debugPrint("All Bookings saved successfully as a list!");
   }
 
   @override
   Widget build(BuildContext context) {
-    // الشرط لإظهار الزر: يجب أن يتم اختيار التاريخ وتحديد وسيلة دفع
     bool isReadyToPay = selectedDate != null && selectedCard != null;
 
     return SingleChildScrollView(
@@ -102,12 +110,29 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
           BookingPaymentSection(
             selectedCard: selectedCard,
             onAddCardTap: () async {
-              final result = await context.push(AppRouter.kBookingAddCard);
-              if (result != null && result is String) {
-                setState(
-                  () => selectedCard =
-                      'Card ending in ${result.substring(result.length - 4)}',
-                );
+              // تمرير البيانات القديمة إلى شاشة إضافة البطاقة لكي تظهر عند النقر على Edit
+              final result = await context.push(
+                AppRouter.kBookingAddCard,
+                extra: {
+                  'initialName': savedCardName,
+                  'initialCardNumber': savedCardNumber,
+                  'initialExpiry': savedCardExpiry,
+                  'initialCvv': savedCardCvv,
+                },
+              );
+
+              // استقبال البيانات الكاملة عند الضغط على Add card وحفظها
+              if (result != null && result is Map<String, dynamic>) {
+                setState(() {
+                  savedCardName = result['name'];
+                  savedCardNumber = result['cardNumber'];
+                  savedCardExpiry = result['expiry'];
+                  savedCardCvv = result['cvv'];
+
+                  // تعيين رقم البطاقة لـ selectedCard ليعمل تصميم الـ MasterCard وكلمة Edit في الواجهة الرئيسية
+                  selectedCard = savedCardNumber;
+                });
+
                 await SharedPreferencesHelper.saveString(
                   'saved_payment_card',
                   selectedCard!,
@@ -116,7 +141,6 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
             },
             onPayPalTap: () async {
               setState(() => selectedCard = "PayPal Connected");
-              // حفظ وسيلة الدفع فور اختيارها
               await SharedPreferencesHelper.saveString(
                 'saved_payment_card',
                 selectedCard!,
@@ -154,15 +178,11 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
           ),
           SizedBox(height: 32.h),
 
-          //  زر Confirm and Pay يظهر فقط إذا اكتمل اختيار التاريخ والبطاقة
           if (isReadyToPay) ...[
             CustomButton(
               text: 'Confirm and Pay',
               onPressed: () async {
-                // 1. حفظ البيانات محلياً عبر SharedPreferencesHelper
-                await _saveBookingData();
-
-                // 2. إظهار نافذة النجاح
+                await _saveBookingData(status: 'Checkin');
                 _showSuccessBottomSheet(context);
               },
             ),
@@ -199,6 +219,8 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
                       'saved_booking_date',
                       dateRange,
                     );
+                    await _saveBookingData(status: 'Waiting payment');
+
                     Navigator.pop(context);
                   },
                 ),
@@ -214,13 +236,10 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      backgroundColor: Colors
-          .transparent, // خلفية شفافة لكي يعمل الـ DraggableScrollableSheet
+      backgroundColor: Colors.transparent,
       builder: (context) {
         return Padding(
-          padding: EdgeInsets.only(
-            top: 250.h,
-          ), // لتغطية الواجهة مع إبقاء الـ AppBar ظاهراً
+          padding: EdgeInsets.only(top: 250.h),
           child: DraggableScrollableSheet(
             initialChildSize: 1.0,
             minChildSize: 0.8,

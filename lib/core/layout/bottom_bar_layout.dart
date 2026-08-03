@@ -39,7 +39,9 @@ class _BottomBarLayoutState extends State<BottomBarLayout> {
 
             FavouriteView(onBackToHome: () => setState(() => currentIndex = 0)),
 
-            const BookingActivityView(),
+            BookingActivityView(
+              onBackToHome: () => setState(() => currentIndex = 0),
+            ),
             ProfileView(onBackToHome: () => setState(() => currentIndex = 0)),
           ];
 

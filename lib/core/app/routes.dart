@@ -39,7 +39,7 @@ abstract class AppRouter {
   static const String kBookingPayment = '/booking_payment';
   static const String kBookingReserve = '/booking_reserve';
   static const String kChatList = '/chat_list';
-  static const String kChatDetail = '/chat_detail';
+  static const String kChatDetail = '/chat_detailView';
   static const String kPopular = '/popular';
   static const String kNotifications = '/notifications';
   static const String kSelectLocation = '/select_location';
@@ -108,7 +108,10 @@ abstract class AppRouter {
         ),
         GoRoute(
           path: kBookingAddCard,
-          builder: (context, state) => const BookingAddCardView(),
+          builder: (context, state) {
+            final extra = state.extra as Map<String, dynamic>?;
+            return BookingAddCardView(extraData: extra);
+          },
         ),
 
         GoRoute(
@@ -131,7 +134,7 @@ abstract class AppRouter {
         GoRoute(
           path: kChatDetail,
           builder: (context, state) {
-            final data = state.extra as Map<String, dynamic>;
+            final data = state.extra as Map<String, dynamic>? ?? {};
             final agent = data['agent'];
 
             return ChatDetailView(agent: agent);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
@@ -15,6 +16,7 @@ class CustomTextFormField extends StatefulWidget {
     this.hintStyle,
     this.prefixIcon,
     this.onTap,
+    this.inputFormatters,
     this.onChanged,
     this.readOnly = false,
   });
@@ -27,6 +29,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? Function(String?)? validator;
   final TextEditingController? controller;
   final TextStyle? hintStyle;
+  final List<TextInputFormatter>? inputFormatters;
   final ValueChanged<String>? onChanged;
   final bool readOnly;
   @override
@@ -52,6 +55,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       obscureText: isObscured,
       onTap: widget.onTap,
       keyboardType: widget.textInputType,
+      inputFormatters: widget.inputFormatters,
       decoration: InputDecoration(
         suffixIcon: widget.obscureText
             ? IconButton(

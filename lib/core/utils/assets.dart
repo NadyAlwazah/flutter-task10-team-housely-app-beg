@@ -43,6 +43,7 @@ class AssetsData {
   static const iconGasSvg = "${_icons}gas.svg";
   static const iconHospitalSvg = "${_icons}hospital.svg";
   static const iconMosqueSvg = "${_icons}mosque.svg";
+  static const iconChatbookingSvg = "${_icons}chat_booking.svg";
 
   static const iconCreditcardSvg = "${_icons}credit_card.svg";
   static const iconPaypalSvg = "${_icons}paypal.svg";
@@ -67,6 +68,7 @@ class AssetsData {
   static const imageOnboard5png = "${_images}image5.png";
   static const imageOnboard6png = "${_images}image6.png";
   static const imageProfilePng = "${_images}profile_image.png";
+  static const imageMybookingoppsPng = "${_images}my_booking_opps.png";
 
   static const alexPng = "${_images}alexander.png";
   static const anggelaPng = "${_images}anggela.png";

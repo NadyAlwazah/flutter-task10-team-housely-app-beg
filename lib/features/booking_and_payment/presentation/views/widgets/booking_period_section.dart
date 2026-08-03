@@ -24,7 +24,8 @@ class BookingPeriodSection extends StatelessWidget {
         children: [
           Row(
             children: [
-              // 1. أيقونة الروزنامة داخل دائرة لونها فاتح
+              // 1أيقونة الروزنامة
+              //
               Container(
                 width: 36.w,
                 height: 36.h,
