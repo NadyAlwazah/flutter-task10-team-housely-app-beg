@@ -26,25 +26,29 @@ class CustomBottomNavBar extends StatelessWidget {
           _buildNavItem(icon: Icons.home_filled, label: 'Home', index: 0),
           _buildNavItem(
             isSvg: true,
-            path: AssetsData.iconExploreSvg,
+            pathInactive: AssetsData.iconExploreSvg,
+            pathActive: AssetsData.iconExploreSvg,
             label: 'Explore',
             index: 1,
           ),
           _buildNavItem(
             isSvg: true,
-            path: AssetsData.iconFavoriteSvg,
+            pathInactive: AssetsData.iconFavoriteSvg,
+            pathActive: AssetsData.iconHeartActiveSvg,
             label: 'Favorite',
             index: 2,
           ),
           _buildNavItem(
             isSvg: true,
-            path: AssetsData.iconDocumentSvg,
+            pathInactive: AssetsData.iconDocumentSvg,
+            pathActive: AssetsData.iconDocumentActiveSvg,
             label: 'My Booking',
             index: 3,
           ),
           _buildNavItem(
             isSvg: true,
-            path: AssetsData.iconProfileSvg,
+            pathInactive: AssetsData.iconProfileSvg,
+            pathActive: AssetsData.iconProfileActiveSvg,
             label: 'Profile',
             index: 4,
           ),
@@ -55,7 +59,8 @@ class CustomBottomNavBar extends StatelessWidget {
 
   Widget _buildNavItem({
     bool isSvg = false,
-    String? path,
+    String? pathInactive,
+    String? pathActive,
     IconData? icon,
     required String label,
     required int index,
@@ -77,7 +82,7 @@ class CustomBottomNavBar extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
             child: isSvg
                 ? SvgPicture.asset(
-                    path!,
+                    isSelected ? pathActive! : pathInactive!,
                     colorFilter: ColorFilter.mode(
                       isSelected ? AppColors.primary : AppColors.textSecondary,
                       BlendMode.srcIn,
