@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 
 class PropertyReviewsSection extends StatelessWidget {
@@ -14,52 +17,61 @@ class PropertyReviewsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final reviews = property.reviews;
+    return BlocBuilder<PropertyCubit, PropertyState>(
+      builder: (context, state) {
+        final updateProperty = [
+          ...state.recommended,
+          ...state.popular,
+          ...state.nearbyProperties,
+        ].firstWhere((e) => e.id == property.id);
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Reviews ${reviews.length}",
-                style: Styles.textStyle16W600Inter,
+        final reviews = updateProperty.reviews;
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Reviews ${reviews.length}",
+                    style: Styles.textStyle16W600Inter,
+                  ),
+                  Text(
+                    "See all",
+                    style: Styles.textStyle12W500Inter.copyWith(
+                      color: AppColors.primary,
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                "See all",
-                style: Styles.textStyle12W500Inter.copyWith(
-                  color: AppColors.primary,
+            ),
+            SizedBox(height: 16.h),
+
+            // بطاقات المراجعات
+            Padding(
+              padding: EdgeInsets.only(left: 24.w),
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: reviews.map((review) {
+                    return Padding(
+                      padding: EdgeInsets.only(right: 12.w),
+                      child: _buildReviewCard(
+                        image: review.reviewerImage,
+                        name: review.reviewerName,
+                        rating: review.rating,
+                        comment: review.comment,
+                      ),
+                    );
+                  }).toList(),
                 ),
               ),
-            ],
-          ),
-        ),
-        SizedBox(height: 16.h),
-
-        // بطاقات المراجعات
-        Padding(
-          padding: EdgeInsets.only(left: 24.w),
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: reviews.map((review) {
-                return Padding(
-                  padding: EdgeInsets.only(right: 12.w),
-                  child: _buildReviewCard(
-                    image: review.reviewerImage,
-                    name: review.reviewerName,
-                    rating: review.rating,
-                    comment: review.comment,
-                  ),
-                );
-              }).toList(),
             ),
-          ),
-        ),
-      ],
+          ],
+        );
+      },
     );
   }
 

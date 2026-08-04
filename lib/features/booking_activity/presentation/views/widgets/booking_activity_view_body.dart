@@ -98,10 +98,8 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
             ),
             labelColor: Colors.white,
             unselectedLabelColor: AppColors.textUnselected.withOpacity(0.5),
-            labelStyle: Styles.textStyle14W500Inter.copyWith(fontSize: 15.sp),
-            unselectedLabelStyle: Styles.textStyle14W400Inter.copyWith(
-              fontSize: 15.sp,
-            ),
+            labelStyle: Styles.textStyle14W500Inter,
+            unselectedLabelStyle: Styles.textStyle14W400Inter,
             tabs: const [
               Tab(text: 'Upcoming'),
               Tab(text: 'Completed'),

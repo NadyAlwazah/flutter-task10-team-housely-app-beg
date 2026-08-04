@@ -98,9 +98,11 @@ abstract class AppRouter {
           path: AppRouter.kAddReview,
           builder: (context, state) {
             final data = state.extra as Map<String, dynamic>;
-            final property = data['property'] as PropertyModel;
 
-            return AddReviewView(property: property);
+            final property = data['property'] as PropertyModel;
+            final cubit = data['cubit'] as PropertyCubit;
+
+            return AddReviewView(property: property, cubit: cubit);
           },
         ),
 
