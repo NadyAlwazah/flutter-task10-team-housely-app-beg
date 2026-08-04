@@ -51,7 +51,7 @@ class BookingPaymentSection extends StatelessWidget {
                       width: 36.w,
                       height: 28.h,
                       decoration: BoxDecoration(
-                        color: AppColors.Secondary.withOpacity(0.1),
+                        color: AppColors.secondary.withOpacity(0.1),
                         shape: BoxShape.circle,
                       ),
                       child: Center(
@@ -116,7 +116,7 @@ class BookingPaymentSection extends StatelessWidget {
                     width: 36.w,
                     height: 36.h,
                     decoration: BoxDecoration(
-                      color: AppColors.Secondary.withOpacity(0.1),
+                      color: AppColors.secondary.withOpacity(0.1),
                       shape: BoxShape.circle,
                     ),
                     child: Center(

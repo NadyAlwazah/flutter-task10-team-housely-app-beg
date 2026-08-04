@@ -23,19 +23,25 @@ class BookingPropertyCardSection extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(12.r),
-            child: Image.network(
-              // استخدام network إذا كانت الصورة رابطاً، أو AssetImage إذا كانت محليّة حسب مصدرها لديك
-              property.image,
-              width: 70.w,
-              height: 70.h,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) => Image.asset(
-                AssetsData.imageOnboard1png,
-                width: 70.w,
-                height: 70.h,
-                fit: BoxFit.cover,
-              ),
-            ),
+            child: property.image.startsWith('http')
+                ? Image.network(
+                    property.image,
+                    width: 70.w,
+                    height: 70.h,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) => Image.asset(
+                      AssetsData.imageOnboard1png,
+                      width: 70.w,
+                      height: 70.h,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : Image.asset(
+                    property.image,
+                    width: 70.w,
+                    height: 70.h,
+                    fit: BoxFit.cover,
+                  ),
           ),
           SizedBox(width: 12.w),
           Expanded(

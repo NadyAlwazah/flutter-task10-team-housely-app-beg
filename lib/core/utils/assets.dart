@@ -43,6 +43,7 @@ class AssetsData {
   static const iconGasSvg = "${_icons}gas.svg";
   static const iconHospitalSvg = "${_icons}hospital.svg";
   static const iconMosqueSvg = "${_icons}mosque.svg";
+  static const iconChatbookingSvg = "${_icons}chat_booking.svg";
 
   static const iconCreditcardSvg = "${_icons}credit_card.svg";
   static const iconPaypalSvg = "${_icons}paypal.svg";
@@ -52,7 +53,13 @@ class AssetsData {
   static const iconCreditcardshSvg = "${_icons}credit_card_sh.svg";
   static const iconCardcolorSvg = "${_icons}card_color.svg";
   static const iconMailBoxSvg = "${_icons}mailbox.svg";
-  static const iconCloudSvg = "${_icons}tabler_cloud-upload.svg";
+  static const iconCloudSvg = "${_icons}tabler_cloud_upload.svg";
+  static const iconCloseSquareSvg = "${_icons}close_square.svg";
+  static const iconTimeCircleSvg = "${_icons}time_circle.svg";
+  static const iconAcSvg = "${_icons}ac.svg";
+  static const iconDocumentActiveSvg = "${_icons}document_active.svg";
+  static const iconHeartActiveSvg = "${_icons}heart_active.svg";
+  static const iconProfileActiveSvg = "${_icons}profile_active.svg";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
@@ -62,6 +69,7 @@ class AssetsData {
   static const imageOnboard5png = "${_images}image5.png";
   static const imageOnboard6png = "${_images}image6.png";
   static const imageProfilePng = "${_images}profile_image.png";
+  static const imageMybookingoppsPng = "${_images}my_booking_opps.png";
 
   static const alexPng = "${_images}alexander.png";
   static const anggelaPng = "${_images}anggela.png";
@@ -99,5 +107,15 @@ class AssetsData {
   static const gallery7Jpg = "${_images}gallery7.jpg";
   static const gallery8Jpg = "${_images}gallery8.jpg";
   static const gallery9Jpg = "${_images}gallery9.jpg";
-   static const imagCardPng = "${_images}card.png";
+  static const imagCardPng = "${_images}card.png";
+  static const imageSearchResultPng = "${_images}search_result.png";
+
+  static const imageNearbyImage1Png = "${_images}nearby_image_1.png";
+  static const imageNearbyImage2Png = "${_images}nearby_image_2.png";
+  static const imageNearbyImage3Png = "${_images}nearby_image_3.png";
+  static const imageNearbyImage4Png = "${_images}nearby_image_4.png";
+
+  static const imagePopularImage1Png = "${_images}popular_image_1.png";
+  static const imagePopularImage2Png = "${_images}popular_image_2.png";
+  static const imagePopularImage3Png = "${_images}popular_image_3.png";
 }

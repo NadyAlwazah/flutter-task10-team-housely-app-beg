@@ -10,10 +10,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/select_location/pre
 class ExploreViewBody extends StatelessWidget {
   final VoidCallback onBackToHome;
 
-  const ExploreViewBody({
-    super.key,
-    required this.onBackToHome,
-  });
+  const ExploreViewBody({super.key, required this.onBackToHome});
 
   IconData _getIconForType(String type) {
     switch (type.toLowerCase()) {
@@ -47,18 +44,14 @@ class ExploreViewBody extends StatelessWidget {
                 initialCenter: state.center,
                 initialZoom: 15.0,
                 onPositionChanged: (position, hasGesture) {
-                  if (hasGesture && position.center != null) {
-                    cubit.onMapMoved(
-                      position.center!,
-                      loadNearby: true,
-                    );
+                  if (hasGesture) {
+                    cubit.onMapMoved(position.center, loadNearby: true);
                   }
                 },
               ),
               children: [
                 TileLayer(
-                  urlTemplate:
-                      'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   userAgentPackageName:
                       'com.example.flutter_task10_team_housely_app_beg',
                 ),
@@ -66,15 +59,15 @@ class ExploreViewBody extends StatelessWidget {
                 MarkerLayer(
                   markers: [
                     Marker(
-                     point: cubit.currentUserLocation ?? state.center,
-                     width: 40.r,
-                     height: 40.r,
-                     child: Icon(
-                       Icons.location_on,
-                       color: Colors.red,
-                       size: 38.r,
-                        ),
+                      point: cubit.currentUserLocation ?? state.center,
+                      width: 40.r,
+                      height: 40.r,
+                      child: Icon(
+                        Icons.location_on,
+                        color: Colors.red,
+                        size: 38.r,
                       ),
+                    ),
 
                     ...state.nearbyPlaces.map((place) {
                       return Marker(

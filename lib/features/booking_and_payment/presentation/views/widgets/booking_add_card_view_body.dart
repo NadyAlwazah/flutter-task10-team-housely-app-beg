@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_text_form_field.dart';
@@ -6,30 +7,98 @@ import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.d
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'booking_card_preview_section.dart';
 
+// --- فئة لتنسيق رقم البطاقة (إضافة مسافة تلقائية بين كل 4 أرقام) ---
+class CardNumberInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    var text = newValue.text.replaceAll(' ', '');
+    if (text.length > 16) {
+      text = text.substring(0, 16);
+    }
+    var buffer = StringBuffer();
+    for (int i = 0; i < text.length; i++) {
+      buffer.write(text[i]);
+      if ((i + 1) % 4 == 0 && i + 1 != text.length) {
+        buffer.write(' ');
+      }
+    }
+    String formatted = buffer.toString();
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: formatted.length),
+    );
+  }
+}
+
+// --- فئة لتنسيق تاريخ الانتهاء (رقمين / رقمين تلقائياً) ---
+class CardExpiryInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    var text = newValue.text.replaceAll('/', '');
+    if (text.length > 4) {
+      text = text.substring(0, 4);
+    }
+    var buffer = StringBuffer();
+    for (int i = 0; i < text.length; i++) {
+      buffer.write(text[i]);
+      if (i == 1 && text.length > 2) {
+        buffer.write('/');
+      }
+    }
+    String formatted = buffer.toString();
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: formatted.length),
+    );
+  }
+}
+
 class BookingAddCardViewBody extends StatefulWidget {
-  const BookingAddCardViewBody({super.key});
+  // استقبال البيانات القديمة في حال الضغط على Edit
+  final String? initialName;
+  final String? initialCardNumber;
+  final String? initialExpiry;
+  final String? initialCvv;
+
+  const BookingAddCardViewBody({
+    super.key,
+    this.initialName,
+    this.initialCardNumber,
+    this.initialExpiry,
+    this.initialCvv,
+  });
 
   @override
   State<BookingAddCardViewBody> createState() => _BookingAddCardViewBodyState();
 }
 
 class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
-  final TextEditingController nameController = TextEditingController(
-    text: 'Brooklyn Simmons',
-  );
-  final TextEditingController cardNumberController = TextEditingController(
-    text: '1234 5678 9101 1121',
-  );
-  final TextEditingController expiryController = TextEditingController(
-    text: '06/21',
-  );
-  final TextEditingController cvvController = TextEditingController(
-    text: '3134',
-  );
+  late final TextEditingController nameController;
+  late final TextEditingController cardNumberController;
+  late final TextEditingController expiryController;
+  late final TextEditingController cvvController;
 
   @override
   void initState() {
     super.initState();
+    // تعبئة الحقول بالبيانات القديمة إن وجدت، أو القيم الافتراضية
+    nameController = TextEditingController(
+      text: widget.initialName ?? 'Brooklyn Simmons',
+    );
+    cardNumberController = TextEditingController(
+      text: widget.initialCardNumber ?? '1234 5678 9101 1121',
+    );
+    expiryController = TextEditingController(
+      text: widget.initialExpiry ?? '06/21',
+    );
+    cvvController = TextEditingController(text: widget.initialCvv ?? '3134');
+
     nameController.addListener(() => setState(() {}));
     cardNumberController.addListener(() => setState(() {}));
     expiryController.addListener(() => setState(() {}));
@@ -58,7 +127,6 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
             expiryDate: expiryController.text,
           ),
           SizedBox(height: 24.h),
-
           // 2. حقل اسم صاحب البطاقة
           Text('Name', style: Styles.textStyle14W600Inter),
           SizedBox(height: 8.h),
@@ -76,6 +144,11 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
             controller: cardNumberController,
             hintText: '1234 5678 9101 1121',
             textInputType: TextInputType.number,
+            inputFormatters: [
+              FilteringTextInputFormatter.digitsOnly,
+              LengthLimitingTextInputFormatter(16),
+              CardNumberInputFormatter(),
+            ],
           ),
           SizedBox(height: 16.h),
 
@@ -92,6 +165,11 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
                       controller: expiryController,
                       hintText: '06/21',
                       textInputType: TextInputType.datetime,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(4),
+                        CardExpiryInputFormatter(),
+                      ],
                     ),
                   ],
                 ),
@@ -108,6 +186,10 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
                       hintText: '3134',
                       obscureText: true,
                       textInputType: TextInputType.number,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(4),
+                      ],
                     ),
                   ],
                 ),
@@ -118,8 +200,27 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
           CustomButton(
             text: 'Add card',
             onPressed: () {
-              // إرجاع رقم البطاقة للواجهة الرئيسية وتحديث حالة الـ Payment
-              context.pop(cardNumberController.text);
+              // شرط عدم الخروج قبل تعبئة جميع الخانات بالكامل وصحتها (مع إضافة الرموز الناقصة للشرط)
+              if (nameController.text.trim().isEmpty ||
+                  cardNumberController.text.replaceAll(' ', '').length < 16 ||
+                  expiryController.text.length < 5 ||
+                  cvvController.text.length < 4) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Please fill all fields correctly'),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+                return;
+              }
+
+              // حفظ وإرجاع كافة البيانات كـ Map للواجهة السابقة
+              context.pop({
+                'cardNumber': cardNumberController.text,
+                'name': nameController.text,
+                'expiry': expiryController.text,
+                'cvv': cvvController.text,
+              });
             },
           ),
         ],

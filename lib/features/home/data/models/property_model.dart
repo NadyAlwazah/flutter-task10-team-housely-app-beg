@@ -19,6 +19,10 @@ class PropertyModel {
   final bool isFavorite;
   final AgentModel agent;
 
+  final String type;
+  final bool hasWifi;
+  final bool hasAc;
+
   PropertyModel({
     required this.id,
     required this.title,
@@ -36,6 +40,10 @@ class PropertyModel {
     required this.reviews,
     this.isFavorite = false,
     required this.agent,
+
+    required this.type,
+    required this.hasWifi,
+    required this.hasAc,
   });
 
   PropertyModel copyWith({
@@ -59,6 +67,9 @@ class PropertyModel {
       reviews: reviews ?? this.reviews,
       isFavorite: isFavorite ?? this.isFavorite,
       agent: agent,
+      type: type,
+      hasWifi: hasWifi,
+      hasAc: hasAc,
     );
   }
 }

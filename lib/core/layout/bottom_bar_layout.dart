@@ -35,26 +35,18 @@ class _BottomBarLayoutState extends State<BottomBarLayout> {
                   )
                 : const HomeView(),
 
-            ExploreView(
-              onBackToHome: () => setState(() => currentIndex = 0),
-            ),
+            ExploreView(onBackToHome: () => setState(() => currentIndex = 0)),
 
-            FavouriteView(
-              onBackToHome: () => setState(() => currentIndex = 0),
-            ),
+            FavouriteView(onBackToHome: () => setState(() => currentIndex = 0)),
 
-            const BookingActivityView(),
-            
-            ProfileView(
+            BookingActivityView(
               onBackToHome: () => setState(() => currentIndex = 0),
             ),
+            ProfileView(onBackToHome: () => setState(() => currentIndex = 0)),
           ];
 
           return Scaffold(
-            body: IndexedStack(
-              index: currentIndex,
-              children: pages,
-            ),
+            body: IndexedStack(index: currentIndex, children: pages),
 
             bottomNavigationBar: currentIndex == 1
                 ? null

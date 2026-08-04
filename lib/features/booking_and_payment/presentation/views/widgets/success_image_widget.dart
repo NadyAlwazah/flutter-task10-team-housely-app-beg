@@ -13,21 +13,24 @@ class SuccessImageWidget extends StatelessWidget {
       width: 208.w,
       height: 208.h,
       decoration: BoxDecoration(
-        color: AppColors.Secondary.withOpacity(
+        color: AppColors.secondary.withOpacity(
           0.25,
         ), // لون الخلفية الدائرية الفاتح
         shape: BoxShape.circle,
       ),
-      child: Center(
-        child: Padding(
-          padding: EdgeInsets.all(20.w),
-          child: SvgPicture.asset(
-            AssetsData.iconReservesuccessSvg,
-            height: 127.h,
-            width: 124.w,
-            fit: BoxFit.contain,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Transform.translate(
+            offset: Offset(0, 12.h),
+            child: SvgPicture.asset(
+              AssetsData.iconReservesuccessSvg,
+              height: 160.h,
+              width: 140.w,
+              fit: BoxFit.contain,
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

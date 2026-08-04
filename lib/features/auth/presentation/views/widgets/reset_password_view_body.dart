@@ -57,8 +57,11 @@ class _ResetPasswordViewBodyState extends State<ResetPasswordViewBody> {
 
             CustomButton(
               text: "Change password",
-              onPressed: () {
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  await Future.delayed(const Duration(milliseconds: 150));
+                  if (!mounted) return;
                   context.push(AppRouter.kSuccessResetPassword);
                 }
               },

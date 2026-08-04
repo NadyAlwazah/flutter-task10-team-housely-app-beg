@@ -2,16 +2,11 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/location_data.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/explore/presentation/model/place_model.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 
 class LocationService {
-  final AuthLocalDataSource _authLocalDataSource;
-
-  LocationService(this._authLocalDataSource);
-
   /// جلب الموقع الحالي للمستخدم
   Future<LocationData> getCurrentLocation() async {
     final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
@@ -39,10 +34,7 @@ class LocationService {
     final LatLng location = LatLng(position.latitude, position.longitude);
     final String address = await getAddressFromLatLng(location);
 
-    return LocationData(
-      address: address,
-      location: location,
-    );
+    return LocationData(address: address, location: location);
   }
 
   /// تحويل الإحداثيات إلى عنوان نصي
@@ -64,71 +56,75 @@ class LocationService {
     return 'Failed to get address';
   }
 
+  Future<List<PlaceModel>> getNearbyPlaces(LatLng center) async {
+    final List<String> overpassEndpoints = [
+      'https://overpass-api.de/api/interpreter',
+      'https://overpass.private.coffee/api/interpreter',
+      'https://overpass.kumi.systems/api/interpreter',
+    ];
 
+    final String query =
+        'data=[out:json][timeout:25];'
+        '(node["amenity"](around:3000,${center.latitude},${center.longitude});'
+        'node["shop"](around:3000,${center.latitude},${center.longitude}););'
+        'out 30;';
 
-Future<List<PlaceModel>> getNearbyPlaces(LatLng center) async {
-  final List<String> overpassEndpoints = [
-    'https://overpass-api.de/api/interpreter',
-    'https://overpass.private.coffee/api/interpreter',
-    'https://overpass.kumi.systems/api/interpreter',
-  ];
+    for (final endpoint in overpassEndpoints) {
+      try {
+        debugPrint('🔍 Fetching places via: $endpoint');
 
+        final response = await http
+            .post(
+              Uri.parse(endpoint),
+              headers: {
+                'User-Agent': 'HouselyApp/1.0 (com.housely.app)',
+                'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: query,
+            )
+            .timeout(const Duration(seconds: 20));
 
-  final String query =
-      'data=[out:json][timeout:25];'
-      '(node["amenity"](around:3000,${center.latitude},${center.longitude});'
-      'node["shop"](around:3000,${center.latitude},${center.longitude}););'
-      'out 30;';
+        if (response.statusCode == 200) {
+          final Map<String, dynamic> data = jsonDecode(response.body);
+          final List elements = data['elements'] ?? [];
 
-  for (final endpoint in overpassEndpoints) {
-    try {
-      debugPrint('🔍 Fetching places via: $endpoint');
+          final List<PlaceModel> places = [];
 
-      final response = await http.post(
-        Uri.parse(endpoint),
-        headers: {
-          'User-Agent': 'HouselyApp/1.0 (com.housely.app)',
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: query,
-      ).timeout(const Duration(seconds: 20));
+          for (final element in elements) {
+            final tags = element['tags'] ?? {};
+            final double? lat = element['lat']?.toDouble();
+            final double? lon = element['lon']?.toDouble();
 
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = jsonDecode(response.body);
-        final List elements = data['elements'] ?? [];
+            if (lat == null || lon == null) continue;
 
-        final List<PlaceModel> places = [];
+            final String name =
+                tags['name'] ??
+                tags['brand'] ??
+                tags['amenity'] ??
+                tags['shop'] ??
+                'Nearby Place';
+            final String type = tags['amenity'] ?? tags['shop'] ?? 'place';
 
-        for (final element in elements) {
-          final tags = element['tags'] ?? {};
-          final double? lat = element['lat']?.toDouble();
-          final double? lon = element['lon']?.toDouble();
+            places.add(
+              PlaceModel(
+                id: element['id'].toString(),
+                name: name,
+                type: type,
+                location: LatLng(lat, lon),
+              ),
+            );
+          }
 
-          if (lat == null || lon == null) continue;
-
-          final String name = tags['name'] ?? tags['brand'] ?? tags['amenity'] ?? tags['shop'] ?? 'Nearby Place';
-          final String type = tags['amenity'] ?? tags['shop'] ?? 'place';
-
-          places.add(
-            PlaceModel(
-              id: element['id'].toString(),
-              name: name,
-              type: type,
-              location: LatLng(lat, lon),
-            ),
-          );
+          debugPrint('Fetched ${places.length} places successfully!');
+          return places;
+        } else {
+          debugPrint(' Endpoint $endpoint status code: ${response.statusCode}');
         }
-
-        debugPrint('Fetched ${places.length} places successfully!');
-        return places;
-      } else {
-        debugPrint(' Endpoint $endpoint status code: ${response.statusCode}');
+      } catch (e) {
+        debugPrint('Endpoint $endpoint failed: $e');
       }
-    } catch (e) {
-      debugPrint('Endpoint $endpoint failed: $e');
     }
-  }
 
-  return [];
-}
+    return [];
+  }
 }

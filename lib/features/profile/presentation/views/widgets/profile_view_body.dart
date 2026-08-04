@@ -33,7 +33,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
             const SizedBox(height: 56),
             ProfileImageWidget(
               onCameraTap: () {
-                context.push(AppRouter.kEditProfile);
+                context.push(
+                  AppRouter.kEditProfile,
+                  extra: context.read<ProfileCubit>(),
+                );
               },
             ),
 
@@ -50,10 +53,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
               },
             ),
 
-            const SizedBox(height: 64),
+            const SizedBox(height: 60),
             const Divider(),
 
-            const SizedBox(height: 32),
+            const SizedBox(height: 15),
             const ProfileOptionsList(),
 
             const SizedBox(height: 16),

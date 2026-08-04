@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -9,7 +8,6 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/widgets/gallerybottomsheet.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/widgets/writereviewsection.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 
@@ -80,10 +78,7 @@ class _AddReviewViewBodyState extends State<AddReviewViewBody> {
 
     if (reviewText.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please write your review'),
-          backgroundColor: Colors.redAccent,
-        ),
+        CustomSnackBar(message: 'Please write your review', isError: true),
       );
       return;
     }
@@ -103,15 +98,13 @@ class _AddReviewViewBodyState extends State<AddReviewViewBody> {
       comment: reviewText,
     );
 
-
     if (widget.property != null) {
-      context.read<PropertyCubit>().addReview(widget.property!.id, newReview);
+      // context.read<PropertyCubit>().addReview(widget.property!.id, newReview);
     }
 
     if (widget.onReviewAdded != null) {
       widget.onReviewAdded!(newReview);
     }
-
 
     _reviewController.clear();
     setState(() {
@@ -119,20 +112,19 @@ class _AddReviewViewBodyState extends State<AddReviewViewBody> {
       _isLoading = false;
     });
 
-    
-if (widget.property != null) {
-      context.push(
-        AppRouter.kDetails,
-        extra: {
-          'property': widget.property,
-          'cubit': context.read<PropertyCubit>(),
-        },
-      );
-    } else {
-      if (context.canPop()) {
-        context.pop(newReview);
-      }
-    }
+    // if (widget.property != null) {
+    //   context.push(
+    //     AppRouter.kDetails,
+    //     extra: {
+    //       'property': widget.property,
+    //       'cubit': context.read<PropertyCubit>(),
+    //     },
+    //   );
+    // } else {
+    //   if (context.canPop()) {
+    //     context.pop(newReview);
+    //   }
+    // }
   }
 
   @override

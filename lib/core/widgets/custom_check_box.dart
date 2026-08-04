@@ -7,11 +7,15 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 class CustomCheckBox extends StatelessWidget {
   final bool value;
   final ValueChanged<bool> onChanged;
+  final double sizeContainer;
+  final double sizeIcon;
 
   const CustomCheckBox({
     super.key,
     required this.value,
     required this.onChanged,
+    this.sizeContainer = 16,
+    this.sizeIcon = 14,
   });
 
   @override
@@ -19,8 +23,8 @@ class CustomCheckBox extends StatelessWidget {
     return InkWell(
       onTap: () => onChanged(!value),
       child: Container(
-        width: 16.r,
-        height: 16.r,
+        width: sizeContainer.r,
+        height: sizeContainer.r,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.r),
           border: Border.all(width: 1, color: const Color(0xFFC4C3CB)),
@@ -30,9 +34,12 @@ class CustomCheckBox extends StatelessWidget {
           child: value
               ? SvgPicture.asset(
                   AssetsData.iconCheckSvg,
-                  color: Colors.white,
-                  width: 14.r,
-                  height: 14.r,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcIn,
+                  ),
+                  width: sizeIcon.r,
+                  height: sizeIcon.r,
                 )
               : null,
         ),

@@ -16,8 +16,9 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/pr
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/details_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/notifications/presentation/views/notifications_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/on_boarding_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/edit_profile_view.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/fillter_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/filtered_properties_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/search_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/map_page.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/select_location_view.dart';
@@ -38,7 +39,7 @@ abstract class AppRouter {
   static const String kBookingPayment = '/booking_payment';
   static const String kBookingReserve = '/booking_reserve';
   static const String kChatList = '/chat_list';
-  static const String kChatDetail = '/chat_detail';
+  static const String kChatDetail = '/chat_detailView';
   static const String kPopular = '/popular';
   static const String kNotifications = '/notifications';
   static const String kSelectLocation = '/select_location';
@@ -46,7 +47,7 @@ abstract class AppRouter {
   static const String kEditProfile = '/edit_profile';
   static const String kVerify = '/verify';
   static const String kSuccessResetPassword = '/success_reset_password';
-  static const String kFillter = '/fillter';
+  static const String kFileterdProperties = '/filtered_properties';
 
   static late GoRouter router;
   static void initRouter() {
@@ -64,9 +65,15 @@ abstract class AppRouter {
           path: kBottomBar,
           builder: (context, state) => const BottomBarLayout(),
         ),
+
         GoRoute(
           path: kEditProfile,
-          builder: (context, state) => const EditProfileView(),
+          builder: (context, state) {
+            return BlocProvider.value(
+              value: state.extra as ProfileCubit,
+              child: const EditProfileView(),
+            );
+          },
         ),
 
         GoRoute(
@@ -87,13 +94,16 @@ abstract class AppRouter {
           builder: (context, state) => const SelectLocationView(),
         ),
         GoRoute(path: kSearch, builder: (context, state) => const SearchView()),
-        GoRoute( path: kAddReview, builder: (context, state) {
-          final property = state.extra as PropertyModel?; 
-           return AddReviewView(
-           property: property,
-           );
-         },
-       ),
+        GoRoute(
+          path: AppRouter.kAddReview,
+          builder: (context, state) {
+            final data = state.extra as Map<String, dynamic>;
+            final property = data['property'] as PropertyModel;
+
+            return AddReviewView(property: property);
+          },
+        ),
+
         GoRoute(
           path: kResetPassword,
           builder: (context, state) => const ResetPasswordView(),
@@ -104,7 +114,10 @@ abstract class AppRouter {
         ),
         GoRoute(
           path: kBookingAddCard,
-          builder: (context, state) => const BookingAddCardView(),
+          builder: (context, state) {
+            final extra = state.extra as Map<String, dynamic>?;
+            return BookingAddCardView(extraData: extra);
+          },
         ),
 
         GoRoute(
@@ -127,7 +140,7 @@ abstract class AppRouter {
         GoRoute(
           path: kChatDetail,
           builder: (context, state) {
-            final data = state.extra as Map<String, dynamic>;
+            final data = state.extra as Map<String, dynamic>? ?? {};
             final agent = data['agent'];
 
             return ChatDetailView(agent: agent);
@@ -144,9 +157,23 @@ abstract class AppRouter {
           path: kSuccessResetPassword,
           builder: (context, state) => const SuccessResetPasswordView(),
         ),
+
         GoRoute(
-          path: kFillter,
-          builder: (context, state) => const FillterView(),
+          path: AppRouter.kFileterdProperties,
+
+          builder: (context, state) {
+            final data = state.extra as Map<String, dynamic>;
+            return BlocProvider.value(
+              value: data['cubit'] as PropertyCubit,
+              child: FilteredPropertiesView(
+                minPrice: data['minPrice'],
+                maxPrice: data['maxPrice'],
+                facilities: data['facilities'],
+                lookingFor: data['lookingFor'],
+                propertyTypes: data['propertyTypes'],
+              ),
+            );
+          },
         ),
       ],
     );
