@@ -66,51 +66,6 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
     }
   }
 
-  /* Future<void> _clearAllBookings() async {
-    // حذف المفتاح من SharedPreferences
-    await SharedPreferencesHelper.saveString('saved_bookings_list', '');
-
-    // تحديث الحالة فوراً لتفريغ القائمة وإظهار صورة الـ Oops
-    setState(() {
-      upcomingBookings = [];
-    });
-
-    debugPrint("All bookings cleared for testing!");
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (isLoading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    return Column(
-      children: [
-        SizedBox(height: 12.h),
-
-        //  زر اختبار مؤقت في الأعلى (يمكنك حذفه لاحقاً عند الانتهاء من الاختبار)
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.w),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              TextButton.icon(
-                onPressed: _clearAllBookings,
-                icon: const Icon(
-                  Icons.delete_sweep,
-                  color: Colors.red,
-                  size: 20,
-                ),
-                label: Text(
-                  'Reset Bookings (Test)',
-                  style: Styles.textStyle12W400Inter.copyWith(
-                    color: Colors.red,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),*/
   @override
   Widget build(BuildContext context) {
     _fetchSavedBookings(); // تحديث البيانات عند إعادة بناء الواجهة

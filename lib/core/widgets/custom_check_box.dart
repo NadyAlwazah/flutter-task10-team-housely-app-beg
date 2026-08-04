@@ -34,7 +34,10 @@ class CustomCheckBox extends StatelessWidget {
           child: value
               ? SvgPicture.asset(
                   AssetsData.iconCheckSvg,
-                  color: Colors.white,
+                  colorFilter: const ColorFilter.mode(
+                    Colors.white,
+                    BlendMode.srcIn,
+                  ),
                   width: sizeIcon.r,
                   height: sizeIcon.r,
                 )

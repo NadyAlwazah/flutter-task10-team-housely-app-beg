@@ -95,9 +95,15 @@ abstract class AppRouter {
         ),
         GoRoute(path: kSearch, builder: (context, state) => const SearchView()),
         GoRoute(
-          path: kAddReview,
-          builder: (context, state) => const AddReviewView(),
+          path: AppRouter.kAddReview,
+          builder: (context, state) {
+            final data = state.extra as Map<String, dynamic>;
+            final property = data['property'] as PropertyModel;
+
+            return AddReviewView(property: property);
+          },
         ),
+
         GoRoute(
           path: kResetPassword,
           builder: (context, state) => const ResetPasswordView(),

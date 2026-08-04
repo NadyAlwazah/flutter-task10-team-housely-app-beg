@@ -2,7 +2,6 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/data_sour
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/home_content_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
-
 import 'package:flutter_task10_team_housely_app_beg/core/services/location_service.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/data/data_source/search_local_data_source.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/data/manager/filter_cubit/filter_cubit.dart';
@@ -12,6 +11,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sour
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/manager/auth_cubit/auth_cubit.dart';
 
 final getIt = GetIt.instance;
+
 void setupLocator() {
   // Data Sources
   getIt.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSource());
@@ -25,15 +25,13 @@ void setupLocator() {
   // Cubits
   getIt.registerFactory<AuthCubit>(() => AuthCubit());
   getIt.registerFactory<ProfileCubit>(() => ProfileCubit());
-  getIt.registerFactory<LocationCubit>(
-    () => LocationCubit(getIt<AuthLocalDataSource>()),
-  );
   getIt.registerFactory<PropertyCubit>(() => PropertyCubit());
   getIt.registerFactory<HomeContentCubit>(() => HomeContentCubit());
   getIt.registerFactory<FilterCubit>(() => FilterCubit());
+  getIt.registerFactory<LocationCubit>(
+    () => LocationCubit(getIt<LocationService>(), getIt<AuthLocalDataSource>()),
+  );
 
   // Location Service
-  getIt.registerLazySingleton<LocationService>(
-    () => LocationService(getIt<AuthLocalDataSource>()),
-  );
+  getIt.registerLazySingleton<LocationService>(() => LocationService());
 }

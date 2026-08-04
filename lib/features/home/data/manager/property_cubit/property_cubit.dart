@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/data_source/favorites_local_data_source.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/data/data_source/search_local_data_source.dart';
 
 import 'property_state.dart';
@@ -67,6 +68,28 @@ class PropertyCubit extends Cubit<PropertyState> {
         recommended: updatedRecommended,
         popular: updatedPopular,
         nearbyProperties: updatedNearbyProperties,
+      ),
+    );
+  }
+
+  //اضافة مراجعه
+  void addReview(int propertyId, ReviewModel newReview) {
+    List<PropertyModel> updateList(List<PropertyModel> list) {
+      return list.map((property) {
+        if (property.id == propertyId) {
+          final updatedReviews = List<ReviewModel>.from(property.reviews)
+            ..insert(0, newReview); // إضافة المراجعة الجديدة في البداية
+          return property.copyWith(reviews: updatedReviews);
+        }
+        return property;
+      }).toList();
+    }
+
+    emit(
+      state.copyWith(
+        recommended: updateList(state.recommended),
+        popular: updateList(state.popular),
+        nearbyProperties: updateList(state.nearbyProperties),
       ),
     );
   }

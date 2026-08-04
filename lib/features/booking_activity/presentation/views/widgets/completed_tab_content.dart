@@ -5,6 +5,9 @@ import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/agent_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 import 'package:go_router/go_router.dart';
 import 'booking_activity_card.dart';
 
@@ -14,15 +17,49 @@ class CompletedTabContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // قائمة العقارات المكتملة
-    final List<Map<String, dynamic>> completedBookings = [
-      {
-        'title': 'Takatea Homestay',
-        'location': 'Benhil, Jl. Bendungan Hilir Karet Tengsin,...',
-        'image': AssetsData.imageRecommendedImage2Png,
-        'date': '08 Aug - 12 Aug',
-        'status': 'Completed',
-      },
+    final List<PropertyModel> completedBookings = [
+      PropertyModel(
+        id: 1,
+        title: "Ayana Homestay",
+        location: "Imogiri, Yogyakarta",
+        image: AssetsData.imageRecommendedImage1Png,
+        pricePerMonth: 310,
+        rating: 4.5,
+        bedrooms: 3,
+        bathrooms: 2,
+        buildYear: 2020,
+        parking: 1,
+        area: 1880,
+        status: "For Rent",
+        description:
+            "Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.Beautiful modern homestay with garden view.",
+        agent: AgentModel(
+          image: AssetsData.imageAgentPng,
+          name: "Theresa Webb",
+          role: "Property Agent",
+        ),
+        type: "Apartment",
+        hasAc: true,
+        hasWifi: true,
+
+        reviews: [
+          ReviewModel(
+            reviewerName: "Theresa Webb",
+            reviewerImage: AssetsData.imageReview1Png,
+            rating: 4.5,
+            comment:
+                "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
+          ),
+          ReviewModel(
+            reviewerName: "Theresa Webb",
+            reviewerImage: AssetsData.imageReview2Png,
+            rating: 3.5,
+            comment: "Amazing place, very clean and cozy! ",
+          ),
+        ],
+      ),
     ];
+
     if (completedBookings.isEmpty) {
       // الحالة الفارغة مع صورة Oops!
       return SingleChildScrollView(
@@ -108,11 +145,11 @@ class CompletedTabContent extends StatelessWidget {
           children: [
             // كارت العقار
             BookingActivityCard(
-              title: item['title'],
-              location: item['location'],
-              image: item['image'],
-              dateOrPrice: item['date'],
-              statusText: item['status'],
+              title: item.title,
+              location: item.location,
+              image: item.image,
+              dateOrPrice: '08 Aug - 12 Aug',
+              statusText: 'Completed',
               statusColor: const Color(0xFFD1FADF),
               statusTextColor: const Color(0xFF12B76A),
             ),
@@ -121,7 +158,7 @@ class CompletedTabContent extends StatelessWidget {
             // زر Write review (أيقونة بنفسجي ونصوص رمادية)
             GestureDetector(
               onTap: () {
-                context.push(AppRouter.kAddReview);
+                context.push(AppRouter.kAddReview, extra: {'property': item});
               },
               child: Row(
                 children: [
