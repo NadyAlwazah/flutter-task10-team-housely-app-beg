@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/widgets/gallerybottomsheet.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/widgets/writereviewsection.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/widgets/gallery_bottom_sheet.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/widgets/write_review_section.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 
@@ -16,6 +18,7 @@ import 'upload_media_section.dart';
 
 class AddReviewViewBody extends StatefulWidget {
   final PropertyModel? property;
+  final PropertyCubit cubit;
   final String? userName;
   final double? initialRating;
   final Function(ReviewModel newReview)? onReviewAdded;
@@ -26,6 +29,7 @@ class AddReviewViewBody extends StatefulWidget {
     this.userName,
     this.initialRating,
     this.onReviewAdded,
+    required this.cubit,
   });
 
   @override
@@ -87,6 +91,8 @@ class _AddReviewViewBodyState extends State<AddReviewViewBody> {
       _isLoading = true;
     });
 
+    FocusManager.instance.primaryFocus?.unfocus();
+
     await Future.delayed(const Duration(milliseconds: 300));
 
     if (!mounted) return;
@@ -99,7 +105,7 @@ class _AddReviewViewBodyState extends State<AddReviewViewBody> {
     );
 
     if (widget.property != null) {
-      // context.read<PropertyCubit>().addReview(widget.property!.id, newReview);
+      widget.cubit.addReview(widget.property!.id, newReview);
     }
 
     if (widget.onReviewAdded != null) {
@@ -111,20 +117,16 @@ class _AddReviewViewBodyState extends State<AddReviewViewBody> {
       _selectedImagePath = null;
       _isLoading = false;
     });
-
-    // if (widget.property != null) {
-    //   context.push(
-    //     AppRouter.kDetails,
-    //     extra: {
-    //       'property': widget.property,
-    //       'cubit': context.read<PropertyCubit>(),
-    //     },
-    //   );
-    // } else {
-    //   if (context.canPop()) {
-    //     context.pop(newReview);
-    //   }
-    // }
+    if (widget.property != null) {
+      context.push(
+        AppRouter.kDetails,
+        extra: {'property': widget.property, 'cubit': widget.cubit},
+      );
+    } else {
+      if (context.canPop()) {
+        context.pop(newReview);
+      }
+    }
   }
 
   @override
@@ -166,6 +168,7 @@ class _AddReviewViewBodyState extends State<AddReviewViewBody> {
                 text: 'Submit Review',
                 isLoading: _isLoading,
                 onPressed: _submitReview,
+                loadingColor: Colors.white,
               ),
             ),
           ],
