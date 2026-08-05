@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/shared_preferences_helper.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_and_payment/presentation/views/widgets/booking_calender_content.dart';
@@ -148,7 +149,7 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
             },
           ),
 
-          const Divider(color: Color(0xFFE5E7EB), thickness: 1),
+          const Divider(color: AppColors.lightGrayBackground, thickness: 1),
           SizedBox(height: 16.h),
 
           GestureDetector(

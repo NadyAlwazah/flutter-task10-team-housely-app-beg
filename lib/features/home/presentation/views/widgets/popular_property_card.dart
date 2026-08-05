@@ -162,7 +162,7 @@ class PopularPropertyCard extends StatelessWidget {
             : AssetsData.iconFavoriteSvg,
         width: 20.r,
         height: 20.r,
-        colorFilter: const ColorFilter.mode(Color(0xFFF97066), BlendMode.srcIn),
+        colorFilter: const ColorFilter.mode(AppColors.textRed, BlendMode.srcIn),
       ),
     );
   }

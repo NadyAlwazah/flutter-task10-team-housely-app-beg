@@ -39,7 +39,8 @@ class MapPageBody extends StatelessWidget {
                   color: AppColors.textPrimary,
                   size: 24,
                 ),
-                onPressed: onBackPressed ??
+                onPressed:
+                    onBackPressed ??
                     () {
                       if (Navigator.canPop(context)) {
                         Navigator.pop(context);
@@ -79,10 +80,7 @@ class MapPageBody extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
-        border: Border.all(
-          color: AppColors.textCard,
-          width: 1.w,
-        ),
+        border: Border.all(color: AppColors.border, width: 1.w),
       ),
       child: TextField(
         readOnly: true,
@@ -107,10 +105,7 @@ class MapPageBody extends StatelessWidget {
       padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(
-          color: AppColors.textCard,
-          width: 1.w,
-        ),
+        border: Border.all(color: AppColors.border, width: 1.w),
         borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
@@ -124,10 +119,7 @@ class MapPageBody extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            cardTitle,
-            style: Styles.textStyle20W600Inter,
-          ),
+          Text(cardTitle, style: Styles.textStyle20W600Inter),
           SizedBox(height: 15.h),
           Row(
             children: [
@@ -135,14 +127,10 @@ class MapPageBody extends StatelessWidget {
                 width: 40.r,
                 height: 40.r,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFF4EBFF),
+                  color: AppColors.lavenderContainer,
                   shape: BoxShape.circle,
                 ),
-                child: Icon(
-                  cardIcon,
-                  size: 18.r,
-                  color: AppColors.primary,
-                ),
+                child: Icon(cardIcon, size: 18.r, color: AppColors.primary),
               ),
               SizedBox(width: 10.w),
               Flexible(

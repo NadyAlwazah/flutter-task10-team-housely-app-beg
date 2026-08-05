@@ -87,7 +87,7 @@ class PropertyAgentSection extends StatelessWidget {
         height: 36.r,
 
         decoration: const BoxDecoration(
-          color: Color(0xFFF9F5FF),
+          color: AppColors.iconContainerBackground,
           shape: BoxShape.circle,
         ),
         child: Center(

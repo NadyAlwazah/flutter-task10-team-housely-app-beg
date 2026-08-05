@@ -140,7 +140,10 @@ class _SearchResultSectionState extends State<SearchResultSection> {
           padding: EdgeInsets.only(bottom: 12.h),
           decoration: const BoxDecoration(
             border: Border(
-              bottom: BorderSide(color: Color(0xFFE5E7EB), width: 0.5),
+              bottom: BorderSide(
+                color: AppColors.lightGrayBackground,
+                width: 0.5,
+              ),
             ),
           ),
           child: Row(

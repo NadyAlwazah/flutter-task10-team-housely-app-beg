@@ -72,7 +72,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
             decoration: BoxDecoration(
-              color: AppColors.chatMessageContainer,
+              color: AppColors.chatPurple,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(8.r),
                 topRight: Radius.circular(8.r),
@@ -129,7 +129,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
                       vertical: 8.h,
                     ),
                     decoration: BoxDecoration(
-                      color: AppColors.chatMessage2Container,
+                      color: AppColors.lightGrayBackground,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(8.r),
                         topRight: Radius.circular(8.r),
@@ -223,12 +223,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
               children: [
                 SizedBox(height: 16.h),
                 Center(
-                  child: Text(
-                    'Today',
-                    style: Styles.textStyle16W600Inter.copyWith(
-                      color: AppColors.nameChat,
-                    ),
-                  ),
+                  child: Text('Today', style: Styles.textStyle16W600Inter),
                 ),
                 SizedBox(height: 16.h),
                 Container(
@@ -258,11 +253,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
           padding: EdgeInsets.all(16.0.r),
           child: Row(
             children: [
-              Icon(
-                Icons.add,
-                color: AppColors.chatMessageContainer,
-                size: 24.r,
-              ),
+              Icon(Icons.add, color: AppColors.chatPurple, size: 24.r),
               SizedBox(width: 11.w),
               Expanded(
                 child: Container(
@@ -271,7 +262,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
                     vertical: 8.h,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.chatMessage2Container,
+                    color: AppColors.lightGrayBackground,
                     borderRadius: BorderRadius.circular(12.r),
                   ),
                   child: TextField(
@@ -295,7 +286,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
                   width: 44.r,
                   height: 44.r,
                   decoration: const BoxDecoration(
-                    color: AppColors.chatMessageContainer,
+                    color: AppColors.chatPurple,
                     shape: BoxShape.circle,
                   ),
                   child: SvgPicture.asset(

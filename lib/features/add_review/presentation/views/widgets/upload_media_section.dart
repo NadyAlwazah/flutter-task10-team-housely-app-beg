@@ -22,10 +22,7 @@ class UploadMediaSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Add Photo or Video',
-          style: Styles.textStyle16W600Inter,
-        ),
+        Text('Add Photo or Video', style: Styles.textStyle16W600Inter),
         SizedBox(height: 16.h),
         GestureDetector(
           onTap: onTapUpload,
@@ -34,7 +31,7 @@ class UploadMediaSection extends StatelessWidget {
             height: 140.h,
             borderRadius: 12.r,
             borderWidth: 1,
-            color: AppColors.greyDeleteContainer,
+            color: AppColors.borderGray,
             child: selectedImagePath == null
                 ? Column(
                     mainAxisAlignment: MainAxisAlignment.center,

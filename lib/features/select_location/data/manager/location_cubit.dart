@@ -15,28 +15,17 @@ class LocationCubit extends Cubit<LocationState> {
   final AuthLocalDataSource _authLocalDataSource;
 
   final MapController mapController = MapController();
-  LatLng? currentUserLocation; 
+  LatLng? currentUserLocation;
   Timer? _debounceTimer;
 
-  LocationCubit(
-    this._locationService,
-    this._authLocalDataSource,
-  ) : super(LocationState.initial());
+  LocationCubit(this._locationService, this._authLocalDataSource)
+    : super(LocationState.initial());
 
-  Future<void> initialize({
-    bool loadNearby = false,
-  }) async {
+  Future<void> initialize({bool loadNearby = false}) async {
     try {
-      emit(
-        state.copyWith(
-          isLoading: true,
-          errorMessage: null,
-        ),
-      );
+      emit(state.copyWith(isLoading: true, errorMessage: null));
 
-      final LocationData location =
-          await _locationService.getCurrentLocation();
-      
+      final LocationData location = await _locationService.getCurrentLocation();
 
       currentUserLocation = location.location;
 
@@ -49,23 +38,13 @@ class LocationCubit extends Cubit<LocationState> {
         ),
       );
 
-      mapController.move(
-        location.location,
-        15,
-      );
+      mapController.move(location.location, 15);
 
       if (loadNearby) {
-        await loadNearbyPlaces(
-          location.location,
-        );
+        await loadNearbyPlaces(location.location);
       }
     } catch (e) {
-      emit(
-        state.copyWith(
-          isLoading: false,
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(isLoading: false, errorMessage: e.toString()));
     }
   }
 
@@ -77,79 +56,39 @@ class LocationCubit extends Cubit<LocationState> {
     return await Geolocator.isLocationServiceEnabled();
   }
 
-  void onMapMoved(
-    LatLng newCenter, {
-    bool loadNearby = false,
-  }) {
-    emit(
-      state.copyWith(
-        center: newCenter,
-      ),
-    );
+  void onMapMoved(LatLng newCenter, {bool loadNearby = false}) {
+    emit(state.copyWith(center: newCenter));
 
     _debounceTimer?.cancel();
 
-    _debounceTimer = Timer(
-      const Duration(
-        milliseconds: 700,
-      ),
-      () async {
-        await updateAddress(
-          newCenter,
-        );
+    _debounceTimer = Timer(const Duration(milliseconds: 700), () async {
+      await updateAddress(newCenter);
 
-        if (loadNearby) {
-          await loadNearbyPlaces(
-            newCenter,
-          );
-        }
-      },
-    );
+      if (loadNearby) {
+        await loadNearbyPlaces(newCenter);
+      }
+    });
   }
 
-  Future<void> updateAddress(
-    LatLng location,
-  ) async {
+  Future<void> updateAddress(LatLng location) async {
     try {
-      final String address =
-          await _locationService.getAddressFromLatLng(
+      final String address = await _locationService.getAddressFromLatLng(
         location,
       );
 
-      emit(
-        state.copyWith(
-          address: address,
-        ),
-      );
+      emit(state.copyWith(address: address));
     } catch (e) {
-      emit(
-        state.copyWith(
-          address: "Unable to get address",
-        ),
-      );
+      emit(state.copyWith(address: "Unable to get address"));
     }
   }
 
-  Future<void> loadNearbyPlaces(
-    LatLng location,
-  ) async {
+  Future<void> loadNearbyPlaces(LatLng location) async {
     try {
-      final places = await _locationService.getNearbyPlaces(
-        location,
-      );
+      final places = await _locationService.getNearbyPlaces(location);
 
-      emit(
-        state.copyWith(
-          nearbyPlaces: places,
-        ),
-      );
+      emit(state.copyWith(nearbyPlaces: places));
     } catch (e) {
-
-      emit(
-        state.copyWith(
-          nearbyPlaces: [],
-        ),
-      );
+      emit(state.copyWith(nearbyPlaces: []));
     }
   }
 
@@ -169,37 +108,18 @@ class LocationCubit extends Cubit<LocationState> {
         myLocation: state.address,
       );
 
-      await _authLocalDataSource.saveUser(
-        updatedUser,
-      );
+      await _authLocalDataSource.saveUser(updatedUser);
 
-      emit(
-        state.copyWith(
-          hasSelectedLocation: true,
-        ),
-      );
+      emit(state.copyWith(hasSelectedLocation: true));
     } catch (e) {
-      emit(
-        state.copyWith(
-          errorMessage: e.toString(),
-        ),
-      );
+      emit(state.copyWith(errorMessage: e.toString()));
     }
   }
 
-  void moveMap(
-    LatLng location,
-  ) {
-    mapController.move(
-      location,
-      15,
-    );
+  void moveMap(LatLng location) {
+    mapController.move(location, 15);
 
-    emit(
-      state.copyWith(
-        center: location,
-      ),
-    );
+    emit(state.copyWith(center: location));
   }
 
   @override

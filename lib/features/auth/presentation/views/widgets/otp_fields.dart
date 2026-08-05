@@ -65,7 +65,7 @@ class OtpFieldsState extends State<OtpFields> {
               counterText: '',
               enabledBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.r),
-                borderSide: const BorderSide(color: Color(0xFFD2D6DB)),
+                borderSide: const BorderSide(color: AppColors.borderGray),
               ),
               focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(8.r),

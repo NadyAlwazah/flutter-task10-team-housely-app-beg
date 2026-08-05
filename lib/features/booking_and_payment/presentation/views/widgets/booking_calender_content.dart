@@ -110,7 +110,7 @@ class _BookingCalendarContentState extends State<BookingCalendarContent> {
                 width: 36.w,
                 height: 36.h,
                 decoration: BoxDecoration(
-                  color: AppColors.secondary.withOpacity(0.2),
+                  color: AppColors.primary200.withOpacity(0.2),
                   shape: BoxShape.circle,
                 ),
                 child: Center(
@@ -149,7 +149,7 @@ class _BookingCalendarContentState extends State<BookingCalendarContent> {
           SizedBox(height: 7.h),
 
           // خط فاصل تحت قسم الـ Calendar
-          const Divider(color: Color(0xFFE5E7EB), thickness: 1),
+          const Divider(color: AppColors.lightGrayBackground, thickness: 1),
           SizedBox(height: 14.h),
 
           // 3. اسم الشهر والأسهم في الأعلى (بدائرة ذات لون غامق)
@@ -248,12 +248,12 @@ class _BookingCalendarContentState extends State<BookingCalendarContent> {
                     .toList(),
               ),
               SizedBox(height: 5.h),
-              const Divider(color: Color(0xFFE5E7EB), thickness: 1),
+              const Divider(color: AppColors.lightGrayBackground, thickness: 1),
             ],
           ),
           SizedBox(height: 4.h),
 
-          // 4. جدول الروزنامة 
+          // 4. جدول الروزنامة
           SizedBox(
             height: 275.h,
             child: TableCalendar(

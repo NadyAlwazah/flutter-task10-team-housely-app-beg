@@ -3,33 +3,28 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 
-
-
 Widget buildDivider() {
   return Padding(
-
-    padding: EdgeInsets.only(top: 12.h, left: 48.w), 
+    padding: EdgeInsets.only(top: 12.h, left: 48.w),
     child: Container(
       width: double.infinity,
       height: 2.h,
       margin: EdgeInsets.only(top: 12.h),
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
-        border: Border.all(
-          color: AppColors.vectorColor,
-          width: 0.5.w,
-        ),
+        border: Border.all(color: AppColors.lightGrayBackground, width: 0.5.w),
       ),
     ),
   );
 }
+
 Widget buildNotificationBellIcon({required String assetPath}) {
   return Container(
     width: 36.w,
     height: 36.h,
     decoration: const BoxDecoration(
-      color: Color(0xFFF9F5FF),
-      shape: BoxShape.circle
+      color: AppColors.iconContainerBackground,
+      shape: BoxShape.circle,
     ),
     child: Stack(
       children: [
@@ -39,9 +34,10 @@ Widget buildNotificationBellIcon({required String assetPath}) {
           child: SvgPicture.asset(
             assetPath,
             colorFilter: const ColorFilter.mode(
-               AppColors.chatMessageContainer,
-                 BlendMode.srcIn,
-                      ),            width: 24.w,
+              AppColors.chatPurple,
+              BlendMode.srcIn,
+            ),
+            width: 24.w,
             height: 24.h,
           ),
         ),
@@ -52,7 +48,7 @@ Widget buildNotificationBellIcon({required String assetPath}) {
             width: 4.w,
             height: 4.h,
             decoration: const BoxDecoration(
-              color: AppColors.redCircle,
+              color: AppColors.statusRed,
               shape: BoxShape.circle,
             ),
           ),
@@ -86,17 +82,13 @@ class NotificationItemTile extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-
             if (hasRedDot && imageType == NotificationImageType.svg)
               buildNotificationBellIcon(assetPath: imagePath)
             else if (imageType == NotificationImageType.png)
-
               Container(
                 width: 36.w,
                 height: 36.h,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
+                decoration: const BoxDecoration(shape: BoxShape.circle),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(18.r),
                   child: Image.asset(
@@ -108,13 +100,12 @@ class NotificationItemTile extends StatelessWidget {
                 ),
               )
             else
-
               Container(
                 width: 36.w,
                 height: 36.h,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFF9F5FF),
-                  shape: BoxShape.circle
+                  color: AppColors.iconContainerBackground,
+                  shape: BoxShape.circle,
                 ),
                 child: Center(
                   child: SvgPicture.asset(
@@ -122,20 +113,16 @@ class NotificationItemTile extends StatelessWidget {
                     width: 24.w,
                     height: 24.h,
                     colorFilter: const ColorFilter.mode(
-                      AppColors.chatMessageContainer,
+                      AppColors.chatPurple,
                       BlendMode.srcIn,
-                      ),
+                    ),
                   ),
                 ),
               ),
 
             SizedBox(width: 12.w),
 
-            Expanded(
-              child: RichText(
-                text: textSpan,
-              ),
-            ),
+            Expanded(child: RichText(text: textSpan)),
           ],
         ),
         buildDivider(),

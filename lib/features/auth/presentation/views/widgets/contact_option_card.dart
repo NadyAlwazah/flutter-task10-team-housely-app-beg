@@ -28,7 +28,7 @@ class ContactOptionCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(
-            color: isSelected ? AppColors.primary : const Color(0xFFD2D6DB),
+            color: isSelected ? AppColors.primary : AppColors.borderGray,
             width: 1,
           ),
         ),
@@ -37,7 +37,7 @@ class ContactOptionCard extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(10.h),
               decoration: const BoxDecoration(
-                color: Color(0xFFF4EBFF),
+                color: AppColors.lavenderContainer,
                 shape: BoxShape.circle,
               ),
               child: icon,

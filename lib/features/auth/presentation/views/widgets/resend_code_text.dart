@@ -25,7 +25,7 @@ class ResendCodeText extends StatelessWidget {
           child: Text(
             "Resend code",
             style: Styles.textStyle14W400Inter.copyWith(
-              color: const Color(0xFFF97066),
+              color: AppColors.textRed,
             ),
           ),
         ),

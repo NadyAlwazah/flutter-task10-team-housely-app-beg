@@ -128,7 +128,7 @@ class _CircleIconButton extends StatelessWidget {
             height: 44.r,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFD2D6DB)),
+              border: Border.all(color: AppColors.borderGray),
             ),
             child: Center(
               child: SvgPicture.asset(

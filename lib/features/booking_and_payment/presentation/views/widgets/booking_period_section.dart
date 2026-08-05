@@ -30,7 +30,7 @@ class BookingPeriodSection extends StatelessWidget {
                 width: 36.w,
                 height: 36.h,
                 decoration: BoxDecoration(
-                  color: AppColors.secondary.withOpacity(0.1), // لون فاتح
+                  color: AppColors.primary200.withOpacity(0.1), // لون فاتح
                   shape: BoxShape.circle,
                 ),
                 child: Center(
@@ -73,7 +73,7 @@ class BookingPeriodSection extends StatelessWidget {
             ],
           ),
           SizedBox(height: 5.h),
-          const Divider(color: Color(0xFFE5E7EB), thickness: 1),
+          const Divider(color: AppColors.lightGrayBackground, thickness: 1),
           SizedBox(height: 5.h),
           Text(
             'Make sure to check your date before making any\n  sort of payments',

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 
@@ -117,7 +118,11 @@ class BookingActivityCard extends StatelessWidget {
           ),
         ),
         // خط فاصل تحت العقار بدلاً من المستطيل الخارجي
-        const Divider(color: Color(0xFFE5E7EB), thickness: 1, height: 8),
+        const Divider(
+          color: AppColors.lightGrayBackground,
+          thickness: 1,
+          height: 8,
+        ),
       ],
     );
   }

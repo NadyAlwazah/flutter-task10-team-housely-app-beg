@@ -1,4 +1,4 @@
-import 'package:flutter_task10_team_housely_app_beg/features/explore/presentation/model/place_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/explore/data/model/place_model.dart';
 import 'package:latlong2/latlong.dart';
 
 class LocationState {
@@ -52,8 +52,7 @@ class LocationState {
       address: address ?? this.address,
       center: center ?? this.center,
       nearbyPlaces: nearbyPlaces ?? this.nearbyPlaces,
-      hasSelectedLocation:
-          hasSelectedLocation ?? this.hasSelectedLocation,
+      hasSelectedLocation: hasSelectedLocation ?? this.hasSelectedLocation,
       errorMessage: errorMessage,
     );
   }

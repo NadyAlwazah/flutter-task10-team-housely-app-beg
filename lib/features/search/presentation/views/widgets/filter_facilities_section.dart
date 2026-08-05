@@ -108,7 +108,7 @@ class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
         width: 76.w,
         height: 64.h,
         decoration: BoxDecoration(
-          color: isSelected ? const Color(0xFFE9D7FE) : Colors.white,
+          color: isSelected ? AppColors.primary200 : Colors.white,
           borderRadius: BorderRadius.circular(12.r),
           border: Border.all(color: AppColors.primary, width: 1),
         ),

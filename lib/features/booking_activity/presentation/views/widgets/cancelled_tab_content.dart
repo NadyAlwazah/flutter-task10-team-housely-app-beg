@@ -114,7 +114,7 @@ class CancelledTabContent extends StatelessWidget {
               dateOrPrice: item['date'],
               statusText: item['status'],
               statusColor: const Color(0xFFFFE4E6),
-              statusTextColor: const Color(0xFFF04438),
+              statusTextColor: AppColors.statusRed,
             ),
             SizedBox(height: 5.h),
             //  زر Call Agent (أيقونة هاتف بنفسجي مع نص رمادي غامق)
@@ -128,7 +128,7 @@ class CancelledTabContent extends StatelessWidget {
                     AssetsData.iconCallSvg,
                     width: 24.w,
                     colorFilter: const ColorFilter.mode(
-                      AppColors.chatMessageContainer,
+                      AppColors.chatPurple,
                       BlendMode.srcIn,
                     ),
                   ),
@@ -146,7 +146,11 @@ class CancelledTabContent extends StatelessWidget {
 
             SizedBox(height: 3.h),
             //  خط فاصل نهائي تحت Call Agent ليفصله عن العنصر الذي يليه
-            Divider(color: const Color(0xFFE5E7EB), thickness: 1, height: 16.h),
+            Divider(
+              color: AppColors.lightGrayBackground,
+              thickness: 1,
+              height: 16.h,
+            ),
           ],
         );
       },

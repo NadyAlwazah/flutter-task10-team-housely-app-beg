@@ -8,17 +8,14 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/pr
 class PropertyInfoCard extends StatelessWidget {
   final PropertyModel? property;
 
-  const PropertyInfoCard({
-    super.key,
-    this.property,
-  });
+  const PropertyInfoCard({super.key, this.property});
 
   @override
   Widget build(BuildContext context) {
-
     final String title = property?.title ?? 'Tropis Homestay';
-    final String location = property?.location ?? 'Benhil, Jl. Bendungan Hilir Karet Tengsin,...';
-    final String subText = property != null 
+    final String location =
+        property?.location ?? 'Benhil, Jl. Bendungan Hilir Karet Tengsin,...';
+    final String subText = property != null
         ? '\$${property!.pricePerMonth.toStringAsFixed(0)} / month'
         : '08 Aug - 12 Aug';
     final String? imageUrl = property?.image;
@@ -58,7 +55,7 @@ class PropertyInfoCard extends StatelessWidget {
                         child: Text(
                           location,
                           style: Styles.textStyle10W400Inter.copyWith(
-                            color: AppColors.textSecondary
+                            color: AppColors.textSecondary,
                           ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
@@ -69,7 +66,10 @@ class PropertyInfoCard extends StatelessWidget {
                   SizedBox(height: 9.h),
                   Text(
                     subText,
-                    style:Styles.textStyle12W500Inter.copyWith(fontSize: 10,color: AppColors.textSecondary)
+                    style: Styles.textStyle12W500Inter.copyWith(
+                      fontSize: 10,
+                      color: AppColors.textSecondary,
+                    ),
                   ),
                 ],
               ),
@@ -80,32 +80,31 @@ class PropertyInfoCard extends StatelessWidget {
         const Divider(
           thickness: 0.5,
           height: 0.5,
-          color: AppColors.vectorColor,
+          color: AppColors.lightGrayBackground,
         ),
       ],
     );
   }
 
-
   Widget _buildPropertyImage(String? imageUrl) {
     if (imageUrl != null && imageUrl.isNotEmpty) {
-
       if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
         return Image.network(
           imageUrl,
           width: 80.w,
           height: 62.h,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) => _buildPlaceholderImage(),
+          errorBuilder: (context, error, stackTrace) =>
+              _buildPlaceholderImage(),
         );
       } else {
-
         return Image.asset(
           imageUrl,
           width: 80.w,
           height: 62.h,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) => _buildPlaceholderImage(),
+          errorBuilder: (context, error, stackTrace) =>
+              _buildPlaceholderImage(),
         );
       }
     }

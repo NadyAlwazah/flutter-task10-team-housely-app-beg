@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_app_bar.dart';
 import 'widgets/booking_activity_view_body.dart';
 
@@ -10,7 +11,7 @@ class BookingActivityView extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        backgroundColor: const Color(0xFFFCFCFD),
+        backgroundColor: AppColors.backgroundColor,
         appBar: CustomAppBar(title: 'My Booking', onTapLeading: onBackToHome),
         body: const BookingActivityViewBody(),
       ),

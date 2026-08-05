@@ -80,7 +80,7 @@ class _DetailsViewState extends State<DetailsView> {
                     height: 24.r,
                     colorFilter: ColorFilter.mode(
                       property.isFavorite
-                          ? const Color(0xFFF97066)
+                          ? AppColors.textRed
                           : AppColors.textPrimary,
                       BlendMode.srcIn,
                     ),

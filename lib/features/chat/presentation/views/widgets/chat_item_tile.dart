@@ -12,7 +12,7 @@ class ChatItemTile extends StatelessWidget {
   final String message;
   final String time;
   final String image;
-  final VoidCallback? onTap; 
+  final VoidCallback? onTap;
   final VoidCallback onDeletePressed;
 
   const ChatItemTile({
@@ -32,7 +32,6 @@ class ChatItemTile extends StatelessWidget {
       backgroundColor: Colors.transparent,
       builder: (context) => DeleteConfirmationDialog(
         onDeleteConfirm: () async {
-
           await Future.delayed(const Duration(seconds: 2));
           onDeletePressed();
         },
@@ -45,14 +44,14 @@ class ChatItemTile extends StatelessWidget {
     return Slidable(
       key: ValueKey(name),
       endActionPane: ActionPane(
-        extentRatio: 110 / 375, 
+        extentRatio: 110 / 375,
         motion: const ScrollMotion(),
         children: [
           const SizedBox(width: 4),
           CustomSlidableAction(
             onPressed: (_) {},
             padding: EdgeInsets.zero,
-            backgroundColor: AppColors.greyDeleteContainer,
+            backgroundColor: AppColors.borderGray,
             child: const _SlidableActionButton(
               iconPath: AssetsData.iconMoreSvg,
               label: 'More',
@@ -64,7 +63,7 @@ class ChatItemTile extends StatelessWidget {
               _showDeleteConfirmation(context);
             },
             padding: EdgeInsets.zero,
-            backgroundColor: AppColors.chatMessageContainer,
+            backgroundColor: AppColors.chatPurple,
             child: const _SlidableActionButton(
               iconPath: AssetsData.iconDeleteOutlineSvg,
               label: 'Delete',
@@ -77,7 +76,7 @@ class ChatItemTile extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: onTap,
-            behavior: HitTestBehavior.opaque, 
+            behavior: HitTestBehavior.opaque,
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 4.0.h),
               child: Row(
@@ -86,9 +85,7 @@ class ChatItemTile extends StatelessWidget {
                   Container(
                     width: 44.r,
                     height: 44.r,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                    ),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
                     clipBehavior: Clip.antiAlias,
                     child: Image.asset(
                       image,
@@ -107,12 +104,16 @@ class ChatItemTile extends StatelessWidget {
                           children: [
                             Text(
                               name,
-                              style: Styles.textStyle14W600Inter.copyWith(color: AppColors.textPrimary),
+                              style: Styles.textStyle14W600Inter.copyWith(
+                                color: AppColors.textPrimary,
+                              ),
                             ),
                             Text(
                               time,
                               style: Styles.textStyle12W500Inter.copyWith(
-                                fontSize: 10.sp, color: AppColors.textSecondary),
+                                fontSize: 10.sp,
+                                color: AppColors.textSecondary,
+                              ),
                             ),
                           ],
                         ),
@@ -121,7 +122,9 @@ class ChatItemTile extends StatelessWidget {
                           message,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: Styles.textStyle12W400Inter.copyWith(color: AppColors.textSecondary),
+                          style: Styles.textStyle12W400Inter.copyWith(
+                            color: AppColors.textSecondary,
+                          ),
                         ),
                       ],
                     ),
@@ -135,7 +138,7 @@ class ChatItemTile extends StatelessWidget {
             child: Container(
               width: 271.w,
               height: 0.5.h,
-              color: AppColors.chatMessage2Container,
+              color: AppColors.lightGrayBackground,
             ),
           ),
         ],
