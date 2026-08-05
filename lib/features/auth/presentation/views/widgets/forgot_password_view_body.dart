@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/function_helpers/email_masker.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/data/models/user_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/contact_option_card.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/presentation/views/widgets/section_header.dart';
 import 'package:go_router/go_router.dart';
@@ -17,6 +21,19 @@ class ForgotPasswordViewBody extends StatefulWidget {
 
 class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
   int selectedIndex = 0;
+  UserModel? user;
+
+  @override
+  void initState() {
+    super.initState();
+    loadUserEmail();
+  }
+
+  Future<void> loadUserEmail() async {
+    user = await getIt<AuthLocalDataSource>().getUser();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -47,7 +64,9 @@ class _ForgotPasswordViewBodyState extends State<ForgotPasswordViewBody> {
               height: 24.r,
             ),
             title: 'Via email',
-            value: 'mu***@gmail.com',
+            value: user == null
+                ? 'Not Found'
+                : EmailMasker.maskEmail(user!.email),
             isSelected: selectedIndex == 1,
             onTap: () => setState(() => selectedIndex = 1),
           ),
