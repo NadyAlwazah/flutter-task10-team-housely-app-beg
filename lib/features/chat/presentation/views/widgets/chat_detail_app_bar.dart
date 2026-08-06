@@ -124,7 +124,7 @@ class _ChatDetailAppBarState extends State<ChatDetailAppBar> {
         width: 36.r,
         height: 36.r,
         decoration: const BoxDecoration(
-          color: AppColors.callContainer,
+          color: AppColors.iconContainerBackground,
           shape: BoxShape.circle,
         ),
         alignment: Alignment.center,
@@ -133,7 +133,7 @@ class _ChatDetailAppBarState extends State<ChatDetailAppBar> {
           width: 24.r,
           height: 24.r,
           colorFilter: const ColorFilter.mode(
-            AppColors.chatMessageContainer,
+            AppColors.chatPurple,
             BlendMode.srcIn,
           ),
         ),

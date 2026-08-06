@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/location_data.dart';
-import 'package:flutter_task10_team_housely_app_beg/features/explore/presentation/model/place_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/explore/data/model/place_model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';

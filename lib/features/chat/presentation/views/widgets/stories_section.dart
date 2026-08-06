@@ -5,10 +5,7 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 class StoriesSection extends StatelessWidget {
   final List<String> svgAssets;
 
-  const StoriesSection({
-    Key? key,
-    required this.svgAssets,
-  }) : super(key: key);
+  const StoriesSection({Key? key, required this.svgAssets}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,27 +17,19 @@ class StoriesSection extends StatelessWidget {
             width: 52.r,
             height: 52.r,
             alignment: Alignment.center,
-           
-              decoration: const BoxDecoration(
-                color: AppColors.chatMessageContainer,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                Icons.add,
-                color: Colors.white,
-                size: 24.r,
-         
+
+            decoration: const BoxDecoration(
+              color: AppColors.chatPurple,
+              shape: BoxShape.circle,
             ),
+            child: Icon(Icons.add, color: Colors.white, size: 24.r),
           ),
           SizedBox(width: 12.w),
           Container(
             height: 43.5.h,
             width: 0,
             decoration: BoxDecoration(
-              border: Border.all(
-                color: AppColors.textSecondary,
-                width: 0.5.w,
-              ),
+              border: Border.all(color: AppColors.textSecondary, width: 0.5.w),
             ),
           ),
           SizedBox(width: 12.w),
@@ -56,7 +45,7 @@ class StoriesSection extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: AppColors.chatMessageContainer,
+                      color: AppColors.chatPurple,
                       width: 2.0.w,
                     ),
                   ),

@@ -15,7 +15,7 @@ class SuccessAvatar extends StatelessWidget {
         height: 208.r,
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: Color(0xFFF4EBFF),
+          color: AppColors.lavenderContainer,
         ),
         child: Center(
           child: Container(

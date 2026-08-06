@@ -112,8 +112,8 @@ class CompletedTabContent extends StatelessWidget {
                   image: item.image,
                   dateOrPrice: '08 Aug - 12 Aug',
                   statusText: 'Completed',
-                  statusColor: const Color(0xFFD1FADF),
-                  statusTextColor: const Color(0xFF12B76A),
+                  statusColor: AppColors.greenStatusBackground,
+                  statusTextColor: AppColors.greenTextStatus,
                 ),
                 SizedBox(height: 5.h),
                 GestureDetector(
@@ -132,7 +132,7 @@ class CompletedTabContent extends StatelessWidget {
                         AssetsData.iconChatbookingSvg,
                         width: 24.w,
                         colorFilter: const ColorFilter.mode(
-                          AppColors.chatMessageContainer,
+                          AppColors.chatPurple,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -151,7 +151,7 @@ class CompletedTabContent extends StatelessWidget {
                 SizedBox(height: 5.h),
                 // خط فاصل بين Write review و Call Agent
                 Divider(
-                  color: const Color(0xFFE5E7EB),
+                  color: AppColors.lightGrayBackground,
                   thickness: 1,
                   height: 4.h,
                 ),
@@ -167,7 +167,7 @@ class CompletedTabContent extends StatelessWidget {
                         AssetsData.iconCallSvg,
                         width: 24.w,
                         colorFilter: const ColorFilter.mode(
-                          AppColors.chatMessageContainer,
+                          AppColors.chatPurple,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -186,7 +186,7 @@ class CompletedTabContent extends StatelessWidget {
 
                 // خط فاصل نهائي تحت هذا العنصر ليفصله عن العقار التالي
                 Divider(
-                  color: const Color(0xFFE5E7EB),
+                  color: AppColors.lightGrayBackground,
                   thickness: 1,
                   height: 16.h,
                 ),

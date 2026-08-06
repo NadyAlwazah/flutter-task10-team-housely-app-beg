@@ -2,6 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:go_router/go_router.dart';
@@ -36,9 +37,7 @@ class SignOutButton extends StatelessWidget {
         },
         child: Text(
           'Sign Out',
-          style: Styles.textStyle16W500Inter.copyWith(
-            color: const Color(0xFFF97066),
-          ),
+          style: Styles.textStyle16W500Inter.copyWith(color: AppColors.textRed),
         ),
       ),
     );

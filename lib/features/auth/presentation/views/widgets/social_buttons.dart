@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 
 class SocialButtons extends StatelessWidget {
@@ -24,7 +25,7 @@ class SocialButtons extends StatelessWidget {
       height: 46.r,
       decoration: const BoxDecoration(
         shape: BoxShape.circle,
-        color: Color(0xFFE5E7EB),
+        color: AppColors.lightGrayBackground,
       ),
       child: Center(
         child: SvgPicture.asset(assetPath, width: 24.r, height: 24.r),

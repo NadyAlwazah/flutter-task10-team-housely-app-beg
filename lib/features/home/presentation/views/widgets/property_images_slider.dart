@@ -57,7 +57,7 @@ class _PropertyImagesSliderState extends State<PropertyImagesSlider> {
                     dotHeight: 8.h,
                     dotWidth: 8.w,
                     activeDotColor: AppColors.primary,
-                    dotColor: const Color(0XFFD2D6DB),
+                    dotColor: AppColors.borderGray,
                   ),
                 ),
               ),

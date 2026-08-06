@@ -24,9 +24,11 @@ class TopLocationItem extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.only(left: 4.w, right: 8.w, top: 4.h, bottom: 4.h),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.primary : const Color(0xFFF9F5FF),
+          color: isSelected
+              ? AppColors.primary
+              : AppColors.iconContainerBackground,
           borderRadius: BorderRadius.circular(10.r),
-          border: Border.all(color: const Color(0xFFD2D6DB)),
+          border: Border.all(color: AppColors.borderGray),
         ),
         child: Row(
           children: [
@@ -44,7 +46,7 @@ class TopLocationItem extends StatelessWidget {
               name,
               style: Styles.textStyle12W600Inter.copyWith(
                 color: isSelected
-                    ? const Color(0xFFF9F5FF)
+                    ? AppColors.iconContainerBackground
                     : AppColors.textSecondary,
               ),
             ),

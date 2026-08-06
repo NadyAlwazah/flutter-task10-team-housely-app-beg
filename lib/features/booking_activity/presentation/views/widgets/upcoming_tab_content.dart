@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_activity/presentation/views/widgets/empty_booking.dart';
 import 'booking_activity_card.dart';
 
@@ -30,11 +31,11 @@ class UpcomingTabContent extends StatelessWidget {
               dateOrPrice: item['date'],
               statusText: item['status'], // 'Checkin' أو 'Waiting payment'
               statusColor: item['status'] == 'Checkin'
-                  ? const Color(0xFFD1FADF)
+                  ? AppColors.greenStatusBackground
                   : const Color(0xFFFFE4E6),
               statusTextColor: item['status'] == 'Checkin'
-                  ? const Color(0xFF12B76A)
-                  : const Color(0xFFF04438),
+                  ? AppColors.greenTextStatus
+                  : AppColors.statusRed,
             ),
           ],
         );

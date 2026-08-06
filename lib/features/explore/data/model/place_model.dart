@@ -3,7 +3,7 @@ import 'package:latlong2/latlong.dart';
 class PlaceModel {
   final String id;
   final String name;
-  final String type; // مثال: restaurant, cafe, shop
+  final String type;
   final LatLng location;
 
   PlaceModel({

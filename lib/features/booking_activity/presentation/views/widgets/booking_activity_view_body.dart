@@ -82,7 +82,7 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
           height: 52.h,
           padding: EdgeInsets.all(4.w),
           decoration: BoxDecoration(
-            color: AppColors.chatMessage2Container,
+            color: AppColors.lightGrayBackground,
             borderRadius: BorderRadius.circular(10.r),
           ),
           child: TabBar(

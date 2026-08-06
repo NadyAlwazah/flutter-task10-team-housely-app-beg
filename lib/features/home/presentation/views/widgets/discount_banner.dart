@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 
@@ -34,7 +35,7 @@ class DiscountBanner extends StatelessWidget {
               Text(
                 "*Expired 25 Aug 2022",
                 style: Styles.textStyle12W400Inter.copyWith(
-                  color: const Color(0xFFE5E7EB),
+                  color: AppColors.lightGrayBackground,
                 ),
               ),
             ],

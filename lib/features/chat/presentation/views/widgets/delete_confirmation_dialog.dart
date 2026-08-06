@@ -8,13 +8,12 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 class DeleteConfirmationDialog extends StatefulWidget {
   final Future<void> Function() onDeleteConfirm;
 
-  const DeleteConfirmationDialog({
-    Key? key,
-    required this.onDeleteConfirm,
-  }) : super(key: key);
+  const DeleteConfirmationDialog({Key? key, required this.onDeleteConfirm})
+    : super(key: key);
 
   @override
-  State<DeleteConfirmationDialog> createState() => _DeleteConfirmationDialogState();
+  State<DeleteConfirmationDialog> createState() =>
+      _DeleteConfirmationDialogState();
 }
 
 class _DeleteConfirmationDialogState extends State<DeleteConfirmationDialog> {
@@ -51,7 +50,7 @@ class _DeleteConfirmationDialogState extends State<DeleteConfirmationDialog> {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: const Color(0xFFF4EBFF),
+                color: AppColors.lavenderContainer,
                 width: 9.81.r,
               ),
             ),
@@ -61,7 +60,7 @@ class _DeleteConfirmationDialogState extends State<DeleteConfirmationDialog> {
               width: 66.r,
               height: 66.r,
               colorFilter: const ColorFilter.mode(
-                AppColors.chatMessageContainer,
+                AppColors.chatPurple,
                 BlendMode.srcIn,
               ),
             ),
@@ -70,20 +69,24 @@ class _DeleteConfirmationDialogState extends State<DeleteConfirmationDialog> {
           Text(
             'Are you sure you want to\ndelete this message ?',
             textAlign: TextAlign.center,
-            style: Styles.textStyle20W600Inter.copyWith(color: AppColors.textPrimary),
+            style: Styles.textStyle20W600Inter.copyWith(
+              color: AppColors.textPrimary,
+            ),
           ),
           SizedBox(height: 16.h),
           Text(
             'the message will be deleted from this\ndevice',
             textAlign: TextAlign.center,
-            style: Styles.textStyle14W400Inter.copyWith(color: AppColors.textSecondary),
+            style: Styles.textStyle14W400Inter.copyWith(
+              color: AppColors.textSecondary,
+            ),
           ),
           SizedBox(height: 40.h),
           if (_isLoading)
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8.h),
               child: const CircularProgressIndicator(
-                color: AppColors.chatMessageContainer,
+                color: AppColors.chatPurple,
               ),
             )
           else
@@ -100,7 +103,7 @@ class _DeleteConfirmationDialogState extends State<DeleteConfirmationDialog> {
                 SizedBox(width: 16.w),
                 _DialogButton(
                   text: 'Delete',
-                  backgroundColor: AppColors.greyDeleteContainer,
+                  backgroundColor: AppColors.borderGray,
                   pressedColor: AppColors.primary,
                   textColor: Colors.white,
                   onTap: () async {
