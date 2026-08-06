@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/location_data.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/explore/data/model/place_model.dart';
@@ -7,24 +8,37 @@ import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
 
 class LocationService {
+  /// التحقق من أن خدمة الموقع (GPS) مفعلة
+  Future<bool> isLocationServiceEnabled() async {
+    return await Geolocator.isLocationServiceEnabled();
+  }
+
+  /// فتح إعدادات الموقع
+  Future<void> openLocationSettings() async {
+    await Geolocator.openLocationSettings();
+  }
+
   /// جلب الموقع الحالي للمستخدم
   Future<LocationData> getCurrentLocation() async {
+    // التحقق من تشغيل خدمة الموقع
     final bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
-      throw Exception('Location services are disabled.');
+      throw Exception('LOCATION_SERVICE_DISABLED');
     }
 
+    // التحقق من الصلاحيات
     LocationPermission permission = await Geolocator.checkPermission();
+
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
     }
 
     if (permission == LocationPermission.denied) {
-      throw Exception('Location permission denied.');
+      throw Exception('LOCATION_PERMISSION_DENIED');
     }
 
     if (permission == LocationPermission.deniedForever) {
-      throw Exception('Location permission denied forever.');
+      throw Exception('LOCATION_PERMISSION_DENIED_FOREVER');
     }
 
     final Position position = await Geolocator.getCurrentPosition(
@@ -34,18 +48,26 @@ class LocationService {
     final LatLng location = LatLng(position.latitude, position.longitude);
     final String address = await getAddressFromLatLng(location);
 
-    return LocationData(address: address, location: location);
+    return LocationData(
+      address: address,
+      location: location,
+    );
   }
 
   /// تحويل الإحداثيات إلى عنوان نصي
   Future<String> getAddressFromLatLng(LatLng location) async {
     try {
       final String url =
-          'https://nominatim.openstreetmap.org/reverse?format=json&lat=${location.latitude}&lon=${location.longitude}';
+          'https://nominatim.openstreetmap.org/reverse'
+          '?format=json'
+          '&lat=${location.latitude}'
+          '&lon=${location.longitude}';
 
       final response = await http.get(
         Uri.parse(url),
-        headers: {'User-Agent': 'com.example.housely_app'},
+        headers: {
+          'User-Agent': 'com.example.housely_app',
+        },
       );
 
       if (response.statusCode == 200) {
@@ -53,6 +75,7 @@ class LocationService {
         return data['display_name'] ?? 'Unknown location';
       }
     } catch (_) {}
+
     return 'Failed to get address';
   }
 
@@ -92,24 +115,21 @@ class LocationService {
 
           for (final element in elements) {
             final tags = element['tags'] ?? {};
+
             final double? lat = element['lat']?.toDouble();
             final double? lon = element['lon']?.toDouble();
 
             if (lat == null || lon == null) continue;
 
-            final String name =
-                tags['name'] ??
-                tags['brand'] ??
-                tags['amenity'] ??
-                tags['shop'] ??
-                'Nearby Place';
-            final String type = tags['amenity'] ?? tags['shop'] ?? 'place';
-
             places.add(
               PlaceModel(
                 id: element['id'].toString(),
-                name: name,
-                type: type,
+                name: tags['name'] ??
+                    tags['brand'] ??
+                    tags['amenity'] ??
+                    tags['shop'] ??
+                    'Nearby Place',
+                type: tags['amenity'] ?? tags['shop'] ?? 'place',
                 location: LatLng(lat, lon),
               ),
             );
@@ -117,9 +137,9 @@ class LocationService {
 
           debugPrint('Fetched ${places.length} places successfully!');
           return places;
-        } else {
-          debugPrint(' Endpoint $endpoint status code: ${response.statusCode}');
         }
+
+        debugPrint('Endpoint $endpoint status code: ${response.statusCode}');
       } catch (e) {
         debugPrint('Endpoint $endpoint failed: $e');
       }

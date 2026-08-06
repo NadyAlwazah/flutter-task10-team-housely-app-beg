@@ -128,4 +128,21 @@ class LocationCubit extends Cubit<LocationState> {
     mapController.dispose();
     return super.close();
   }
+
+
+
+  Future<void> initializeIfLocationEnabled({bool loadNearby = false}) async {
+  final enabled = await _locationService.isLocationServiceEnabled();
+
+  if (!enabled) {
+    emit(
+      state.copyWith(
+        errorMessage: 'LOCATION_SERVICE_DISABLED',
+      ),
+    );
+    return;
+  }
+
+  await initialize(loadNearby: loadNearby);
+}
 }
