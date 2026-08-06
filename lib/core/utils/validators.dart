@@ -25,7 +25,7 @@ class Validators {
     }
 
     final regex = RegExp(
-      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*]).{8,}$',
+      r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#\$%^&*-]).{8,}$',
     );
 
     if (!regex.hasMatch(value)) {
