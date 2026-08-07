@@ -22,6 +22,9 @@ class BottomBarLayout extends StatefulWidget {
 class _BottomBarLayoutState extends State<BottomBarLayout> {
   int currentIndex = 0;
 
+  /// لمعرفة هل تم فتح صفحة Explore مرة واحدة
+  bool _exploreVisited = false;
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -47,24 +50,43 @@ class _BottomBarLayoutState extends State<BottomBarLayout> {
                   )
                 : const HomeView(),
 
-            ExploreView(onBackToHome: () => setState(() => currentIndex = 0)),
+            // لا يتم إنشاء Explore إلا عند أول زيارة
+            _exploreVisited
+                ? ExploreView(
+                    onBackToHome: () => setState(() => currentIndex = 0),
+                  )
+                : const SizedBox(),
 
-            FavouriteView(onBackToHome: () => setState(() => currentIndex = 0)),
+            FavouriteView(
+              onBackToHome: () => setState(() => currentIndex = 0),
+            ),
 
             BookingActivityView(
               onBackToHome: () => setState(() => currentIndex = 0),
             ),
-            ProfileView(onBackToHome: () => setState(() => currentIndex = 0)),
+
+            ProfileView(
+              onBackToHome: () => setState(() => currentIndex = 0),
+            ),
           ];
 
           return Scaffold(
-            body: IndexedStack(index: currentIndex, children: pages),
+            body: IndexedStack(
+              index: currentIndex,
+              children: pages,
+            ),
             bottomNavigationBar: currentIndex == 1
                 ? null
                 : CustomBottomNavBar(
                     currentIndex: currentIndex,
                     onTap: (index) {
-                      setState(() => currentIndex = index);
+                      if (index == 1) {
+                        _exploreVisited = true;
+                      }
+
+                      setState(() {
+                        currentIndex = index;
+                      });
                     },
                   ),
           );
