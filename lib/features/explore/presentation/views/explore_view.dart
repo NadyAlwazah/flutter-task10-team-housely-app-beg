@@ -67,6 +67,9 @@ class _ExploreViewState extends State<ExploreView>
             TextButton(
               onPressed: () {
                 Navigator.pop(dialogContext);
+
+                // العودة إلى الصفحة الرئيسية
+                widget.onBackToHome();
               },
               child: const Text('Cancel'),
             ),
@@ -91,6 +94,10 @@ class _ExploreViewState extends State<ExploreView>
 
       if (enabled) {
         _locationCubit.initialize(loadNearby: true);
+      } else {
+        if (mounted) {
+          widget.onBackToHome();
+        }
       }
     }
   }
