@@ -50,31 +50,26 @@ class _BottomBarLayoutState extends State<BottomBarLayout> {
                   )
                 : const HomeView(),
 
-            // لا يتم إنشاء Explore إلا عند أول زيارة
             _exploreVisited
                 ? ExploreView(
-                    onBackToHome: () => setState(() => currentIndex = 0),
+                    onBackToHome: () => setState(() {
+                      currentIndex = 0;
+                      _exploreVisited = false;
+                    }),
                   )
                 : const SizedBox(),
 
-            FavouriteView(
-              onBackToHome: () => setState(() => currentIndex = 0),
-            ),
+            FavouriteView(onBackToHome: () => setState(() => currentIndex = 0)),
 
             BookingActivityView(
               onBackToHome: () => setState(() => currentIndex = 0),
             ),
 
-            ProfileView(
-              onBackToHome: () => setState(() => currentIndex = 0),
-            ),
+            ProfileView(onBackToHome: () => setState(() => currentIndex = 0)),
           ];
 
           return Scaffold(
-            body: IndexedStack(
-              index: currentIndex,
-              children: pages,
-            ),
+            body: IndexedStack(index: currentIndex, children: pages),
             bottomNavigationBar: currentIndex == 1
                 ? null
                 : CustomBottomNavBar(
