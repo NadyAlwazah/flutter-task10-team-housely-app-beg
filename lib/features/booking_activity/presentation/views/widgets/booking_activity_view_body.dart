@@ -66,6 +66,20 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
     }
   }
 
+  // دالة لحذف العنصر من القائمة وتحديث التخزين المحلي
+  Future<void> _deleteBooking(int index) async {
+    setState(() {
+      upcomingBookings.removeAt(index);
+    });
+
+    // تحديث القائمة في الـ SharedPreferences
+    String encodedList = jsonEncode(upcomingBookings);
+    await SharedPreferencesHelper.saveString(
+      'saved_bookings_list',
+      encodedList,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     _fetchSavedBookings(); // تحديث البيانات عند إعادة بناء الواجهة
@@ -112,7 +126,10 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
         Expanded(
           child: TabBarView(
             children: [
-              UpcomingTabContent(upcomingBookings: upcomingBookings),
+              UpcomingTabContent(
+                upcomingBookings: upcomingBookings,
+                onDeleteBooking: _deleteBooking,
+              ),
               const CompletedTabContent(),
               const CancelledTabContent(),
             ],

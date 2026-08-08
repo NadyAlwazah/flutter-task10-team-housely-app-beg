@@ -7,9 +7,16 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 
 class DeleteConfirmationDialog extends StatefulWidget {
   final Future<void> Function() onDeleteConfirm;
+  final String titleText;
+  final String subtitleText;
 
-  const DeleteConfirmationDialog({Key? key, required this.onDeleteConfirm})
-    : super(key: key);
+  const DeleteConfirmationDialog({
+    super.key,
+    required this.onDeleteConfirm,
+    this.titleText = 'Are you sure you want to\ndelete this message ?',
+
+    this.subtitleText = 'the message will be deleted from this\ndevice',
+  });
 
   @override
   State<DeleteConfirmationDialog> createState() =>
@@ -67,7 +74,7 @@ class _DeleteConfirmationDialogState extends State<DeleteConfirmationDialog> {
           ),
           SizedBox(height: 24.h),
           Text(
-            'Are you sure you want to\ndelete this message ?',
+            widget.titleText,
             textAlign: TextAlign.center,
             style: Styles.textStyle20W600Inter.copyWith(
               color: AppColors.textPrimary,
@@ -75,7 +82,7 @@ class _DeleteConfirmationDialogState extends State<DeleteConfirmationDialog> {
           ),
           SizedBox(height: 16.h),
           Text(
-            'the message will be deleted from this\ndevice',
+            widget.subtitleText,
             textAlign: TextAlign.center,
             style: Styles.textStyle14W400Inter.copyWith(
               color: AppColors.textSecondary,
