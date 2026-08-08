@@ -125,7 +125,6 @@ class ExploreViewBody extends StatelessWidget {
               cardIcon: Icons.explore,
               onBackPressed: onBackToHome,
             ),
-            
           ],
         );
       },
