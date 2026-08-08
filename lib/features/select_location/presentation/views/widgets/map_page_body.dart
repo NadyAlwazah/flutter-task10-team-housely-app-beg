@@ -51,7 +51,7 @@ class MapPageBody extends StatelessWidget {
           ),
           SizedBox(height: 20.h),
           _buildSearchBar(),
-          const Spacer(),
+          SizedBox(height: 339.h),
           _buildLocationDetailsCard(),
           if (!hideChooseLocationButton) ...[
             SizedBox(height: 20.h),
@@ -127,7 +127,7 @@ class MapPageBody extends StatelessWidget {
                 width: 40.r,
                 height: 40.r,
                 decoration: const BoxDecoration(
-                  color: AppColors.lavenderContainer,
+                  color: Color(0xFFF4EBFF),
                   shape: BoxShape.circle,
                 ),
                 child: Icon(cardIcon, size: 18.r, color: AppColors.primary),
