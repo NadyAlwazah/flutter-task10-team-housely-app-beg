@@ -24,7 +24,7 @@ class ChatMessageModel {
 class ChatDetailViewBody extends StatefulWidget {
   final AgentModel? agent;
 
-  const ChatDetailViewBody({Key? key, this.agent}) : super(key: key);
+  const ChatDetailViewBody({super.key, this.agent});
 
   @override
   State<ChatDetailViewBody> createState() => _ChatDetailViewBodyState();
@@ -244,7 +244,7 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
                       time: msg.time,
                     );
                   }
-                }).toList(),
+                }),
               ],
             ),
           ),

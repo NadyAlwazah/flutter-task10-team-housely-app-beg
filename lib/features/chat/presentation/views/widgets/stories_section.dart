@@ -5,7 +5,7 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 class StoriesSection extends StatelessWidget {
   final List<String> svgAssets;
 
-  const StoriesSection({Key? key, required this.svgAssets}) : super(key: key);
+  const StoriesSection({super.key, required this.svgAssets});
 
   @override
   Widget build(BuildContext context) {

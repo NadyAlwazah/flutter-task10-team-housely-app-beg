@@ -158,7 +158,7 @@ class SelectLocationView extends StatelessWidget {
           children: [
 
 
-            Expanded(
+            const Expanded(
 
               child:
                   SelectLocationViewBody(),

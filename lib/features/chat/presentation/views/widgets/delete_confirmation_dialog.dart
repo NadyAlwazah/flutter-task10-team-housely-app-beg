@@ -141,13 +141,13 @@ class _DialogButton extends StatefulWidget {
   final VoidCallback onTap;
 
   const _DialogButton({
-    Key? key,
+    super.key,
     required this.text,
     required this.backgroundColor,
     required this.pressedColor,
     required this.textColor,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   State<_DialogButton> createState() => _DialogButtonState();

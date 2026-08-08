@@ -5,7 +5,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/widgets/stories_section.dart';
 
 class ChatListViewBody extends StatelessWidget {
-  const ChatListViewBody({Key? key}) : super(key: key);
+  const ChatListViewBody({super.key});
 
   final List<String> storiesSvgList = const [
     AssetsData.imag1chatPng,
