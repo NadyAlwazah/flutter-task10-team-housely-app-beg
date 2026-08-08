@@ -8,7 +8,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/ag
 import 'chat_item_tile.dart';
 
 class MessageList extends StatefulWidget {
-  const MessageList({Key? key}) : super(key: key);
+  const MessageList({super.key});
 
   @override
   State<MessageList> createState() => _MessageListState();

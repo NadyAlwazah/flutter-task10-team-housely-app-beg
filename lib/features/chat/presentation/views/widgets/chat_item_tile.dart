@@ -16,14 +16,14 @@ class ChatItemTile extends StatelessWidget {
   final VoidCallback onDeletePressed;
 
   const ChatItemTile({
-    Key? key,
+    super.key,
     required this.name,
     required this.message,
     required this.time,
     required this.image,
     this.onTap,
     required this.onDeletePressed,
-  }) : super(key: key);
+  });
 
   void _showDeleteConfirmation(BuildContext context) {
     showModalBottomSheet(
@@ -153,11 +153,10 @@ class _SlidableActionButton extends StatelessWidget {
   final Color iconColor;
 
   const _SlidableActionButton({
-    Key? key,
     required this.iconPath,
     required this.label,
     required this.iconColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
