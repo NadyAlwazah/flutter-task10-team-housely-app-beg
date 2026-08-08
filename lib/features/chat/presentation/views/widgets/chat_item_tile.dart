@@ -153,7 +153,6 @@ class _SlidableActionButton extends StatelessWidget {
   final Color iconColor;
 
   const _SlidableActionButton({
-    super.key,
     required this.iconPath,
     required this.label,
     required this.iconColor,
