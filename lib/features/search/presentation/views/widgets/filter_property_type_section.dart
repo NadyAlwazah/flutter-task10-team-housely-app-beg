@@ -6,60 +6,50 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/data/manager/filter_cubit/filter_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/presentation/views/widgets/filter_checkbox_item.dart';
 
-class FilterPropertyTypeSection extends StatefulWidget {
+class FilterPropertyTypeSection extends StatelessWidget {
   const FilterPropertyTypeSection({super.key});
 
   @override
-  State<FilterPropertyTypeSection> createState() =>
-      _FilterPropertyTypeSectionState();
-}
-
-class _FilterPropertyTypeSectionState extends State<FilterPropertyTypeSection> {
-  List<String> propertyTypes = [];
-
-  void _toggle(String value, bool isSelected) {
-    setState(() {
-      if (isSelected) {
-        propertyTypes.add(value);
-      } else {
-        propertyTypes.remove(value);
-      }
-    });
-
-    // FilterCubit نرسل التغيير إلى
-    context.read<FilterCubit>().togglePropertyType(value);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<FilterCubit>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Property Type", style: Styles.textStyle16W600Inter),
+
         SizedBox(height: 16.h),
 
         FilterCheckboxItem(
           title: "Apartment",
-          value: propertyTypes.contains("Apartment"),
-          onChanged: (val) => _toggle("Apartment", val!),
+          value: cubit.propertyTypes.contains("Apartment"),
+          onChanged: (_) {
+            context.read<FilterCubit>().togglePropertyType("Apartment");
+          },
         ),
 
         FilterCheckboxItem(
           title: "Penthouse",
-          value: propertyTypes.contains("Penthouse"),
-          onChanged: (val) => _toggle("Penthouse", val!),
+          value: cubit.propertyTypes.contains("Penthouse"),
+          onChanged: (_) {
+            context.read<FilterCubit>().togglePropertyType("Penthouse");
+          },
         ),
 
         FilterCheckboxItem(
           title: "Hotel",
-          value: propertyTypes.contains("Hotel"),
-          onChanged: (val) => _toggle("Hotel", val!),
+          value: cubit.propertyTypes.contains("Hotel"),
+          onChanged: (_) {
+            context.read<FilterCubit>().togglePropertyType("Hotel");
+          },
         ),
 
         FilterCheckboxItem(
           title: "Villa",
-          value: propertyTypes.contains("Villa"),
-          onChanged: (val) => _toggle("Villa", val!),
+          value: cubit.propertyTypes.contains("Villa"),
+          onChanged: (_) {
+            context.read<FilterCubit>().togglePropertyType("Villa");
+          },
         ),
 
         SizedBox(height: 4.h),

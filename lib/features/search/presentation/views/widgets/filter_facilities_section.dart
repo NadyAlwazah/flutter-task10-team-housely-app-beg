@@ -8,33 +8,18 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/data/manager/filter_cubit/filter_cubit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class FilterFacilitiesSection extends StatefulWidget {
+class FilterFacilitiesSection extends StatelessWidget {
   const FilterFacilitiesSection({super.key});
 
   @override
-  State<FilterFacilitiesSection> createState() =>
-      _FilterFacilitiesSectionState();
-}
-
-class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
-  List<String> facilities = ["Bed room"];
-
-  void _toggle(String value) {
-    setState(() {
-      if (facilities.contains(value)) {
-        facilities.remove(value);
-      } else {
-        facilities.add(value);
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<FilterCubit>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text("Facilities", style: Styles.textStyle16W600Inter),
+
         SizedBox(height: 16.h),
 
         Row(
@@ -43,13 +28,12 @@ class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
             _buildFacilityItem(
               icon: const Icon(Icons.bed_outlined, color: AppColors.primary),
               title: "Bed room",
-              isSelected: facilities.contains("Bed room"),
+              isSelected: cubit.facilities.contains("Bed room"),
               onTap: () {
-                _toggle("Bed room");
-
                 context.read<FilterCubit>().toggleFacility("Bed room");
               },
             ),
+
             _buildFacilityItem(
               icon: SvgPicture.asset(
                 AssetsData.iconBathubSvg,
@@ -57,13 +41,12 @@ class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
                 height: 20.r,
               ),
               title: "Bathtub",
-              isSelected: facilities.contains("Bathtub"),
-
+              isSelected: cubit.facilities.contains("Bathtub"),
               onTap: () {
-                _toggle("Bathtub");
                 context.read<FilterCubit>().toggleFacility("Bathtub");
               },
             ),
+
             _buildFacilityItem(
               icon: SvgPicture.asset(
                 AssetsData.iconAcSvg,
@@ -71,12 +54,12 @@ class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
                 height: 21.r,
               ),
               title: "AC",
-              isSelected: facilities.contains("AC"),
+              isSelected: cubit.facilities.contains("AC"),
               onTap: () {
-                _toggle("AC");
                 context.read<FilterCubit>().toggleFacility("AC");
               },
             ),
+
             _buildFacilityItem(
               icon: FaIcon(
                 FontAwesomeIcons.wifi,
@@ -84,9 +67,8 @@ class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
                 size: 18.r,
               ),
               title: "WIFI",
-              isSelected: facilities.contains("WIFI"),
+              isSelected: cubit.facilities.contains("WIFI"),
               onTap: () {
-                _toggle("WIFI");
                 context.read<FilterCubit>().toggleFacility("WIFI");
               },
             ),
@@ -116,7 +98,9 @@ class _FilterFacilitiesSectionState extends State<FilterFacilitiesSection> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             icon,
+
             SizedBox(height: 4.h),
+
             Text(
               title,
               style: Styles.textStyle12W500Inter.copyWith(
