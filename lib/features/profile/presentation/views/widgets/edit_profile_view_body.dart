@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart' show ReadContext, BlocConsumer;
+import 'package:flutter_bloc/flutter_bloc.dart'
+    show ReadContext, BlocConsumer, BlocBuilder;
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/app_loader.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
@@ -9,6 +11,7 @@ import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manage
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/edit_profile_form_fields.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/profile_image_widget.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditProfileViewBody extends StatefulWidget {
   const EditProfileViewBody({super.key});
@@ -24,6 +27,7 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
   TextEditingController emailController = TextEditingController();
   TextEditingController dateController = TextEditingController();
 
+  late String profileImage;
   @override
   void initState() {
     super.initState();
@@ -66,6 +70,19 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
     fullNameController.text = "$newFirstName $lastName";
   }
 
+  Future<void> _pickImage() async {
+    final ImagePicker picker = ImagePicker();
+    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+    if (image != null) {
+      setState(() {
+        profileImage = image.path;
+      });
+      if (!mounted) return;
+      context.read<ProfileCubit>().updateProfileImage(image.path);
+    }
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -85,7 +102,20 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
           child: Column(
             children: [
               SizedBox(height: 32.h),
-              const ProfileImageWidget(),
+              BlocBuilder<ProfileCubit, ProfileState>(
+                builder: (context, state) {
+                  if (state is ProfileLoading) {
+                    return const AppLoader();
+                  } else if (state is ProfileLoaded) {
+                    return ProfileImageWidget(
+                      profileImage: state.user.profileImage!,
+                      onCameraTap: _pickImage,
+                    );
+                  } else {
+                    return const Text("No user data");
+                  }
+                },
+              ),
 
               EditProfileFormFields(
                 fullNameController: fullNameController,

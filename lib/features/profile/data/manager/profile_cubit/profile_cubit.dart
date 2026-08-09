@@ -52,4 +52,32 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileFailure(message: e.toString()));
     }
   }
+
+  Future<void> updateProfileImage(String imagePath) async {
+    emit(ProfileLoading());
+
+    try {
+      final user = await _local.getUser();
+
+      if (user == null) {
+        emit(ProfileFailure(message: "No user found"));
+        return;
+      }
+
+      final updatedUser = UserModel(
+        fullName: user.fullName,
+        email: user.email,
+        rememberMe: user.rememberMe,
+        dateOfBirth: user.dateOfBirth,
+        myLocation: user.myLocation,
+        profileImage: imagePath,
+      );
+
+      await _local.saveUser(updatedUser);
+
+      emit(ProfileLoaded(user: updatedUser));
+    } catch (e) {
+      emit(ProfileFailure(message: e.toString()));
+    }
+  }
 }
