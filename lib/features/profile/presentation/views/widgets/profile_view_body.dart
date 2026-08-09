@@ -31,22 +31,28 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
         child: Column(
           children: [
             const SizedBox(height: 56),
-            ProfileImageWidget(
-              onCameraTap: () {
-                context.push(
-                  AppRouter.kEditProfile,
-                  extra: context.read<ProfileCubit>(),
-                );
-              },
-            ),
-
-            const SizedBox(height: 16),
             BlocBuilder<ProfileCubit, ProfileState>(
               builder: (context, state) {
                 if (state is ProfileLoading) {
                   return const AppLoader();
                 } else if (state is ProfileLoaded) {
-                  return UserInfoWidget(user: state.user);
+                  return Column(
+                    children: [
+                      ProfileImageWidget(
+                        profileImage: state.user.profileImage!,
+                        onCameraTap: () {
+                          context.push(
+                            AppRouter.kEditProfile,
+                            extra: context.read<ProfileCubit>(),
+                          );
+                        },
+                      ),
+
+                      const SizedBox(height: 16),
+
+                      UserInfoWidget(user: state.user),
+                    ],
+                  );
                 } else {
                   return const Text("No user data");
                 }

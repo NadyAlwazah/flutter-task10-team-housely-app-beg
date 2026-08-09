@@ -1,20 +1,30 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 
 class ProfileImageWidget extends StatelessWidget {
   final VoidCallback? onCameraTap;
-
-  const ProfileImageWidget({super.key, this.onCameraTap});
+  final String profileImage;
+  const ProfileImageWidget({
+    super.key,
+    this.onCameraTap,
+    required this.profileImage,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final bool isFileImage = profileImage.startsWith('/data');
     return Stack(
       children: [
-        const CircleAvatar(
-          radius: 50,
-          backgroundImage: AssetImage(AssetsData.imageProfilePng),
+        CircleAvatar(
+          radius: 50.r,
+          backgroundImage: isFileImage
+              ? FileImage(File(profileImage))
+              : AssetImage(profileImage) as ImageProvider,
         ),
         Positioned(
           bottom: 0,

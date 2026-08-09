@@ -1,9 +1,12 @@
+import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
+
 class UserModel {
   final String fullName;
   final String email;
   final bool rememberMe;
   final String? dateOfBirth;
   final String? myLocation;
+  final String? profileImage;
 
   UserModel({
     required this.fullName,
@@ -11,6 +14,7 @@ class UserModel {
     this.rememberMe = false,
     this.dateOfBirth,
     this.myLocation,
+    this.profileImage,
   });
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
@@ -20,6 +24,8 @@ class UserModel {
       rememberMe: map['remember_me'] ?? false,
       dateOfBirth: map['date_of_birth'] ?? '',
       myLocation: map['my_location'] ?? '',
+      profileImage:
+          map['profile_image'] ?? AssetsData.imageProfileImageDefaultPng,
     );
   }
 
@@ -30,6 +36,7 @@ class UserModel {
       'remember_me': rememberMe,
       'date_of_birth': dateOfBirth,
       'my_location': myLocation,
+      'profile_image': profileImage,
     };
   }
 }

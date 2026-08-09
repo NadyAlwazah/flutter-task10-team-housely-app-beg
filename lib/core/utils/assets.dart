@@ -60,6 +60,8 @@ class AssetsData {
   static const iconDocumentActiveSvg = "${_icons}document_active.svg";
   static const iconHeartActiveSvg = "${_icons}heart_active.svg";
   static const iconProfileActiveSvg = "${_icons}profile_active.svg";
+  static const imageProfileImageDefaultPng =
+      "${_images}profile_image_default.png";
 
   // Images
   static const imageOnboard1png = "${_images}image1.png";
