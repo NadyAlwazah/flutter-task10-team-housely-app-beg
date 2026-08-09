@@ -45,8 +45,6 @@ class FillterBottomSheet extends StatelessWidget {
           ScaffoldMessenger.of(
             context,
           ).showSnackBar(SnackBar(content: Text(state.message)));
-        } else if (state is FilterInitial) {
-          Navigator.pop(context); // إغلاق أي Dialog مفتوح
         }
       },
       child: Container(
@@ -59,7 +57,19 @@ class FillterBottomSheet extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: Column(
             children: [
-              SizedBox(height: 39.h),
+              SizedBox(height: 16.h),
+
+              Container(
+                width: 42.w,
+                height: 7.h,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFE5E5E5),
+                  borderRadius: BorderRadius.circular(20.r),
+                ),
+              ),
+
+              SizedBox(height: 16.h),
+
               Center(
                 child: Text("Fillter", style: Styles.textStyle16W600Inter),
               ),

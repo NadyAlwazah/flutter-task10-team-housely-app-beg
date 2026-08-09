@@ -5,22 +5,13 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/search/data/manager/filter_cubit/filter_cubit.dart';
 
-class FilterPriceRangeSection extends StatefulWidget {
+class FilterPriceRangeSection extends StatelessWidget {
   const FilterPriceRangeSection({super.key});
 
   @override
-  State<FilterPriceRangeSection> createState() =>
-      _FilterPriceRangeSectionState();
-}
-
-class _FilterPriceRangeSectionState extends State<FilterPriceRangeSection> {
-  RangeValues rangeValues = const RangeValues(300, 1100);
-
-  double get minPrice => rangeValues.start;
-  double get maxPrice => rangeValues.end;
-
-  @override
   Widget build(BuildContext context) {
+    final cubit = context.watch<FilterCubit>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -48,17 +39,14 @@ class _FilterPriceRangeSectionState extends State<FilterPriceRangeSection> {
           child: SizedBox(
             width: double.infinity,
             child: RangeSlider(
-              values: rangeValues,
+              values: RangeValues(cubit.minPrice, cubit.maxPrice),
               min: 0,
               max: 1500,
               onChanged: (values) {
-                setState(() {
-                  rangeValues = values;
-                  context.read<FilterCubit>().updatePrice(
-                    values.start,
-                    values.end,
-                  );
-                });
+                context.read<FilterCubit>().updatePrice(
+                  values.start,
+                  values.end,
+                );
               },
             ),
           ),
@@ -70,13 +58,13 @@ class _FilterPriceRangeSectionState extends State<FilterPriceRangeSection> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "\$${rangeValues.start.toInt()}",
+              "\$${cubit.minPrice.toInt()}",
               style: Styles.textStyle12W500Inter.copyWith(
                 color: AppColors.textSecondary,
               ),
             ),
             Text(
-              "\$${rangeValues.end.toInt()}",
+              "\$${cubit.maxPrice.toInt()}",
               style: Styles.textStyle12W500Inter.copyWith(
                 color: AppColors.textSecondary,
               ),

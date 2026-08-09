@@ -56,7 +56,6 @@ class ShareBottomSheet extends StatelessWidget {
         children: [
           SizedBox(height: 10.h),
 
-          /// Handle
           Container(
             width: 42.w,
             height: 6.h,
