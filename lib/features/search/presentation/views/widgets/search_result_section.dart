@@ -35,13 +35,16 @@ class _SearchResultSectionState extends State<SearchResultSection> {
         final searchResults = state.filteredProperties ?? [];
         final query = context.read<PropertyCubit>().currentQuery;
 
+        final hasQuery = query.trim().isNotEmpty;
+        final hasSearchResults = searchResults.isNotEmpty;
+        final hasResults = searchResults.isNotEmpty;
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 24.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Recent Searches
-              if (recentResults.isNotEmpty) ...[
+              if (recentResults.isNotEmpty && (!hasQuery || hasResults)) ...[
                 Text("Recent", style: Styles.textStyle16W600Inter),
                 SizedBox(height: 12.h),
 
@@ -79,12 +82,10 @@ class _SearchResultSectionState extends State<SearchResultSection> {
                     },
                   ),
                 ),
-
-                SizedBox(height: 24.h),
               ],
 
               // Search Results
-              if (searchResults.isNotEmpty) ...[
+              if (hasQuery && hasSearchResults) ...[
                 Text("Result", style: Styles.textStyle16W600Inter),
                 SizedBox(height: 12.h),
 
@@ -108,10 +109,19 @@ class _SearchResultSectionState extends State<SearchResultSection> {
                 ),
               ],
 
-              // Empty State
-              if (recentResults.isEmpty && searchResults.isEmpty)
+              // Empty Search Result
+              //  وعدم وجود نتائج Query يظهر عند كتابة
+              // Recent بغض النظر عن وجود
+              if (hasQuery && !hasSearchResults)
                 Padding(
-                  padding: EdgeInsets.only(top: 90.0.h),
+                  padding: EdgeInsets.only(top: 90.h),
+                  child: const Center(child: EmptySearchResult()),
+                ),
+
+              //  Search Query ولا يوجد  Recent لا يوجد
+              if (!hasQuery && recentResults.isEmpty)
+                Padding(
+                  padding: EdgeInsets.only(top: 90.h),
                   child: const Center(child: EmptySearchResult()),
                 ),
             ],
@@ -121,7 +131,6 @@ class _SearchResultSectionState extends State<SearchResultSection> {
     );
   }
 
-  // Result Item Builder
   Widget _buildResultItem({
     required PropertyModel property,
     required String icon,
@@ -183,12 +192,10 @@ class _SearchResultSectionState extends State<SearchResultSection> {
   }
 
   TextSpan _highlightText(String text, String query, {required bool isTitle}) {
-    // Default styles
     final defaultStyle = isTitle
         ? Styles.textStyle14W600Inter
         : Styles.textStyle12W400Inter;
 
-    // Highlight styles
     final highlightStyle = isTitle
         ? Styles.textStyle14W600Inter.copyWith(color: AppColors.primary)
         : Styles.textStyle12W400Inter.copyWith(color: AppColors.primary);
@@ -199,6 +206,7 @@ class _SearchResultSectionState extends State<SearchResultSection> {
 
     final lowerText = text.toLowerCase();
     final lowerQuery = query.toLowerCase();
+
     final startIndex = lowerText.indexOf(lowerQuery);
 
     if (startIndex == -1) {
