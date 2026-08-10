@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/booking_refresh_notifier.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/shared_preferences_helper.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
@@ -60,6 +61,7 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
       'image': widget.property.image,
       'date': selectedDate ?? '',
       'status': status,
+      'agent': widget.property.agent.toJson(),
     };
 
     // 3. البحث عن الحجز باستخدام ID العقار
@@ -78,6 +80,7 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
       'saved_bookings_list',
       jsonEncode(allBookings),
     );
+    BookingRefreshNotifier.instance.notifyBookingsChanged();
 
     debugPrint('All Bookings saved successfully as a list!');
   }

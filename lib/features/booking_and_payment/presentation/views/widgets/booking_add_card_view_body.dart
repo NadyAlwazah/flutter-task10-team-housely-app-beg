@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_text_form_field.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
@@ -238,9 +239,9 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
                   expiryController.text.trim().isEmpty ||
                   cvvController.text.length < 3) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Please fill all fields correctly'),
-                    backgroundColor: Colors.red,
+                  CustomSnackBar(
+                    message: 'Please fill all fields correctly',
+                    isError: true,
                   ),
                 );
                 return;
@@ -249,11 +250,10 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
               // 2. التحقق من شروط الاسم (أحرف فقط، وأول حرف من كل كلمة كبير)
               if (!_validateName(nameController.text)) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Name must contain letters only, and each word must start with a capital letter (e.g., Brooklyn Simmons)',
-                    ),
-                    backgroundColor: Colors.red,
+                  CustomSnackBar(
+                    message:
+                        'Name must contain letters only, and each word must start with a capital letter (e.g., Brooklyn Simmons)',
+                    isError: true,
                   ),
                 );
                 return;
@@ -262,11 +262,10 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
               // 3. التحقق من شروط تاريخ الانتهاء (الشهر بين 01 و 12)
               if (!_validateExpiry(expiryController.text)) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Please enter a valid expiry date where month is between 01 and 12 (e.g., 06/25)',
-                    ),
-                    backgroundColor: Colors.red,
+                  CustomSnackBar(
+                    message:
+                        'Please enter a valid expiry date where month is between 01 and 12 (e.g., 06/25)',
+                    isError: true,
                   ),
                 );
                 return;

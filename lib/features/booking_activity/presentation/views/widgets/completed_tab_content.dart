@@ -116,7 +116,10 @@ class _CompletedTabContentState extends State<CompletedTabContent> {
                 // زر Call Agent (أيقونة هاتف بنفسجي ونصوص رمادية)
                 GestureDetector(
                   onTap: () {
-                    context.push(AppRouter.kChatDetail);
+                    context.push(
+                      AppRouter.kChatDetail,
+                      extra: {'agent': item.agent},
+                    );
                   },
                   child: Row(
                     children: [
