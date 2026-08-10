@@ -20,6 +20,7 @@ class CancelledTabContent extends StatelessWidget {
       // الحالة الفارغة مع صورة Oops!
       return const EmptyBookingWidget(tabType: 'cancelled');
     }
+    
     return ListView.builder(
       padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 8.h),
       itemCount: cancelledBookings.length + 1, // +1 for the Call Agent button
@@ -83,3 +84,4 @@ class CancelledTabContent extends StatelessWidget {
     );
   }
 }
+

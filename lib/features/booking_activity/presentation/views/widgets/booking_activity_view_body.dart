@@ -119,13 +119,14 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
 
   @override
   Widget build(BuildContext context) {
-    _fetchAllBookings();
+    _fetchAllBookings(); // استدعاء الدالة لجلب البيانات عند بناء الواجهة
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
     return Column(
       children: [
         SizedBox(height: 16.h),
+
         // --- تصميم الـ TabBar ---
         Container(
           margin: EdgeInsets.symmetric(horizontal: 20.w),
