@@ -5,12 +5,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
+import 'package:go_router/go_router.dart';
 
 class PropertyReviewsSection extends StatelessWidget {
   const PropertyReviewsSection({super.key, required this.property});
@@ -60,11 +63,11 @@ class PropertyReviewsSection extends StatelessWidget {
                   children: reviews.map((review) {
                     return Padding(
                       padding: EdgeInsets.only(right: 12.w),
-                      child: _buildReviewCard(
-                        image: review.reviewerImage,
-                        name: review.reviewerName,
-                        rating: review.rating,
-                        comment: review.comment,
+                      child: GestureDetector(
+                        onTap: () {
+                          context.push(AppRouter.kReviewDetails, extra: review);
+                        },
+                        child: _buildReviewCard(review: review),
                       ),
                     );
                   }).toList(),
@@ -77,13 +80,9 @@ class PropertyReviewsSection extends StatelessWidget {
     );
   }
 
-  Widget _buildReviewCard({
-    required String image,
-    required String name,
-    required double rating,
-    required String comment,
-  }) {
-    final bool isFileImage = image.startsWith('/data');
+  Widget _buildReviewCard({required ReviewModel review}) {
+    final bool isFileImage = review.reviewerImage.startsWith('/data');
+
     return Container(
       width: 268.w,
       height: 104.h,
@@ -101,28 +100,31 @@ class PropertyReviewsSection extends StatelessWidget {
               CircleAvatar(
                 radius: 20.r,
                 backgroundImage: isFileImage
-                    ? FileImage(File(image))
-                    : AssetImage(image) as ImageProvider,
+                    ? FileImage(File(review.reviewerImage))
+                    : AssetImage(review.reviewerImage) as ImageProvider,
               ),
+
               SizedBox(width: 12.w),
+
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Expanded(
                           child: Text(
-                            name,
+                            review.reviewerName,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: Styles.textStyle14W600Inter,
                           ),
                         ),
 
+                        SizedBox(width: 6.w),
+
                         RatingBarIndicator(
-                          rating: rating,
+                          rating: review.rating,
                           itemBuilder: (context, index) =>
                               SvgPicture.asset(AssetsData.iconStarSvg),
                           itemCount: 5,
@@ -132,11 +134,13 @@ class PropertyReviewsSection extends StatelessWidget {
                         ),
                       ],
                     ),
+
                     SizedBox(height: 6.h),
+
                     Text(
-                      comment,
-                      overflow: TextOverflow.ellipsis,
+                      review.comment,
                       maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
                       style: Styles.textStyle12W400Inter.copyWith(height: 1.6),
                     ),
                   ],
