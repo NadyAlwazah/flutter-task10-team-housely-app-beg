@@ -205,10 +205,12 @@ class _ChatDetailViewBodyState extends State<ChatDetailViewBody> {
 
       reviews: [
         ReviewModel(
+          reviewerEmail: "theresa1@example.com",
           reviewerName: "Theresa Webb",
-          reviewerImage: AssetsData.imageProfilePng,
+          reviewerImage: AssetsData.imageReview1Png,
           rating: 4.5,
-          comment: "Amazing place, very clean and cozy!",
+          comment:
+              "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
         ),
       ],
       isFavorite: true,

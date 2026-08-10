@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -81,8 +83,10 @@ class PropertyReviewsSection extends StatelessWidget {
     required double rating,
     required String comment,
   }) {
+    final bool isFileImage = image.startsWith('/data');
     return Container(
       width: 268.w,
+      height: 104.h,
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.r),
@@ -94,9 +98,11 @@ class PropertyReviewsSection extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(40.r),
-                child: Image.asset(image, width: 40.r, height: 40.r),
+              CircleAvatar(
+                radius: 20.r,
+                backgroundImage: isFileImage
+                    ? FileImage(File(image))
+                    : AssetImage(image) as ImageProvider,
               ),
               SizedBox(width: 12.w),
               Expanded(
@@ -106,7 +112,14 @@ class PropertyReviewsSection extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(name, style: Styles.textStyle14W600Inter),
+                        Expanded(
+                          child: Text(
+                            name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: Styles.textStyle14W600Inter,
+                          ),
+                        ),
 
                         RatingBarIndicator(
                           rating: rating,
@@ -122,6 +135,8 @@ class PropertyReviewsSection extends StatelessWidget {
                     SizedBox(height: 6.h),
                     Text(
                       comment,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
                       style: Styles.textStyle12W400Inter.copyWith(height: 1.6),
                     ),
                   ],

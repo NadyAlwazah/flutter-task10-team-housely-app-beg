@@ -158,4 +158,37 @@ class PropertyCubit extends Cubit<PropertyState> {
 
     emit(state.copyWith(recentSearches: updatedRecent));
   }
+
+  void updateReviewerImage({
+    required String reviewerEmail,
+    required String newImagePath,
+  }) {
+    List<PropertyModel> updateList(List<PropertyModel> properties) {
+      return properties.map((property) {
+        final updatedReviews = property.reviews.map((review) {
+          if (review.reviewerEmail == reviewerEmail) {
+            return ReviewModel(
+              reviewerEmail: review.reviewerEmail,
+              reviewerName: review.reviewerName,
+              reviewerImage: newImagePath,
+              rating: review.rating,
+              comment: review.comment,
+            );
+          }
+
+          return review;
+        }).toList();
+
+        return property.copyWith(reviews: updatedReviews);
+      }).toList();
+    }
+
+    emit(
+      state.copyWith(
+        recommended: updateList(state.recommended),
+        popular: updateList(state.popular),
+        nearbyProperties: updateList(state.nearbyProperties),
+      ),
+    );
+  }
 }

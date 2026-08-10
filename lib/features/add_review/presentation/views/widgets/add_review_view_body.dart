@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/service_locator.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
-import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/widgets/gallery_bottom_sheet.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/add_review/presentation/views/widgets/write_review_section.dart';
@@ -19,14 +20,12 @@ import 'upload_media_section.dart';
 class AddReviewViewBody extends StatefulWidget {
   final PropertyModel? property;
   final PropertyCubit cubit;
-  final String? userName;
   final double? initialRating;
   final Function(ReviewModel newReview)? onReviewAdded;
 
   const AddReviewViewBody({
     super.key,
     this.property,
-    this.userName,
     this.initialRating,
     this.onReviewAdded,
     required this.cubit,
@@ -96,12 +95,14 @@ class _AddReviewViewBodyState extends State<AddReviewViewBody> {
     await Future.delayed(const Duration(milliseconds: 300));
 
     if (!mounted) return;
-
+    final user = await getIt<AuthLocalDataSource>().getUser();
     final newReview = ReviewModel(
-      reviewerName: widget.userName ?? 'Theresa Webb',
-      reviewerImage: _selectedImagePath ?? AssetsData.imageReview1Png,
+      reviewerEmail: user!.email,
+      reviewerName: user.fullName,
+      reviewerImage: user.profileImage!,
       rating: widget.initialRating ?? 5.0,
       comment: reviewText,
+      reviewImage: _selectedImagePath,
     );
 
     if (widget.property != null) {

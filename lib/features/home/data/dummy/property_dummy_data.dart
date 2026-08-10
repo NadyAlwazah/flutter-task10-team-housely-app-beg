@@ -30,6 +30,7 @@ final List<PropertyModel> recommendedProperties = [
 
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -37,10 +38,11 @@ final List<PropertyModel> recommendedProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -67,9 +69,9 @@ final List<PropertyModel> recommendedProperties = [
     type: "Hotel",
     hasAc: true,
     hasWifi: true,
-
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -77,10 +79,11 @@ final List<PropertyModel> recommendedProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -112,6 +115,7 @@ List<PropertyModel> popularProperties = [
 
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -119,10 +123,11 @@ List<PropertyModel> popularProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -152,6 +157,7 @@ List<PropertyModel> popularProperties = [
     hasWifi: true,
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -159,10 +165,11 @@ List<PropertyModel> popularProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -190,6 +197,7 @@ List<PropertyModel> popularProperties = [
     hasWifi: false,
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -197,10 +205,11 @@ List<PropertyModel> popularProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -230,6 +239,7 @@ List<PropertyModel> popularProperties = [
     hasWifi: true,
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -237,10 +247,11 @@ List<PropertyModel> popularProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -269,6 +280,7 @@ List<PropertyModel> popularProperties = [
     hasWifi: false,
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -276,10 +288,11 @@ List<PropertyModel> popularProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -310,6 +323,7 @@ List<PropertyModel> nearbyProperties = [
     hasWifi: true,
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -317,10 +331,11 @@ List<PropertyModel> nearbyProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -349,6 +364,7 @@ List<PropertyModel> nearbyProperties = [
     hasWifi: true,
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -356,10 +372,11 @@ List<PropertyModel> nearbyProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -387,6 +404,7 @@ List<PropertyModel> nearbyProperties = [
     hasWifi: false,
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -394,10 +412,11 @@ List<PropertyModel> nearbyProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -426,6 +445,7 @@ List<PropertyModel> nearbyProperties = [
     hasWifi: true,
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -433,10 +453,11 @@ List<PropertyModel> nearbyProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),
@@ -464,6 +485,7 @@ List<PropertyModel> nearbyProperties = [
     hasWifi: false,
     reviews: [
       ReviewModel(
+        reviewerEmail: "theresa1@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview1Png,
         rating: 4.5,
@@ -471,10 +493,11 @@ List<PropertyModel> nearbyProperties = [
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. 1500s,",
       ),
       ReviewModel(
+        reviewerEmail: "theresa2@example.com",
         reviewerName: "Theresa Webb",
         reviewerImage: AssetsData.imageReview2Png,
         rating: 3.5,
-        comment: "Amazing place, very clean and cozy! ",
+        comment: "Amazing place, very clean and cozy!",
       ),
     ],
   ),

@@ -7,6 +7,7 @@ import 'package:flutter_task10_team_housely_app_beg/core/widgets/app_loader.dart
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/auth/data/data_sources/auth_local_data_source.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/edit_profile_form_fields.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/profile_image_widget.dart';
@@ -72,14 +73,30 @@ class _EditProfileViewBodyState extends State<EditProfileViewBody> {
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(source: ImageSource.gallery);
 
-    if (image != null) {
-      setState(() {
-        profileImage = image.path;
-      });
+    final XFile? image = await picker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 85,
+    );
+
+    if (image == null || !mounted) return;
+
+    final profileCubit = context.read<ProfileCubit>();
+    final propertyCubit = context.read<PropertyCubit>();
+
+    final profileState = profileCubit.state;
+
+    if (profileState is ProfileLoaded) {
+      final userEmail = profileState.user.email;
+
+      await profileCubit.updateProfileImage(image.path);
+
       if (!mounted) return;
-      context.read<ProfileCubit>().updateProfileImage(image.path);
+
+      propertyCubit.updateReviewerImage(
+        reviewerEmail: userEmail,
+        newImagePath: image.path,
+      );
     }
   }
 

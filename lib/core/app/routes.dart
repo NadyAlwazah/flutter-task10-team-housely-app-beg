@@ -69,8 +69,17 @@ abstract class AppRouter {
         GoRoute(
           path: kEditProfile,
           builder: (context, state) {
-            return BlocProvider.value(
-              value: state.extra as ProfileCubit,
+            final extra = state.extra as Map<String, dynamic>;
+
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider.value(
+                  value: extra['profileCubit'] as ProfileCubit,
+                ),
+                BlocProvider.value(
+                  value: extra['propertyCubit'] as PropertyCubit,
+                ),
+              ],
               child: const EditProfileView(),
             );
           },
@@ -99,10 +108,10 @@ abstract class AppRouter {
           builder: (context, state) {
             final data = state.extra as Map<String, dynamic>;
 
-            final property = data['property'] as PropertyModel;
-            final cubit = data['cubit'] as PropertyCubit;
-
-            return AddReviewView(property: property, cubit: cubit);
+            return AddReviewView(
+              property: data['property'] as PropertyModel?,
+              cubit: data['cubit'] as PropertyCubit,
+            );
           },
         ),
 

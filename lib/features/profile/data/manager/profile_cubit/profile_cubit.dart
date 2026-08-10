@@ -43,6 +43,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         rememberMe: user.rememberMe,
         dateOfBirth: dateOfBirth,
         myLocation: user.myLocation,
+        profileImage: user.profileImage,
       );
 
       await _local.saveUser(updatedUser);

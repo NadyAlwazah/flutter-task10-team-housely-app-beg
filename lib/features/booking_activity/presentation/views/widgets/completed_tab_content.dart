@@ -9,11 +9,24 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 import 'package:go_router/go_router.dart';
 import 'booking_activity_card.dart';
 
-class CompletedTabContent extends StatelessWidget {
+class CompletedTabContent extends StatefulWidget {
   const CompletedTabContent({super.key});
+
+  @override
+  State<CompletedTabContent> createState() => _CompletedTabContentState();
+}
+
+class _CompletedTabContentState extends State<CompletedTabContent> {
+  @override
+  void initState() {
+    super.initState();
+
+    context.read<ProfileCubit>().loadUser();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,37 +129,47 @@ class CompletedTabContent extends StatelessWidget {
                   statusTextColor: AppColors.greenTextStatus,
                 ),
                 SizedBox(height: 5.h),
-                GestureDetector(
-                  onTap: () {
-                    context.push(
-                      AppRouter.kAddReview,
-                      extra: {
-                        'property': item,
-                        'cubit': context.read<PropertyCubit>(),
+
+                BlocBuilder<ProfileCubit, ProfileState>(
+                  builder: (context, profileState) {
+                    return GestureDetector(
+                      onTap: () {
+                        if (profileState is ProfileLoaded) {
+                          context.push(
+                            AppRouter.kAddReview,
+                            extra: {
+                              'property': item,
+                              'cubit': context.read<PropertyCubit>(),
+                            },
+                          );
+                        } else {
+                          debugPrint(
+                            'Profile is not loaded. Current state: $profileState',
+                          );
+                        }
                       },
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            AssetsData.iconChatbookingSvg,
+                            width: 24.w,
+                            colorFilter: const ColorFilter.mode(
+                              AppColors.chatPurple,
+                              BlendMode.srcIn,
+                            ),
+                          ),
+                          SizedBox(width: 12.w),
+                          Text(
+                            'Write review',
+                            style: Styles.textStyle12W400Inter.copyWith(
+                              color: AppColors.textSecondary,
+                              fontSize: 14.sp,
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   },
-                  child: Row(
-                    children: [
-                      SvgPicture.asset(
-                        AssetsData.iconChatbookingSvg,
-                        width: 24.w,
-                        colorFilter: const ColorFilter.mode(
-                          AppColors.chatPurple,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                      SizedBox(width: 12.w),
-                      // زر Write review (أيقونة بنفسجي ونصوص رمادية)
-                      Text(
-                        'Write review',
-                        style: Styles.textStyle12W400Inter.copyWith(
-                          color: AppColors.textSecondary,
-                          fontSize: 14.sp,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
                 SizedBox(height: 5.h),
                 // خط فاصل بين Write review و Call Agent
