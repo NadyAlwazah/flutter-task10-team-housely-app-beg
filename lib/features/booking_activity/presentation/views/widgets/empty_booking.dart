@@ -35,7 +35,7 @@ class EmptyBookingWidget extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 60.h),
@@ -48,13 +48,7 @@ class EmptyBookingWidget extends StatelessWidget {
             SizedBox(height: 36.h),
 
             // النص الرئيسي المتغير
-            Text(
-              mainText,
-              style: Styles.textStyle20W600Inter.copyWith(
-                color: AppColors.textPrimary,
-                fontSize: 22.sp,
-              ),
-            ),
+            Text(mainText, style: Styles.textStyle20W600Inter),
             SizedBox(height: 12.h),
 
             Column(
