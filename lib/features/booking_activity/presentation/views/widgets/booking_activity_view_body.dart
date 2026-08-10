@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/services/booking_refresh_notifier.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/services/shared_preferences_helper.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_snack_bar.dart';
 import 'upcoming_tab_content.dart';
 import 'completed_tab_content.dart';
 import 'cancelled_tab_content.dart';
@@ -26,12 +28,14 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    BookingRefreshNotifier.instance.addListener(_fetchAllBookings);
     _fetchAllBookings();
   }
 
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    BookingRefreshNotifier.instance.removeListener(_fetchAllBookings);
     super.dispose();
   }
 
@@ -107,11 +111,12 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
         'saved_cancelled_bookings_list',
         jsonEncode(cancelledBookings),
       );
+      BookingRefreshNotifier.instance.notifyBookingsChanged();
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Only waiting payment bookings can be cancelled'),
-          backgroundColor: Colors.red,
+        CustomSnackBar(
+          message: 'Only waiting payment bookings can be cancelled',
+          isError: true,
         ),
       );
     }

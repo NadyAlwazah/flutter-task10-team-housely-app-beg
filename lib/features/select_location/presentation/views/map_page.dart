@@ -11,30 +11,20 @@ import 'package:flutter_task10_team_housely_app_beg/features/select_location/dat
 import 'package:flutter_task10_team_housely_app_beg/features/select_location/presentation/views/widgets/map_page_body.dart';
 import 'package:go_router/go_router.dart';
 
-
 class MapPage extends StatelessWidget {
-
-  const MapPage({
-    super.key,
-  });
+  const MapPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
-
-      create: (_) => LocationCubit(
-        getIt<LocationService>(),
-        getIt<AuthLocalDataSource>(),
-      )..initialize(),
-
+      create: (_) =>
+          LocationCubit(getIt<LocationService>(), getIt<AuthLocalDataSource>())
+            ..initialize(),
 
       child: const _MapPageView(),
-
     );
   }
 }
-
 
 class _MapPageView extends StatelessWidget {
   const _MapPageView();
@@ -45,31 +35,20 @@ class _MapPageView extends StatelessWidget {
       extendBodyBehindAppBar: true,
       body: BlocBuilder<LocationCubit, LocationState>(
         builder: (context, state) {
-         final cubit =
-              context.read<LocationCubit>();
+          final cubit = context.read<LocationCubit>();
           return Stack(
-
             children: [
               FlutterMap(
-                mapController:
-                    cubit.mapController,
+                mapController: cubit.mapController,
 
                 options: MapOptions(
-                  initialCenter:
-                      state.center,
+                  initialCenter: state.center,
                   initialZoom: 15,
-                  onPositionChanged:
-                      (camera, hasGesture) {
+                  onPositionChanged: (camera, hasGesture) {
                     if (hasGesture) {
-
-                      cubit.onMapMoved(
-                        camera.center,
-                      );
-
+                      cubit.onMapMoved(camera.center);
                     }
-
                   },
-
                 ),
                 children: [
                   TileLayer(
@@ -78,59 +57,42 @@ class _MapPageView extends StatelessWidget {
 
                     userAgentPackageName:
                         'com.example.flutter_task10_team_housely_app_beg',
-
                   ),
-                  MarkerLayer( markers: [
-                    Marker(  point:   state.center, width: 50,height: 50,
-                        child: const Icon(
-                          Icons.location_on,
-                          color: Colors.red,),
-
+                  MarkerLayer(
+                    markers: [
+                      Marker(
+                        point: state.center,
+                        width: 50,
+                        height: 50,
+                        child: const Icon(Icons.location_on, color: Colors.red),
                       ),
                     ],
-
                   ),
                 ],
               ),
               MapPageBody(
-                address:
-                    state.address,
-                hideChooseLocationButton:
-                    false,
-                cardTitle:
-                    "Location Details",
-                cardIcon:
-                    Icons.location_on_outlined,
+                address: state.address,
+                hideChooseLocationButton: false,
+                cardTitle: "Location Details",
+                cardIcon: Icons.location_on_outlined,
                 onBackPressed: () {
-
                   context.pop();
-
                 },
                 onChooseLocation: () async {
-
                   if (!state.hasSelectedLocation ||
-                      state.address ==
-                          "Getting current location...") {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(
-
+                      state.address == "Getting current location...") {
+                    ScaffoldMessenger.of(context).showSnackBar(
                       CustomSnackBar(
-
-                        message:
-                            "Location not ready yet.",
+                        message: "Location not ready yet.",
 
                         isError: true,
                       ),
                     );
                     return;
                   }
-                  await cubit
-                      .saveSelectedLocation();
-                  if(context.mounted){
-                    context.go(
-                      AppRouter.kBottomBar,
-                    );
-
+                  await cubit.saveSelectedLocation();
+                  if (context.mounted) {
+                    context.go(AppRouter.kBottomBar);
                   }
                 },
               ),
