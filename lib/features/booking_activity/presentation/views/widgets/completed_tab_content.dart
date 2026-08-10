@@ -6,6 +6,7 @@ import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/booking_activity/presentation/views/widgets/empty_booking.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
@@ -40,74 +41,7 @@ class _CompletedTabContentState extends State<CompletedTabContent> {
 
         if (completedBookings.isEmpty) {
           // الحالة الفارغة مع صورة Oops!
-          return SingleChildScrollView(
-            padding: EdgeInsets.all(24.w),
-            child: Column(
-              children: [
-                SizedBox(height: 60.h),
-                Image.asset(
-                  AssetsData.imageMybookingoppsPng,
-                  height: 220.h,
-                  fit: BoxFit.contain,
-                ),
-                SizedBox(height: 36.h),
-                Text(
-                  'You have no completed booking',
-                  style: Styles.textStyle20W600Inter.copyWith(
-                    color: AppColors.textPrimary,
-                    fontSize: 22.sp,
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          ' are you looking for a  ',
-                          style: Styles.textStyle14W400Inter.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            'upcoming',
-                            style: Styles.textStyle14W400Inter.copyWith(
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          ' or ',
-                          style: Styles.textStyle14W400Inter.copyWith(
-                            color: AppColors.textSecondary,
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            'cancelled',
-                            style: Styles.textStyle14W400Inter.copyWith(
-                              color: AppColors.primary,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 4.h),
-                    Text(
-                      ' booking ?',
-                      style: Styles.textStyle14W400Inter.copyWith(
-                        color: AppColors.textSecondary,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          );
+          return const EmptyBookingWidget(tabType: 'completed');
         }
 
         return ListView.builder(

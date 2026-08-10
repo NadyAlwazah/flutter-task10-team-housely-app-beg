@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_activity/presentation/views/widgets/empty_booking.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/widgets/delete_confirmation_dialog.dart';
+import 'package:go_router/go_router.dart';
 import 'booking_activity_card.dart';
 
 class UpcomingTabContent extends StatelessWidget {
@@ -13,6 +15,7 @@ class UpcomingTabContent extends StatelessWidget {
     required this.upcomingBookings,
     required this.onDeleteBooking,
   });
+
   void _showDeleteConfirmationSheet(BuildContext context, int index) {
     showModalBottomSheet(
       context: context,
@@ -35,7 +38,7 @@ class UpcomingTabContent extends StatelessWidget {
   Widget build(BuildContext context) {
     // إذا كانت القائمة فارغة، اعرض واجهة الـ Oops
     if (upcomingBookings.isEmpty) {
-      return const EmptyBookingWidget();
+      return const EmptyBookingWidget(tabType: 'upcoming');
     }
 
     // وإذا وُجدت بيانات، اعرض الكروت
@@ -60,6 +63,21 @@ class UpcomingTabContent extends StatelessWidget {
                 statusTextColor: item['status'] == 'Checkin'
                     ? AppColors.greenTextStatus
                     : AppColors.statusRed,
+                onTap: () {
+                  final status = (item['status'] ?? '')
+                      .toString()
+                      .trim()
+                      .toLowerCase();
+
+                  // التحقق إذا كانت الحالة هي Waiting payment
+                  if (status.contains('waiting')) {
+                    // الانتقال لواجهة الدفع مع إرسال التاريخ السابق وحالة الحجز
+                    context.push(
+                      AppRouter.kBookingPayment,
+                      extra: item['property'],
+                    );
+                  }
+                },
               ),
             ],
           ),

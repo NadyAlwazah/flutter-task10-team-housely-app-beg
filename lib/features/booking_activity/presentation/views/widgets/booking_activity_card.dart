@@ -13,7 +13,7 @@ class BookingActivityCard extends StatelessWidget {
   final String statusText;
   final Color statusColor;
   final Color statusTextColor;
-
+  final VoidCallback? onTap;
   const BookingActivityCard({
     super.key,
     required this.title,
@@ -23,107 +23,111 @@ class BookingActivityCard extends StatelessWidget {
     required this.statusText,
     required this.statusColor,
     required this.statusTextColor,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(vertical: 8.h),
-          child: Row(
-            children: [
-              // صورة العقار
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16.r),
-                child: image.startsWith('http')
-                    ? Image.network(
-                        image,
-                        width: 85.w,
-                        height: 85.h,
-                        fit: BoxFit.cover,
-                      )
-                    : Image.asset(
-                        image,
-                        width: 85.w,
-                        height: 85.h,
-                        fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.h),
+            child: Row(
+              children: [
+                // صورة العقار
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(6.r),
+                  child: image.startsWith('http')
+                      ? Image.network(
+                          image,
+                          width: 85.w,
+                          height: 62.h,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          image,
+                          width: 95.w,
+                          height: 75.h,
+                          fit: BoxFit.cover,
+                        ),
+                ),
+                SizedBox(width: 12.w),
+                // تفاصيل العقار
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: Styles.textStyle16W600Inter.copyWith(
+                          fontSize: 17.sp,
+                        ),
                       ),
-              ),
-              SizedBox(width: 14.w),
-              // تفاصيل العقار
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: Styles.textStyle16W600Inter.copyWith(
-                        fontSize: 17.sp,
-                      ),
-                    ),
-                    SizedBox(height: 6.h),
-                    Row(
-                      children: [
-                        SvgPicture.asset(
-                          AssetsData.iconLocationOutlinedSvg,
-                          width: 14.w,
-                        ),
-                        SizedBox(width: 4.w),
-                        Expanded(
-                          child: Text(
-                            location,
-                            style: Styles.textStyle12W400Inter,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
+                      SizedBox(height: 6.h),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            AssetsData.iconLocationOutlinedSvg,
+                            width: 14.w,
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(height: 10.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // تاريخ الحجز
-                        Text(
-                          dateOrPrice,
-                          style: Styles.textStyle10W500Inter.copyWith(
-                            fontSize: 13.sp,
-                          ),
-                        ),
-                        // حالة الحجز
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 12.w,
-                            vertical: 6.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: statusColor,
-                            borderRadius: BorderRadius.circular(12.r),
-                          ),
-                          child: Text(
-                            statusText,
-                            style: Styles.textStyle14W400Inter.copyWith(
-                              color: statusTextColor,
-                              fontSize: 12.sp,
+                          SizedBox(width: 4.w),
+                          Expanded(
+                            child: Text(
+                              location,
+                              style: Styles.textStyle12W400Inter,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      SizedBox(height: 6.h),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // تاريخ الحجز
+                          Text(
+                            dateOrPrice,
+                            style: Styles.textStyle10W500Inter.copyWith(
+                              fontSize: 13.sp,
+                            ),
+                          ),
+                          // حالة الحجز
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 10.w,
+                              vertical: 4.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: statusColor,
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            child: Text(
+                              statusText,
+                              style: Styles.textStyle14W400Inter.copyWith(
+                                color: statusTextColor,
+                                fontSize: 12.sp,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-        // خط فاصل تحت العقار بدلاً من المستطيل الخارجي
-        const Divider(
-          color: AppColors.lightGrayBackground,
-          thickness: 1,
-          height: 8,
-        ),
-      ],
+          // خط فاصل تحت العقار بدلاً من المستطيل الخارجي
+          const Divider(
+            color: AppColors.lightGrayBackground,
+            thickness: 1,
+            height: 8,
+          ),
+        ],
+      ),
     );
   }
 }

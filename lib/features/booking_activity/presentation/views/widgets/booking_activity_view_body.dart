@@ -19,13 +19,14 @@ class BookingActivityViewBody extends StatefulWidget {
 class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
     with WidgetsBindingObserver {
   List<Map<String, dynamic>> upcomingBookings = [];
+  List<Map<String, dynamic>> cancelledBookings = [];
   bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addObserver(this); // مراقبة عودة التطبيق للواجهة
-    _fetchSavedBookings();
+    WidgetsBinding.instance.addObserver(this);
+    _fetchAllBookings();
   }
 
   @override
@@ -37,56 +38,91 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
-      _fetchSavedBookings();
+      _fetchAllBookings();
     }
   }
 
   // دالة لجلب البيانات المخزنة محلياً عند فتح الشاشة
-  Future<void> _fetchSavedBookings() async {
-    final String? existingBookingsJson =
-        await SharedPreferencesHelper.getString('saved_bookings_list');
+  Future<void> _fetchAllBookings() async {
+    final String? upcomingJson = await SharedPreferencesHelper.getString(
+      'saved_bookings_list',
+    );
+    final String? cancelledJson = await SharedPreferencesHelper.getString(
+      'saved_cancelled_bookings_list',
+    );
 
-    if (existingBookingsJson != null && existingBookingsJson.isNotEmpty) {
-      List<dynamic> decodedList = jsonDecode(existingBookingsJson);
-      if (mounted) {
-        setState(() {
-          upcomingBookings = decodedList
-              .map((item) => Map<String, dynamic>.from(item))
-              .toList();
-          isLoading = false;
-        });
-      }
-    } else {
-      if (mounted) {
-        setState(() {
+    if (mounted) {
+      setState(() {
+        if (upcomingJson != null && upcomingJson.isNotEmpty) {
+          upcomingBookings = List<Map<String, dynamic>>.from(
+            jsonDecode(
+              upcomingJson,
+            ).map((item) => Map<String, dynamic>.from(item)),
+          );
+        } else {
           upcomingBookings = [];
-          isLoading = false;
-        });
-      }
+        }
+
+        if (cancelledJson != null && cancelledJson.isNotEmpty) {
+          cancelledBookings = List<Map<String, dynamic>>.from(
+            jsonDecode(
+              cancelledJson,
+            ).map((item) => Map<String, dynamic>.from(item)),
+          );
+        } else {
+          cancelledBookings = [];
+        }
+
+        isLoading = false;
+      });
     }
   }
 
-  // دالة لحذف العنصر من القائمة وتحديث التخزين المحلي
+  // دالة لحذف العنصر ونقله إلى الـ Cancelled
   Future<void> _deleteBooking(int index) async {
-    setState(() {
-      upcomingBookings.removeAt(index);
-    });
+    final booking = upcomingBookings[index];
 
-    // تحديث القائمة في الـ SharedPreferences
-    String encodedList = jsonEncode(upcomingBookings);
-    await SharedPreferencesHelper.saveString(
-      'saved_bookings_list',
-      encodedList,
-    );
+    // التحقق من أن الحالة هي Checkin (مع تجاهل حالة الأحرف الكبيرة والصغيرة)
+    final String status = (booking['status'] ?? '')
+        .toString()
+        .trim()
+        .toLowerCase();
+
+    if (status == 'waiting payment') {
+      setState(() {
+        // 1. إزالته من القائمة القادمة
+        upcomingBookings.removeAt(index);
+
+        // 2. تحديث حالته إلى Cancelled وإضافته للقائمة الملغاة
+        booking['status'] = 'Cancelled';
+        cancelledBookings.add(booking);
+      });
+
+      // 3. حفظ القائمتين في SharedPreferences بشكل دائم
+      await SharedPreferencesHelper.saveString(
+        'saved_bookings_list',
+        jsonEncode(upcomingBookings),
+      );
+      await SharedPreferencesHelper.saveString(
+        'saved_cancelled_bookings_list',
+        jsonEncode(cancelledBookings),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Only waiting payment bookings can be cancelled'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    _fetchSavedBookings(); // تحديث البيانات عند إعادة بناء الواجهة
+    _fetchAllBookings();
     if (isLoading) {
       return const Center(child: CircularProgressIndicator());
     }
-
     return Column(
       children: [
         SizedBox(height: 16.h),
@@ -112,8 +148,10 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
             ),
             labelColor: Colors.white,
             unselectedLabelColor: AppColors.textUnselected.withOpacity(0.5),
-            labelStyle: Styles.textStyle14W500Inter,
-            unselectedLabelStyle: Styles.textStyle14W400Inter,
+            labelStyle: Styles.textStyle14W500Inter.copyWith(fontSize: 16.sp),
+            unselectedLabelStyle: Styles.textStyle14W400Inter.copyWith(
+              fontSize: 16.sp,
+            ),
             tabs: const [
               Tab(text: 'Upcoming'),
               Tab(text: 'Completed'),
@@ -122,7 +160,7 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
           ),
         ),
         SizedBox(height: 16.h),
-        // --- محتوى التبويبات الثلاثة مع تمرير القائمة المحدثة ---
+        // --- محتوى التبويبات الثلاثة ---
         Expanded(
           child: TabBarView(
             children: [
@@ -131,7 +169,7 @@ class _BookingActivityViewBodyState extends State<BookingActivityViewBody>
                 onDeleteBooking: _deleteBooking,
               ),
               const CompletedTabContent(),
-              const CancelledTabContent(),
+              CancelledTabContent(cancelledBookings: cancelledBookings),
             ],
           ),
         ),
