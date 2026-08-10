@@ -116,7 +116,6 @@ class BookingCardPreviewSection extends StatelessWidget {
   String _formatCardNumber(String number) {
     number = number.replaceAll(' ', ''); // إزالة أي مسافات موجودة
     if (number.length <= 4) return number;
-
     String formatted = '';
     for (int i = 0; i < number.length; i++) {
       if (i > 0 && i % 4 == 0) {

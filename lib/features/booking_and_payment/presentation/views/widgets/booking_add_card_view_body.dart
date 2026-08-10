@@ -87,17 +87,12 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
   @override
   void initState() {
     super.initState();
-    // تعبئة الحقول بالبيانات القديمة إن وجدت، أو القيم الافتراضية
-    nameController = TextEditingController(
-      text: widget.initialName ?? 'Brooklyn Simmons',
-    );
+    nameController = TextEditingController(text: widget.initialName ?? '');
     cardNumberController = TextEditingController(
-      text: widget.initialCardNumber ?? '1234 5678 9101 1121',
+      text: widget.initialCardNumber ?? '',
     );
-    expiryController = TextEditingController(
-      text: widget.initialExpiry ?? '06/21',
-    );
-    cvvController = TextEditingController(text: widget.initialCvv ?? '3134');
+    expiryController = TextEditingController(text: widget.initialExpiry ?? '');
+    cvvController = TextEditingController(text: widget.initialCvv ?? '');
 
     nameController.addListener(() => setState(() {}));
     cardNumberController.addListener(() => setState(() {}));

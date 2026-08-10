@@ -102,7 +102,6 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
             onTap: () => _showCalendarBottomSheet(context),
           ),
           SizedBox(height: 24.h),
-
           Text(
             'Payments',
             style: Styles.textStyle16W600Inter.copyWith(fontSize: 18.sp),
@@ -221,7 +220,6 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
                       dateRange,
                     );
                     await _saveBookingData(status: 'Waiting payment');
-
                     Navigator.pop(context);
                   },
                 ),

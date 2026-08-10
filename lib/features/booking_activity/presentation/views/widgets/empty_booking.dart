@@ -5,10 +5,32 @@ import 'package:flutter_task10_team_housely_app_beg/core/utils/assets.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 
 class EmptyBookingWidget extends StatelessWidget {
-  const EmptyBookingWidget({super.key});
+  //  إضافة متغير لتحديد نوع التبويب (قيمته الافتراضية 'upcoming')
+  final String tabType;
+
+  const EmptyBookingWidget({super.key, this.tabType = 'upcoming'});
 
   @override
   Widget build(BuildContext context) {
+    // 1. تحديد النصوص ديناميكياً بناءً على نوع التبويب
+    String mainText;
+    String firstOption;
+    String secondOption;
+
+    if (tabType == 'completed') {
+      mainText = 'You have no completed booking';
+      firstOption = 'upcoming';
+      secondOption = 'cancelled';
+    } else if (tabType == 'cancelled') {
+      mainText = 'You have no cancelled booking';
+      firstOption = 'upcoming';
+      secondOption = 'completed';
+    } else {
+      mainText = 'You have no upcoming booking';
+      firstOption = 'completed';
+      secondOption = 'cancelled';
+    }
+
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 24.w),
@@ -16,7 +38,6 @@ class EmptyBookingWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            //  الصورة التوضيحية الخاصة بالـ Oops
             SizedBox(height: 60.h),
             Image.asset(
               AssetsData.imageMybookingoppsPng,
@@ -26,9 +47,9 @@ class EmptyBookingWidget extends StatelessWidget {
 
             SizedBox(height: 36.h),
 
-            //  النص الرئيسي
+            // النص الرئيسي المتغير
             Text(
-              'You have no upcoming booking',
+              mainText,
               style: Styles.textStyle20W600Inter.copyWith(
                 color: AppColors.textPrimary,
                 fontSize: 22.sp,
@@ -50,7 +71,7 @@ class EmptyBookingWidget extends StatelessWidget {
                     GestureDetector(
                       onTap: () {},
                       child: Text(
-                        'completed',
+                        firstOption, //  الخيار الأول المتغير
                         style: Styles.textStyle14W400Inter.copyWith(
                           color: AppColors.primary,
                         ),
@@ -65,7 +86,7 @@ class EmptyBookingWidget extends StatelessWidget {
                     GestureDetector(
                       onTap: () {},
                       child: Text(
-                        'cancelled',
+                        secondOption, //  الخيار الثاني المتغير
                         style: Styles.textStyle14W400Inter.copyWith(
                           color: AppColors.primary,
                         ),
