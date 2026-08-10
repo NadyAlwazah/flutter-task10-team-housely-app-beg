@@ -38,13 +38,15 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
   String? savedCardCvv;
 
   Future<void> _saveBookingData({required String status}) async {
-    // 1. جلب الحجوزات القديمة المخزنة مسبقاً
+    // 1. جلب الحجوزات القديمة
     final String? existingBookingsJson =
         await SharedPreferencesHelper.getString('saved_bookings_list');
+
     List<Map<String, dynamic>> allBookings = [];
 
     if (existingBookingsJson != null && existingBookingsJson.isNotEmpty) {
-      List<dynamic> decodedList = jsonDecode(existingBookingsJson);
+      final List<dynamic> decodedList = jsonDecode(existingBookingsJson);
+
       allBookings = decodedList
           .map((item) => Map<String, dynamic>.from(item))
           .toList();
@@ -52,32 +54,32 @@ class _BookingPaymentViewBodyState extends State<BookingPaymentViewBody> {
 
     // 2. إنشاء بيانات الحجز الجديد
     final newBooking = {
-      'title': widget.property.title.toString(),
-      'location': widget.property.location.toString(),
-      'image': widget.property.image.toString(),
+      'propertyId': widget.property.id,
+      'title': widget.property.title,
+      'location': widget.property.location,
+      'image': widget.property.image,
       'date': selectedDate ?? '',
       'status': status,
     };
 
-    // 3. التحقق مما إذا كان العقار موجوداً مسبقاً، لتحديثه أو إضافته كعنصر جديد تحت القديم
-    int existingIndex = allBookings.indexWhere(
-      (item) => item['title'] == newBooking['title'],
+    // 3. البحث عن الحجز باستخدام ID العقار
+    final int existingIndex = allBookings.indexWhere(
+      (item) => item['propertyId'] == newBooking['propertyId'],
     );
+
     if (existingIndex >= 0) {
-      allBookings[existingIndex] = newBooking; // تحديث الحالة إذا كان موجوداً
+      allBookings[existingIndex] = newBooking;
     } else {
-      allBookings.add(
-        newBooking,
-      ); // إضافته إلى القائمة لكي يظهر تحت العقارات القديمة
+      allBookings.add(newBooking);
     }
 
-    // 4. حفظ القائمة المحدثة محلياً
+    // 4. حفظ القائمة
     await SharedPreferencesHelper.saveString(
       'saved_bookings_list',
       jsonEncode(allBookings),
     );
 
-    debugPrint("All Bookings saved successfully as a list!");
+    debugPrint('All Bookings saved successfully as a list!');
   }
 
   @override

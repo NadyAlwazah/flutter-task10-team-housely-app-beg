@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/utils/app_colors.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/booking_activity/presentation/views/widgets/empty_booking.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/widgets/delete_confirmation_dialog.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
 import 'package:go_router/go_router.dart';
 import 'booking_activity_card.dart';
 
@@ -69,12 +72,39 @@ class UpcomingTabContent extends StatelessWidget {
                       .trim()
                       .toLowerCase();
 
-                  // التحقق إذا كانت الحالة هي Waiting payment
                   if (status.contains('waiting')) {
-                    // الانتقال لواجهة الدفع مع إرسال التاريخ السابق وحالة الحجز
+                    final propertyId = item['propertyId'];
+
+                    if (propertyId == null) {
+                      debugPrint('❌ Property ID is missing');
+                      return;
+                    }
+
+                    final cubit = context.read<PropertyCubit>();
+
+                    final allProperties = [
+                      ...cubit.state.recommended,
+                      ...cubit.state.popular,
+                      ...cubit.state.nearbyProperties,
+                    ];
+
+                    PropertyModel? property;
+
+                    for (final item in allProperties) {
+                      if (item.id == propertyId) {
+                        property = item;
+                        break;
+                      }
+                    }
+
+                    if (property == null) {
+                      debugPrint('❌ Property not found. ID: $propertyId');
+                      return;
+                    }
+
                     context.push(
                       AppRouter.kBookingPayment,
-                      extra: item['property'],
+                      extra: {'property': property, 'cubit': cubit},
                     );
                   }
                 },
