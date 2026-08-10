@@ -7,7 +7,7 @@ import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_button.d
 import 'package:flutter_task10_team_housely_app_beg/core/utils/styles.dart';
 import 'booking_card_preview_section.dart';
 
-// --- فئة لتنسيق رقم البطاقة (إضافة مسافة تلقائية بين كل 4 أرقام) ---
+// --- فئة لتنسيق رقم البطاقة ---
 class CardNumberInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
@@ -60,7 +60,6 @@ class CardExpiryInputFormatter extends TextInputFormatter {
 }
 
 class BookingAddCardViewBody extends StatefulWidget {
-  // استقبال البيانات القديمة في حال الضغط على Edit
   final String? initialName;
   final String? initialCardNumber;
   final String? initialExpiry;
@@ -108,6 +107,42 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
     super.dispose();
   }
 
+  // دالة للتحقق من أن الاسم يحتوي على أحرف فقط وكل كلمة تبدأ بحرف كبير
+  bool _validateName(String name) {
+    // التحقق من أن الاسم يحتوي على أحرف ومسافات فقط (بدون أرقام أو رموز خاصة)
+    final RegExp nameRegExp = RegExp(r'^[a-zA-ZÀ-ÿ\s]+$');
+    if (!nameRegExp.hasMatch(name)) return false;
+
+    // التحقق من أن أول حرف من كل كلمة هو حرف كبير (Capital)
+    List<String> words = name.trim().split(RegExp(r'\s+'));
+    for (String word in words) {
+      if (word.isNotEmpty) {
+        if (word[0] != word[0].toUpperCase()) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+  // دالة للتحقق من صحة تاريخ الانتهاء (الشهر من 01 لـ 12)
+  bool _validateExpiry(String expiry) {
+    if (expiry.length != 5 || !expiry.contains('/')) return false;
+
+    List<String> parts = expiry.split('/');
+    if (parts.length != 2) return false;
+
+    int? month = int.tryParse(parts[0]);
+    int? year = int.tryParse(parts[1]);
+
+    if (month == null || year == null) return false;
+
+    // التحقق أن الشهر بين 01 و 12
+    if (month < 1 || month > 12) return false;
+
+    return true;
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -122,6 +157,7 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
             expiryDate: expiryController.text,
           ),
           SizedBox(height: 24.h),
+
           // 2. حقل اسم صاحب البطاقة
           Text('Name', style: Styles.textStyle14W600Inter),
           SizedBox(height: 8.h),
@@ -158,7 +194,7 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
                     SizedBox(height: 8.h),
                     CustomTextFormField(
                       controller: expiryController,
-                      hintText: '06/21',
+                      hintText: '06/25',
                       textInputType: TextInputType.datetime,
                       inputFormatters: [
                         FilteringTextInputFormatter.digitsOnly,
@@ -192,14 +228,15 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
             ],
           ),
           SizedBox(height: 60.h),
+
           CustomButton(
             text: 'Add card',
             onPressed: () {
-              // شرط عدم الخروج قبل تعبئة جميع الخانات بالكامل وصحتها (مع إضافة الرموز الناقصة للشرط)
+              // 1. التحقق من الفراغات الأساسية
               if (nameController.text.trim().isEmpty ||
                   cardNumberController.text.replaceAll(' ', '').length < 16 ||
-                  expiryController.text.length < 5 ||
-                  cvvController.text.length < 4) {
+                  expiryController.text.trim().isEmpty ||
+                  cvvController.text.length < 3) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     content: Text('Please fill all fields correctly'),
@@ -209,7 +246,33 @@ class _BookingAddCardViewBodyState extends State<BookingAddCardViewBody> {
                 return;
               }
 
-              // حفظ وإرجاع كافة البيانات كـ Map للواجهة السابقة
+              // 2. التحقق من شروط الاسم (أحرف فقط، وأول حرف من كل كلمة كبير)
+              if (!_validateName(nameController.text)) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                      'Name must contain letters only, and each word must start with a capital letter (e.g., Brooklyn Simmons)',
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+                return;
+              }
+
+              // 3. التحقق من شروط تاريخ الانتهاء (الشهر بين 01 و 12)
+              if (!_validateExpiry(expiryController.text)) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                      'Please enter a valid expiry date where month is between 01 and 12 (e.g., 06/25)',
+                    ),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+                return;
+              }
+
+              // حفظ وإرجاع كافة البيانات كـ Map للواجهة السابقة عند اجتياز كافة الشروط
               context.pop({
                 'cardNumber': cardNumberController.text,
                 'name': nameController.text,
