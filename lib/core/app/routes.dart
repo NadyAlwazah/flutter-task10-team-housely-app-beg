@@ -13,7 +13,9 @@ import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/v
 import 'package:flutter_task10_team_housely_app_beg/features/chat/presentation/views/chat_list_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/property_model.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/models/review_model.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/details_view.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/review_details_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/notifications/presentation/views/notifications_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
@@ -48,6 +50,7 @@ abstract class AppRouter {
   static const String kVerify = '/verify';
   static const String kSuccessResetPassword = '/success_reset_password';
   static const String kFileterdProperties = '/filtered_properties';
+  static const String kReviewDetails = '/reviewDetails';
 
   static late GoRouter router;
   static void initRouter() {
@@ -69,8 +72,17 @@ abstract class AppRouter {
         GoRoute(
           path: kEditProfile,
           builder: (context, state) {
-            return BlocProvider.value(
-              value: state.extra as ProfileCubit,
+            final extra = state.extra as Map<String, dynamic>;
+
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider.value(
+                  value: extra['profileCubit'] as ProfileCubit,
+                ),
+                BlocProvider.value(
+                  value: extra['propertyCubit'] as PropertyCubit,
+                ),
+              ],
               child: const EditProfileView(),
             );
           },
@@ -99,10 +111,10 @@ abstract class AppRouter {
           builder: (context, state) {
             final data = state.extra as Map<String, dynamic>;
 
-            final property = data['property'] as PropertyModel;
-            final cubit = data['cubit'] as PropertyCubit;
-
-            return AddReviewView(property: property, cubit: cubit);
+            return AddReviewView(
+              property: data['property'] as PropertyModel?,
+              cubit: data['cubit'] as PropertyCubit,
+            );
           },
         ),
 
@@ -175,6 +187,14 @@ abstract class AppRouter {
                 propertyTypes: data['propertyTypes'],
               ),
             );
+          },
+        ),
+        GoRoute(
+          path: AppRouter.kReviewDetails,
+          builder: (context, state) {
+            final review = state.extra as ReviewModel;
+
+            return ReviewDetailsView(review: review);
           },
         ),
       ],

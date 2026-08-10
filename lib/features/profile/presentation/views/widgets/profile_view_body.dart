@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/app/routes.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/app_loader.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/data/manager/profile_cubit/profile_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/profile_image_widget.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/profile/presentation/views/widgets/profile_options_list.dart';
@@ -43,7 +44,10 @@ class _ProfileViewBodyState extends State<ProfileViewBody> {
                         onCameraTap: () {
                           context.push(
                             AppRouter.kEditProfile,
-                            extra: context.read<ProfileCubit>(),
+                            extra: {
+                              'profileCubit': context.read<ProfileCubit>(),
+                              'propertyCubit': context.read<PropertyCubit>(),
+                            },
                           );
                         },
                       ),
