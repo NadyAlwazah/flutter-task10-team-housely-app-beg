@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_task10_team_housely_app_beg/core/widgets/custom_app_bar.dart';
+import 'package:flutter_task10_team_housely_app_beg/features/favourite/presentation/views/widgets/empty_favorite_widget.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_cubit.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/data/manager/property_cubit/property_state.dart';
 import 'package:flutter_task10_team_housely_app_beg/features/home/presentation/views/widgets/popular_property_card.dart';
@@ -21,13 +22,17 @@ class FavouriteViewBody extends StatelessWidget {
                     .where((property) => property.isFavorite)
                     .toList();
 
+            //  الحالة الفارغة
+            if (properties.isEmpty) {
+              return const EmptyFavoriteWidget();
+            }
+
             return Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: ListView.builder(
                   padding: EdgeInsets.only(bottom: 16.h, top: 5.h),
                   itemCount: properties.length,
-
                   itemBuilder: (context, index) {
                     final property = properties[index];
 

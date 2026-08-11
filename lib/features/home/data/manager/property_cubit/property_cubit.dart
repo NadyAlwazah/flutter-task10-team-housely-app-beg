@@ -25,7 +25,7 @@ class PropertyCubit extends Cubit<PropertyState> {
     List<PropertyModel>? nearbyProperties,
   }) async {
     favoriteIds = await _favoritesLocalDataSource.loadFavorites();
-
+    if (isClosed) return;
     emit(
       PropertyState(
         recommended: recommended != null
@@ -54,7 +54,7 @@ class PropertyCubit extends Cubit<PropertyState> {
     } else {
       favoriteIds.add(id);
     }
-
+    if (isClosed) return;
     await _favoritesLocalDataSource.saveFavorites(favoriteIds);
 
     final updatedRecommended = _applyFavoritesToList(state.recommended);
@@ -85,6 +85,7 @@ class PropertyCubit extends Cubit<PropertyState> {
       }).toList();
     }
 
+    if (isClosed) return;
     emit(
       state.copyWith(
         recommended: updateList(state.recommended),
@@ -137,7 +138,7 @@ class PropertyCubit extends Cubit<PropertyState> {
 
   Future<void> loadRecentProperties() async {
     final ids = await _searchLocalDataSource.getRecentPropertyIds();
-
+    if (isClosed) return;
     final all = [
       ...state.recommended,
       ...state.popular,
@@ -155,7 +156,7 @@ class PropertyCubit extends Cubit<PropertyState> {
     updatedRecent.removeWhere((p) => p.id == property.id);
 
     await _searchLocalDataSource.removeRecentProperty(property.id.toString());
-
+    if (isClosed) return;
     emit(state.copyWith(recentSearches: updatedRecent));
   }
 
