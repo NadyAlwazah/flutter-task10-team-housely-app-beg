@@ -91,62 +91,54 @@ class PropertyReviewsSection extends StatelessWidget {
         borderRadius: BorderRadius.circular(8.r),
         border: Border.all(color: const Color(0xFFE5E5E5)),
       ),
-      child: Column(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CircleAvatar(
-                radius: 20.r,
-                backgroundImage: isFileImage
-                    ? FileImage(File(review.reviewerImage))
-                    : AssetImage(review.reviewerImage) as ImageProvider,
-              ),
-
-              SizedBox(width: 12.w),
-
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          CircleAvatar(
+            radius: 20.r,
+            backgroundImage: isFileImage
+                ? FileImage(File(review.reviewerImage))
+                : AssetImage(review.reviewerImage) as ImageProvider,
+          ),
+          SizedBox(width: 12.w),
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            review.reviewerName,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: Styles.textStyle14W600Inter,
-                          ),
-                        ),
-
-                        SizedBox(width: 6.w),
-
-                        RatingBarIndicator(
-                          rating: review.rating,
-                          itemBuilder: (context, index) =>
-                              SvgPicture.asset(AssetsData.iconStarSvg),
-                          itemCount: 5,
-                          itemSize: 14.r,
-                          unratedColor: const Color(0xFFE0E0E0),
-                          direction: Axis.horizontal,
-                        ),
-                      ],
+                    Expanded(
+                      child: Text(
+                        review.reviewerName,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: Styles.textStyle14W600Inter,
+                      ),
                     ),
-
-                    SizedBox(height: 6.h),
-
-                    Text(
-                      review.comment,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                      style: Styles.textStyle12W400Inter.copyWith(height: 1.6),
+                    SizedBox(width: 6.w),
+                    RatingBarIndicator(
+                      rating: review.rating,
+                      itemBuilder: (context, index) =>
+                          SvgPicture.asset(AssetsData.iconStarSvg),
+                      itemCount: 5,
+                      itemSize: 14.r,
+                      unratedColor: const Color(0xFFE0E0E0),
+                      direction: Axis.horizontal,
                     ),
                   ],
                 ),
-              ),
-            ],
+                SizedBox(height: 6.h),
+                Flexible(
+                  child: Text(
+                    review.comment,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: Styles.textStyle12W400Inter,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),
