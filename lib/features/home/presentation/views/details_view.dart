@@ -60,11 +60,15 @@ class _DetailsViewState extends State<DetailsView> {
           ),
           BlocBuilder<PropertyCubit, PropertyState>(
             builder: (context, state) {
-              final property = [
-                ...state.recommended,
-                ...state.popular,
-                ...state.nearbyProperties,
-              ].firstWhere((e) => e.id == widget.propertyModel.id);
+              final property =
+                  [
+                    ...state.recommended,
+                    ...state.popular,
+                    ...state.nearbyProperties,
+                  ].firstWhere(
+                    (e) => e.id == widget.propertyModel.id,
+                    orElse: () => widget.propertyModel,
+                  );
 
               return Padding(
                 padding: const EdgeInsets.only(right: 8.0),
